@@ -64,7 +64,8 @@ class Home extends CI_Controller {
                         'logged_in'  =>  TRUE,
                         'username' => $check_login[0]['username'],
                         'usertype' => $check_login[0]['usertype'],
-                        'userid' => $check_login[0]['id']
+                        'userid' => $check_login[0]['id'],
+                        'loginid' => $check_login[0]['login_id']
                     );
                     $this->session->set_userdata($data);
                     redirect('/');
@@ -74,7 +75,8 @@ class Home extends CI_Controller {
                         'logged_in'  =>  TRUE,
                         'username' => $check_login[0]['username'],
                         'usertype' => $check_login[0]['usertype'],
-                        'userid' => $check_login[0]['id']
+                        'userid' => $check_login[0]['id'],
+                        'loginid' => $check_login[0]['login_id']
                     );
                     $this->session->set_userdata($data);
                     redirect('/');
@@ -99,8 +101,16 @@ class Home extends CI_Controller {
 
     public function logout()
     {
-        $this->session->sess_destroy();
-        redirect(base_url().'login');
+        $data = $this->session->get_userdata();
+        print_r($data);
+        $logoutdata=$this->Home_model->logoutdata($data['loginid']);
+        if($logoutdata > 0){
+            $this->session->sess_destroy();
+            redirect(base_url().'login');
+        }else{
+            $this->session->set_flashdata('login_error', 'Please check your username or password and try again.', 300);
+            redirect(base_url().'login');
+        }
     }
 
 }

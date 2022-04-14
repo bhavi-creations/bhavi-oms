@@ -83,7 +83,7 @@ class Staff extends CI_Controller {
                 
                 $image=$image_data['file_name'];
             }
-            $login=$this->Home_model->insert_login(array('username'=>$email,'password'=>$mobile,'usertype'=>2));
+            $login=$this->Home_model->insert_login(array('username'=>$email,'password'=>md5($mobile),'usertype'=>2));
             if($login>0)
             {
                 $data=$this->Staff_model->insert_staff(array('id'=>$login,'staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'pic'=>$image,'added_by'=>$added));

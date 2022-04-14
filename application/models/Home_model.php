@@ -5,20 +5,66 @@ class Home_model extends CI_Model {
 
     function logindata($un,$pw)
     {
-        $this->db->where('username',$un);               
-        $this->db->where('password',$pw);
+        $this->db->where('username',$un);
+        $this->db->where('password',md5($pw));
         $qry=$this->db->get("login_tbl");
         if($qry->num_rows()>0)
         {
             $result=$qry->result_array();
+            $login_record = array(
+                'staff_id'=> $result['0']['id'],
+                'login_date_time'=> date('Y-m-d H:i:s'),
+                'logout_date_time'=> NULL,
+                'ip_address'=> $this->getIPAddress(),
+                'status'=> 1,
+            );
+            $login_id = $this->insert_login_records($login_record);
+            $result['0']['login_id'] = $login_id;
             return $result;
         }
+    }
+
+    function getIPAddress()
+    {
+        $ipaddress = '';
+        if (getenv('HTTP_CLIENT_IP'))
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        else if(getenv('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        else if(getenv('HTTP_X_FORWARDED'))
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        else if(getenv('HTTP_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        else if(getenv('HTTP_FORWARDED'))
+            $ipaddress = getenv('HTTP_FORWARDED');
+        else if(getenv('REMOTE_ADDR'))
+            $ipaddress = getenv('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+
+        return $ipaddress;
+    }  
+    
+    function insert_login_records($data)
+    {
+        $this->db->insert("login_records_tbl",$data);
+        return $this->db->insert_id();
     }
 
     function insert_login($data)
     {
         $this->db->insert("login_tbl",$data);
         return $this->db->insert_id();
+    }
+
+    function logoutdata($id){
+        $logout_record = array(
+            'logout_date_time'=> date('Y-m-d H:i:s'),
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('login_records_tbl',$logout_record);
+        return $this->db->affected_rows();
     }
 
     function update_rooms($data,$id)
