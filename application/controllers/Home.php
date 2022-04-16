@@ -102,7 +102,6 @@ class Home extends CI_Controller {
     public function logout()
     {
         $data = $this->session->get_userdata();
-        print_r($data);
         $logoutdata=$this->Home_model->logoutdata($data['loginid']);
         if($logoutdata > 0){
             $this->session->sess_destroy();

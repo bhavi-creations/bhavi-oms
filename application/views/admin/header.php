@@ -128,7 +128,7 @@
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Department</span>
+            <i class="fa fa-table"></i> <span>Department</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -141,7 +141,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Staff</span>
+            <i class="fa fa-user"></i> <span>Staff</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -154,7 +154,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Salary</span>
+            <i class="fa fa-inr"></i> <span>Salary</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -167,7 +167,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Leave</span>
+            <i class="fa fa-check-circle"></i> <span>Leave</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -180,7 +180,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Holidays</span>
+            <i class="fa fa-snowflake-o"></i> <span>Holidays</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -190,6 +190,8 @@
             <li><a href="<?php echo base_url(); ?>manage-holidays"><i class="fa fa-circle-o"></i> Manage Holidays</a></li>
           </ul>
         </li>
+
+        <li><a href="<?php echo base_url(); ?>manage-attendance"><i class="fa fa-clock-o"></i> <span>Attendance</span></a></li>
 
 
       </ul>

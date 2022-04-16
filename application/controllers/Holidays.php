@@ -27,6 +27,14 @@ class Holidays extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
+    public function view()
+    {
+        $data['content']=$this->Holidays_model->select_holidays();
+        $this->load->view('staff/header');
+        $this->load->view('staff/view-holidays',$data);
+        $this->load->view('staff/footer');
+    }
+
     public function insert()
     {
         $this->form_validation->set_rules('txtholidayname', 'Holiday Name', 'required');

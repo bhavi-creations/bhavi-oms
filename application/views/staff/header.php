@@ -36,7 +36,7 @@
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>B</b>CH</span>
+      <span class="logo-mini"><b>B</b>C</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Bhavi</b> Creations</span>
     </a>
@@ -49,27 +49,6 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">0</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 0 notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <!-- <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li> -->
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -114,17 +93,6 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
@@ -133,7 +101,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Salary</span>
+            <i class="fa fa-inr"></i> <span>Salary</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -145,7 +113,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Leave</span>
+            <i class="fa fa-check-circle"></i> <span>Leave</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -158,7 +126,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Holidays</span>
+            <i class="fa fa-snowflake-o"></i> <span>Holidays</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -167,6 +135,8 @@
             <li><a href="<?php echo base_url(); ?>view-holidays"><i class="fa fa-circle-o"></i> View Holidays</a></li>
           </ul>
         </li>
+
+        <li><a href="<?php echo base_url(); ?>view-attendance"><i class="fa fa-clock-o"></i> <span>Attendance</span></a></li>
 
 
       </ul>

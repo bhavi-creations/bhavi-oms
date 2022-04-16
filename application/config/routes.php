@@ -75,6 +75,7 @@ $route['update-staff'] = 'staff/update';
 //holidays routes
 $route['add-holidays'] = 'holidays';
 $route['manage-holidays'] = 'holidays/manage';
+$route['view-holidays'] = 'holidays/view';
 $route['insert-holidays'] = 'holidays/insert';
 $route['delete-holidays/(:num)'] = 'holidays/delete/$1';
 $route['edit-holidays/(:num)'] = 'holidays/edit/$1';
@@ -94,3 +95,6 @@ $route['leave-history'] = 'leave/manage';
 $route['leave-approved/(:num)'] = 'leave/insert_approve/$1';
 $route['leave-rejected/(:num)'] = 'leave/insert_reject/$1';
 $route['view-leave'] = 'leave/view';
+
+$route['manage-attendance'] = 'attendance/manage';
+$route['view-attendance'] = 'attendance/staff_attendance';
