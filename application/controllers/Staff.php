@@ -29,6 +29,17 @@ class Staff extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
+    public function profile()
+    {
+        $data = $this->session->get_userdata();
+        $data['department']=$this->Department_model->select_departments();
+        $data['country']=$this->Home_model->select_countries();
+        $data['content']=$this->Staff_model->select_staff_byID($data['userid']);
+        $this->load->view('staff/header');
+        $this->load->view('staff/profile',$data);
+        $this->load->view('staff/footer');
+    }
+
     public function insert()
     {
         $this->form_validation->set_rules('txtname', 'Full Name', 'required');
@@ -168,6 +179,77 @@ class Staff extends CI_Controller {
                 $this->session->set_flashdata('error', "Sorry, Staff Updated Failed.");
             }
             redirect(base_url()."manage-staff");
+        }
+        else{
+            $this->index();
+            return false;
+
+        } 
+    }
+
+    public function updateProfile()
+    {
+        $this->load->helper('form');
+        $this->form_validation->set_rules('txtname', 'Full Name', 'required');
+        $this->form_validation->set_rules('slcgender', 'Gender', 'required');
+        $this->form_validation->set_rules('slcdepartment', 'Department', 'required');
+        $this->form_validation->set_rules('txtemail', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('txtmobile', 'Mobile Number ', 'required|regex_match[/^[0-9]{10}$/]');
+        $this->form_validation->set_rules('txtdob', 'Date of Birth', 'required');
+        $this->form_validation->set_rules('txtdoj', 'Date of Joining', 'required');
+        $this->form_validation->set_rules('txtcity', 'City', 'required');
+        $this->form_validation->set_rules('txtstate', 'State', 'required');
+        $this->form_validation->set_rules('slccountry', 'Country', 'required');
+        
+        $id=$this->input->post('txtid');
+        $name=$this->input->post('txtname');
+        $gender=$this->input->post('slcgender');
+        $department=$this->input->post('slcdepartment');
+        $email=$this->input->post('txtemail');
+        $mobile=$this->input->post('txtmobile');
+        $dob=$this->input->post('txtdob');
+        $doj=$this->input->post('txtdoj');
+        $city=$this->input->post('txtcity');
+        $state=$this->input->post('txtstate');
+        $country=$this->input->post('slccountry');
+        $address=$this->input->post('txtaddress');
+
+        if($this->form_validation->run() !== false)
+        {
+            $this->load->library('image_lib');
+            $config['upload_path']= 'uploads/profile-pic/';
+            $config['allowed_types'] ='gif|jpg|png|jpeg';
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload('filephoto'))
+            {
+                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department),$id);
+            }
+            else
+            {
+                $image_data =   $this->upload->data();
+
+                $configer =  array(
+                  'image_library'   => 'gd2',
+                  'source_image'    =>  $image_data['full_path'],
+                  'maintain_ratio'  =>  TRUE,
+                  'width'           =>  150,
+                  'height'          =>  150,
+                  'quality'         =>  50
+                );
+                $this->image_lib->clear();
+                $this->image_lib->initialize($configer);
+                $this->image_lib->resize();
+
+                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'pic'=>$image_data['file_name'],'added_by'=>$added),$id);
+            }
+            
+            if($this->db->affected_rows() > 0)
+            {
+                $this->session->set_flashdata('success', "Profile Updated Succesfully"); 
+            }else{
+                $this->session->set_flashdata('error', "Sorry, Profile Updated Failed.");
+            }
+            redirect(base_url()."profile");
         }
         else{
             $this->index();
