@@ -225,6 +225,52 @@
             <?php endif; ?>
           </div>
           <!-- /.box -->
+
+          <!-- change password form elements -->
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Change Password</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <?php if(isset($content)): ?>
+              <?php foreach($content as $cnt): ?>
+                  <!-- form start -->
+                  <?php echo form_open_multipart('Staff/updatePassword');?>
+                    <div class="box-body">
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>Current Password *</label>
+                          <input type="hidden" name="staffid" value="<?php echo $cnt['id'] ?>" class="form-control">
+                          <input type="password" name="current_password" class="form-control" placeholder="Current Password">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>New Password *</label>
+                          <input type="password" name="new_password" class="form-control" placeholder="New Password">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>Confirm Password *</label>
+                          <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                      <button type="submit" class="btn btn-info pull-right">Update Password</button>
+                    </div>
+                  </form>
+                <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+          <!-- /.box -->
         </div>
         <!--/.col (left) -->
       </div>

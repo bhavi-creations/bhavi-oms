@@ -80,7 +80,25 @@ class Staff_model extends CI_Model {
         $this->db->affected_rows();
     }
 
-    
+    function check_current_password($current_password,$id){
+        $this->db->where('id', $id);
+        $this->db->where('password', $current_password);
+        $this->db->select('*');
+        $this->db->from('login_tbl');
+        $qry=$this->db->get();
+        if($qry->num_rows()>0)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function update_password($data,$id){
+        $this->db->where('id', $id);
+        $this->db->update('login_tbl',$data);
+        $this->db->affected_rows();
+    }
 
     
     

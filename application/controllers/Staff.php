@@ -176,12 +176,12 @@ class Staff extends CI_Controller {
             {
                 $this->session->set_flashdata('success', "Staff Updated Succesfully"); 
             }else{
-                $this->session->set_flashdata('error', "Sorry, Staff Updated Failed.");
+                $this->session->set_flashdata('error', "Sorry, Staff Update Failed.");
             }
             redirect(base_url()."manage-staff");
         }
         else{
-            $this->index();
+            $this->edit($id);
             return false;
 
         } 
@@ -247,17 +247,50 @@ class Staff extends CI_Controller {
             {
                 $this->session->set_flashdata('success', "Profile Updated Succesfully"); 
             }else{
-                $this->session->set_flashdata('error', "Sorry, Profile Updated Failed.");
+                $this->session->set_flashdata('error', "Sorry, Profile Update Failed.");
             }
             redirect(base_url()."profile");
         }
         else{
-            $this->index();
+            $this->profile();
             return false;
-
         } 
     }
 
+    public function updatePassword()
+    {
+        $this->load->helper('form');
+        $this->form_validation->set_rules('current_password', 'Current Password', 'required');
+        $this->form_validation->set_rules('new_password', 'New Password', 'required');
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[new_password]');
+        
+        $id=$this->input->post('staffid');
+        $current_password=$this->input->post('current_password');
+        $new_password=$this->input->post('new_password');
+        $confirm_password=$this->input->post('confirm_password');
+
+        if($this->form_validation->run() !== false)
+        {            
+            $check=$this->Staff_model->check_current_password(md5($current_password),$id);
+            if($check){
+                $data=$this->Staff_model->update_password(array('password'=>md5($confirm_password)),$id);
+            
+                if($this->db->affected_rows() > 0)
+                {
+                    $this->session->set_flashdata('success', "Password Updated Succesfully"); 
+                }else{
+                    $this->session->set_flashdata('error', "Sorry, Password Update Failed.");
+                }
+            }else{
+                $this->session->set_flashdata('error', "Invalid Current Password.");
+            }
+            redirect(base_url()."profile");
+        }
+        else{
+            $this->profile();
+            return false;
+        } 
+    }
 
     function edit($id)
     {
