@@ -4,7 +4,6 @@
     <section class="content-header">
       <h1>
         Invoice
-        <small>#007612</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -121,7 +120,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="<?php echo base_url(); ?>print-invoice/<?php echo $cnt['id']; ?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <a href="<?php echo base_url(); ?>staff-print-invoice/<?php echo $cnt['id']; ?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
           <button type="button" id="cmd" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Generate PDF
           </button>

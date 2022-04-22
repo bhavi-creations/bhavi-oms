@@ -65,7 +65,7 @@
                         <td><?php echo $cnt['allowance']; ?></td>
                         <td><?php echo $cnt['total']; ?></td>
                         <td><?php echo date('d-m-Y', strtotime($cnt['added_on'])); ?></td>
-                        <td><a href="<?php echo base_url(); ?>salary-invoice/<?php echo $cnt['id']; ?>" class="btn btn-warning">Invioce</a></td>
+                        <td><a href="<?php echo base_url(); ?>staff-salary-invoice/<?php echo $cnt['id']; ?>" class="btn btn-warning">Invioce</a></td>
                       </tr>
                     <?php 
                       $i++;

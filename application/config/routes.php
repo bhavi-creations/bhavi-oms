@@ -97,6 +97,8 @@ $route['view-salary'] = 'salary/view';
 $route['salary-invoice/(:num)'] = 'salary/invoice/$1';
 $route['print-invoice/(:num)'] = 'salary/invoice_print/$1';
 $route['delete-salary/(:num)'] = 'salary/delete/$1';
+$route['staff-salary-invoice/(:num)'] = 'salary/staff_invoice/$1';
+$route['staff-print-invoice/(:num)'] = 'salary/staff_invoice_print/$1';
 
 $route['apply-leave'] = 'leave';
 $route['approve-leave'] = 'leave/approve';
