@@ -1,0 +1,129 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Projects extends CI_Controller {
+
+    function __construct()
+    {
+        parent::__construct();
+        if ( ! $this->session->userdata('logged_in'))
+        { 
+            redirect(base_url().'login');
+        }
+    }
+
+    public function index()
+    {
+        $this->load->view('admin/header');
+        $this->load->view('admin/add-projects');
+        $this->load->view('admin/footer');
+    }
+
+    public function manage()
+    {
+        $data['content']=$this->Projects_model->select_projects();
+        $this->load->view('admin/header');
+        $this->load->view('admin/manage-projects',$data);
+        $this->load->view('admin/footer');
+    }
+
+    public function view()
+    {
+        $data['content']=$this->Projects_model->select_projects();
+        $this->load->view('staff/header');
+        $this->load->view('staff/view-projects',$data);
+        $this->load->view('staff/footer');
+    }
+
+    public function insert()
+    {
+        $this->form_validation->set_rules('project_name', 'Project Name', 'required');
+        $this->form_validation->set_rules('project_link', 'Project Link', 'required');
+        // $this->form_validation->set_rules('project_details', 'Project Details', 'required');
+        // $this->form_validation->set_rules('project_status', 'Project Status', 'required');
+        $this->form_validation->set_rules('project_date', 'Project Date', 'required');
+
+        $name=$this->input->post('project_name');
+        $link=$this->input->post('project_link');
+        $details=$this->input->post('project_details');
+        $status=$this->input->post('project_status');
+        $date_time=$this->input->post('project_date');
+
+        if($this->form_validation->run() !== false)
+        {
+            $data=$this->Projects_model->insert_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'status'=>$status,'date_time'=>$date_time));
+            
+            if($data==true)
+            {
+                $this->session->set_flashdata('success', "New Project Added Succesfully"); 
+            }else{
+                $this->session->set_flashdata('error', "Sorry, New Project Adding Failed.");
+            }
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        else{
+            $this->index();
+            return false;
+
+        } 
+    }
+
+    public function update()
+    {
+        $this->load->helper('form');
+        $this->form_validation->set_rules('project_name', 'Project Name', 'required');
+        $this->form_validation->set_rules('project_link', 'Project Link', 'required');
+        // $this->form_validation->set_rules('project_details', 'Project Details', 'required');
+        // $this->form_validation->set_rules('project_status', 'Project Status', 'required');
+        $this->form_validation->set_rules('project_date', 'Project Date', 'required');
+        
+        $id=$this->input->post('project_id');
+        $name=$this->input->post('project_name');
+        $link=$this->input->post('project_link');
+        $details=$this->input->post('project_details');
+        $status=$this->input->post('project_status');
+        $date_time=$this->input->post('project_date');
+
+        if($this->form_validation->run() !== false)
+        {
+            $data=$this->Projects_model->update_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'status'=>$status,'date_time'=>$date_time),$id);
+            
+            if($this->db->affected_rows() > 0)
+            {
+                $this->session->set_flashdata('success', "Project Updated Succesfully"); 
+            }else{
+                $this->session->set_flashdata('error', "Sorry, Project Update Failed.");
+            }
+            redirect(base_url()."manage-projects");
+        }
+        else{
+            $this->edit($id);
+            return false;
+
+        } 
+    }
+
+
+    function edit($id)
+    {
+        $data['content']=$this->Projects_model->select_projects_byID($id);
+        $this->load->view('admin/header');
+        $this->load->view('admin/edit-projects',$data);
+        $this->load->view('admin/footer');
+    }
+
+
+    function delete($id)
+    {
+        $this->Home_model->delete_login_byID($id);
+        $data=$this->Projects_model->delete_projects($id);
+        if($this->db->affected_rows() > 0)
+        {
+            $this->session->set_flashdata('success', "Project Deleted Succesfully"); 
+        }else{
+            $this->session->set_flashdata('error', "Sorry, Project Delete Failed.");
+        }
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+}
