@@ -81,7 +81,7 @@ class Holidays extends CI_Controller {
             {
                 $this->session->set_flashdata('success', "Holiday Updated Succesfully"); 
             }else{
-                $this->session->set_flashdata('error', "Sorry, Holiday Updated Failed.");
+                $this->session->set_flashdata('error', "Sorry, Holiday Update Failed.");
             }
             redirect(base_url()."manage-holidays");
         }
