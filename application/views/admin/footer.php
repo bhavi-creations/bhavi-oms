@@ -1,8 +1,8 @@
  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
+    <!-- <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.13
-    </div>
-    <strong>Copyright &copy; <?=date('Y')?> <a href="http://Bhavi Creations">Bhavi Creations</a>.</strong> All rights
+    </div> -->
+    <strong>Copyright &copy; <?=date('Y')?> <a href="https://bhavicreations.com" target="blank">Bhavi Creations</a>.</strong> All rights
     reserved.
   </footer>
 
