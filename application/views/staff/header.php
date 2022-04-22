@@ -137,6 +137,7 @@
         </li>
 
         <li><a href="<?php echo base_url(); ?>view-attendance"><i class="fa fa-clock-o"></i> <span>Attendance</span></a></li>
+        <li><a href="<?php echo base_url(); ?>view-projects"><i class="fa fa-star"></i> <span>Projects</span></a></li>
 
 
       </ul>

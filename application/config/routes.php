@@ -82,6 +82,14 @@ $route['delete-holidays/(:num)'] = 'holidays/delete/$1';
 $route['edit-holidays/(:num)'] = 'holidays/edit/$1';
 $route['update-holidays'] = 'holidays/update';
 
+//projects routes
+$route['add-projects'] = 'projects';
+$route['manage-projects'] = 'projects/manage';
+$route['view-projects'] = 'projects/view';
+$route['insert-projects'] = 'projects/insert';
+$route['delete-projects/(:num)'] = 'projects/delete/$1';
+$route['edit-projects/(:num)'] = 'projects/edit/$1';
+
 //salary routes
 $route['add-salary'] = 'salary';
 $route['manage-salary'] = 'salary/manage';
