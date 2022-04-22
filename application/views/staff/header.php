@@ -99,17 +99,7 @@
 
         <li class="active"><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-inr"></i> <span>Salary</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>view-salary"><i class="fa fa-circle-o"></i> View Salary</a></li>
-          </ul>
-        </li>
+        <li><a href="<?php echo base_url(); ?>view-salary"><i class="fa fa-inr"></i> My Salary</a></li>
 
         <li class="treeview">
           <a href="#">
@@ -123,19 +113,8 @@
             <li><a href="<?php echo base_url(); ?>view-leave"><i class="fa fa-circle-o"></i> View Leave</a></li>
           </ul>
         </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-snowflake-o"></i> <span>Holidays</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>view-holidays"><i class="fa fa-circle-o"></i> View Holidays</a></li>
-          </ul>
-        </li>
-
+          
+        <li><a href="<?php echo base_url(); ?>view-holidays"><i class="fa fa-snowflake-o"></i> Holidays</a></li>
         <li><a href="<?php echo base_url(); ?>view-attendance"><i class="fa fa-clock-o"></i> <span>Attendance</span></a></li>
         <li><a href="<?php echo base_url(); ?>view-projects"><i class="fa fa-star"></i> <span>Projects</span></a></li>
 
