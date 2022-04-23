@@ -90,6 +90,14 @@ $route['insert-projects'] = 'projects/insert';
 $route['delete-projects/(:num)'] = 'projects/delete/$1';
 $route['edit-projects/(:num)'] = 'projects/edit/$1';
 
+//projects tasks routes
+$route['add-project-tasks'] = 'project_tasks';
+$route['manage-project-tasks'] = 'project_tasks/manage';
+$route['view-project-tasks'] = 'project_tasks/view';
+$route['insert-project-tasks'] = 'project_tasks/insert';
+$route['delete-project-tasks/(:num)'] = 'project_tasks/delete/$1';
+$route['edit-project-tasks/(:num)'] = 'project_tasks/edit/$1';
+
 //salary routes
 $route['add-salary'] = 'salary';
 $route['manage-salary'] = 'salary/manage';
