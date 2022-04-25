@@ -43,19 +43,21 @@ class Work_Reports extends CI_Controller {
     {
         $this->form_validation->set_rules('project_id', 'Project', 'required');
         $this->form_validation->set_rules('task_id', 'Task', 'required');
+        $this->form_validation->set_rules('staff_id', 'Staff Id', 'required');
         $this->form_validation->set_rules('work_details', 'Work Details', 'required');
         $this->form_validation->set_rules('work_status', 'Work Status', 'required');
         $this->form_validation->set_rules('on_date', 'Work Date', 'required');
 
         $name=$this->input->post('project_id');
-        $link=$this->input->post('task_id');
+        $task_id=$this->input->post('task_id');
+        $staff_id=$this->input->post('staff_id');
         $details=$this->input->post('work_details');
         $status=$this->input->post('work_status');
         $date_time=$this->input->post('on_date');
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Work_Reports_model->insert_work_reports(array('project_id'=>$name,'task_id'=>$link,'work_details'=>addslashes($details),'work_status'=>$status,'on_date'=>$date_time));
+            $data=$this->Work_Reports_model->insert_work_reports(array('project_id'=>$name,'task_id'=>$task_id,'staff_id'=>$staff_id,'work_details'=>addslashes($details),'work_status'=>$status,'on_date'=>$date_time));
             
             if($data==true)
             {
@@ -83,14 +85,15 @@ class Work_Reports extends CI_Controller {
         
         $id=$this->input->post('work_report_id');
         $name=$this->input->post('project_id');
-        $link=$this->input->post('task_id');
+        $task_id=$this->input->post('task_id');
+        $staff_id=$this->input->post('staff_id');
         $details=$this->input->post('work_details');
         $status=$this->input->post('work_status');
         $date_time=$this->input->post('on_date');
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Work_Reports_model->update_work_reports(array('project_id'=>$name,'task_id'=>$link,'work_details'=>addslashes($details),'work_status'=>$status,'on_date'=>$date_time),$id);
+            $data=$this->Work_Reports_model->update_work_reports(array('project_id'=>$name,'task_id'=>$task_id,'staff_id'=>$staff_id,'work_details'=>addslashes($details),'work_status'=>$status,'on_date'=>$date_time),$id);
             
             if($this->db->affected_rows() > 0)
             {

@@ -51,7 +51,6 @@
             <!-- form start -->
             <?php echo form_open_multipart('Work_Reports/insert');?>
               <div class="box-body">
-
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Project</label>
@@ -80,26 +79,25 @@
                       {
                         foreach($tasks as $cnt)
                         {
-                          print "<option value='".$cnt['id']."'>".$cnt['task_name']."</option>";
+                          print "<option value='".$cnt['p_id']."'>".$cnt['task_name']."</option>";
                         }
-                        print "<option value='0'>Unallocated Task</option>";
                       } 
                       ?>
                     </select>
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <div class="form-group">
-                    <label>Staff</label>
-                    <input type="text" name="staff_id" class="form-control" placeholder="staff_id">
-                  </div>
-                </div>
+                    <label>Staff</label> -->
+                    <input type="hidden" name="staff_id" class="form-control" value="<?php echo $this->session->userdata('userid'); ?>" placeholder="staff_id">
+                  <!-- </div>
+                </div> -->
 
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Work Details</label>
-                    <textarea type="text" name="work_details" class="form-control" placeholder="work details"></textarea>
+                    <textarea type="text" rows="5" name="work_details" class="form-control" placeholder="work details"></textarea>
                   </div>
                 </div>
 

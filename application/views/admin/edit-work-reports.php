@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Project</label>
-                                <input type="hidden" name="id" value="<?php echo $cnt['id'] ?>" class="form-control" placeholder="Task ID">
+                                <input type="hidden" name="work_report_id" value="<?php echo $cnt['id'] ?>" class="form-control" placeholder="Task ID">
                                 <select class="form-control" name="project_id">
                                 <option value="">Select</option>
                                 <?php
@@ -89,12 +89,12 @@
                                 {
                                     foreach($tasks as $cnt1)
                                     {
-                                        if($cnt1['id'] == $cnt['task_id'])
+                                        if($cnt1['p_id'] == $cnt['task_id'])
                                         {
-                                            print "<option value='".$cnt1['id']."' selected>".$cnt1['task_name']."</option>";
+                                            print "<option value='".$cnt1['p_id']."' selected>".$cnt1['task_name']."</option>";
                                         }
                                         else{
-                                            print "<option value='".$cnt1['id']."'>".$cnt1['task_name']."</option>";
+                                            print "<option value='".$cnt1['p_id']."'>".$cnt1['task_name']."</option>";
                                         }
                                     }
                                 } 
@@ -103,12 +103,12 @@
                             </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                             <div class="form-group">
-                                <label>Staff</label>
-                                <input type="text" name="staff_id" class="form-control" value="<?php echo $cnt['staff_id'] ?>" placeholder="staff_id">
-                            </div>
-                            </div>
+                                <label>Staff</label> -->
+                                <input type="hidden" name="staff_id" class="form-control" value="<?php echo $cnt['staff_id'] ?>" placeholder="staff_id">
+                            <!-- </div>
+                            </div> -->
 
                             <div class="col-md-6">
                             <div class="form-group">
