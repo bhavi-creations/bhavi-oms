@@ -62,6 +62,8 @@ class Home extends CI_Controller {
                 if($check_login[0]['usertype']==1){
                     $data = array(
                         'logged_in'  =>  TRUE,
+                        'staff_name' => $check_login[0]['staff_name'],
+                        'pic' => "../../uploads/profile-pic/".$check_login[0]['pic'],
                         'username' => $check_login[0]['username'],
                         'usertype' => $check_login[0]['usertype'],
                         'userid' => $check_login[0]['id'],
@@ -73,6 +75,8 @@ class Home extends CI_Controller {
                 elseif($check_login[0]['usertype']==2){
                     $data = array(
                         'logged_in'  =>  TRUE,
+                        'staff_name' => $check_login[0]['staff_name'],
+                        'pic' => "../../uploads/profile-pic/".$check_login[0]['pic'],
                         'username' => $check_login[0]['username'],
                         'usertype' => $check_login[0]['usertype'],
                         'userid' => $check_login[0]['id'],

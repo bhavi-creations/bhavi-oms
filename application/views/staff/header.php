@@ -61,7 +61,6 @@
                 <img src="<?php echo base_url(); ?>assets/dist/img/bhavi.jpg" class="img-circle" alt="User Image">
                 <p>
                   Staff
-                  <small>Since Nov, 2012</small>
                 </p>
               </li>
               <!-- Menu Footer-->
