@@ -66,6 +66,8 @@
                     if(isset($content)):
                     $i=1; 
                     foreach($content as $cnt): 
+                      // to stop displaying admin
+                      if($cnt['id']!=1){
                   ?>
                       <tr>
                         <td><?php echo $i; ?></td>
@@ -88,6 +90,7 @@
                       </tr>
                     <?php 
                       $i++;
+                      }
                       endforeach;
                       endif; 
                     ?>
