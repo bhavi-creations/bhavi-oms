@@ -46,12 +46,12 @@
                   <thead>
                   <tr>
                     <th>Sl.no</th>
-                    <th>project_id</th>
-                    <th>task_id</th>
-                    <th>staff_id</th>
-                    <th>work_details</th>
-                    <th>work_status</th>
-                    <th>on_date</th>
+                    <th>Project</th>
+                    <th>Task</th>
+                    <th>Staff</th>
+                    <th>Work Details</th>
+                    <th>Work Status</th>
+                    <th>Date</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
@@ -64,8 +64,24 @@
                       <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $cnt['project_id']; ?></td>
-                        <td><?php echo $cnt['task_id']; ?></td>
-                        <td><?php echo $cnt['staff_id']; ?></td>
+                        <td>
+                          <?php
+                            if(isset($cnt['task_data'])){
+                              echo $cnt['task_data']['task_name'];
+                            }else{
+                              echo $cnt['task_id'];
+                            }
+                          ?>
+                        </td>
+                        <td>
+                          <?php
+                            if(isset($cnt['staff_data'])){
+                              echo $cnt['staff_data']['staff_name'];
+                            }else{
+                              echo $cnt['staff_id'];
+                            }
+                          ?>
+                        </td>
                         <td><?php echo $cnt['work_details']; ?></td>
                         <td><?php echo $cnt['work_status']; ?></td>
                         <td><?php echo date('d-m-Y', strtotime($cnt['on_date'])); ?></td>

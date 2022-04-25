@@ -24,6 +24,11 @@ class Work_Reports_model extends CI_Model {
                 $this->load->model('Project_Tasks_model', 'tasks_model');
                 $task_result= $this->tasks_model->select_project_tasks_byID($task_id);
                 $result[$key]['task_data'] = $task_result['0'];
+
+                $staff_id = $result_data['staff_id'];
+                $this->load->model('Staff_model', 'staff_model');
+                $staff_result= $this->staff_model->select_staff_byID($staff_id);
+                $result[$key]['staff_data'] = $staff_result['0'];
             }
             return $result;
         }
@@ -56,6 +61,11 @@ class Work_Reports_model extends CI_Model {
                 $this->load->model('Project_Tasks_model', 'tasks_model');
                 $task_result= $this->tasks_model->select_project_tasks_byID($task_id);
                 $result[$key]['task_data'] = $task_result['0'];
+
+                $staff_id = $result_data['staff_id'];
+                $this->load->model('Staff_model', 'staff_model');
+                $staff_result= $this->staff_model->select_staff_byID($staff_id);
+                $result[$key]['staff_data'] = $staff_result['0'];
             }
             return $result;
         }
