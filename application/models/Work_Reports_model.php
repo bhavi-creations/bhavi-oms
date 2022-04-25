@@ -19,6 +19,12 @@ class Work_Reports_model extends CI_Model {
         if($qry->num_rows()>0)
         {
             $result=$qry->result_array();
+            foreach ($result as $key => $result_data) {
+                $task_id = $result_data['task_id'];
+                $this->load->model('Project_Tasks_model', 'tasks_model');
+                $task_result= $this->tasks_model->select_project_tasks_byID($task_id);
+                $result[$key]['task_data'] = $task_result['0'];
+            }
             return $result;
         }
     }
@@ -45,6 +51,12 @@ class Work_Reports_model extends CI_Model {
         if($qry->num_rows()>0)
         {
             $result=$qry->result_array();
+            foreach ($result as $key => $result_data) {
+                $task_id = $result_data['task_id'];
+                $this->load->model('Project_Tasks_model', 'tasks_model');
+                $task_result= $this->tasks_model->select_project_tasks_byID($task_id);
+                $result[$key]['task_data'] = $task_result['0'];
+            }
             return $result;
         }
     }

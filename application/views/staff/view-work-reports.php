@@ -63,7 +63,15 @@
                       <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $cnt['project_id']; ?></td>
-                        <td><?php echo $cnt['task_id']; ?></td>
+                        <td>
+                          <?php
+                            if(isset($cnt['task_data'])){
+                              echo $cnt['task_data']['task_name'];
+                            }else{
+                              echo $cnt['task_id'];
+                            }
+                          ?>
+                         </td>
                         <td><?php echo $cnt['work_details']; ?></td>
                         <td><?php echo $cnt['work_status']; ?></td>
                         <td><?php echo date('d-m-Y', strtotime($cnt['on_date'])); ?></td>

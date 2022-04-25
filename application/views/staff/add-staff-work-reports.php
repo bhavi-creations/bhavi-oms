@@ -82,7 +82,6 @@
                         {
                           print "<option value='".$cnt['id']."'>".$cnt['task_name']."</option>";
                         }
-                        print "<option value='0'>Unallocated Task</option>";
                       } 
                       ?>
                     </select>

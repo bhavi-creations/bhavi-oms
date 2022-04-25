@@ -59,6 +59,7 @@ class Project_Tasks_model extends CI_Model {
     function select_project_tasks_by_staffID($id)
     {
         $this->db->where_in('pt.assigned_to',$id);
+        $this->db->or_where('pt.id',0);
         $this->db->select("pt.*,pt.id as p_id,p.*");
         $this->db->from("project_tasks_tbl pt");
         $this->db->join("projects_tbl p","pt.project_id = p.id", "left");
