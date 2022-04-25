@@ -101,10 +101,14 @@ $route['edit-project-tasks/(:num)'] = 'project_tasks/edit/$1';
 //work reports tasks routes
 $route['add-work-reports'] = 'work_reports';
 $route['manage-work-reports'] = 'work_reports/manage';
-$route['view-work-reports'] = 'work_reports/view';
 $route['insert-work-reports'] = 'work_reports/insert';
 $route['delete-work-reports/(:num)'] = 'work_reports/delete/$1';
 $route['edit-work-reports/(:num)'] = 'work_reports/edit/$1';
+$route['view-work-reports'] = 'work_reports/view';
+$route['add-staff-work-reports'] = 'work_reports/staff_index';
+$route['insert-staff-work-reports'] = 'work_reports/staff_insert';
+$route['delete-staff-work-reports/(:num)'] = 'work_reports/staff_delete/$1';
+$route['edit-staff-work-reports/(:num)'] = 'work_reports/staff_edit/$1';
 
 //salary routes
 $route['add-salary'] = 'salary';

@@ -104,7 +104,7 @@ class Holidays extends CI_Controller {
 
     function delete($id)
     {
-        $this->Home_model->delete_login_byID($id);
+        
         $data=$this->Holidays_model->delete_holidays($id);
         if($this->db->affected_rows() > 0)
         {

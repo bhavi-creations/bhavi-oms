@@ -115,7 +115,7 @@ class Projects extends CI_Controller {
 
     function delete($id)
     {
-        $this->Home_model->delete_login_byID($id);
+        
         $data=$this->Projects_model->delete_projects($id);
         if($this->db->affected_rows() > 0)
         {

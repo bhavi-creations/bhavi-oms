@@ -31,7 +31,8 @@ class Project_Tasks extends CI_Controller {
 
     public function view()
     {
-        $data['content']=$this->Project_Tasks_model->select_project_tasks();
+        $staff=$this->session->userdata('userid');
+        $data['content']=$this->Project_Tasks_model->select_project_tasks_by_staffID($staff);
         $this->load->view('staff/header');
         $this->load->view('staff/view-project-tasks',$data);
         $this->load->view('staff/footer');
