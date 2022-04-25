@@ -20,6 +20,15 @@ class Project_Tasks_model extends CI_Model {
         if($qry->num_rows()>0)
         {
             $result=$qry->result_array();
+            foreach ($result as $key => $result_data) {
+                $staff_id = $result_data['assigned_to'];
+                $staff_data = explode(',',$staff_id);
+                foreach ($staff_data as $key2 => $single_staff_id) {
+                    $this->load->model('Staff_model', 'staff_model');
+                    $staff_result = $this->staff_model->select_staff_byID($single_staff_id);
+                    $result[$key]['staff_data'][$key2] = $staff_result['0'];
+                }
+            }
             return $result;
         }
     }

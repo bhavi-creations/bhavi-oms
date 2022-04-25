@@ -165,6 +165,19 @@
 
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-table"></i> <span>Work Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>add-work-reports"><i class="fa fa-circle-o"></i> Add Work Reports</a></li>
+            <li><a href="<?php echo base_url(); ?>manage-work-reports"><i class="fa fa-circle-o"></i> Manage Work Reports</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-check-circle"></i> <span>Leave</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

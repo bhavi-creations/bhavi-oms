@@ -14,50 +14,53 @@ class Work_Reports extends CI_Controller {
 
     public function index()
     {
+        // $staff=$this->session->userdata('userid');
+        $data['projects']=$this->Projects_model->select_projects();
+        $data['tasks']=$this->Project_Tasks_model->select_project_tasks();
         $this->load->view('admin/header');
-        $this->load->view('admin/add-projects');
+        $this->load->view('admin/add-work-reports',$data);
         $this->load->view('admin/footer');
     }
 
     public function manage()
     {
-        $data['content']=$this->Projects_model->select_projects();
+        $data['content']=$this->Work_Reports_model->select_work_reports();
         $this->load->view('admin/header');
-        $this->load->view('admin/manage-projects',$data);
+        $this->load->view('admin/manage-work-reports',$data);
         $this->load->view('admin/footer');
     }
 
     public function view()
     {
-        $data['content']=$this->Projects_model->select_projects();
+        $data['content']=$this->Work_Reports_model->select_work_reports();
         $this->load->view('staff/header');
-        $this->load->view('staff/view-projects',$data);
+        $this->load->view('staff/view-work-reports',$data);
         $this->load->view('staff/footer');
     }
 
     public function insert()
     {
-        $this->form_validation->set_rules('project_name', 'Project Name', 'required');
-        $this->form_validation->set_rules('project_link', 'Project Link', 'required');
-        // $this->form_validation->set_rules('project_details', 'Project Details', 'required');
-        // $this->form_validation->set_rules('project_status', 'Project Status', 'required');
-        $this->form_validation->set_rules('project_date', 'Project Date', 'required');
+        $this->form_validation->set_rules('project_id', 'Project', 'required');
+        $this->form_validation->set_rules('task_id', 'Task', 'required');
+        $this->form_validation->set_rules('work_details', 'Work Details', 'required');
+        $this->form_validation->set_rules('work_status', 'Work Status', 'required');
+        $this->form_validation->set_rules('on_date', 'Work Date', 'required');
 
-        $name=$this->input->post('project_name');
-        $link=$this->input->post('project_link');
-        $details=$this->input->post('project_details');
-        $status=$this->input->post('project_status');
-        $date_time=$this->input->post('project_date');
+        $name=$this->input->post('project_id');
+        $link=$this->input->post('task_id');
+        $details=$this->input->post('work_details');
+        $status=$this->input->post('work_status');
+        $date_time=$this->input->post('on_date');
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Projects_model->insert_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'status'=>$status,'date_time'=>$date_time));
+            $data=$this->Work_Reports_model->insert_work_reports(array('project_id'=>$name,'task_id'=>$link,'work_details'=>addslashes($details),'work_status'=>$status,'on_date'=>$date_time));
             
             if($data==true)
             {
-                $this->session->set_flashdata('success', "New Project Added Succesfully"); 
+                $this->session->set_flashdata('success', "New Report Added Succesfully"); 
             }else{
-                $this->session->set_flashdata('error', "Sorry, New Project Adding Failed.");
+                $this->session->set_flashdata('error', "Sorry, New Report Adding Failed.");
             }
             redirect($_SERVER['HTTP_REFERER']);
         }
@@ -71,30 +74,30 @@ class Work_Reports extends CI_Controller {
     public function update()
     {
         $this->load->helper('form');
-        $this->form_validation->set_rules('project_name', 'Project Name', 'required');
-        $this->form_validation->set_rules('project_link', 'Project Link', 'required');
-        // $this->form_validation->set_rules('project_details', 'Project Details', 'required');
-        // $this->form_validation->set_rules('project_status', 'Project Status', 'required');
-        $this->form_validation->set_rules('project_date', 'Project Date', 'required');
+        $this->form_validation->set_rules('project_id', 'Project', 'required');
+        $this->form_validation->set_rules('task_id', 'Task', 'required');
+        $this->form_validation->set_rules('work_details', 'Work Details', 'required');
+        $this->form_validation->set_rules('work_status', 'Work Status', 'required');
+        $this->form_validation->set_rules('on_date', 'Work Date', 'required');
         
-        $id=$this->input->post('project_id');
-        $name=$this->input->post('project_name');
-        $link=$this->input->post('project_link');
-        $details=$this->input->post('project_details');
-        $status=$this->input->post('project_status');
-        $date_time=$this->input->post('project_date');
+        $id=$this->input->post('work_report_id');
+        $name=$this->input->post('project_id');
+        $link=$this->input->post('task_id');
+        $details=$this->input->post('work_details');
+        $status=$this->input->post('work_status');
+        $date_time=$this->input->post('on_date');
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Projects_model->update_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'status'=>$status,'date_time'=>$date_time),$id);
+            $data=$this->Work_Reports_model->update_work_reports(array('project_id'=>$name,'task_id'=>$link,'work_details'=>addslashes($details),'work_status'=>$status,'on_date'=>$date_time),$id);
             
             if($this->db->affected_rows() > 0)
             {
-                $this->session->set_flashdata('success', "Project Updated Succesfully"); 
+                $this->session->set_flashdata('success', "Report Updated Succesfully"); 
             }else{
-                $this->session->set_flashdata('error', "Sorry, Project Update Failed.");
+                $this->session->set_flashdata('error', "Sorry, Report Update Failed.");
             }
-            redirect(base_url()."manage-projects");
+            redirect(base_url()."manage-work-reports");
         }
         else{
             $this->edit($id);
@@ -106,9 +109,11 @@ class Work_Reports extends CI_Controller {
 
     function edit($id)
     {
-        $data['content']=$this->Projects_model->select_projects_byID($id);
+        $data['projects']=$this->Projects_model->select_projects();
+        $data['tasks']=$this->Project_Tasks_model->select_project_tasks();
+        $data['content']=$this->Work_Reports_model->select_work_reports_byID($id);
         $this->load->view('admin/header');
-        $this->load->view('admin/edit-projects',$data);
+        $this->load->view('admin/edit-work-reports',$data);
         $this->load->view('admin/footer');
     }
 
@@ -116,12 +121,12 @@ class Work_Reports extends CI_Controller {
     function delete($id)
     {
         $this->Home_model->delete_login_byID($id);
-        $data=$this->Projects_model->delete_projects($id);
+        $data=$this->Work_Reports_model->delete_work_reports($id);
         if($this->db->affected_rows() > 0)
         {
-            $this->session->set_flashdata('success', "Project Deleted Succesfully"); 
+            $this->session->set_flashdata('success', "Work Report Deleted Succesfully"); 
         }else{
-            $this->session->set_flashdata('error', "Sorry, Project Delete Failed.");
+            $this->session->set_flashdata('error', "Sorry, Work Report Delete Failed.");
         }
         redirect($_SERVER['HTTP_REFERER']);
     }

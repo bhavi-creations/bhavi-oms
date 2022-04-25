@@ -3,12 +3,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Project Tasks
+        Work Reports
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Project Tasks</a></li>
-        <li class="active">Manage Project Tasks</li>
+        <li><a href="#">Work Reports</a></li>
+        <li class="active">Manage Work Reports</li>
       </ol>
     </section>
 
@@ -37,7 +37,7 @@
         <div class="col-xs-12">
           <div class="box box-info">
             <div class="box-header">
-              <h3 class="box-title">Manage Project Tasks</h3>
+              <h3 class="box-title">Manage Work Reports</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -46,13 +46,12 @@
                   <thead>
                   <tr>
                     <th>Sl.no</th>
-                    <th>Project id</th>
-                    <th>Assigned to</th>
-                    <th>Task Name</th>
-                    <th>Task Details</th>
-                    <th>Task Status</th>
-                    <th>Due Date</th>
-                    <th>Completed date</th>
+                    <th>project_id</th>
+                    <th>task_id</th>
+                    <th>staff_id</th>
+                    <th>work_details</th>
+                    <th>work_status</th>
+                    <th>on_date</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
@@ -64,35 +63,15 @@
                   ?>
                       <tr>
                         <td><?php echo $i; ?></td>
-                        <td><?php echo $cnt['project_name']; ?></td>
+                        <td><?php echo $cnt['project_id']; ?></td>
+                        <td><?php echo $cnt['task_id']; ?></td>
+                        <td><?php echo $cnt['staff_id']; ?></td>
+                        <td><?php echo $cnt['work_details']; ?></td>
+                        <td><?php echo $cnt['work_status']; ?></td>
+                        <td><?php echo date('d-m-Y', strtotime($cnt['on_date'])); ?></td>
                         <td>
-                          <?php
-                            $staff_data = $cnt['staff_data'];
-                            foreach($staff_data as $key => $staff){
-                              if($key == 0){
-                                echo $staff['staff_name'];
-                              }else{
-                                echo " , ".$staff['staff_name'];
-                              }
-                            }
-                          ?>
-                         </td>
-                        <td><?php echo $cnt['task_name']; ?></td>
-                        <td><?php echo $cnt['task_details']; ?></td>
-                        <td><?php echo $cnt['task_status']; ?></td>
-                        <td><?php echo date('d-m-Y', strtotime($cnt['due_date'])); ?></td>
-                        <td>
-                          <?php 
-                            if( $cnt['completed_date']=="0000-00-00"){
-                              echo"-";
-                            }else{
-                              echo date('d-m-Y', strtotime($cnt['completed_date']));
-                            } 
-                          ?>
-                        </td>
-                        <td>
-                          <a href="<?php echo base_url(); ?>edit-project-tasks/<?php echo $cnt['p_id']; ?>" class="btn btn-info">Edit</a>
-                          <a href="<?php echo base_url(); ?>delete-project-tasks/<?php echo $cnt['p_id']; ?>" class="btn btn-danger">Delete</a>
+                          <a href="<?php echo base_url(); ?>edit-work-reports/<?php echo $cnt['id']; ?>" class="btn btn-info">Edit</a>
+                          <a href="<?php echo base_url(); ?>delete-work-reports/<?php echo $cnt['id']; ?>" class="btn btn-danger">Delete</a>
                         </td>
                       </tr>
                     <?php 
