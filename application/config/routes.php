@@ -91,24 +91,24 @@ $route['delete-projects/(:num)'] = 'projects/delete/$1';
 $route['edit-projects/(:num)'] = 'projects/edit/$1';
 
 //projects tasks routes
-$route['add-project-tasks'] = 'project_tasks';
-$route['manage-project-tasks'] = 'project_tasks/manage';
-$route['view-project-tasks'] = 'project_tasks/view';
-$route['insert-project-tasks'] = 'project_tasks/insert';
-$route['delete-project-tasks/(:num)'] = 'project_tasks/delete/$1';
-$route['edit-project-tasks/(:num)'] = 'project_tasks/edit/$1';
+$route['add-project-tasks'] = 'Project_Tasks';
+$route['manage-project-tasks'] = 'Project_Tasks/manage';
+$route['view-project-tasks'] = 'Project_Tasks/view';
+$route['insert-project-tasks'] = 'Project_Tasks/insert';
+$route['delete-project-tasks/(:num)'] = 'Project_Tasks/delete/$1';
+$route['edit-project-tasks/(:num)'] = 'Project_Tasks/edit/$1';
 
 //work reports tasks routes
-$route['add-work-reports'] = 'work_reports';
-$route['manage-work-reports'] = 'work_reports/manage';
-$route['insert-work-reports'] = 'work_reports/insert';
-$route['delete-work-reports/(:num)'] = 'work_reports/delete/$1';
-$route['edit-work-reports/(:num)'] = 'work_reports/edit/$1';
-$route['view-work-reports'] = 'work_reports/view';
-$route['add-staff-work-reports'] = 'work_reports/staff_index';
-$route['insert-staff-work-reports'] = 'work_reports/staff_insert';
-$route['delete-staff-work-reports/(:num)'] = 'work_reports/staff_delete/$1';
-$route['edit-staff-work-reports/(:num)'] = 'work_reports/staff_edit/$1';
+$route['add-work-reports'] = 'Work_Reports';
+$route['manage-work-reports'] = 'Work_Reports/manage';
+$route['insert-work-reports'] = 'Work_Reports/insert';
+$route['delete-work-reports/(:num)'] = 'Work_Reports/delete/$1';
+$route['edit-work-reports/(:num)'] = 'Work_Reports/edit/$1';
+$route['view-work-reports'] = 'Work_Reports/view';
+$route['add-staff-work-reports'] = 'Work_Reports/staff_index';
+$route['insert-staff-work-reports'] = 'Work_Reports/staff_insert';
+$route['delete-staff-work-reports/(:num)'] = 'Work_Reports/staff_delete/$1';
+$route['edit-staff-work-reports/(:num)'] = 'Work_Reports/staff_edit/$1';
 
 //salary routes
 $route['add-salary'] = 'salary';
