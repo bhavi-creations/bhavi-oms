@@ -12,6 +12,7 @@ class Department_model extends CI_Model {
 
     function select_departments()
     {
+        $this->db->where('id !=',0);
         $qry=$this->db->get('department_tbl');
         if($qry->num_rows()>0)
         {
