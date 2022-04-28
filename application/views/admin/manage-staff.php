@@ -46,6 +46,7 @@
                   <thead>
                   <tr>
                     <th>Slno.</th>
+                    <th>Employee Id</th>
                     <th>Name</th>
                     <th>Pic</th>
                     <th>Department</th>
@@ -71,6 +72,7 @@
                   ?>
                       <tr>
                         <td><?php echo $i; ?></td>
+                        <td><?php echo $cnt['employee_id']; ?></td>
                         <td><?php echo $cnt['staff_name']; ?></td>
                         <td><img src="<?php echo base_url(); ?>uploads/profile-pic/<?php echo $cnt['pic'] ?>" class="img-circle" width="50px" alt="User Image"></td>
                         <td><?php echo $cnt['department_name']; ?></td>

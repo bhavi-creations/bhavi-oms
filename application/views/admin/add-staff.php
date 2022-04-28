@@ -122,6 +122,20 @@
                     <input type="date" name="txtdoj" class="form-control" placeholder="DOJ">
                   </div>
                 </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Employee Id</label>
+                    <input type="text" name="employee_id" class="form-control" placeholder="Employee Id">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Blood Group</label>
+                    <input type="text" name="blood_group" class="form-control" placeholder="Blood Group">
+                  </div>
+                </div>
                 
                 <div class="col-md-6">
                   <div class="form-group">
