@@ -88,10 +88,10 @@
                               {
                                 if($cnt1['id']==$cnt['department_id'])
                                 {
-                                  print "<option value='".$cnt1['id']."' selected>".$cnt1['department_name']."</option>";
+                                  print "<option value='".$cnt1['id']."' selected>".$cnt1['department_name']." ".$cnt1['city']."</option>";
                                 }
                                 else{
-                                  print "<option value='".$cnt1['id']."'>".$cnt1['department_name']."</option>";
+                                  print "<option value='".$cnt1['id']."'>".$cnt1['department_name']." ".$cnt1['city']."</option>";
                                 }
                               }
                             } 

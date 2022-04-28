@@ -68,7 +68,7 @@
                       {
                         foreach($department as $cnt)
                         {
-                          print "<option value='".$cnt['id']."'>".$cnt['department_name']."</option>";
+                          print "<option value='".$cnt['id']."'>".$cnt['department_name']." ".$cnt['city']."</option>";
                         }
                       } 
                       ?>
