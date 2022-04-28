@@ -63,9 +63,15 @@
                       <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $cnt['project_name']; ?></td>
-                        <td><?php echo $cnt['project_link']; ?></td>
+                        <td><?php echo '<a target="_blank" href="'.$cnt['project_link'].'">'.$cnt['project_link'].'</a>'; ?></td>
                         <td><?php echo $cnt['project_details']; ?></td>
-                        <td><?php echo $cnt['status']; ?></td>
+                        <td><?php 
+                          if($cnt['status'] == 1){
+                            echo '<span class="label label-success">Active</span>';
+                          }else{
+                            echo '<span class="label label-danger">Inactive</span>';
+                          }
+                        ?></td>
                         <td><?php echo date('d-m-Y', strtotime($cnt['date_time'])); ?></td>
                         <td>
                           <a href="<?php echo base_url(); ?>edit-projects/<?php echo $cnt['id']; ?>" class="btn btn-info">Edit</a>
