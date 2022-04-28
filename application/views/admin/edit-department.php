@@ -16,6 +16,12 @@
     <section class="content">
       <div class="row">
 
+        <?php echo validation_errors('<div class="col-md-12">
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4><i class="icon fa fa-check"></i> Failed!</h4>', '</div>
+          </div>'); ?>
+
         <?php if($this->session->flashdata('success')): ?>
           <div class="col-md-12">
             <div class="alert alert-success alert-dismissible">
@@ -48,11 +54,18 @@
                 <!-- form start -->
                 <form role="form" action="<?php echo base_url(); ?>update-department" method="POST">
                   <div class="box-body">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <label>Department Name</label>
                         <input type="hidden" name="txtid" value="<?php echo $cnt['id']; ?>" class="form-control">
                         <input type="text" name="txtdepartment" value="<?php echo $cnt['department_name']; ?>" class="form-control" placeholder="Department Name">
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">City</label>
+                        <input type="text" name="txtcity" value="<?php echo $cnt['city']; ?>" class="form-control" placeholder="City">
                       </div>
                     </div>
                     

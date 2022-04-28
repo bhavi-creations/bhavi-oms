@@ -46,6 +46,7 @@
                 <tr>
                   <th>Slno.</th>
                   <th>Department Name</th>
+                  <th>City</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -58,6 +59,7 @@
                     <tr>
                       <td><?php echo $i; ?></td>
                       <td><?php echo $cnt['department_name']; ?></td>
+                      <td><?php echo $cnt['city']; ?></td>
                       <td>
                         <a href="<?php echo base_url(); ?>edit-department/<?php echo $cnt['id']; ?>" class="btn btn-info">Edit</a>
                         <a href="<?php echo base_url(); ?>delete-department/<?php echo $cnt['id']; ?>" class="btn btn-danger">Delete</a>

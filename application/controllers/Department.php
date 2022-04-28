@@ -29,29 +29,53 @@ class Department extends CI_Controller {
 
     public function insert()
     {
+        $this->load->helper('form');
+        $this->form_validation->set_rules('txtdepartment', 'Department Name', 'required');
+        // $this->form_validation->set_rules('txtcity', 'Department City', 'required');
+
         $department=$this->input->post('txtdepartment');
-        $data=$this->Department_model->insert_department(array('department_name'=>$department));
-        if($data==true)
+        $city=$this->input->post('txtcity');
+
+        if($this->form_validation->run() !== false)
         {
-            $this->session->set_flashdata('success', "New Department Added Succesfully"); 
+            $data=$this->Department_model->insert_department(array('department_name'=>$department,'city'=>$city));
+            if($data==true)
+            {
+                $this->session->set_flashdata('success', "New Department Added Succesfully"); 
+            }else{
+                $this->session->set_flashdata('error', "Sorry, New Department Adding Failed.");
+            }
+            redirect($_SERVER['HTTP_REFERER']);
         }else{
-            $this->session->set_flashdata('error', "Sorry, New Department Adding Failed.");
+            $this->index();
+            return false;
         }
-        redirect($_SERVER['HTTP_REFERER']);
     }
 
     public function update()
     {
+        $this->load->helper('form');
+        $this->form_validation->set_rules('txtdepartment', 'Department Name', 'required');
+        // $this->form_validation->set_rules('txtcity', 'Department City', 'required');
+
         $id=$this->input->post('txtid');
         $department=$this->input->post('txtdepartment');
-        $data=$this->Department_model->update_department(array('department_name'=>$department),$id);
-        if($this->db->affected_rows() > 0)
+        $city=$this->input->post('txtcity');
+
+        if($this->form_validation->run() !== false)
         {
-            $this->session->set_flashdata('success', "Department Updated Succesfully"); 
+            $data=$this->Department_model->update_department(array('department_name'=>$department,'city'=>$city),$id);
+            if($this->db->affected_rows() > 0)
+            {
+                $this->session->set_flashdata('success', "Department Updated Succesfully"); 
+            }else{
+                $this->session->set_flashdata('error', "Sorry, Department Update Failed.");
+            }
+            redirect(base_url()."department/manage_department");
         }else{
-            $this->session->set_flashdata('error', "Sorry, Department Update Failed.");
+            $this->edit($id);
+            return false;
         }
-        redirect(base_url()."department/manage_department");
     }
 
 
