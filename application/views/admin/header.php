@@ -202,6 +202,19 @@
           </ul>
         </li>
 
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Appointments</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>add-appointments"><i class="fa fa-circle-o"></i> Add Appointments</a></li>
+            <li><a href="<?php echo base_url(); ?>manage-appointments"><i class="fa fa-circle-o"></i> Manage Appointments</a></li>
+          </ul>
+        </li>
+
         <li><a href="<?php echo base_url(); ?>manage-attendance"><i class="fa fa-clock-o"></i> <span>Attendance</span></a></li>
 
 

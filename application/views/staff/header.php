@@ -120,6 +120,19 @@
 
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-list"></i> <span>Appointments</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>add-staff-appointments"><i class="fa fa-circle-o"></i> Add Appointments</a></li>
+            <li><a href="<?php echo base_url(); ?>view-staff-appointments"><i class="fa fa-circle-o"></i> View Appointments</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-check-circle"></i> <span>Work Reports</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

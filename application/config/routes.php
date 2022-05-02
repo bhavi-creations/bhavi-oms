@@ -82,6 +82,21 @@ $route['delete-holidays/(:num)'] = 'holidays/delete/$1';
 $route['edit-holidays/(:num)'] = 'holidays/edit/$1';
 $route['update-holidays'] = 'holidays/update';
 
+//appointments routes
+$route['add-appointments'] = 'appointments';
+$route['manage-appointments'] = 'appointments/manage';
+$route['insert-appointments'] = 'appointments/insert';
+$route['delete-appointments/(:num)'] = 'appointments/delete/$1';
+$route['edit-appointments/(:num)'] = 'appointments/edit/$1';
+$route['update-appointments'] = 'appointments/update';
+
+$route['add-staff-appointments'] = 'appointments/staff_add';
+$route['view-staff-appointments'] = 'appointments/view';
+$route['insert-staff-appointments'] = 'appointments/staff_insert';
+$route['delete-staff-appointments/(:num)'] = 'appointments/staff_delete/$1';
+$route['edit-staff-appointments/(:num)'] = 'appointments/staff_edit/$1';
+$route['update-staff-appointments'] = 'appointments/staff_update';
+
 //projects routes
 $route['add-projects'] = 'projects';
 $route['manage-projects'] = 'projects/manage';
