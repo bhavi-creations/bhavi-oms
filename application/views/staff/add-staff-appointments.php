@@ -68,14 +68,24 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Remarks</label>
-                    <textarea type="text" name="remarks" class="form-control" placeholder="Remarks" rows="9"></textarea>
+                    <textarea type="text" name="remarks" class="form-control" placeholder="Remarks" rows="12"></textarea>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Website</label>
-                    <input type="text" name="website" class="form-control" placeholder="Website">
+                    <label>Service</label>
+                    <input type="text" name="service" class="form-control" placeholder="Service">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Lead Type</label>
+                    <select name="lead_type" class="form-control">
+                        <option value="hot">Hot</option>
+                        <option value="cold">Cold</option>
+                    </select>
                   </div>
                 </div>
 

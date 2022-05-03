@@ -49,7 +49,8 @@
                     <th>Client</th>
                     <th>Status</th>
                     <th>Remarks</th>
-                    <th>Website</th>
+                    <th>Service</th>
+                    <th>Lead Type</th>
                     <th>Date</th>
                     <th>Close Status</th>
                     <th>Actions</th>
@@ -66,7 +67,8 @@
                         <td><?php echo $cnt['client']; ?></td>
                         <td><?php echo $cnt['status']; ?></td>
                         <td><?php echo $cnt['remarks']; ?></td>
-                        <td><?php echo $cnt['website']; ?></td>
+                        <td><?php echo $cnt['service']; ?></td>
+                        <td><?php echo $cnt['lead_type']; ?></td>
                         <td><?php echo date('d-m-Y', strtotime($cnt['date'])); ?></td>
                         <td><?php echo $cnt['close_status']; ?></td>
                         <td>

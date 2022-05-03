@@ -71,14 +71,35 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Remarks</label>
-                                <textarea type="text" name="remarks" class="form-control" placeholder="Remarks" rows="9"><?php echo $cnt['remarks'] ?></textarea>
+                                <textarea type="text" name="remarks" class="form-control" placeholder="Remarks" rows="12"><?php echo $cnt['remarks'] ?></textarea>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Website</label>
-                                <input type="text" name="website" class="form-control" placeholder="Website" value="<?php echo $cnt['website'] ?>">
+                                <label>Service</label>
+                                <input type="text" name="service" class="form-control" placeholder="Service" value="<?php echo $cnt['service'] ?>">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Lead Type</label>
+                                <select name="lead_type" class="form-control">
+                                    <?php 
+                                        if($cnt['lead_type'] == 'hot'){
+                                            echo '
+                                            <option value="hot" selected>Hot</option>
+                                            <option value="cold" >Cold</option>
+                                            ';
+                                        }else{
+                                            echo '
+                                            <option value="hot">Hot</option>
+                                            <option value="cold" selected>Cold</option>
+                                            ';
+                                        }
+                                    ?>
+                                </select>
                             </div>
                         </div>
 

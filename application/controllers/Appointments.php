@@ -40,20 +40,21 @@ class Appointments extends CI_Controller {
         $this->form_validation->set_rules('client', 'Client Name', 'required');
         $this->form_validation->set_rules('status', 'Client Status', 'required');
         // $this->form_validation->set_rules('remarks', 'Remarks', 'required');
-        // $this->form_validation->set_rules('website', 'Website', 'required');
-        $this->form_validation->set_rules('date', 'Date', 'required');
+        // $this->form_validation->set_rules('service', 'Service', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');        $this->form_validation->set_rules('lead_type', 'Lead Type', 'required');
         $this->form_validation->set_rules('close_status', 'Closing Status', 'required');
 
         $client=$this->input->post('client');
         $status=$this->input->post('status');
         $remarks=$this->input->post('remarks');
-        $website=$this->input->post('website');
-        $date=$this->input->post('date');
+        $service=$this->input->post('service');
+        $date=$this->input->post('date');        
+        $lead_type=$this->input->post('lead_type');
         $close_status=$this->input->post('close_status');
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Appointments_model->insert_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'website'=>$website,'date'=>$date,'close_status'=>$close_status));
+            $data=$this->Appointments_model->insert_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status));
             
             if($data==true)
             {
@@ -77,21 +78,22 @@ class Appointments extends CI_Controller {
         $this->form_validation->set_rules('client', 'Client Name', 'required');
         $this->form_validation->set_rules('status', 'Client Status', 'required');
         // $this->form_validation->set_rules('remarks', 'Remarks', 'required');
-        // $this->form_validation->set_rules('website', 'Website', 'required');
-        $this->form_validation->set_rules('date', 'Date', 'required');
+        // $this->form_validation->set_rules('service', 'Service', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');        $this->form_validation->set_rules('lead_type', 'Lead Type', 'required');
         $this->form_validation->set_rules('close_status', 'Closing Status', 'required');
         
         $id=$this->input->post('appointment_id');
         $client=$this->input->post('client');
         $status=$this->input->post('status');
         $remarks=$this->input->post('remarks');
-        $website=$this->input->post('website');
-        $date=$this->input->post('date');
+        $service=$this->input->post('service');
+        $date=$this->input->post('date');        
+        $lead_type=$this->input->post('lead_type');
         $close_status=$this->input->post('close_status');
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Appointments_model->update_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'website'=>$website,'date'=>$date,'close_status'=>$close_status),$id);
+            $data=$this->Appointments_model->update_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status),$id);
             
             if($this->db->affected_rows() > 0)
             {
@@ -143,20 +145,21 @@ class Appointments extends CI_Controller {
         $this->form_validation->set_rules('client', 'Client Name', 'required');
         $this->form_validation->set_rules('status', 'Client Status', 'required');
         // $this->form_validation->set_rules('remarks', 'Remarks', 'required');
-        // $this->form_validation->set_rules('website', 'Website', 'required');
-        $this->form_validation->set_rules('date', 'Date', 'required');
+        // $this->form_validation->set_rules('service', 'Service', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');        $this->form_validation->set_rules('lead_type', 'Lead Type', 'required');
         $this->form_validation->set_rules('close_status', 'Closing Status', 'required');
 
         $client=$this->input->post('client');
         $status=$this->input->post('status');
         $remarks=$this->input->post('remarks');
-        $website=$this->input->post('website');
-        $date=$this->input->post('date');
+        $service=$this->input->post('service');
+        $date=$this->input->post('date');        
+        $lead_type=$this->input->post('lead_type');
         $close_status=$this->input->post('close_status');
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Appointments_model->insert_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'website'=>$website,'date'=>$date,'close_status'=>$close_status));
+            $data=$this->Appointments_model->insert_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status));
             
             if($data==true)
             {
@@ -180,21 +183,22 @@ class Appointments extends CI_Controller {
         $this->form_validation->set_rules('client', 'Client Name', 'required');
         $this->form_validation->set_rules('status', 'Client Status', 'required');
         // $this->form_validation->set_rules('remarks', 'Remarks', 'required');
-        // $this->form_validation->set_rules('website', 'Website', 'required');
-        $this->form_validation->set_rules('date', 'Date', 'required');
+        // $this->form_validation->set_rules('service', 'Service', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');        $this->form_validation->set_rules('lead_type', 'Lead Type', 'required');
         $this->form_validation->set_rules('close_status', 'Closing Status', 'required');
         
         $id=$this->input->post('appointment_id');
         $client=$this->input->post('client');
         $status=$this->input->post('status');
         $remarks=$this->input->post('remarks');
-        $website=$this->input->post('website');
-        $date=$this->input->post('date');
+        $service=$this->input->post('service');
+        $date=$this->input->post('date');        
+        $lead_type=$this->input->post('lead_type');
         $close_status=$this->input->post('close_status');
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Appointments_model->update_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'website'=>$website,'date'=>$date,'close_status'=>$close_status),$id);
+            $data=$this->Appointments_model->update_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status),$id);
             
             if($this->db->affected_rows() > 0)
             {
