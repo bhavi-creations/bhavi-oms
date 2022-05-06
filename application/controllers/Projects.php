@@ -38,7 +38,7 @@ class Projects extends CI_Controller {
     public function insert()
     {
         $this->form_validation->set_rules('project_name', 'Project Name', 'required');
-        $this->form_validation->set_rules('project_link', 'Project Link', 'required');
+        // $this->form_validation->set_rules('project_link', 'Project Link', 'required');
         // $this->form_validation->set_rules('project_details', 'Project Details', 'required');
         // $this->form_validation->set_rules('project_status', 'Project Status', 'required');
         $this->form_validation->set_rules('project_date', 'Project Date', 'required');
@@ -72,7 +72,7 @@ class Projects extends CI_Controller {
     {
         $this->load->helper('form');
         $this->form_validation->set_rules('project_name', 'Project Name', 'required');
-        $this->form_validation->set_rules('project_link', 'Project Link', 'required');
+        // $this->form_validation->set_rules('project_link', 'Project Link', 'required');
         // $this->form_validation->set_rules('project_details', 'Project Details', 'required');
         // $this->form_validation->set_rules('project_status', 'Project Status', 'required');
         $this->form_validation->set_rules('project_date', 'Project Date', 'required');
