@@ -51,7 +51,23 @@ class Projects extends CI_Controller {
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Projects_model->insert_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'status'=>$status,'date_time'=>$date_time));
+            $this->load->library('image_lib');
+            $config['upload_path']= 'uploads/project-files/';
+            $config['allowed_types'] ='gif|jpg|png|jpeg|doc|docx|csv|html|mp3|mp4|svg|pdf|txt|xls|xlsx|xml';
+            $new_name = time()."_".$_FILES["project_files"]['name'];
+            $config['file_name'] = $new_name;
+
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload('project_files'))
+            {
+                $data=$this->Projects_model->insert_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'status'=>$status,'date_time'=>$date_time));
+            }
+            else
+            {
+                $image_data =   $this->upload->data();
+
+                $data=$this->Projects_model->insert_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'project_files'=>$image_data['file_name'],'status'=>$status,'date_time'=>$date_time));
+            }
             
             if($data==true)
             {
@@ -86,7 +102,25 @@ class Projects extends CI_Controller {
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Projects_model->update_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'status'=>$status,'date_time'=>$date_time),$id);
+            $this->load->library('image_lib');
+            $config['upload_path']= 'uploads/project-files/';
+            $config['allowed_types'] ='gif|jpg|png|jpeg|doc|docx|csv|html|mp3|mp4|svg|pdf|txt|xls|xlsx|xml';
+            $new_name = time()."_".$_FILES["project_files"]['name'];
+            $config['file_name'] = $new_name;
+
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload('project_files'))
+            {
+                $data=$this->Projects_model->update_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'status'=>$status,'date_time'=>$date_time),$id);
+            }
+            else
+            {
+                $image_data =   $this->upload->data();
+
+                $data=$this->Projects_model->update_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'project_files'=>$image_data['file_name'],'status'=>$status,'date_time'=>$date_time),$id);
+            }
+
+            // $data=$this->Projects_model->update_projects(array('project_name'=>$name,'project_link'=>$link,'project_details'=>addslashes($details),'status'=>$status,'date_time'=>$date_time),$id);
             
             if($this->db->affected_rows() > 0)
             {

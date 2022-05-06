@@ -68,7 +68,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Project Details</label>
-                        <textarea type="text" name="project_details" class="form-control" placeholder="Project Details"></textarea>
+                        <textarea type="text" name="project_details" class="form-control" rows="5" placeholder="Project Details"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Project File</label>
+                        <input type="file" name="project_files" class="form-control" placeholder="Project Files">
                     </div>
                 </div>
 

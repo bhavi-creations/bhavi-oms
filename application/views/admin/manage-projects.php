@@ -49,6 +49,7 @@
                     <th>Project Name</th>
                     <th>Project Link</th>
                     <th>Project Details</th>
+                    <th>Project File</th>
                     <th>Status</th>
                     <th>Added On</th>
                     <th>Actions</th>
@@ -65,6 +66,15 @@
                         <td><?php echo $cnt['project_name']; ?></td>
                         <td><?php echo '<a target="_blank" href="'.$cnt['project_link'].'">'.$cnt['project_link'].'</a>'; ?></td>
                         <td><?php echo $cnt['project_details']; ?></td>
+                        <td>
+                          <?php
+                            echo '
+                              <a href="'.base_url().'uploads/project-files/'.$cnt['project_files'].'" download>
+                                '.$cnt['project_files'].'
+                              </a>
+                            ';
+                          ?>
+                        </td>
                         <td><?php 
                           if($cnt['status'] == 1){
                             echo '<span class="label label-success">Active</span>';
