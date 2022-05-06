@@ -68,6 +68,7 @@ $route['delete-department/(:num)'] = 'department/delete/$1';
 $route['add-staff'] = 'staff';
 $route['manage-staff'] = 'staff/manage';
 $route['insert-staff'] = 'staff/insert';
+$route['admin-profile'] = 'staff/admin_profile';
 $route['profile'] = 'staff/profile';
 $route['delete-staff/(:num)'] = 'staff/delete/$1';
 $route['edit-staff/(:num)'] = 'staff/edit/$1';
