@@ -49,7 +49,7 @@
                     <th>Project Name</th>
                     <th>Project Link</th>
                     <th>Project Details</th>
-                    <th>Project File</th>
+                    <th>Project Files</th>
                     <th>Status</th>
                     <th>Added On</th>
                     <th>Actions</th>
@@ -68,11 +68,18 @@
                         <td><?php echo $cnt['project_details']; ?></td>
                         <td>
                           <?php
-                            echo '
-                              <a href="'.base_url().'uploads/project-files/'.$cnt['project_files'].'" download>
-                                '.$cnt['project_files'].'
-                              </a>
-                            ';
+                            $links = explode(',',$cnt['project_files']);
+                            foreach ($links as $key => $value) {
+                              $filename = explode('_',$value,2);
+                              if(!isset($filename['1'])){
+                                $filename['1'] = $value;
+                              }
+                              echo '
+                                <a href="'.base_url().'uploads/project-files/'.$value.'" download>
+                                '.$filename['1'].'
+                                </a><br>
+                              ';
+                            }
                           ?>
                         </td>
                         <td><?php 

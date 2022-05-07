@@ -74,8 +74,8 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Project File</label>
-                        <input type="file" name="project_files" class="form-control" placeholder="Project Files">
+                        <label>Project Files</label>
+                        <input type="file" name="project_files[]" class="form-control" placeholder="Project Files" multiple>
                     </div>
                 </div>
 
@@ -89,7 +89,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Project Status</label><br>
-                        <input type="checkbox" name="project_status" selected class="form-control" data-toggle="toggle"  checked placeholder="Project Status">
+                        <input type="checkbox" name="project_status" class="form-control" data-toggle="toggle" value="1" checked="checked" placeholder="Project Status">
                     </div>
                 </div>
                 
