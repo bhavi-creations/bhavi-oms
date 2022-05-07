@@ -49,6 +49,7 @@
                     <th>Employee Id</th>
                     <th>Name</th>
                     <th>Pic</th>
+                    <th>Files</th>
                     <th>Department</th>
                     <th>Gender</th>
                     <th>Mobile</th>
@@ -75,6 +76,22 @@
                         <td><?php echo $cnt['employee_id']; ?></td>
                         <td><?php echo $cnt['staff_name']; ?></td>
                         <td><img src="<?php echo base_url(); ?>uploads/profile-pic/<?php echo $cnt['pic'] ?>" class="img-circle" width="50px" alt="User Image"></td>
+                        <td>
+                          <?php
+                            $links = explode(',',$cnt['files']);
+                            foreach ($links as $key => $value) {
+                              $filename = explode('_',$value,2);
+                              if(!isset($filename['1'])){
+                                $filename['1'] = $value;
+                              }
+                              echo '
+                                <a href="'.base_url().'uploads/staff-files/'.$value.'" download>
+                                '.$filename['1'].'
+                                </a><br>
+                              ';
+                            }
+                          ?>
+                        </td>
                         <td><?php echo $cnt['department_name']; ?></td>
                         <td><?php echo $cnt['gender']; ?></td>
                         <td><?php echo $cnt['mobile']; ?></td>

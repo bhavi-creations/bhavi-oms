@@ -80,13 +80,42 @@ class Staff extends CI_Controller {
         $country=$this->input->post('slccountry');
         $address=$this->input->post('txtaddress');
         $added=$this->session->userdata('userid');
+        $files=$_FILES["files"];
 
         if($this->form_validation->run() !== false)
         {
+            $this->load->library('upload');
+            $config['upload_path']= 'uploads/staff-files/';
+            $config['allowed_types'] ='gif|jpg|png|jpeg|doc|docx|csv|html|mp3|mp4|svg|pdf|txt|xls|xlsx|xml';
+            $file_names = [];
+            foreach ($files['name'] as $key => $image) {
+                $_FILES['files[]']['name']= $files['name'][$key];
+                $_FILES['files[]']['type']= $files['type'][$key];
+                $_FILES['files[]']['tmp_name']= $files['tmp_name'][$key];
+                $_FILES['files[]']['error']= $files['error'][$key];
+                $_FILES['files[]']['size']= $files['size'][$key];
+        
+                $fileName = time()."_".$image;
+        
+                $files[] = $fileName;
+        
+                $config['file_name'] = $fileName;
+        
+                $this->upload->initialize($config);
+        
+                if ($this->upload->do_upload('files[]')) {
+                    $file_data =   $this->upload->data();
+                    $file_names[] = $file_data['file_name'];
+                }
+            }
+            $file_names = implode(',',$file_names);
+
+            $config = [];
+
             $this->load->library('image_lib');
-            $config['upload_path']= 'uploads/profile-pic/';
-            $config['allowed_types'] ='gif|jpg|png|jpeg';
-            $this->load->library('upload', $config);
+            $config2['upload_path']= 'uploads/profile-pic/';
+            $config2['allowed_types'] ='gif|jpg|png|jpeg';
+            $this->load->library('upload', $config2);
             if ( ! $this->upload->do_upload('filephoto'))
             {
                 $image='default-pic.jpg';
@@ -112,7 +141,7 @@ class Staff extends CI_Controller {
             $login=$this->Home_model->insert_login(array('username'=>$email,'password'=>md5($mobile),'usertype'=>2));
             if($login>0)
             {
-                $data=$this->Staff_model->insert_staff(array('id'=>$login,'staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'pic'=>$image,'added_by'=>$added));
+                $data=$this->Staff_model->insert_staff(array('id'=>$login,'staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'pic'=>$image,'files'=>$file_names,'added_by'=>$added));
             }
             
             if($data==true)
@@ -161,6 +190,8 @@ class Staff extends CI_Controller {
         $state=$this->input->post('txtstate');
         $country=$this->input->post('slccountry');
         $address=$this->input->post('txtaddress');
+        $prev_files=$this->input->post('prev_files');
+        $files=$_FILES["files"];
 
         if($this->form_validation->run() !== false)
         {
@@ -345,9 +376,36 @@ class Staff extends CI_Controller {
         $state=$this->input->post('txtstate');
         $country=$this->input->post('slccountry');
         $address=$this->input->post('txtaddress');
+        $files=$_FILES["files"];
 
         if($this->form_validation->run() !== false)
         {
+            $this->load->library('upload');
+            $config['upload_path']= 'uploads/staff-files/';
+            $config['allowed_types'] ='gif|jpg|png|jpeg|doc|docx|csv|html|mp3|mp4|svg|pdf|txt|xls|xlsx|xml';
+            $file_names = [];
+            foreach ($files['name'] as $key => $image) {
+                $_FILES['files[]']['name']= $files['name'][$key];
+                $_FILES['files[]']['type']= $files['type'][$key];
+                $_FILES['files[]']['tmp_name']= $files['tmp_name'][$key];
+                $_FILES['files[]']['error']= $files['error'][$key];
+                $_FILES['files[]']['size']= $files['size'][$key];
+        
+                $fileName = time()."_".$image;
+        
+                $files[] = $fileName;
+        
+                $config['file_name'] = $fileName;
+        
+                $this->upload->initialize($config);
+        
+                if ($this->upload->do_upload('files[]')) {
+                    $file_data =   $this->upload->data();
+                    $file_names[] = $file_data['file_name'];
+                }
+            }
+            $file_names = implode(',',$file_names);
+
             $this->load->library('image_lib');
             $config['upload_path']= 'uploads/profile-pic/';
             $config['allowed_types'] ='gif|jpg|png|jpeg';

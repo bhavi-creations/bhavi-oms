@@ -175,6 +175,13 @@
                     <textarea class="form-control" name="txtaddress"></textarea>
                   </div>
                 </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label>Files</label>
+                      <input type="file" name="files[]" class="form-control" placeholder="Files" multiple>
+                  </div>
+                </div>
                 
               </div>
               <!-- /.box-body -->
