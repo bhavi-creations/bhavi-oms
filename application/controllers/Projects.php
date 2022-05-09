@@ -219,4 +219,29 @@ class Projects extends CI_Controller {
         redirect($_SERVER['HTTP_REFERER']);
     }
 
+    function deleteFile($id,$filename)
+    {
+        $result=$this->Projects_model->select_projects_byID($id);
+        $prev_files = $result['0']['project_files'];
+        
+        $files = explode(',',$prev_files);
+        print_r($files);
+        foreach ($files as $key => $value){
+            if ($value == $filename) {
+                unlink(FCPATH .'uploads/project-files/'.$filename);
+                unset($files[$key]);
+            }
+        }
+        $file_names = implode(',',$files);
+
+        $data=$this->Projects_model->delete_project_file(array('project_files'=>$file_names),$id);
+        if($this->db->affected_rows() > 0)
+        {
+            $this->session->set_flashdata('success', "Project File Deleted Succesfully"); 
+        }else{
+            $this->session->set_flashdata('error', "Sorry, Project File Delete Failed.");
+        }
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
 }

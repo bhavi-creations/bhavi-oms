@@ -49,4 +49,11 @@ class Projects_model extends CI_Model {
         $this->db->update('projects_tbl',$data);
         $this->db->affected_rows();
     }
+
+    function delete_project_file($data,$id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('projects_tbl',$data);
+        $this->db->affected_rows();
+    }
 }

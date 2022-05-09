@@ -517,8 +517,28 @@ class Staff extends CI_Controller {
         redirect($_SERVER['HTTP_REFERER']);
     }
 
-    
+    function deleteFile($id,$filename)
+    {
+        $result=$this->Staff_model->select_staff_byID($id);
+        $prev_files = $result['0']['files'];
+        
+        $files = explode(',',$prev_files);
+        print_r($files);
+        foreach ($files as $key => $value){
+            if ($value == $filename) {
+                unlink(FCPATH .'uploads/staff-files/'.$filename);
+                unset($files[$key]);
+            }
+        }
+        $file_names = implode(',',$files);
 
-
-
+        $data=$this->Staff_model->delete_staff_file(array('files'=>$file_names),$id);
+        if($this->db->affected_rows() > 0)
+        {
+            $this->session->set_flashdata('success', "Staff File Deleted Succesfully"); 
+        }else{
+            $this->session->set_flashdata('error', "Sorry, Staff File Delete Failed.");
+        }
+        redirect($_SERVER['HTTP_REFERER']);
+    }
 }

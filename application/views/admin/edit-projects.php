@@ -84,16 +84,28 @@
                             <div class="form-group" style="background-color: #ecf0f5; padding:10px; border-radius:5px">
                                 <?php
                                   $links = explode(',',$cnt['project_files']);
-                                  foreach ($links as $key => $value) {
-                                    $filename = explode('_',$value,2);
-                                    if(!isset($filename['1'])){
-                                      $filename['1'] = $value;
+                                  if($cnt['project_files']!=''){
+                                    foreach ($links as $key => $value) {
+                                      $filename = explode('_',$value,2);
+                                      if(!isset($filename['1'])){
+                                        $filename['1'] = $value;
+                                      }
+                                      if($value != ''){
+                                      echo '
+                                        <div class"d-flex" style="margin:10px">
+                                        <a href="'.base_url().'uploads/project-files/'.$value.'" download>
+                                        '.$filename['1'].'
+                                        </a>
+                                        <a class="label label-danger" style="margin-left:20px" href="'.base_url().'delete-file/'.$cnt['id'].'/'.$value.'">
+                                        Delete
+                                        </a>
+                                        <br>
+                                        </div>
+                                      ';
+                                      }
                                     }
-                                    echo '
-                                      <a href="'.base_url().'uploads/project-files/'.$value.'" download>
-                                      '.$filename['1'].'
-                                      </a><br>
-                                    ';
+                                  }else{
+                                    echo'No Files';
                                   }
                                 ?>
                             </div>

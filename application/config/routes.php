@@ -73,6 +73,7 @@ $route['profile'] = 'staff/profile';
 $route['delete-staff/(:num)'] = 'staff/delete/$1';
 $route['edit-staff/(:num)'] = 'staff/edit/$1';
 $route['update-staff'] = 'staff/update';
+$route['delete-staff-file/(:num)/(:any)'] = 'staff/deleteFile/$1/$2';
 
 //holidays routes
 $route['add-holidays'] = 'holidays';
@@ -105,6 +106,7 @@ $route['view-projects'] = 'projects/view';
 $route['insert-projects'] = 'projects/insert';
 $route['delete-projects/(:num)'] = 'projects/delete/$1';
 $route['edit-projects/(:num)'] = 'projects/edit/$1';
+$route['delete-file/(:num)/(:any)'] = 'projects/deleteFile/$1/$2';
 
 //projects tasks routes
 $route['add-project-tasks'] = 'Project_Tasks';

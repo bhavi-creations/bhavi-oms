@@ -100,10 +100,11 @@ class Staff_model extends CI_Model {
         $this->db->affected_rows();
     }
 
-    
-    
-
-
-
+    function delete_staff_file($data,$id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('staff_tbl',$data);
+        $this->db->affected_rows();
+    }
 
 }
