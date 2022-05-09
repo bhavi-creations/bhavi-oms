@@ -222,6 +222,33 @@
                           <textarea class="form-control" name="txtaddress"><?php echo $cnt['address'] ?></textarea>
                         </div>
                       </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Files</label>
+                            <input type="hidden" name="prev_files" class="form-control" placeholder="Files" value="<?php echo $cnt['files'] ?>">
+                            <input type="file" name="files[]" class="form-control" placeholder="Files" multiple>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group" style="background-color: #ecf0f5; padding:10px; border-radius:5px">
+                            <?php
+                              $links = explode(',',$cnt['files']);
+                              foreach ($links as $key => $value) {
+                                $filename = explode('_',$value,2);
+                                if(!isset($filename['1'])){
+                                  $filename['1'] = $value;
+                                }
+                                echo '
+                                  <a href="'.base_url().'uploads/staff-files/'.$value.'" download>
+                                  '.$filename['1'].'
+                                  </a><br>
+                                ';
+                              }
+                            ?>
+                        </div>
+                      </div>
                       
                     </div>
                     <!-- /.box-body -->

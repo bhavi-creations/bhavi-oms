@@ -183,31 +183,54 @@ class Staff extends CI_Controller {
 
         if($this->form_validation->run() !== false)
         {
-            $this->load->library('image_lib');
-            $config['upload_path']= 'uploads/profile-pic/';
-            $config['allowed_types'] ='gif|jpg|png|jpeg';
-            $this->load->library('upload', $config);
+            $this->load->library('upload');
+            $config['upload_path']= 'uploads/staff-files/';
+            $config['allowed_types'] ='gif|jpg|png|jpeg|doc|docx|csv|html|mp3|mp4|svg|pdf|txt|xls|xlsx|xml';
+            $file_names = [];
+            foreach ($files['name'] as $key => $image) {
+                $_FILES['files[]']['name']= $files['name'][$key];
+                $_FILES['files[]']['type']= $files['type'][$key];
+                $_FILES['files[]']['tmp_name']= $files['tmp_name'][$key];
+                $_FILES['files[]']['error']= $files['error'][$key];
+                $_FILES['files[]']['size']= $files['size'][$key];
+        
+                $fileName = time()."_".$image;
+        
+                $files[] = $fileName;
+        
+                $config['file_name'] = $fileName;
+        
+                $this->upload->initialize($config);
+        
+                if ($this->upload->do_upload('files[]')) {
+                    $file_data =   $this->upload->data();
+                    $file_names[] = $file_data['file_name'];
+                }
+            }
+            if(count($file_names)){
+                $file_names = implode(',',$file_names);
+                $file_names = $file_names.','.$prev_files;
+            }else{
+                $file_names = $prev_files;
+            }
+
+            $config = [];
+
+            // $this->load->library('image_lib');
+            $config2['upload_path']= 'uploads/profile-pic/';
+            $config2['allowed_types'] ='gif|jpg|png|jpeg';
+            $this->load->library('upload', $config2);
+            $this->upload->initialize($config2);
             if ( ! $this->upload->do_upload('filephoto'))
             {
-                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department),$id);
+                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'files'=>$file_names),$id);
             }
             else
             {
                 $image_data =   $this->upload->data();
+                $image=$image_data['file_name'];
 
-                $configer =  array(
-                  'image_library'   => 'gd2',
-                  'source_image'    =>  $image_data['full_path'],
-                  'maintain_ratio'  =>  TRUE,
-                  'width'           =>  150,
-                  'height'          =>  150,
-                  'quality'         =>  50
-                );
-                $this->image_lib->clear();
-                $this->image_lib->initialize($configer);
-                $this->image_lib->resize();
-
-                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'pic'=>$image_data['file_name'],'added_by'=>$added),$id);
+                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'pic'=>$image_data['file_name'],'files'=>$file_names,'added_by'=>$added),$id);
             }
             
             if($this->db->affected_rows() > 0)
