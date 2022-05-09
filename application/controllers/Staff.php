@@ -112,10 +112,11 @@ class Staff extends CI_Controller {
 
             $config = [];
 
-            $this->load->library('image_lib');
+            // $this->load->library('image_lib');
             $config2['upload_path']= 'uploads/profile-pic/';
             $config2['allowed_types'] ='gif|jpg|png|jpeg';
             $this->load->library('upload', $config2);
+            $this->upload->initialize($config2);
             if ( ! $this->upload->do_upload('filephoto'))
             {
                 $image='default-pic.jpg';
@@ -123,19 +124,6 @@ class Staff extends CI_Controller {
             else
             {
                 $image_data =   $this->upload->data();
-
-                $configer =  array(
-                  'image_library'   => 'gd2',
-                  'source_image'    =>  $image_data['full_path'],
-                  'maintain_ratio'  =>  TRUE,
-                  'width'           =>  150,
-                  'height'          =>  150,
-                  'quality'         =>  50
-                );
-                $this->image_lib->clear();
-                $this->image_lib->initialize($configer);
-                $this->image_lib->resize();
-                
                 $image=$image_data['file_name'];
             }
             $login=$this->Home_model->insert_login(array('username'=>$email,'password'=>md5($mobile),'usertype'=>2));
