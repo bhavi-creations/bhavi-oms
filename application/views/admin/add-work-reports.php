@@ -54,7 +54,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Project</label>
-                    <select class="form-control" name="project_id">
+                    <select class="form-control selectpicker" data-live-search="true" name="project_id">
                       <option value="">Select</option>
                       <?php
                       if(isset($projects))
@@ -72,7 +72,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Task</label>
-                    <select class="form-control" name="task_id">
+                    <select class="form-control selectpicker" data-live-search="true" name="task_id">
                       <option value="">Select</option>
                       <?php
                       if(isset($tasks))

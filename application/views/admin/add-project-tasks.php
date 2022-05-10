@@ -68,7 +68,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Project</label>
-                    <select class="form-control" name="project_id">
+                    <select class="form-control selectpicker" data-live-search="true" name="project_id">
                       <option value="">Select</option>
                       <?php
                       if(isset($projects))
@@ -86,7 +86,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Staff</label>
-                    <select class="form-control" name="assigned_to[]" multiple>
+                    <select class="form-control selectpicker" data-live-search="true" name="assigned_to[]" multiple>
                       <option value="">Select</option>
                       <?php
                       if(isset($staff))

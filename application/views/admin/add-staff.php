@@ -61,7 +61,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Department</label>
-                    <select class="form-control" name="slcdepartment">
+                    <select class="form-control selectpicker" data-live-search="true" name="slcdepartment">
                       <option value="">Select</option>
                       <?php
                       if(isset($department))
@@ -79,7 +79,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Gender</label>
-                    <select class="form-control" name="slcgender">
+                    <select class="form-control selectpicker" data-live-search="true" name="slcgender">
                       <option value="">Select</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -154,7 +154,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Country</label>
-                    <select class="form-control" name="slccountry">
+                    <select class="form-control selectpicker" data-live-search="true" name="slccountry">
                       <option value="">Select</option>
                       <?php
                         if(isset($country))

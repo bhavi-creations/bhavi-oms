@@ -175,7 +175,7 @@ class Salary extends CI_Controller {
             // print '<div class="col-md-12">
             //       <div class="form-group">
             //         <label for="exampleInputPassword1">Department Name</label>
-            //         <select class="form-control" name="slcdepartment" onchange="getstaff(this.value)">
+            //         <select class="form-control selectpicker" data-live-search="true" name="slcdepartment" onchange="getstaff(this.value)">
             //           <option value="">Select</option>
                         
             //         </select>
