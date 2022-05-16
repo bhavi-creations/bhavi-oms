@@ -57,7 +57,7 @@
 <!-- Datatable -->
 <script>
   $(function () {
-    $('#example1, #attendance').DataTable({
+    $('#example1, #attendance, #salary').DataTable({
       dom: 'Bfrtip',
       buttons: [
           'copy', 'csv', 'excel',
@@ -77,6 +77,7 @@
   var minDate, maxDate, staff;
  
   // Custom filtering function which will search data in column four between two values
+  // attendance
   $.fn.dataTable.ext.search.push(
       function( settings, data, dataIndex ) {
           console.log(settings.nTable.id);
@@ -116,8 +117,50 @@
           return false;
       }
   );
+
+  // salary 
+  $.fn.dataTable.ext.search.push(
+      function( settings, data, dataIndex ) {
+          console.log(settings.nTable.id);
+          if ( settings.nTable.id !== 'salary' ) {
+            return true;
+          }
+
+          var staff = $('#salary_staff').val();
+          var min = new Date($('#salary_min').val()+' 00:00:00');
+          var max = new Date($('#salary_max').val()+' 23:59:59');
+
+          var staffName = data[1];
+          var staffDate = data[7].split(' ');
+          var staffDateIndexes = data[7].split('-');
+          var date = new Date( staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
+          console.log(min);
+          console.log(max);
+          console.log(staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
+          console.log(date);
+          if (
+              ( min === null && max === null ) ||
+              ( min === null && date <= max ) ||
+              ( min <= date   && max === null ) ||
+              ( min <= date   && date <= max ) ||
+              ( min === date  || date === max )
+          ) {
+            if(staff != ''){
+              if(staff == staffName){
+                return true;
+              }else{
+                return false;
+              }
+            }else{
+              return true;
+            }
+          }
+          return false;
+      }
+  );
   
   $(document).ready(function() {
+      // attendance 
       // Create date inputs
       minDate = new Date($('#min').val());
       maxDate = new Date($('#max').val());
@@ -134,6 +177,17 @@
       $('#min, #max, #staff').on('change', function () {
           table.draw();
       });
+      // attendance 
+
+
+      // Salary
+      // DataTables initialisation
+      var salaryTable = $('#salary').DataTable();
+      // Refilter the salaryTable
+      $('#salary_min, #salary_max, #salary_staff').on('change', function () {
+          salaryTable.draw();
+      });
+      // Salary 
   });
 </script>
 </body>

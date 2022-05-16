@@ -50,6 +50,7 @@ class Salary extends CI_Controller {
 
     public function manage()
     {
+        $data['staff']=$this->Staff_model->select_staff();
         $data['content']=$this->Salary_model->select_salary();
         $this->load->view('admin/header');
         $this->load->view('admin/manage-salary',$data);

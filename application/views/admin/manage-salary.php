@@ -41,8 +41,33 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="row" style="margin-bottom:10px">
+                <div class="col-md-4">
+                  <label for="salary_staff">Staff/Employee</label>
+                  <select name="salary_staff" id="salary_staff" class="form-control selectpicker" >
+                      <option value="">All</option>
+                      <?php
+                      if(isset($staff))
+                      {
+                        foreach($staff as $cnt)
+                        {
+                          print "<option value='".$cnt['staff_name']."'>".$cnt['staff_name']."</option>";
+                        }
+                      } 
+                      ?>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="salary_min">From Date</label>
+                  <input type="date" id="salary_min" name="salary_min" class="form-control" value="<?=date('Y-m-01')?>">
+                </div>
+                <div class="col-md-4">
+                  <label for="salary_max">To Date</label>
+                  <input type="date" id="salary_max" name="salary_max" class="form-control" value="<?=date('Y-m-d')?>">
+                </div>
+              </div>
               <div class="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="salary" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Slno.</th>
@@ -55,6 +80,7 @@
                     <th>Paid On</th>
                     <th>Invoice</th>
                     <th>Actions</th>
+                    <!-- if you are adding/deleting any fields, please change the data index used for filtering in footer.php -->
                   </tr>
                   </thead>
                   <tbody>
