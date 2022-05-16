@@ -57,7 +57,7 @@
 <!-- Datatable -->
 <script>
   $(function () {
-    $('#example1, #attendance, #salary').DataTable({
+    $('#example1, #attendance, #salary, #leave').DataTable({
       dom: 'Bfrtip',
       buttons: [
           'copy', 'csv', 'excel',
@@ -158,6 +158,47 @@
           return false;
       }
   );
+
+  // leave
+  $.fn.dataTable.ext.search.push(
+      function( settings, data, dataIndex ) {
+          console.log(settings.nTable.id);
+          if ( settings.nTable.id !== 'leave' ) {
+            return true;
+          }
+
+          var staff = $('#leave_staff').val();
+          var min = new Date($('#leave_min').val()+' 00:00:00');
+          var max = new Date($('#leave_max').val()+' 23:59:59');
+
+          var staffName = data[1];
+          var staffDate = data[5].split(' ');
+          var staffDateIndexes = data[5].split('-');
+          var date = new Date( staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
+          console.log(min);
+          console.log(max);
+          console.log(staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
+          console.log(date);
+          if (
+              ( min === null && max === null ) ||
+              ( min === null && date <= max ) ||
+              ( min <= date   && max === null ) ||
+              ( min <= date   && date <= max ) ||
+              ( min === date  || date === max )
+          ) {
+            if(staff != ''){
+              if(staff == staffName){
+                return true;
+              }else{
+                return false;
+              }
+            }else{
+              return true;
+            }
+          }
+          return false;
+      }
+  );
   
   $(document).ready(function() {
       // attendance 
@@ -188,6 +229,15 @@
           salaryTable.draw();
       });
       // Salary 
+
+      // Leave
+      // DataTables initialisation
+      var leaveTable = $('#leave').DataTable();
+      // Refilter the leaveTable
+      $('#leave_min, #leave_max, #leave_staff').on('change', function () {
+          leaveTable.draw();
+      });
+      // Leave 
   });
 </script>
 </body>

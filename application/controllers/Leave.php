@@ -30,6 +30,7 @@ class Leave extends CI_Controller {
 
     public function manage()
     {
+        $data['staff']=$this->Staff_model->select_staff();
         $data['content']=$this->Leave_model->select_leave();
         $this->load->view('admin/header');
         $this->load->view('admin/manage-leave',$data);
