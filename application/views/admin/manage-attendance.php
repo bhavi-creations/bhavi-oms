@@ -76,6 +76,7 @@
                     <th>Logout</th>
                     <th>Email</th>
                     <th>Mobile</th>
+                    <!-- if you are adding/deleting any fields, please change the data index used for filtering in footer.php -->
                   </tr>
                   </thead>
                   <tbody>
