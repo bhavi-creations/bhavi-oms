@@ -57,7 +57,7 @@
 <!-- Datatable -->
 <script>
   $(function () {
-    $('#example1, #attendance, #salary, #leave').DataTable({
+    $('#example1, #attendance, #salary, #leave, #work_reports').DataTable({
       dom: 'Bfrtip',
       buttons: [
           'copy', 'csv', 'excel',
@@ -199,6 +199,46 @@
           return false;
       }
   );
+
+  // work_reports
+  $.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        console.log(settings.nTable.id);
+        if ( settings.nTable.id !== 'work_reports' ) {
+          return true;
+        }
+
+        var staff = $('#work_reports_staff').val();
+        var min = new Date($('#work_reports_min').val()+' 00:00:00');
+        var max = new Date($('#work_reports_max').val()+' 23:59:59');
+
+        var staffName = data[3];
+        var staffDateIndexes = data[6].split('-');
+        var date = new Date( staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
+        console.log(min);
+        console.log(max);
+        console.log(staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
+        console.log(date);
+        if (
+            ( min === null && max === null ) ||
+            ( min === null && date <= max ) ||
+            ( min <= date   && max === null ) ||
+            ( min <= date   && date <= max ) ||
+            ( min === date  || date === max )
+        ) {
+          if(staff != ''){
+            if(staff == staffName){
+              return true;
+            }else{
+              return false;
+            }
+          }else{
+            return true;
+          }
+        }
+        return false;
+    }
+  );
   
   $(document).ready(function() {
       // attendance 
@@ -238,6 +278,15 @@
           leaveTable.draw();
       });
       // Leave 
+
+      // Work Reports
+      // DataTables initialisation
+      var workReportsTable = $('#work_reports').DataTable();
+      // Refilter the workReportsTable
+      $('#work_reports_min, #work_reports_max, #work_reports_staff').on('change', function () {
+          workReportsTable.draw();
+      });
+      // Work Reports 
   });
 </script>
 </body>

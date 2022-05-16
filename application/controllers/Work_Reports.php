@@ -24,6 +24,7 @@ class Work_Reports extends CI_Controller {
 
     public function manage()
     {
+        $data['staff']=$this->Staff_model->select_staff();
         $data['content']=$this->Work_Reports_model->select_work_reports();
         $this->load->view('admin/header');
         $this->load->view('admin/manage-work-reports',$data);

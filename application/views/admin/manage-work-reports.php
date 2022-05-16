@@ -41,8 +41,33 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="row" style="margin-bottom:10px">
+                <div class="col-md-4">
+                  <label for="work_reports_staff">Staff/Employee</label>
+                  <select name="work_reports_staff" id="work_reports_staff" class="form-control selectpicker" >
+                      <option value="">All</option>
+                      <?php
+                      if(isset($staff))
+                      {
+                        foreach($staff as $cnt)
+                        {
+                          print "<option value='".$cnt['staff_name']."'>".$cnt['staff_name']."</option>";
+                        }
+                      } 
+                      ?>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="work_reports_min">From Date</label>
+                  <input type="date" id="work_reports_min" name="work_reports_min" class="form-control" value="<?=date('Y-m-01')?>">
+                </div>
+                <div class="col-md-4">
+                  <label for="work_reports_max">To Date</label>
+                  <input type="date" id="work_reports_max" name="work_reports_max" class="form-control" value="<?=date('Y-m-d')?>">
+                </div>
+              </div>
               <div class="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="work_reports" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Sl.no</th>
@@ -53,6 +78,7 @@
                     <th>Work Status</th>
                     <th>Date</th>
                     <th>Actions</th>
+                    <!-- if you are adding/deleting any fields, please change the data index used for filtering in footer.php -->
                   </tr>
                   </thead>
                   <tbody>
