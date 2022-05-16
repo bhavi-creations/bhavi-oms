@@ -27,6 +27,12 @@
 <!-- DataTables -->
 <script src="<?php echo base_url(); ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
 <!-- Boostrap Toogle Script -->
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
@@ -51,7 +57,12 @@
 <!-- Datatable -->
 <script>
   $(function () {
-    $('#example1').DataTable()
+    $('#example1, #attendance').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel',
+      ]
+    })
     
     $('#example2').DataTable({
       'paging'      : true,
@@ -62,6 +73,68 @@
       'autoWidth'   : false
     })
   })
+
+  var minDate, maxDate, staff;
+ 
+  // Custom filtering function which will search data in column four between two values
+  $.fn.dataTable.ext.search.push(
+      function( settings, data, dataIndex ) {
+          console.log(settings.nTable.id);
+          if ( settings.nTable.id !== 'attendance' ) {
+            return true;
+          }
+
+          staff = $('#staff').val();
+          var min = new Date($('#min').val()+' 00:00:00');
+          var max = new Date($('#max').val()+' 23:59:59');
+
+          var staffName = data[1];
+          var loginDate = data[2].split(' ');
+          var loginDateIndexes = loginDate[0].split('-');
+          var date = new Date( loginDateIndexes[2]+' '+loginDateIndexes[1]+' '+loginDateIndexes[0]);
+          console.log(min);
+          console.log(max);
+          console.log(loginDateIndexes[2]+' '+loginDateIndexes[1]+' '+loginDateIndexes[0]);
+          console.log(date);
+          if (
+              ( min === null && max === null ) ||
+              ( min === null && date <= max ) ||
+              ( min <= date   && max === null ) ||
+              ( min <= date   && date <= max ) ||
+              ( min === date  || date === max )
+          ) {
+            if(staff != ''){
+              if(staff == staffName){
+                return true;
+              }else{
+                return false;
+              }
+            }else{
+              return true;
+            }
+          }
+          return false;
+      }
+  );
+  
+  $(document).ready(function() {
+      // Create date inputs
+      minDate = new Date($('#min').val());
+      maxDate = new Date($('#max').val());
+      staff = $('#staff').val();
+
+      console.log(minDate)
+      console.log(maxDate)
+      console.log(staff)
+  
+      // DataTables initialisation
+      var table = $('#attendance').DataTable();
+  
+      // Refilter the table
+      $('#min, #max, #staff').on('change', function () {
+          table.draw();
+      });
+  });
 </script>
 </body>
 </html>

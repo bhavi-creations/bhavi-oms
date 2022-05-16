@@ -32,8 +32,8 @@
                   <?php echo $this->session->flashdata('error'); ?>
             </div>
           </div>
-        <?php endif;?>
-
+        <?php endif; ?>
+          
         <div class="col-xs-12">
           <div class="box box-info">
             <div class="box-header">
@@ -41,8 +41,33 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="row" style="margin-bottom:10px">
+                <div class="col-md-4">
+                  <label for="staff">Staff/Employee</label>
+                  <select name="staff" id="staff" class="form-control selectpicker" >
+                      <option value="">All</option>
+                      <?php
+                      if(isset($staff))
+                      {
+                        foreach($staff as $cnt)
+                        {
+                          print "<option value='".$cnt['staff_name']."'>".$cnt['staff_name']."</option>";
+                        }
+                      } 
+                      ?>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="min">From Date</label>
+                  <input type="date" id="min" name="min" class="form-control" value="<?=date('Y-m-01')?>">
+                </div>
+                <div class="col-md-4">
+                  <label for="max">To Date</label>
+                  <input type="date" id="max" name="max" class="form-control" value="<?=date('Y-m-d')?>">
+                </div>
+              </div>
               <div class="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="attendance" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Slno.</th>
@@ -95,4 +120,3 @@
   </div>
   <!-- /.content-wrapper -->
 
-    
