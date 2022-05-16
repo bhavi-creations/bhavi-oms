@@ -41,8 +41,40 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="row" style="margin-bottom:10px">
+                <div class="col-md-3">
+                  <label for="project_tasks_staff">Staff/Employee</label>
+                  <select name="project_tasks_staff" id="project_tasks_staff" class="form-control selectpicker" >
+                      <option value="">All</option>
+                      <?php
+                      if(isset($staff))
+                      {
+                        foreach($staff as $cnt)
+                        {
+                          print "<option value='".$cnt['staff_name']."'>".$cnt['staff_name']."</option>";
+                        }
+                      } 
+                      ?>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="filter_by">Filter By</label>
+                  <select name="filter_by" id="filter_by" class="form-control selectpicker" >
+                    <option value="due_date">Due Date</option>
+                    <option value="completed_date">Completed Date</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="project_tasks_min">From Date</label>
+                  <input type="date" id="project_tasks_min" name="project_tasks_min" class="form-control" value="<?=date('Y-m-01')?>">
+                </div>
+                <div class="col-md-3">
+                  <label for="project_tasks_max">To Date</label>
+                  <input type="date" id="project_tasks_max" name="project_tasks_max" class="form-control" value="<?=date('Y-m-d')?>">
+                </div>
+              </div>
               <div class="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="project_tasks" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Sl.no</th>
@@ -54,6 +86,7 @@
                     <th>Due Date</th>
                     <th>Completed date</th>
                     <th>Actions</th>
+                    <!-- if you are adding/deleting any fields, please change the data index used for filtering in footer.php -->
                   </tr>
                   </thead>
                   <tbody>

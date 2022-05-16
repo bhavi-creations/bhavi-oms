@@ -23,6 +23,7 @@ class Project_Tasks extends CI_Controller {
 
     public function manage()
     {
+        $data['staff']=$this->Staff_model->select_staff();
         $data['content']=$this->Project_Tasks_model->select_project_tasks();
         $this->load->view('admin/header');
         $this->load->view('admin/manage-project-tasks',$data);

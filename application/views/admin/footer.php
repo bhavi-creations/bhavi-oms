@@ -57,7 +57,7 @@
 <!-- Datatable -->
 <script>
   $(function () {
-    $('#example1, #attendance, #salary, #leave, #work_reports').DataTable({
+    $('#example1, #attendance, #salary, #leave, #work_reports, #project_tasks').DataTable({
       dom: 'Bfrtip',
       buttons: [
           'copy', 'csv', 'excel',
@@ -239,6 +239,52 @@
         return false;
     }
   );
+
+  // project_tasks
+  $.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        console.log(settings.nTable.id);
+        if ( settings.nTable.id !== 'project_tasks' ) {
+          return true;
+        }
+
+        var staff = $('#project_tasks_staff').val();
+        var filter_by = $('#filter_by').val();
+        var min = new Date($('#project_tasks_min').val()+' 00:00:00');
+        var max = new Date($('#project_tasks_max').val()+' 23:59:59');
+
+        var staffName = data[2];
+        if(filter_by == 'due_date'){
+          var staffDateIndexes = data[6].split('-');
+        }else{
+          var staffDateIndexes = data[7].split('-');
+        }
+        var date = new Date( staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
+        console.log(min);
+        console.log(max);
+        console.log(staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
+        console.log(date);
+        if (
+            ( min === null && max === null ) ||
+            ( min === null && date <= max ) ||
+            ( min <= date   && max === null ) ||
+            ( min <= date   && date <= max ) ||
+            ( min === date  || date === max )
+        ) {
+          if(staff != ''){
+            if(staffName.indexOf(staff) !== -1){
+            // if(staff == staffName){
+              return true;
+            }else{
+              return false;
+            }
+          }else{
+            return true;
+          }
+        }
+        return false;
+    }
+  );
   
   $(document).ready(function() {
       // attendance 
@@ -287,6 +333,15 @@
           workReportsTable.draw();
       });
       // Work Reports 
+
+      // Project tasks
+      // DataTables initialisation
+      var projectTasksTable = $('#project_tasks').DataTable();
+      // Refilter the projectTasksTable
+      $('#project_tasks_min, #project_tasks_max, #project_tasks_staff, #filter_by').on('change', function () {
+          projectTasksTable.draw();
+      });
+      // Project tasks 
   });
 </script>
 </body>
