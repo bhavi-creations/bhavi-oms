@@ -53,6 +53,8 @@
                     <th>Task Status</th>
                     <th>Due Date</th>
                     <th>Completed date</th>
+                    <th>Daily Task</th>
+                    <th>Priority</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -87,6 +89,26 @@
                             }else{
                               echo date('d-m-Y', strtotime($cnt['completed_date']));
                             } 
+                          ?>
+                        </td>
+                        <td>
+                          <?php 
+                            if( $cnt['task_daily']){
+                              echo " <span class='text-capitalize label label-success' style='font-size:12px;'>yes</span> ";
+                            }else{
+                              echo " <span class='text-capitalize label label-danger' style='font-size:12px;'>no</span> ";
+                            } 
+                          ?>
+                        </td>
+                        <td>
+                          <?php 
+                            if( $cnt['task_priority'] == 'low'){
+                              echo " <span class='text-capitalize label label-info' style='font-size:12px;'>".$cnt['task_priority']."</span> ";
+                            }else if( $cnt['task_priority'] == 'medium'){
+                              echo " <span class='text-capitalize label label-success' style='font-size:12px;'>".$cnt['task_priority']."</span> ";
+                            }else if( $cnt['task_priority'] == 'high'){
+                              echo " <span class='text-capitalize label label-warning' style='font-size:12px;'>".$cnt['task_priority']."</span> ";
+                            }
                           ?>
                         </td>
                       </tr>
