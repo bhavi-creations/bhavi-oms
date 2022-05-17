@@ -44,7 +44,7 @@
               <div class="row" style="margin-bottom:10px">
                 <div class="col-md-3">
                   <label for="project_tasks_staff">Staff/Employee</label>
-                  <select name="project_tasks_staff" id="project_tasks_staff" class="form-control selectpicker" >
+                  <select name="project_tasks_staff" id="project_tasks_staff" class="form-control selectpicker" data-live-search="true">
                       <option value="">All</option>
                       <?php
                       if(isset($staff))
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-3">
                   <label for="filter_by">Filter By</label>
-                  <select name="filter_by" id="filter_by" class="form-control selectpicker" >
+                  <select name="filter_by" id="filter_by" class="form-control selectpicker" data-live-search="true" >
                     <option value="due_date">Due Date</option>
                     <option value="completed_date">Completed Date</option>
                   </select>

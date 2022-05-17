@@ -44,7 +44,7 @@
               <div class="row" style="margin-bottom:10px">
                 <div class="col-md-4">
                   <label for="staff">Staff/Employee</label>
-                  <select name="staff" id="staff" class="form-control selectpicker" >
+                  <select name="staff" id="staff" class="form-control selectpicker" data-live-search="true">
                       <option value="">All</option>
                       <?php
                       if(isset($staff))
