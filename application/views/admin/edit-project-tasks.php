@@ -136,6 +136,25 @@
                                 <input type="date" name="completed_date" value="<?php echo $cnt['completed_date']; ?>" class="form-control" placeholder="DATE">
                             </div>
                         </div>
+
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Priority</label>
+                            <select name="task_priority" id="task_priority" class="form-control">
+                              <option value="low" <?php if($cnt['task_priority'] == 'low'){echo "selected";} ?> >Low</option>
+                              <option value="medium" <?php if($cnt['task_priority'] == 'medium'){echo "selected";} ?>>Medium</option>
+                              <option value="high" <?php if($cnt['task_priority'] == 'high'){echo "selected";} ?>>High</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Daily Task</label><br>
+                                <input type="hidden" name="task_daily" class="form-control" data-toggle="toggle" value="0" placeholder="Daily Task">
+                                <input type="checkbox" name="task_daily" class="form-control" data-toggle="toggle" value="1" <?php if($cnt['task_daily'] == 1){ echo 'checked'; } ?> placeholder="Daily Task">
+                            </div>
+                        </div>
                         
                     </div>
                     <!-- /.box-body -->

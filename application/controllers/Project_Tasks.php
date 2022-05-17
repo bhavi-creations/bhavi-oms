@@ -57,6 +57,8 @@ class Project_Tasks extends CI_Controller {
             $task_name=$this->input->post('task_name');
             $task_details=$this->input->post('task_details');
             $task_status=$this->input->post('task_status');
+            $task_priority=$this->input->post('task_priority');
+            $task_daily=$this->input->post('task_daily');
             $due_date=$this->input->post('due_date');
             $completed_date=$this->input->post('completed_date');
             
@@ -66,6 +68,8 @@ class Project_Tasks extends CI_Controller {
                 'task_name'=>addslashes($task_name),
                 'task_details'=>addslashes($task_details),
                 'task_status'=>$task_status,
+                'task_priority'=>$task_priority,
+                'task_daily'=>$task_daily,
                 'due_date'=>$due_date,
                 'completed_date'=>$completed_date
             );
@@ -109,6 +113,8 @@ class Project_Tasks extends CI_Controller {
             $task_name=$this->input->post('task_name');
             $task_details=$this->input->post('task_details');
             $task_status=$this->input->post('task_status');
+            $task_priority=$this->input->post('task_priority');
+            $task_daily=$this->input->post('task_daily');
             $due_date=$this->input->post('due_date');
             $completed_date=$this->input->post('completed_date');
 
@@ -118,6 +124,8 @@ class Project_Tasks extends CI_Controller {
                 'task_name'=>addslashes($task_name),
                 'task_details'=>addslashes($task_details),
                 'task_status'=>$task_status,
+                'task_priority'=>$task_priority,
+                'task_daily'=>$task_daily,
                 'due_date'=>$due_date,
                 'completed_date'=>$completed_date
             );
