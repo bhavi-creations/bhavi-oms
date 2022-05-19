@@ -91,6 +91,7 @@ $route['insert-appointments'] = 'appointments/insert';
 $route['delete-appointments/(:num)'] = 'appointments/delete/$1';
 $route['edit-appointments/(:num)'] = 'appointments/edit/$1';
 $route['update-appointments'] = 'appointments/update';
+$route['delete-marketing-file/(:num)/(:any)'] = 'appointments/deleteFile/$1/$2';
 
 $route['add-staff-appointments'] = 'appointments/staff_add';
 $route['view-staff-appointments'] = 'appointments/view';

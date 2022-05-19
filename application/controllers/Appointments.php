@@ -48,13 +48,41 @@ class Appointments extends CI_Controller {
         $status=$this->input->post('status');
         $remarks=$this->input->post('remarks');
         $service=$this->input->post('service');
-        $date=$this->input->post('date');        
+        $date=$this->input->post('date');
         $lead_type=$this->input->post('lead_type');
         $close_status=$this->input->post('close_status');
+        $location=$this->input->post('location');
+        $files=$_FILES["files"];
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Appointments_model->insert_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status));
+            $this->load->library('upload');
+            $config['upload_path']= 'uploads/marketing/';
+            $config['allowed_types'] ='gif|jpg|png|jpeg';
+            $file_names = [];
+            foreach ($files['name'] as $key => $image) {
+                $_FILES['files[]']['name']= $files['name'][$key];
+                $_FILES['files[]']['type']= $files['type'][$key];
+                $_FILES['files[]']['tmp_name']= $files['tmp_name'][$key];
+                $_FILES['files[]']['error']= $files['error'][$key];
+                $_FILES['files[]']['size']= $files['size'][$key];
+        
+                $fileName = time()."_".$image;
+        
+                $files[] = $fileName;
+        
+                $config['file_name'] = $fileName;
+        
+                $this->upload->initialize($config);
+        
+                if ($this->upload->do_upload('files[]')) {
+                    $file_data =   $this->upload->data();
+                    $file_names[] = $file_data['file_name'];
+                }
+            }
+            $file_names = implode(',',$file_names);
+
+            $data=$this->Appointments_model->insert_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'images'=>$file_names,'location'=>$location,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status));
             
             if($data==true)
             {
@@ -90,10 +118,44 @@ class Appointments extends CI_Controller {
         $date=$this->input->post('date');        
         $lead_type=$this->input->post('lead_type');
         $close_status=$this->input->post('close_status');
+        $location=$this->input->post('location');
+        $prev_files=$this->input->post('prev_files');
+        $files=$_FILES["files"];
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Appointments_model->update_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status),$id);
+            $this->load->library('upload');
+            $config['upload_path']= 'uploads/marketing/';
+            $config['allowed_types'] ='gif|jpg|png|jpeg';
+            $file_names = [];
+            foreach ($files['name'] as $key => $image) {
+                $_FILES['files[]']['name']= $files['name'][$key];
+                $_FILES['files[]']['type']= $files['type'][$key];
+                $_FILES['files[]']['tmp_name']= $files['tmp_name'][$key];
+                $_FILES['files[]']['error']= $files['error'][$key];
+                $_FILES['files[]']['size']= $files['size'][$key];
+        
+                $fileName = time()."_".$image;
+        
+                $files[] = $fileName;
+        
+                $config['file_name'] = $fileName;
+        
+                $this->upload->initialize($config);
+        
+                if ($this->upload->do_upload('files[]')) {
+                    $file_data =   $this->upload->data();
+                    $file_names[] = $file_data['file_name'];
+                }
+            }
+            if(count($file_names)){
+                $file_names = implode(',',$file_names);
+                $file_names = $file_names.','.$prev_files;
+            }else{
+                $file_names = $prev_files;
+            }
+
+            $data=$this->Appointments_model->update_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'images'=>$file_names,'location'=>$location,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status),$id);
             
             if($this->db->affected_rows() > 0)
             {
@@ -238,6 +300,29 @@ class Appointments extends CI_Controller {
         redirect($_SERVER['HTTP_REFERER']);
     }
 
+    function deleteFile($id,$filename)
+    {
+        $result=$this->Appointments_model->select_appointments_byID($id);
+        $prev_files = $result['0']['images'];
+        
+        $files = explode(',',$prev_files);
+        print_r($files);
+        foreach ($files as $key => $value){
+            if ($value == $filename) {
+                unlink(FCPATH .'uploads/marketing/'.$filename);
+                unset($files[$key]);
+            }
+        }
+        $file_names = implode(',',$files);
 
+        $data=$this->Appointments_model->delete_marketing_file(array('images'=>$file_names),$id);
+        if($this->db->affected_rows() > 0)
+        {
+            $this->session->set_flashdata('success', "Appointments File Deleted Succesfully"); 
+        }else{
+            $this->session->set_flashdata('error', "Sorry, Appointments File Delete Failed.");
+        }
+        redirect($_SERVER['HTTP_REFERER']);
+    }
 
 }

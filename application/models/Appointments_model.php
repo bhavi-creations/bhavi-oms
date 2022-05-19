@@ -49,4 +49,11 @@ class Appointments_model extends CI_Model {
         $this->db->update('appointments_tbl',$data);
         $this->db->affected_rows();
     }
+
+    function delete_marketing_file($data,$id)
+    {
+        $this->db->where('appointment_id', $id);
+        $this->db->update('appointments_tbl',$data);
+        $this->db->affected_rows();
+    }
 }

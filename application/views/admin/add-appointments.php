@@ -81,6 +81,20 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
+                      <label>Images</label>
+                      <input type="file" name="files[]" class="form-control" placeholder="Files" multiple>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" name="location" class="form-control" placeholder="Location">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
                     <label>Lead Type</label>
                     <select name="lead_type" class="form-control">
                         <option value="hot">Hot</option>

@@ -178,7 +178,7 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                      <label>Files</label>
+                      <label>Images</label>
                       <input type="file" name="files[]" class="form-control" placeholder="Files" multiple>
                   </div>
                 </div>

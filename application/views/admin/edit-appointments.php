@@ -83,6 +83,53 @@
                         </div>
 
                         <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Images</label>
+                              <input type="hidden" name="prev_files" class="form-control" placeholder="Files" value="<?php echo $cnt['images'] ?>">
+                              <input type="file" name="files[]" class="form-control" placeholder="Files" multiple>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group" style="background-color: #ecf0f5; padding:10px; border-radius:5px">
+                              <?php
+                                  $links = explode(',',$cnt['images']);
+                                  if($cnt['images']!=''){
+                                    foreach ($links as $key => $value) {
+                                      $filename = explode('_',$value,2);
+                                      if(!isset($filename['1'])){
+                                        $filename['1'] = $value;
+                                      }
+                                      if($value != ''){
+                                        echo '
+                                          <div class"d-flex" style="margin:10px">
+                                            <a href="'.base_url().'uploads/marketing/'.$value.'" target="_blank">
+                                              <img src="'.base_url().'uploads/marketing/'.$value.'" width="150"/>
+                                              '.$filename['1'].'
+                                            </a>
+                                            <a class="label label-danger" style="margin-left:20px" href="'.base_url().'delete-marketing-file/'.$cnt['appointment_id'].'/'.$value.'">
+                                            Delete
+                                            </a>
+                                            <br>
+                                          </div>
+                                        ';
+                                      }
+                                    }
+                                  }else{
+                                    echo'No Files';
+                                  }
+                                ?>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" name="location" class="form-control" placeholder="Location" value="<?php echo $cnt['location'] ?>">
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Lead Type</label>
                                 <select name="lead_type" class="form-control">
