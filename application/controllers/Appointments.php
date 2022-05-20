@@ -48,6 +48,7 @@ class Appointments extends CI_Controller {
         $status=$this->input->post('status');
         $remarks=$this->input->post('remarks');
         $service=$this->input->post('service');
+        $follow_up_date=$this->input->post('follow_up_date');
         $date=$this->input->post('date');
         $lead_type=$this->input->post('lead_type');
         $close_status=$this->input->post('close_status');
@@ -82,7 +83,7 @@ class Appointments extends CI_Controller {
             }
             $file_names = implode(',',$file_names);
 
-            $data=$this->Appointments_model->insert_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'images'=>$file_names,'location'=>$location,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status));
+            $data=$this->Appointments_model->insert_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'images'=>$file_names,'location'=>$location,'lead_type'=>$lead_type,'date'=>$date,'follow_up_date'=>$follow_up_date,'close_status'=>$close_status));
             
             if($data==true)
             {
@@ -115,7 +116,8 @@ class Appointments extends CI_Controller {
         $status=$this->input->post('status');
         $remarks=$this->input->post('remarks');
         $service=$this->input->post('service');
-        $date=$this->input->post('date');        
+        $date=$this->input->post('date');
+        $follow_up_date=$this->input->post('follow_up_date');
         $lead_type=$this->input->post('lead_type');
         $close_status=$this->input->post('close_status');
         $location=$this->input->post('location');
@@ -155,7 +157,7 @@ class Appointments extends CI_Controller {
                 $file_names = $prev_files;
             }
 
-            $data=$this->Appointments_model->update_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'images'=>$file_names,'location'=>$location,'lead_type'=>$lead_type,'date'=>$date,'close_status'=>$close_status),$id);
+            $data=$this->Appointments_model->update_appointments(array('client'=>$client,'status'=>$status,'remarks'=>$remarks,'service'=>$service,'images'=>$file_names,'location'=>$location,'lead_type'=>$lead_type,'date'=>$date,'follow_up_date'=>$follow_up_date,'close_status'=>$close_status),$id);
             
             if($this->db->affected_rows() > 0)
             {

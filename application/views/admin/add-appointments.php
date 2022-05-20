@@ -118,6 +118,13 @@
                     <input type="date" name="date" class="form-control" placeholder="Date" value="<?php echo date('Y-m-d'); ?>">
                   </div>
                 </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Follow up Date</label>
+                    <input type="date" name="follow_up_date" class="form-control" placeholder="Follow up Date" value="<?php echo date('Y-m-d', strtotime("+1 week")); ?>">
+                  </div>
+                </div>
                 
                 <div class="col-md-6">
                   <div class="form-group">

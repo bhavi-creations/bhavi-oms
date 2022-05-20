@@ -52,6 +52,7 @@
                     <th>Service</th>
                     <th>Lead Type</th>
                     <th>Date</th>
+                    <th>Follow up Date</th>
                     <th>Close Status</th>
                     <th>Actions</th>
                   </tr>
@@ -70,6 +71,7 @@
                         <td><?php echo $cnt['service']; ?></td>
                         <td><?php echo $cnt['lead_type']; ?></td>
                         <td><?php echo date('d-m-Y', strtotime($cnt['date'])); ?></td>
+                        <td><?php if($cnt['follow_up_date']!='0000-00-00'){echo date('d-m-Y', strtotime($cnt['follow_up_date']));}else{echo '-';} ?></td>
                         <td><?php echo $cnt['close_status']; ?></td>
                         <td>
                           <a href="<?php echo base_url(); ?>edit-appointments/<?php echo $cnt['appointment_id']; ?>" class="btn btn-info">Edit</a>

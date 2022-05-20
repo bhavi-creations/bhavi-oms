@@ -164,6 +164,13 @@
                                 <input type="date" name="date" class="form-control" placeholder="Date" value="<?php echo $cnt['date'] ?>">
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Follow up Date</label>
+                            <input type="date" name="follow_up_date" class="form-control" placeholder="Follow up Date" value="<?php echo $cnt['follow_up_date'] ?>">
+                          </div>
+                        </div>
                         
                         <div class="col-md-6">
                             <div class="form-group">
