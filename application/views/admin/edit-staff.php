@@ -305,7 +305,7 @@
 
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label>Permission - <?php echo $permission; ?></label>
+                          <label>Permission</label>
                           <select class="form-control selectpicker" data-live-search="true" name="permission">
                             <option value="no_access" <?php if($permission == 'no_access'){echo"selected";} ?> >No Access</option>
                             <option value="view_access" <?php if($permission == 'view_access'){echo"selected";} ?> >View Access</option>
