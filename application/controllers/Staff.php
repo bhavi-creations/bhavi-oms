@@ -541,4 +541,33 @@ class Staff extends CI_Controller {
         }
         redirect($_SERVER['HTTP_REFERER']);
     }
+
+    public function update_staff_permissions()
+    {
+        $this->load->helper('form');
+        $this->form_validation->set_rules('staff_id', 'Staff', 'required');
+        $this->form_validation->set_rules('module', 'Module', 'required');
+        $this->form_validation->set_rules('permission', 'permission', 'required');
+        
+        $staff_id=$this->input->post('staff_id');
+        $module=$this->input->post('module');
+        $permission=$this->input->post('permission');
+
+        if($this->form_validation->run() !== false)
+        {
+            $data=$this->Staff_model->update_permission(array('staff_id'=>$staff_id,'module'=>$module,'permission'=>$permission));
+        
+            if($data)
+            {
+                $this->session->set_flashdata('success', "Staff Permissions Updated Succesfully"); 
+            }else{
+                $this->session->set_flashdata('error', "Sorry, Staff Permissions Update Failed.");
+            }
+            redirect(base_url()."manage-staff");
+        }
+        else{
+            $this->edit($staff_id);
+            return false;
+        } 
+    }
 }

@@ -34,13 +34,13 @@ class Staff_model extends CI_Model {
         if($qry->num_rows()>0)
         {
             $result=$qry->result_array();
+            $result['0']['permissions'] = $this->select_staff_permissions($id);
             return $result;
         }
     }
 
     function select_staff_byEmail($email)
     {
-
         $this->db->where('email',$email);
         $qry=$this->db->get('staff_tbl');
         if($qry->num_rows()>0)
@@ -64,6 +64,16 @@ class Staff_model extends CI_Model {
         }
     }
 
+    function select_staff_permissions($staff_id)
+    {
+        $this->db->where('staff_id',$staff_id);
+        $qry=$this->db->get('permissions_tbl');
+        if($qry->num_rows()>0)
+        {
+            $result=$qry->result_array();
+            return $result;
+        }
+    }
 
     function delete_staff($id)
     {
@@ -105,6 +115,29 @@ class Staff_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update('staff_tbl',$data);
         $this->db->affected_rows();
+    }
+
+    function update_permission($data)
+    {
+        $staff_id = $data['staff_id'];
+        $module = $data['module'];
+        $this->db->where('staff_id',$staff_id);
+        $this->db->where('module',$module);
+        $qry=$this->db->get('permissions_tbl');
+        if($qry->num_rows()>0)
+        {
+            $this->db->where('staff_id',$staff_id);
+            $this->db->where('module',$module);
+            $this->db->update('permissions_tbl',$data);
+            if($this->db->affected_rows()){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            $this->db->insert("permissions_tbl",$data);
+            return $this->db->insert_id();
+        }
     }
 
 }

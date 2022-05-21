@@ -272,6 +272,58 @@
             <?php endif; ?>
           </div>
           <!-- /.box -->
+
+          <!-- general form elements -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Edit Staff Permissions</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <?php if(isset($content)): ?>
+              <?php foreach($content as $cnt): ?>
+                <?php
+                  if(isset($cnt['permissions']['0'])){
+                    $permission = $cnt['permissions']['0']['permission'];
+                  }else{
+                    $permission = 'no_access';
+                  } 
+                ?>
+                  <!-- form start -->
+                  <?php echo form_open_multipart('Staff/update_staff_permissions');?>
+                    <div class="box-body">
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Module</label>
+                          <input type="hidden" name="staff_id" value="<?php echo $cnt['id'] ?>" class="form-control" placeholder="Staff Id">
+                          <select class="form-control selectpicker" data-live-search="true" name="module">
+                            <option value="marketing">Marketing</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Permission - <?php echo $permission; ?></label>
+                          <select class="form-control selectpicker" data-live-search="true" name="permission">
+                            <option value="no_access" <?php if($permission == 'no_access'){echo"selected";} ?> >No Access</option>
+                            <option value="view_access" <?php if($permission == 'view_access'){echo"selected";} ?> >View Access</option>
+                            <option value="edit_access" <?php if($permission == 'edit_access'){echo"selected";} ?> >Edit Access</option>
+                          </select>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                      <button type="submit" class="btn btn-info pull-right">Submit</button>
+                    </div>
+                  </form>
+                <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+          <!-- /.box -->
         </div>
         <!--/.col (left) -->
       </div>
