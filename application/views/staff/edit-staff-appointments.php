@@ -83,6 +83,61 @@
                         </div>
 
                         <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Images</label>
+                              <input type="hidden" name="prev_files" class="form-control" placeholder="Files" value="<?php echo $cnt['images'] ?>">
+                              <input type="file" name="files[]" class="form-control" placeholder="Files" multiple>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group" style="background-color: #ecf0f5; padding:10px; border-radius:5px">
+                              <?php
+                                  $links = explode(',',$cnt['images']);
+                                  if($cnt['images']!=''){
+                                    foreach ($links as $key => $value) {
+                                      $filename = explode('_',$value,2);
+                                      if(!isset($filename['1'])){
+                                        $filename['1'] = $value;
+                                      }
+                                      if($value != ''){
+                                        echo '
+                                          <div class"d-flex" style="margin:10px">
+                                            <a href="'.base_url().'uploads/marketing/'.$value.'" target="_blank">
+                                              <img src="'.base_url().'uploads/marketing/'.$value.'" width="150"/>
+                                              '.$filename['1'].'
+                                            </a>
+                                            <a class="label label-danger" style="margin-left:20px" href="'.base_url().'delete-marketing-file/'.$cnt['appointment_id'].'/'.$value.'">
+                                            Delete
+                                            </a>
+                                            <br>
+                                          </div>
+                                        ';
+                                      }
+                                    }
+                                  }else{
+                                    echo'No Files';
+                                  }
+                                ?>
+                          </div>
+                        </div>
+
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label>Location</label>
+                            <input type="hidden" id="location" name="location" class="form-control" placeholder="location points" value="<?php echo $cnt['location'] ?>">
+                            <div id="location-details">Click on the 'Pick Location' Button</div>
+                            <a class="btn btn-primary" id="get-location">Pick Location</a>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <div class="map"></div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Lead Type</label>
                                 <select name="lead_type" class="form-control">
@@ -108,6 +163,13 @@
                                 <label>Date</label>
                                 <input type="date" name="date" class="form-control" placeholder="Date" value="<?php echo $cnt['date'] ?>">
                             </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Follow up Date</label>
+                            <input type="date" name="follow_up_date" class="form-control" placeholder="Follow up Date" value="<?php echo $cnt['follow_up_date'] ?>">
+                          </div>
                         </div>
                         
                         <div class="col-md-6">
@@ -149,3 +211,59 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+
+  <script>
+    let locationButton = document.getElementById("get-location");
+    let locationDiv = document.getElementById("location-details");
+
+    locationButton.addEventListener("click", () => {
+      //Geolocation APU is used to get geographical position of a user and is available inside the navigator object
+      if (navigator.geolocation) {
+        //returns position(latitude and longitude) or error
+        navigator.geolocation.getCurrentPosition(showLocation, checkError);
+      } else {
+        //For old browser i.e IE
+        locationDiv.innerText = "The browser does not support geolocation";
+      }
+    });
+
+    //Error Checks
+    const checkError = (error) => {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          locationDiv.innerText = "Please allow access to location";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          //usually fired for firefox
+          locationDiv.innerText = "Location Information unavailable";
+          break;
+        case error.TIMEOUT:
+          locationDiv.innerText = "The request to get user location timed out";
+      }
+    };
+
+    const showLocation = async (position) => {
+      //We user the NOminatim API for getting actual addres from latitude and longitude
+      let response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
+      );
+      console.log(position.coords.latitude)
+      console.log(position.coords.longitude)
+      //store response object
+      let data = await response.json();
+      locationDiv.innerText = `${data.address.city}, ${data.address.country}`;
+      
+      $('#location').val(position.coords.latitude+','+position.coords.longitude);
+      $('.map').html('<iframe src="https://maps.google.com/maps?q=' + position.coords.latitude + ',' + position.coords.longitude + '&t=&z=15&ie=UTF8&iwloc=&output=embed" width="auto" height="auto" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>');
+    };
+
+    $(document).ready(function(){
+      let points = '<?php echo $cnt['location']; ?>';
+      let pointsArr = points.split(',');
+      let lat = pointsArr['0'];
+      let lang = pointsArr['1'];
+      console.log(lat+' , '+lang);
+      $('.map').html('<iframe src="https://maps.google.com/maps?q=' + lat + ',' + lang + '&t=&z=15&ie=UTF8&iwloc=&output=embed" width="auto" height="auto" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>');
+    })
+  </script>
