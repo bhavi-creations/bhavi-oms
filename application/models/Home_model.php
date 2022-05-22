@@ -20,6 +20,8 @@ class Home_model extends CI_Model {
             );
             $login_id = $this->insert_login_records($login_record);
             $result['0']['login_id'] = $login_id;
+            $staff_data = $this->Staff_model->select_staff_byID($result['0']['id']);
+            $result['0']['staff_data'] = $staff_data['0'];
             return $result;
         }
     }

@@ -9,6 +9,27 @@ class Appointments extends CI_Controller {
         if ( ! $this->session->userdata('logged_in'))
         { 
             redirect(base_url().'login');
+        }else{
+            $this->check_permissions();
+        }
+    }
+
+    function check_permissions(){
+        $staff_data = $this->session->userdata('staff_data');
+        if( $this->session->userdata('usertype') == 2){
+            $permissions = $staff_data['permissions'];
+            if(isset($permissions['0'])){
+                $permission = $permissions['0']['permission'];
+            }else{
+                $permission = 'no_access';
+            } 
+            if($permission == 'no_access'){
+                $this->session->set_flashdata('error', "Sorry, You don't have permission to access appointments.");
+                redirect(base_url().'home');
+            }
+            return $permission;
+        }else{
+            return 'no_access';
         }
     }
 
@@ -199,9 +220,14 @@ class Appointments extends CI_Controller {
 
     public function staff_add()
     {
-        $this->load->view('staff/header');
-        $this->load->view('staff/add-staff-appointments');
-        $this->load->view('staff/footer');
+        if($this->check_permissions() == 'edit_access'){
+            $this->load->view('staff/header');
+            $this->load->view('staff/add-staff-appointments');
+            $this->load->view('staff/footer');
+        }else{
+            $this->session->set_flashdata('error', "Sorry, You don't have permission to access appointments.");
+            redirect(base_url().'home');
+        }
     }
 
     public function staff_insert()
@@ -346,24 +372,33 @@ class Appointments extends CI_Controller {
 
     function staff_edit($id)
     {
-        $data['content']=$this->Appointments_model->select_appointments_byID($id);
-        $this->load->view('staff/header');
-        $this->load->view('staff/edit-staff-appointments',$data);
-        $this->load->view('staff/footer');
+        if($this->check_permissions() == 'edit_access'){
+            $data['content']=$this->Appointments_model->select_appointments_byID($id);
+            $this->load->view('staff/header');
+            $this->load->view('staff/edit-staff-appointments',$data);
+            $this->load->view('staff/footer');
+        }else{
+            $this->session->set_flashdata('error', "Sorry, You don't have permission to access appointments.");
+            redirect(base_url().'home');
+        }
     }
 
 
     function staff_delete($id)
     {
-        
-        $data=$this->Appointments_model->delete_appointments($id);
-        if($this->db->affected_rows() > 0)
-        {
-            $this->session->set_flashdata('success', "Appointment Deleted Succesfully"); 
+        if($this->check_permissions() == 'edit_access'){
+            $data=$this->Appointments_model->delete_appointments($id);
+            if($this->db->affected_rows() > 0)
+            {
+                $this->session->set_flashdata('success', "Appointment Deleted Succesfully"); 
+            }else{
+                $this->session->set_flashdata('error', "Sorry, Appointment Delete Failed.");
+            }
+            redirect($_SERVER['HTTP_REFERER']);
         }else{
-            $this->session->set_flashdata('error', "Sorry, Appointment Delete Failed.");
+            $this->session->set_flashdata('error', "Sorry, You don't have permission to access appointments.");
+            redirect(base_url().'home');
         }
-        redirect($_SERVER['HTTP_REFERER']);
     }
 
     function deleteFile($id,$filename)

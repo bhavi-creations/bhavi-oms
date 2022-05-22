@@ -34,6 +34,24 @@
           </div>
         <?php endif;?>
 
+        <?php
+          $staff_data = $this->session->userdata('staff_data');
+          $permission = 'edit_access';
+          if( $this->session->userdata('usertype') == 2){
+              $permissions = $staff_data['permissions'];
+              if(isset($permissions['0'])){
+                  $permission = $permissions['0']['permission'];
+              }else{
+                  $permission = 'no_access';
+              } 
+              if($permission == 'no_access'){
+                  $this->session->set_flashdata('error', "Sorry, You don't have permission to access appointments.");
+                  redirect(base_url().'home');
+              }
+              // print_r($this->session->userdata('staff_data'));
+          }
+        ?>
+
         <div class="col-xs-12">
           <div class="box box-info">
             <div class="box-header">
@@ -54,7 +72,13 @@
                     <th>Date</th>
                     <th>Follow up Date</th>
                     <th>Close Status</th>
+                    <?php
+                      if($permission == 'edit_access'){
+                    ?>
                     <th>Actions</th>
+                    <?php
+                      }
+                    ?>
                   </tr>
                   </thead>
                   <tbody>
@@ -73,10 +97,16 @@
                         <td><?php echo date('d-m-Y', strtotime($cnt['date'])); ?></td>
                         <td><?php if($cnt['follow_up_date']!='0000-00-00'){echo date('d-m-Y', strtotime($cnt['follow_up_date']));}else{echo '-';} ?></td>
                         <td><?php echo $cnt['close_status']; ?></td>
+                        <?php
+                          if($permission == 'edit_access'){
+                        ?>
                         <td>
                           <a href="<?php echo base_url(); ?>edit-staff-appointments/<?php echo $cnt['appointment_id']; ?>" class="btn btn-info">Edit</a>
                           <a href="<?php echo base_url(); ?>delete-staff-appointments/<?php echo $cnt['appointment_id']; ?>" class="btn btn-danger">Delete</a>
                         </td>
+                        <?php
+                          }
+                        ?>
                       </tr>
                     <?php 
                       $i++;

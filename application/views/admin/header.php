@@ -211,7 +211,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-list"></i> <span>Appointments</span>
+            <i class="fa fa-list"></i> <span>Marketing</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

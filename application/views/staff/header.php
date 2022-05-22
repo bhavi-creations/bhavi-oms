@@ -1,3 +1,17 @@
+<?php
+  $staff_data = $this->session->userdata('staff_data');
+  if( $this->session->userdata('usertype') == 2){
+    $permissions = $staff_data['permissions'];
+    if(isset($permissions['0'])){
+        $permission = $permissions['0']['permission'];
+    }else{
+        $permission = 'no_access';
+    }
+  }else{
+    $permission = 'edit_access';
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,18 +135,24 @@
         <li><a href="<?php echo base_url(); ?>view-projects"><i class="fa fa-star"></i> <span>Projects</span></a></li>
         <li><a href="<?php echo base_url(); ?>view-project-tasks"><i class="fa fa-star"></i> <span>Project Tasks</span></a></li>
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>Appointments</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>add-staff-appointments"><i class="fa fa-circle-o"></i> Add Appointments</a></li>
-            <li><a href="<?php echo base_url(); ?>view-staff-appointments"><i class="fa fa-circle-o"></i> View Appointments</a></li>
-          </ul>
-        </li>
+        <?php if($permission != 'no_access'){ ?>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-list"></i> <span>Marketing</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <?php if($permission == 'edit_access'){ ?>
+                <li><a href="<?php echo base_url(); ?>add-staff-appointments"><i class="fa fa-circle-o"></i> Add Appointments</a></li>
+              <?php } ?>
+              <?php if($permission == 'view_access' || $permission == 'edit_access'){ ?>
+                <li><a href="<?php echo base_url(); ?>view-staff-appointments"><i class="fa fa-circle-o"></i> View Appointments</a></li>
+              <?php } ?>
+            </ul>
+          </li>
+        <?php } ?>
 
         <li class="treeview">
           <a href="#">
