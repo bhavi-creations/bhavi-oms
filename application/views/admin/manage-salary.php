@@ -73,9 +73,11 @@
                     <th>Slno.</th>
                     <th>Staff Name</th>
                     <th>Department</th>
-                    <th>Pic</th>
+                    <!-- <th>Pic</th> -->
                     <th>Basic Salary</th>
                     <th>Allowance</th>
+                    <th>Working Days</th>
+                    <th>Leaves</th>
                     <th>Total Amount</th>
                     <th>Paid On</th>
                     <th>Invoice</th>
@@ -93,9 +95,10 @@
                         <td><?php echo $i; ?></td>
                         <td><?php echo $cnt['staff_name']; ?></td>
                         <td><?php echo $cnt['department_name']; ?></td>
-                        <td><img src="<?php echo base_url(); ?>uploads/profile-pic/<?php echo $cnt['pic'] ?>" class="img-circle" width="50px" alt="User Image"></td>
                         <td><?php echo $cnt['basic_salary']; ?></td>
-                        <td><?php echo $cnt['allowance']; ?></td>
+                        <td><?php echo $cnt['allowance']; ?></td> 
+                        <td><?php echo $cnt['working_days']; ?></td>
+                        <td><?php echo $cnt['no_of_leaves']; ?></td>
                         <td><?php echo $cnt['total']; ?></td>
                         <td><?php echo date('d-m-Y', strtotime($cnt['added_on'])); ?></td>
                         <td><a href="<?php echo base_url(); ?>salary-invoice/<?php echo $cnt['id']; ?>" class="btn btn-warning">Invioce</a></td>

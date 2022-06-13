@@ -85,7 +85,10 @@
             <tr>
               <th>Slno.</th>
               <th>Basic Salary</th>
+              <th>Salary/Day</th>
               <th>Allowance</th>
+              <th>Working Days</th>
+              <th>Leaves</th>
               <th>Subtotal</th>
             </tr>
             </thead>
@@ -93,7 +96,10 @@
               <tr>
                 <td>1</td>
                 <td>Rs. <?php echo $cnt['basic_salary']; ?></td>
+                <td>Rs. <?php echo $cnt['salary_per_day']; ?></td>
                 <td>Rs. <?php echo $cnt['allowance']; ?></td>
+                <td><?php echo $cnt['working_days']; ?></td>
+                <td><?php echo $cnt['no_of_leaves']; ?></td>
                 <td>Rs. <?php echo $cnt['total']; ?></td>
               </tr>
             </tbody>
@@ -114,7 +120,7 @@
           <div class="table-responsive">
             <table class="table">
               <tr>
-                <th style="width:50%">Subtotal:</th>
+                <th style="width:70%">Subtotal:</th>
                 <td>Rs. <?php echo $cnt['total']; ?></td>
               </tr>
               <tr>
