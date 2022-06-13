@@ -131,8 +131,8 @@
           var max = new Date($('#salary_max').val()+' 23:59:59');
 
           var staffName = data[1];
-          var staffDate = data[7].split(' ');
-          var staffDateIndexes = data[7].split('-');
+          var staffDate = data[8].split(' ');
+          var staffDateIndexes = data[8].split('-');
           var date = new Date( staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
           console.log(min);
           console.log(max);
