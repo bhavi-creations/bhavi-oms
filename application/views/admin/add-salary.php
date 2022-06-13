@@ -102,7 +102,42 @@
       $.each($expenses,function(index,object){    
         if($(object).val()!='')
         {
-     $expenseTotal.val(parseInt($expenseTotal.val())+parseInt($(object).val()));
+          $expenseTotal.val(parseFloat($expenseTotal.val())+parseFloat($(object).val()));
+        }
+      })
+    });
+
+    $(document).on('keyup','input.working_days',function(){
+      $working_days = $(this).parents('tr').find('.working_days');
+      $basic_salary = $(this).parents('tr').find('#basic_salary');
+      $salary_per_day = $(this).parents('tr').find('#salary_per_day');
+      $worked_days = $(this).parents('tr').find('#worked_days');
+      $no_of_leaves = $(this).parents('tr').find('#no_of_leaves');
+      $salary_per_day.val('0');
+      $no_of_leaves.val('0');
+      $.each($working_days,function(index,object){    
+        if($(object).val()!='')
+        {
+          $salary_per_day.val((parseFloat($basic_salary.val())/parseInt($(object).val())).toFixed(2));
+          $worked_days.val($working_days.val());
+        }
+      })
+    });
+
+    $(document).on('keyup','input.no_of_leaves',function(){
+      $no_of_leaves = $(this).parents('tr').find('.no_of_leaves');
+      $worked_days = $(this).parents('tr').find('.worked_days');
+      $working_days = $(this).parents('tr').find('.working_days');
+      $allowance = $(this).parents('tr').find('.allowance');
+      $salary_per_day = $(this).parents('tr').find('#salary_per_day');
+      $expenseTotal = $(this).parents('tr').find('#total');
+      $.each($no_of_leaves,function(index,object){    
+        if($(object).val()!='')
+        {
+          $total_worked_days = parseInt($working_days.val())-parseInt($(object).val()).toFixed(2);
+          $worked_days.val($total_worked_days);
+          $without_allowance = Math.round(parseFloat($salary_per_day.val())*parseInt($total_worked_days));
+          $expenseTotal.val(parseInt($allowance.val())+parseInt($without_allowance));
         }
       })
     });

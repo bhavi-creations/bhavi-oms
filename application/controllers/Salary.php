@@ -71,6 +71,10 @@ class Salary extends CI_Controller {
         $id=$this->input->post('txtid');
         $basic=$this->input->post('txtbasic');
         $allowance=$this->input->post('txtallowance');
+        $working_days=$this->input->post('working_days');
+        $worked_days=$this->input->post('worked_days');
+        $no_of_leaves=$this->input->post('no_of_leaves');
+        $salary_per_day=$this->input->post('salary_per_day');
         $total=$this->input->post('txttotal');
         $added=$this->session->userdata('userid');
 
@@ -82,6 +86,10 @@ class Salary extends CI_Controller {
                 $data=$this->Salary_model->insert_salary(array('staff_id' => $id[$i],
                     'basic_salary' => $basic[$i],
                     'allowance' => $allowance[$i],
+                    'working_days' => $working_days[$i],
+                    'worked_days' => $worked_days[$i],
+                    'no_of_leaves' => $no_of_leaves[$i],
+                    'salary_per_day' => $salary_per_day[$i],
                     'total' => $total[$i],
                     'added_by' => $added)
                 );
@@ -148,6 +156,10 @@ class Salary extends CI_Controller {
                     <th>Staff</th>
                     <th>Basic Salary</th>
                     <th>Allowance</th>
+                    <th>Working Days</th>
+                    <th>No of Leaves</th>
+                    <th>Worked Days</th>
+                    <th>Salary/Day</th>
                     <th>Total</th>
                   </tr>
                   </thead>
@@ -158,9 +170,13 @@ class Salary extends CI_Controller {
                 print '<tr>
                 <td>'.$d["staff_name"].'</td>
                 <td><input type="hidden" name="txtid[]" value="'.$d["id"].'">
-                    <input type="text" name="txtbasic[]" class="form-control expenses">
+                    <input type="text" id="basic_salary" name="txtbasic[]" class="form-control expenses">
                 </td>
-                <td><input type="text" name="txtallowance[]" class="form-control expenses"></td>
+                <td><input type="text" name="txtallowance[]" class="form-control expenses allowance"></td>
+                <td><input type="text" name="working_days[]" class="form-control working_days"></td>
+                <td><input type="text" id="no_of_leaves" name="no_of_leaves[]" class="form-control no_of_leaves"></td>
+                <td><input type="text" id="worked_days" name="worked_days[]" class="form-control worked_days" readonly></td>
+                <td><input type="text" id="salary_per_day" name="salary_per_day[]" class="form-control" readonly></td>
                 <td><input type="text" id="total" name="txttotal[]" class="form-control"></td>
                 </tr>';
             }
