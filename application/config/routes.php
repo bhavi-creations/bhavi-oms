@@ -148,3 +148,9 @@ $route['view-leave'] = 'leave/view';
 
 $route['manage-attendance'] = 'attendance/manage';
 $route['view-attendance'] = 'attendance/staff_attendance';
+
+//suppliers routes
+$route['add-suppliers'] = 'suppliers';
+$route['manage-suppliers'] = 'suppliers/manage';
+$route['delete-suppliers/(:num)'] = 'suppliers/delete/$1';
+$route['edit-suppliers/(:num)'] = 'suppliers/edit/$1';

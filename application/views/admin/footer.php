@@ -344,5 +344,14 @@
       // Project tasks 
   });
 </script>
+<script>
+  function deleteItem(link){
+    if(confirm('Are you sure to delete?')){
+      window.location = link;
+    }else{
+      return false;
+    }
+  }
+</script>
 </body>
 </html>
