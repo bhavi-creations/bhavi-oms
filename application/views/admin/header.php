@@ -165,8 +165,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>add-suppliers"><i class="fa fa-circle-o"></i> Add Stock</a></li>
-            <li><a href="<?php echo base_url(); ?>manage-suppliers"><i class="fa fa-circle-o"></i> Manage Stock</a></li>
+            <li><a href="<?php echo base_url(); ?>add-products"><i class="fa fa-circle-o"></i> Add Stock</a></li>
+            <li><a href="<?php echo base_url(); ?>manage-products"><i class="fa fa-circle-o"></i> Manage Stock</a></li>
           </ul>
         </li>
 

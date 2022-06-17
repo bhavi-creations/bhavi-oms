@@ -133,4 +133,4 @@ $autoload['time_zone'] = date_default_timezone_set('Asia/Kolkata');
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Home_model','Department_model','Staff_model','Salary_model','Leave_model','Holidays_model','Attendance_model','Projects_model','Work_Reports_model','Project_Tasks_model','Appointments_model','Suppliers_model');
+$autoload['model'] = array('Home_model','Department_model','Staff_model','Salary_model','Leave_model','Holidays_model','Attendance_model','Projects_model','Work_Reports_model','Project_Tasks_model','Appointments_model','Suppliers_model','Products_model');

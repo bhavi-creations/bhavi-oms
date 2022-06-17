@@ -154,3 +154,9 @@ $route['add-suppliers'] = 'suppliers';
 $route['manage-suppliers'] = 'suppliers/manage';
 $route['delete-suppliers/(:num)'] = 'suppliers/delete/$1';
 $route['edit-suppliers/(:num)'] = 'suppliers/edit/$1';
+
+//products routes
+$route['add-products'] = 'products';
+$route['manage-products'] = 'products/manage';
+$route['delete-products/(:num)'] = 'products/delete/$1';
+$route['edit-products/(:num)'] = 'products/edit/$1';
