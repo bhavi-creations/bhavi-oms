@@ -38,14 +38,14 @@ class Products_model extends CI_Model {
 
     function delete_products($id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('product_id', $id);
         $this->db->delete("products_tbl");
         $this->db->affected_rows();
     }
     
     function update_products($data,$id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('product_id', $id);
         $this->db->update('products_tbl',$data);
         $this->db->affected_rows();
     }

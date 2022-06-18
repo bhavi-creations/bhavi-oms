@@ -125,7 +125,7 @@ class Products extends CI_Controller {
 
         if($this->form_validation->run() !== false)
         {
-            $data=$this->Products_model->insert_products(
+            $data=$this->Products_model->update_products(
                 array(
                     'product_name'=>$product_name,
                     'brand_name' => $brand_name,
@@ -158,6 +158,7 @@ class Products extends CI_Controller {
 
     function edit($product_id)
     {
+        $data['suppliers']=$this->Suppliers_model->select_suppliers();
         $data['content']=$this->Products_model->select_products_byID($product_id);
         $this->load->view('admin/header');
         $this->load->view('admin/edit-products',$data);
