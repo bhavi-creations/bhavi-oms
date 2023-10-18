@@ -132,40 +132,40 @@
           
         <li><a href="<?php echo base_url(); ?>view-holidays"><i class="fa fa-snowflake-o"></i> Holidays</a></li>
         <li><a href="<?php echo base_url(); ?>view-attendance"><i class="fa fa-clock-o"></i> <span>Attendance</span></a></li>
-        <li><a href="<?php echo base_url(); ?>view-projects"><i class="fa fa-star"></i> <span>Projects</span></a></li>
-        <li><a href="<?php echo base_url(); ?>view-project-tasks"><i class="fa fa-star"></i> <span>Project Tasks</span></a></li>
+        <!--<li><a href="<?php echo base_url(); ?>view-projects"><i class="fa fa-star"></i> <span>Projects</span></a></li>-->
+        <!--<li><a href="<?php echo base_url(); ?>view-project-tasks"><i class="fa fa-star"></i> <span>Project Tasks</span></a></li>-->
 
-        <?php if($permission != 'no_access'){ ?>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-list"></i> <span>Marketing</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <?php if($permission == 'edit_access'){ ?>
-                <li><a href="<?php echo base_url(); ?>add-staff-appointments"><i class="fa fa-circle-o"></i> Add Appointments</a></li>
-              <?php } ?>
-              <?php if($permission == 'view_access' || $permission == 'edit_access'){ ?>
-                <li><a href="<?php echo base_url(); ?>view-staff-appointments"><i class="fa fa-circle-o"></i> View Appointments</a></li>
-              <?php } ?>
-            </ul>
-          </li>
-        <?php } ?>
+        <!--<?php if($permission != 'no_access'){ ?>-->
+        <!--  <li class="treeview">-->
+        <!--    <a href="#">-->
+        <!--      <i class="fa fa-list"></i> <span>Marketing</span>-->
+        <!--      <span class="pull-right-container">-->
+        <!--        <i class="fa fa-angle-left pull-right"></i>-->
+        <!--      </span>-->
+        <!--    </a>-->
+        <!--    <ul class="treeview-menu">-->
+        <!--      <?php if($permission == 'edit_access'){ ?>-->
+        <!--        <li><a href="<?php echo base_url(); ?>add-staff-appointments"><i class="fa fa-circle-o"></i> Add Appointments</a></li>-->
+        <!--      <?php } ?>-->
+        <!--      <?php if($permission == 'view_access' || $permission == 'edit_access'){ ?>-->
+        <!--        <li><a href="<?php echo base_url(); ?>view-staff-appointments"><i class="fa fa-circle-o"></i> View Appointments</a></li>-->
+        <!--      <?php } ?>-->
+        <!--    </ul>-->
+        <!--  </li>-->
+        <!--<?php } ?>-->
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-check-circle"></i> <span>Work Reports</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>add-staff-work-reports"><i class="fa fa-circle-o"></i> Add Work Report</a></li>
-            <li><a href="<?php echo base_url(); ?>view-work-reports"><i class="fa fa-circle-o"></i> View Work Reports</a></li>
-          </ul>
-        </li>
+        <!--<li class="treeview">-->
+        <!--  <a href="#">-->
+        <!--    <i class="fa fa-check-circle"></i> <span>Work Reports</span>-->
+        <!--    <span class="pull-right-container">-->
+        <!--      <i class="fa fa-angle-left pull-right"></i>-->
+        <!--    </span>-->
+        <!--  </a>-->
+        <!--  <ul class="treeview-menu">-->
+        <!--    <li><a href="<?php echo base_url(); ?>add-staff-work-reports"><i class="fa fa-circle-o"></i> Add Work Report</a></li>-->
+        <!--    <li><a href="<?php echo base_url(); ?>view-work-reports"><i class="fa fa-circle-o"></i> View Work Reports</a></li>-->
+        <!--  </ul>-->
+        <!--</li>-->
 
       </ul>
     </section>

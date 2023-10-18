@@ -144,70 +144,70 @@
           </ul>
         </li>
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cubes"></i> <span>Suppliers</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>add-suppliers"><i class="fa fa-circle-o"></i> Add Suppliers</a></li>
-            <li><a href="<?php echo base_url(); ?>manage-suppliers"><i class="fa fa-circle-o"></i> Manage Suppliers</a></li>
-          </ul>
-        </li>
+        <!--<li class="treeview">-->
+        <!--  <a href="#">-->
+        <!--    <i class="fa fa-cubes"></i> <span>Suppliers</span>-->
+        <!--    <span class="pull-right-container">-->
+        <!--      <i class="fa fa-angle-left pull-right"></i>-->
+        <!--    </span>-->
+        <!--  </a>-->
+        <!--  <ul class="treeview-menu">-->
+        <!--    <li><a href="<?php echo base_url(); ?>add-suppliers"><i class="fa fa-circle-o"></i> Add Suppliers</a></li>-->
+        <!--    <li><a href="<?php echo base_url(); ?>manage-suppliers"><i class="fa fa-circle-o"></i> Manage Suppliers</a></li>-->
+        <!--  </ul>-->
+        <!--</li>-->
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cubes"></i> <span>Stock</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>add-products"><i class="fa fa-circle-o"></i> Add Stock</a></li>
-            <li><a href="<?php echo base_url(); ?>manage-products"><i class="fa fa-circle-o"></i> Manage Stock</a></li>
-          </ul>
-        </li>
+        <!--<li class="treeview">-->
+        <!--  <a href="#">-->
+        <!--    <i class="fa fa-cubes"></i> <span>Stock</span>-->
+        <!--    <span class="pull-right-container">-->
+        <!--      <i class="fa fa-angle-left pull-right"></i>-->
+        <!--    </span>-->
+        <!--  </a>-->
+        <!--  <ul class="treeview-menu">-->
+        <!--    <li><a href="<?php echo base_url(); ?>add-products"><i class="fa fa-circle-o"></i> Add Stock</a></li>-->
+        <!--    <li><a href="<?php echo base_url(); ?>manage-products"><i class="fa fa-circle-o"></i> Manage Stock</a></li>-->
+        <!--  </ul>-->
+        <!--</li>-->
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-star"></i> <span>Projects</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>add-projects"><i class="fa fa-circle-o"></i> Add Projects</a></li>
-            <li><a href="<?php echo base_url(); ?>manage-projects"><i class="fa fa-circle-o"></i> Manage Projects</a></li>
-          </ul>
-        </li>
+        <!--<li class="treeview">-->
+        <!--  <a href="#">-->
+        <!--    <i class="fa fa-star"></i> <span>Projects</span>-->
+        <!--    <span class="pull-right-container">-->
+        <!--      <i class="fa fa-angle-left pull-right"></i>-->
+        <!--    </span>-->
+        <!--  </a>-->
+        <!--  <ul class="treeview-menu">-->
+        <!--    <li><a href="<?php echo base_url(); ?>add-projects"><i class="fa fa-circle-o"></i> Add Projects</a></li>-->
+        <!--    <li><a href="<?php echo base_url(); ?>manage-projects"><i class="fa fa-circle-o"></i> Manage Projects</a></li>-->
+        <!--  </ul>-->
+        <!--</li>-->
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-star"></i> <span>Project Tasks</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>add-project-tasks"><i class="fa fa-circle-o"></i> Add Project Tasks</a></li>
-            <li><a href="<?php echo base_url(); ?>manage-project-tasks"><i class="fa fa-circle-o"></i> Manage Project Tasks</a></li>
-          </ul>
-        </li>
+        <!--<li class="treeview">-->
+        <!--  <a href="#">-->
+        <!--    <i class="fa fa-star"></i> <span>Project Tasks</span>-->
+        <!--    <span class="pull-right-container">-->
+        <!--      <i class="fa fa-angle-left pull-right"></i>-->
+        <!--    </span>-->
+        <!--  </a>-->
+        <!--  <ul class="treeview-menu">-->
+        <!--    <li><a href="<?php echo base_url(); ?>add-project-tasks"><i class="fa fa-circle-o"></i> Add Project Tasks</a></li>-->
+        <!--    <li><a href="<?php echo base_url(); ?>manage-project-tasks"><i class="fa fa-circle-o"></i> Manage Project Tasks</a></li>-->
+        <!--  </ul>-->
+        <!--</li>-->
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Work Reports</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>add-work-reports"><i class="fa fa-circle-o"></i> Add Work Reports</a></li>
-            <li><a href="<?php echo base_url(); ?>manage-work-reports"><i class="fa fa-circle-o"></i> Manage Work Reports</a></li>
-          </ul>
-        </li>
+        <!--<li class="treeview">-->
+        <!--  <a href="#">-->
+        <!--    <i class="fa fa-table"></i> <span>Work Reports</span>-->
+        <!--    <span class="pull-right-container">-->
+        <!--      <i class="fa fa-angle-left pull-right"></i>-->
+        <!--    </span>-->
+        <!--  </a>-->
+        <!--  <ul class="treeview-menu">-->
+        <!--    <li><a href="<?php echo base_url(); ?>add-work-reports"><i class="fa fa-circle-o"></i> Add Work Reports</a></li>-->
+        <!--    <li><a href="<?php echo base_url(); ?>manage-work-reports"><i class="fa fa-circle-o"></i> Manage Work Reports</a></li>-->
+        <!--  </ul>-->
+        <!--</li>-->
 
         <li class="treeview">
           <a href="#">
@@ -235,18 +235,18 @@
           </ul>
         </li>
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>Marketing</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>add-appointments"><i class="fa fa-circle-o"></i> Add Appointments</a></li>
-            <li><a href="<?php echo base_url(); ?>manage-appointments"><i class="fa fa-circle-o"></i> Manage Appointments</a></li>
-          </ul>
-        </li>
+        <!--<li class="treeview">-->
+        <!--  <a href="#">-->
+        <!--    <i class="fa fa-list"></i> <span>Marketing</span>-->
+        <!--    <span class="pull-right-container">-->
+        <!--      <i class="fa fa-angle-left pull-right"></i>-->
+        <!--    </span>-->
+        <!--  </a>-->
+        <!--  <ul class="treeview-menu">-->
+        <!--    <li><a href="<?php echo base_url(); ?>add-appointments"><i class="fa fa-circle-o"></i> Add Appointments</a></li>-->
+        <!--    <li><a href="<?php echo base_url(); ?>manage-appointments"><i class="fa fa-circle-o"></i> Manage Appointments</a></li>-->
+        <!--  </ul>-->
+        <!--</li>-->
 
         <li><a href="<?php echo base_url(); ?>manage-attendance"><i class="fa fa-clock-o"></i> <span>Attendance</span></a></li>
 
