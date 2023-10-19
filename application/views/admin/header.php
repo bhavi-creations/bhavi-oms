@@ -144,6 +144,19 @@
           </ul>
         </li>
 
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Clients</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url(); ?>add-client"><i class="fa fa-circle-o"></i> Add Client</a></li>
+            <li><a href="<?php echo base_url(); ?>manage-client"><i class="fa fa-circle-o"></i> Manage Client</a></li>
+          </ul>
+        </li>
+
         <!--<li class="treeview">-->
         <!--  <a href="#">-->
         <!--    <i class="fa fa-cubes"></i> <span>Suppliers</span>-->
