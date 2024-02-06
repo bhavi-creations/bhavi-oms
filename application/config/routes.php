@@ -168,3 +168,7 @@ $route['add-products'] = 'products';
 $route['manage-products'] = 'products/manage';
 $route['delete-products/(:num)'] = 'products/delete/$1';
 $route['edit-products/(:num)'] = 'products/edit/$1';
+
+//testing
+
+$route['worksheet'] = 'Worksheet';

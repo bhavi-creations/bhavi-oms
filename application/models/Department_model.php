@@ -10,6 +10,20 @@ class Department_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+       function select_department()
+    {
+        $this->db->select("department_tbl.id,department_tbl.department_name");
+        $this->db->from("department_tbl");
+        $this->db->order_by('id', 'DESC');
+        $qry=$this->db->get();
+        if($qry->num_rows()>0)
+        {
+            $result=$qry->result_array();
+            return $result;
+        }
+        return array();
+    }
+
     function select_departments()
     {
         $this->db->where('id !=',0);

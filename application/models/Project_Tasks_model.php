@@ -3,13 +3,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Project_Tasks_model extends CI_Model {
 
-
     function insert_project_tasks($data)
     {
-        $this->db->insert("project_tasks_tbl",$data);
+        // print_r($data);
+        $this->db->insert("project_tasks_tbl", $data);
+        echo $this->db->last_query(); // Print the last executed query
         return $this->db->insert_id();
+        
     }
-
+    
+    function insert_worksheets($data2 )
+    {
+        // print_r($data2);
+        // $mergedData = array_merge($data2);
+        $this->db->insert_batch("worksheet_tbl", $data2); 
+            echo $this->db->last_query();
+            return $this->db->insert_id();
+    }
+    
     function select_project_tasks()
     {
         $this->db->order_by('pt.due_date','ASC');
