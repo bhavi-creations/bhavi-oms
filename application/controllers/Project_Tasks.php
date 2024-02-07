@@ -85,6 +85,7 @@ class Project_Tasks extends CI_Controller
             $project_id = $this->input->post('project_id');
             $assigned_to = $this->input->post('assigned_to');
             $assigned_to = implode(',', $this->input->post('assigned_to'));
+            $department = $this->input->post('department');
             $task_name = $this->input->post('task_name');
             $task_details = $this->input->post('task_details');
             $task_status = $this->input->post('task_status');
@@ -128,17 +129,50 @@ class Project_Tasks extends CI_Controller
             $target_kw_SEO = $this->input->post('target_kw_SEO');
             $gmb_SEO = $this->input->post('gmb_SEO');
             $assign_date_socialmedia = $this->input->post('assign_date_socialmedia');
-             $data2 = array();
-            
+            $assign_date_web = $this->input->post('assign_date_web');
+            $assign_date_seo = $this->input->post('assign_date_seo');
+            $data2 = array();
+
+            $loop_data = [];
+            if ($department['0'] == 13) {
+                $loop_data = $assign_dates;
+                for ($i = 0; $i < count($loop_data); $i++) {
+                    $data2[] = array(
+                        'assign_date' => $assign_dates[$i],
+                        'client_name' => $client_names[$i],
+                        'work_type_designer' => $work_type_designer[$i],
+                        'desc_designer' => $desc_designer[$i],
+                        'ref_link_designer' => $ref_link_designer[$i],
+                        'content_designer' => $content_designer[$i],
+                    );
+                }
+            } else if ($department['0'] == 12) {
+                $loop_data = $assign_date_socialmedia;
+                for ($i = 0; $i < count($loop_data); $i++) {
+                    $data2[] = array(
+                        'assign_date' => $assign_date_socialmedia[$i],
+                        'client_name' => $client_names[$i],
+                        'work_type_socialmedia' => $work_type_socialmedia[$i],
+                        'desc_socialmedia' => $desc_socialmedia[$i],
+                        'g_ads_socialmedia' => $g_ads_socialmedia[$i],
+                        'fb_ads_socialmedia' => $fb_ads_socialmedia[$i],
+                    );
+                }
+            } else if ($department['0'] == 10) {
+                $loop_data = $assign_date_web;
+            } else if ($department['0'] == 11) {
+                $loop_data = $assign_date_seo;
+            }
+
             // Iterate through each set of data
-            for ($i = 0; $i < count($assign_dates); $i++) {
-                $data2[] = array(
-                    'assign_date' => $assign_dates[$i],
-                    'client_name' => $client_names[$i],
-                    'work_type_designer' => $work_type_designer[$i],
-                    'desc_designer' => $desc_designer[$i],
-                    'ref_link_designer' => $ref_link_designer[$i],
-                    'content_designer' => $content_designer[$i],
+            // for ($i = 0; $i < count($loop_data); $i++) {
+            //     $data2[] = array(
+            //         'assign_date' => $assign_dates[$i],
+            //         'client_name' => $client_names[$i],
+            //         'work_type_designer' => $work_type_designer[$i],
+            //         'desc_designer' => $desc_designer[$i],
+            //         'ref_link_designer' => $ref_link_designer[$i],
+            //         'content_designer' => $content_designer[$i],
                     // 'project_task_id' => $task_id,
                     // 'client_name' => isset($client_names[$i]) ? $client_names[$i] : null,
                     // 'assign_date' => isset($assign_dates[$i]) ? $assign_dates[$i] : null,
@@ -158,7 +192,7 @@ class Project_Tasks extends CI_Controller
                     // 'target_kw_SEO' => isset($target_kw_SEO[$i]) ? $target_kw_SEO[$i] : null,
                     // 'gmb_SEO' => isset($gmb_SEO[$i]) ? $gmb_SEO[$i] : null,
 
-                );
+                // );
                 // $data3[] = array();
                 // for ($i = 0; $i < count($assign_date_socialmedia); $i++) {
                 //     $data3[] = array(
@@ -170,7 +204,7 @@ class Project_Tasks extends CI_Controller
                 //         'fb_ads_socialmedia' => $fb_ads_socialmedia[$i],
                 //     );
                 // }
-            }
+            // }
 
             // $data3 = $this->Project_Tasks_model->insert_worksheets($data3);
             $data = $this->Project_Tasks_model->insert_project_tasks($arr);

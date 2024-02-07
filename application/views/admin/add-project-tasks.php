@@ -436,16 +436,16 @@
                             }
                             ?>\
                         </select></td>
-                      <td><select name="service" id="">
+                      <td><select name="work_type_socialmedia[]" id="">
                           <option value="">Facebook</option>
                           <option value="">Instagram</option>
                           <option value="">Pintrest</option>
                           <option value="">Linkedin</option>
                           <option value="">Youtube</option>
                         </select></td>
-                      <td><textarea name="" id="" cols="30" rows="2"></textarea></td>
-                      <td><input type="text"></td>
-                      <td> <input type="text"></td>
+                      <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2"></textarea></td>
+                      <td><input name="g_ads_socialmedia[]" type="text"></td>
+                      <td> <input name="fb_ads_socialmedia[]" type="text"></td>
                       <td> <button type="button" class="removeRow">Remove row -</button></td>
       `;
 

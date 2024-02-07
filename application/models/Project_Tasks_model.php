@@ -7,7 +7,7 @@ class Project_Tasks_model extends CI_Model {
     {
         // print_r($data);
         $this->db->insert("project_tasks_tbl", $data);
-        echo $this->db->last_query(); // Print the last executed query
+        // echo $this->db->last_query(); // Print the last executed query
         return $this->db->insert_id();
         
     }
@@ -17,7 +17,7 @@ class Project_Tasks_model extends CI_Model {
         // print_r($data2);
         // $mergedData = array_merge($data2);
         $this->db->insert_batch("worksheet_tbl", $data2); 
-            echo $this->db->last_query();
+            // echo $this->db->last_query();
             return $this->db->insert_id();
     }
     
