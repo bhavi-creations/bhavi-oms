@@ -174,9 +174,9 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><input type="date" name="assign_date[]"></td> 
+                        <td><input type="date" name="assign_date[]" class="form-control"></td> 
                         <td>
-                          <select  name="client_name[]">
+                          <select  name="client_name[]" class="form-control">
                             <option value> select </option>
                             <?php
                             if (isset($clients)) {
@@ -188,7 +188,7 @@
                           </select>
                         </td>
                         <td>
-                          <select name="work_type_designer[]" id="">
+                          <select name="work_type_designer[]" id="" class="form-control">
                             <option value="not-selected">Select</option>
                             <option value="image">Image</option>
                             <option value="phamplet">Phamplet</option>
@@ -218,37 +218,36 @@
                   <table id="example1_socialmedia" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Date</th>
-                        <th>Client</th>
-                        <th>Type of Work</th>
+                        <th class="form-control">Date</th>
+                        <th>Work</th>
                         <th>Description</th>
                         <th>Google Ads</th>
                         <th>Fb Ads</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <td><input type="date" name="assign_date_socialmedia[]"></td>
-                      <td><select name="client_name[]" class="">
+                      <td><input type="date" name="assign_date_socialmedia[]" class="form-control"></td>
+                      <td><select name="client_name_socialmedia[]" class="form-control">
                           <option value> select </option>
                           <?php
                           if (isset($clients)) {
                             foreach ($clients as $clt) {
-                              print "<option value='" . $clt['client_id'] . "'>" . $clt['client_name'] . "</option>";
+                              print "<option value='" . $clt['client_name'] . "'>" . $clt['client_name'] . "</option>";
                             }
                           }
                           ?>
                         </select></td>
-                      <td><select name="work_type_socialmedia[]" id="">
+                      <td><select name="work_type_socialmedia[]" id="" class="form-control">
                           <option value="">Facebook</option>
                           <option value="">Instagram</option>
                           <option value="">Pintrest</option>
                           <option value="">Linkedin</option>
                           <option value="">Youtube</option>
                         </select></td>
-                      <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2"></textarea></td>
-                      <td><input name="g_ads_socialmedia[]" type="text"></td>                 
-                      <td> <input name="fb_ads_socialmedia[]" type="text"></td>                
-                      <td> <button type="button" class="removeRow mb-2">Remove row -</button>
+                      <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                      <td><input name="g_ads_socialmedia[]" type="text" class="form-control"></td>                 
+                      <td> <input name="fb_ads_socialmedia[]" type="text" class="form-control"></td>                
+                      <td> <button type="button" class="removeRow mb-2" class="form-control">Remove row -</button>
                     </tbody>
                   </table>
                 </div>
@@ -269,8 +268,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <td><input type="date" name="assign_date_web[]"></td>
-                      <td><select  name="client_name[]" class="">
+                      <td><input type="date" name="assign_date_web[]" class="form-control"></td>
+                      <td><select  name="client_name_web[]" class="form-control">
                           <option value> select </option>
                           <?php
                           if (isset($clients)) {
@@ -280,15 +279,15 @@
                           }
                           ?>
                         </select></td>
-                      <td><select name="website_type[]" id="">
+                      <td><select name="website_type[]" id="" class="form-control">
                           <option value="not-selected">Select</option>
                           <option value="Static">Static</option>
                           <option value="Dynamic">Dynamic</option>
                           <option value="Single Page">Single Page</option>
                           <option value="other">other</option>
                         </select></td>
-                      <td><textarea name="desc_website[]" id="" cols="30" rows="2"></textarea></td>
-                      <td><input name="delivery_date[]" type="date"></td>             // 3
+                      <td><textarea name="desc_website[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                      <td><input name="delivery_date[]" type="date" class="form-control"></td>            
                       <td> <button type="button" class="removeRow mb-2">Remove row -</button>
 
                     </tbody>
@@ -311,20 +310,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <td><input name="assign_date_seo[]" type="date"></td>
-                      <td><select name="client_name[]" class="">
+                      <td><input name="assign_date_seo[]" type="date" class="form-control"></td>
+                      <td><select name="client_name_seo[]" class="form-control">
                           <option value> select </option>
                           <?php
                           if (isset($clients)) {
                             foreach ($clients as $clt) {
-                              print "<option value='" . $clt['client_id'] . "'>" . $clt['client_name'] . "</option>";
+                              print "<option value='" . $clt['client_name'] . "'>" . $clt['client_name'] . "</option>";
                             }
                           }
                           ?>
                         </select></td>
-                      <td><textarea name="p_kw_SEO[]" id="" cols="30" rows="2"></textarea></td>
-                      <td><textarea name="target_kw_SEO[]" id="" cols="30" rows="2"></textarea></td>
-                      <td><textarea name="gmb_SEO[]" id="" cols="30" rows="2"></textarea></td>
+                      <td><textarea name="p_kw_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                      <td><textarea name="target_kw_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                      <td><textarea name="gmb_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td> <button type="button" class="removeRow mb-2">Remove row -</button>
                     </tbody>
                   </table>
@@ -382,9 +381,9 @@
         var newRow = document.createElement("tr");
 
         newRow.innerHTML = `
-        <td><input type="date" name="assign_date[]"></td>
+        <td><input type="date" name="assign_date[]" class="form-control"></td>
         <td>
-            <select name="client_name[]"  >
+            <select name="client_name[]" class="form-control" >
                 <option value="">select</option>
                 \<?php
                   if (isset($clients)) {
@@ -396,7 +395,7 @@
             </select>
         </td>
         <td>
-            <select name="work_type_designer[]">
+            <select name="work_type_designer[]" class="form-control">
                 <option value="image">Image</option>
                 <option value="phamplet">Phamplet</option>
                 <option value="video">Video</option>
@@ -406,10 +405,10 @@
                 <option value="logo">Logo</option>
             </select>
         </td>
-        <td><textarea name="desc_designer[]" id="" cols="30" rows="2"></textarea></td>
-        <td><input type="text" name="ref_link_designer[]"></td>
-        <td><textarea name="content_designer[]" id="" cols="30" rows="2"></textarea></td>
-        <td><input name="ref_file_designer[]" type="file" multiple></td>
+        <td><textarea name="desc_designer[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+        <td><input type="text" name="ref_link_designer[]" class="form-control"></td>
+        <td><textarea name="content_designer[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+        <td><input name="ref_file_designer[]" type="file" class="form-control" multiple></td>
         <td> <button type="button" class="removeRow">Remove row -</button></td>
       `;
 
@@ -425,27 +424,27 @@
         var newRow = document.createElement("tr");
 
         newRow.innerHTML = `
-        <td><input type="date" name="assign_date_socialmedia[]"></td>
-                      <td><select name="Sname[]" class="">
+        <td><input type="date" name="assign_date_socialmedia[]" class="form-control"></td>
+                      <td><select name="client_name_socialmedia[]" class="form-control">
                           <option value> select </option>
                           \<?php
                             if (isset($clients)) {
                               foreach ($clients as $clt) {
-                                print "<option value='" . $clt['client_id'] . "'>" . $clt['client_name'] . "</option>";
+                                print "<option value='" . $clt['client_name'] . "'>" . $clt['client_name'] . "</option>";
                               }
                             }
                             ?>\
                         </select></td>
-                      <td><select name="work_type_socialmedia[]" id="">
+                      <td><select name="work_type_socialmedia[]" id="" class="form-control">
                           <option value="">Facebook</option>
                           <option value="">Instagram</option>
                           <option value="">Pintrest</option>
                           <option value="">Linkedin</option>
                           <option value="">Youtube</option>
                         </select></td>
-                      <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2"></textarea></td>
-                      <td><input name="g_ads_socialmedia[]" type="text"></td>
-                      <td> <input name="fb_ads_socialmedia[]" type="text"></td>
+                      <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                      <td><input name="g_ads_socialmedia[]" type="text" class="form-control"></td>
+                      <td> <input name="fb_ads_socialmedia[]" type="text" class="form-control"></td>
                       <td> <button type="button" class="removeRow">Remove row -</button></td>
       `;
 
@@ -460,26 +459,26 @@
         var newRow = document.createElement("tr");
 
         newRow.innerHTML = `
-        <td><input type="date" name="assign_date_web[]"></td>
-                      <td><select name="Sname[]" class="">
+        <td><input type="date" name="assign_date_web[]" class="form-control"></td>
+                      <td><select name="client_name_web[]" class="form-control">
                       <option value> select </option>
                            \<?php
                             if (isset($clients)) {
                               foreach ($clients as $clt) {
-                                print "<option value='" . $clt['client_id'] . "'>" . $clt['client_name'] . "</option>";
+                                print "<option value='" . $clt['client_name'] . "'>" . $clt['client_name'] . "</option>";
                               }
                             }
                             ?>\
                         </select></td>
-                      <td><select name="service" id="">
-                          <option value="">Facebook</option>
-                          <option value="">Instagram</option>
-                          <option value="">Pintrest</option>
-                          <option value="">Linkedin</option>
-                          <option value="">Youtube</option>
+                        <td><select name="website_type[]" id="" class="form-control">
+                          <option value="not-selected">Select</option>
+                          <option value="Static">Static</option>
+                          <option value="Dynamic">Dynamic</option>
+                          <option value="Single Page">Single Page</option>
+                          <option value="other">other</option>
                         </select></td>
-                      <td><textarea name="" id="" cols="30" rows="2"></textarea></td>
-                      <td><input type="date" name="delivery_date[]"></td>
+                        <td><textarea name="desc_website[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                      <td><input type="date" name="delivery_date[]" class="form-control"></td>
                       <td> <button type="button" class="removeRow">Remove row -</button></td>
       `;
 
@@ -494,20 +493,20 @@
         var newRow = document.createElement("tr");
 
         newRow.innerHTML = `
-        <td><input name="assign_date_seo[]" type="date"></td>
-                      <td><select name="Sname[]" class="">
+        <td><input name="assign_date_seo[]" type="date" class="form-control"></td>
+                      <td><select name="client_name_seo[]" class="form-control">
                       <option value> select </option>
                             \<?php
                               if (isset($clients)) {
                                 foreach ($clients as $clt) {
-                                  print "<option value='" . $clt['client_id'] . "'>" . $clt['client_name'] . "</option>";
+                                  print "<option value='" . $clt['client_name'] . "'>" . $clt['client_name'] . "</option>";
                                 }
                               }
                               ?>\
                         </select></td>
-                      <td><textarea name="" id="" cols="30" rows="2"></textarea></td>
-                      <td><textarea name="" id="" cols="30" rows="2"></textarea></td>
-                      <td><textarea name="" id="" cols="30" rows="2"></textarea></td>
+                      <td><textarea name="p_kw_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                      <td><textarea name="target_kw_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                      <td><textarea name="gmb_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td> <button type="button" class="removeRow">Remove row -</button></td>
       `;
 

@@ -121,6 +121,7 @@ $route['delete-file/(:num)/(:any)'] = 'projects/deleteFile/$1/$2';
 $route['add-project-tasks'] = 'Project_Tasks';
 $route['manage-project-tasks'] = 'Project_Tasks/manage';
 $route['view-project-tasks'] = 'Project_Tasks/view';
+$route['view-worksheets'] = 'Project_Tasks/view_worksheets';
 $route['insert-project-tasks'] = 'Project_Tasks/insert';
 $route['delete-project-tasks/(:num)'] = 'Project_Tasks/delete/$1';
 $route['edit-project-tasks/(:num)'] = 'Project_Tasks/edit/$1';
