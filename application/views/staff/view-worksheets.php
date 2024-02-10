@@ -39,22 +39,23 @@
           <div class="box-header">
             <h3 class="box-title">View Worksheets</h3>
           </div>
+      
           <!-- /.box-header -->
-          <div class="box-body">
+          <div class="box-body" id="website_table">
             <div class="table-responsive" style="display: none;">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>Sl.no</th>
-                    <th>Project id</th>
-                    <th>Assigned to</th>
-                    <th>Task Name</th>
-                    <th>Task Details</th>
-                    <th>Task Status</th>
-                    <th>Due Date</th>
-                    <th>Completed date</th>
-                    <th>Daily Task</th>
-                    <th>Priority</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Type of Website</th>
+                    <th>Description</th>
+                    <th>Delivery Date</th>
+                    <!-- <th>Due Date</th> -->
+                    <!-- <th>Completed date</th> -->
+                    <!-- <th>Daily Task</th> -->
+                    <!-- <th>Priority</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -123,21 +124,185 @@
             </div>
           </div>
           <!-- /.box-body -->
-          <div class="box-body" >
+          <div class="box-body" id="seo_table">
             <div class="table-responsive" style="display: none;">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>Sl.no</th>
-                    <th>Project id</th>
-                    <th>Assigned to</th>
-                    <th>Task Name</th>
-                    <th>Task Details</th>
-                    <th>Task Status</th>
-                    <th>Due Date</th>
-                    <th>Completed date</th>
-                    <th>Daily Task</th>
-                    <th>Priority</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Present keyword</th>
+                    <th>Target Keyword</th>
+                    <th>Google My Business</th>
+                    <!-- <th>Due Date</th> -->
+                    <!-- <th>Completed date</th> -->
+                    <!-- <th>Daily Task</th> -->
+                    <!-- <th>Priority</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  if (isset($content)) :
+                    $i = 1;
+                    foreach ($content as $cnt) :
+                  ?>
+                      <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $cnt['project_name']; ?></td>
+                        <td>
+                          <?php
+                          $staff_data = $cnt['staff_data'];
+                          foreach ($staff_data as $key => $staff) {
+                            if ($key == 0) {
+                              echo $staff['staff_name'];
+                            } else {
+                              echo " , " . $staff['staff_name'];
+                            }
+                          }
+                          ?>
+                        </td>
+                        <td><?php echo $cnt['task_name']; ?></td>
+                        <td><?php echo $cnt['task_details']; ?></td>
+                        <td><?php echo $cnt['task_status']; ?></td>
+                        <td><?php echo date('d-m-Y', strtotime($cnt['due_date'])); ?></td>
+                        <td>
+                          <?php
+                          if ($cnt['completed_date'] == "0000-00-00") {
+                            echo "-";
+                          } else {
+                            echo date('d-m-Y', strtotime($cnt['completed_date']));
+                          }
+                          ?>
+                        </td>
+                        <td>
+                          <?php
+                          if ($cnt['task_daily']) {
+                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>yes</span> ";
+                          } else {
+                            echo " <span class='text-capitalize label label-danger' style='font-size:12px;'>no</span> ";
+                          }
+                          ?>
+                        </td>
+                        <td>
+                          <?php
+                          if ($cnt['task_priority'] == 'low') {
+                            echo " <span class='text-capitalize label label-info' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
+                          } else if ($cnt['task_priority'] == 'medium') {
+                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
+                          } else if ($cnt['task_priority'] == 'high') {
+                            echo " <span class='text-capitalize label label-warning' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
+                          }
+                          ?>
+                        </td>
+                      </tr>
+                  <?php
+                      $i++;
+                    endforeach;
+                  endif;
+                  ?>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="box-body" id="socialmedia_table">
+            <div class="table-responsive" style="display: none;">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Sl.no</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Description</th>
+                    <th>Google Ads</th>
+                    <th>FB Adds</th>
+                    <!-- <th>Due Date</th> -->
+                    <!-- <th>Completed date</th> -->
+                    <!-- <th>Daily Task</th> -->
+                    <!-- <th>Priority</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  if (isset($content)) :
+                    $i = 1;
+                    foreach ($content as $cnt) :
+                  ?>
+                      <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $cnt['project_name']; ?></td>
+                        <td>
+                          <?php
+                          $staff_data = $cnt['staff_data'];
+                          foreach ($staff_data as $key => $staff) {
+                            if ($key == 0) {
+                              echo $staff['staff_name'];
+                            } else {
+                              echo " , " . $staff['staff_name'];
+                            }
+                          }
+                          ?>
+                        </td>
+                        <td><?php echo $cnt['task_name']; ?></td>
+                        <td><?php echo $cnt['task_details']; ?></td>
+                        <td><?php echo $cnt['task_status']; ?></td>
+                        <td><?php echo date('d-m-Y', strtotime($cnt['due_date'])); ?></td>
+                        <td>
+                          <?php
+                          if ($cnt['completed_date'] == "0000-00-00") {
+                            echo "-";
+                          } else {
+                            echo date('d-m-Y', strtotime($cnt['completed_date']));
+                          }
+                          ?>
+                        </td>
+                        <td>
+                          <?php
+                          if ($cnt['task_daily']) {
+                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>yes</span> ";
+                          } else {
+                            echo " <span class='text-capitalize label label-danger' style='font-size:12px;'>no</span> ";
+                          }
+                          ?>
+                        </td>
+                        <td>
+                          <?php
+                          if ($cnt['task_priority'] == 'low') {
+                            echo " <span class='text-capitalize label label-info' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
+                          } else if ($cnt['task_priority'] == 'medium') {
+                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
+                          } else if ($cnt['task_priority'] == 'high') {
+                            echo " <span class='text-capitalize label label-warning' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
+                          }
+                          ?>
+                        </td>
+                      </tr>
+                  <?php
+                      $i++;
+                    endforeach;
+                  endif;
+                  ?>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="box-body" id="designer_table">
+            <div class="table-responsive" style="display: none;">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Sl.no</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Work</th>
+                    <th>Ref link</th>
+                    <th>Content</th>
+                    <th>Ref Image</th>
+                    <!-- <th>Completed date</th> -->
+                    <!-- <th>Daily Task</th> -->
+                    <!-- <th>Priority</th> -->
                   </tr>
                 </thead>
                 <tbody>

@@ -33,6 +33,15 @@ class Project_Tasks extends CI_Controller
         $this->load->view('admin/footer');
     }
 
+    //added func by rajkumar
+
+    public function manage_worksheets()
+    {
+        $this->load->view('admin/header');
+        $this->load->view('admin/manage-worksheets');
+        $this->load->view('admin/footer');
+    }
+
     public function view()
     {
         $staff = $this->session->userdata('userid');
@@ -42,12 +51,12 @@ class Project_Tasks extends CI_Controller
         $this->load->view('staff/footer');
     }
 
-    public function view_worksheets()
+    public function view_worksheets()   //added function 
     {
         $staff = $this->session->userdata('userid');
         $data['content'] = $this->Project_Tasks_model->select_project_tasks_by_staffID($staff);
         $this->load->view('staff/header');
-        $this->load->view('staff/view-worksheets', $data);
+        $this->load->view('staff/view-worksheets', $data);   //added view file
         $this->load->view('staff/footer');
     }
 
@@ -81,12 +90,12 @@ class Project_Tasks extends CI_Controller
         // Website table form validation
         $this->form_validation->set_rules('website_type[]', 'Type of website', '');
         $this->form_validation->set_rules('desc_website[]', 'Desc about website', '');
-        $this->form_validation->set_rules('delivery_date[]', 'website delivery date','');
+        $this->form_validation->set_rules('delivery_date[]', 'website delivery date', '');
 
         // SEO table form validation
         $this->form_validation->set_rules('p_kw_SEO[]', 'Present Keyword SEO', '');
         $this->form_validation->set_rules('target_kw_SEO[]', 'Target keyword SEO', '');
-        $this->form_validation->set_rules('gmb_SEO[]', 'Google My Business SEO', '');   
+        $this->form_validation->set_rules('gmb_SEO[]', 'Google My Business SEO', '');
 
 
 
@@ -128,7 +137,7 @@ class Project_Tasks extends CI_Controller
             $desc_designer = $this->input->post('desc_designer');
             $ref_link_designer = $this->input->post('ref_link_designer');
             $content_designer = $this->input->post('content_designer');
-            $ref_file_designer = $this->input->post('ref_file_designer');
+            // $ref_file_designer = $this->input->post('ref_file_designer');
             $work_type_socialmedia = $this->input->post('work_type_socialmedia');
             $desc_socialmedia = $this->input->post('desc_socialmedia');
             $fb_ads_socialmedia = $this->input->post('fb_ads_socialmedia');
@@ -137,53 +146,66 @@ class Project_Tasks extends CI_Controller
             $desc_website = $this->input->post('desc_website');
             $delivery_date = $this->input->post('delivery_date');
             $p_kw_SEO = $this->input->post('p_kw_SEO');
-            $target_kw_SEO = $this->input->post('target_kw_SEO');
+            $target_kw_SEO = $this->input->post('target_kw_SEO');   
             $gmb_SEO = $this->input->post('gmb_SEO');
             $assign_date_socialmedia = $this->input->post('assign_date_socialmedia');
             $assign_date_web = $this->input->post('assign_date_web');
             $assign_date_seo = $this->input->post('assign_date_seo');
             $client_name_web = $this->input->post('client_name_web');
             $client_name_seo = $this->input->post('client_name_seo');
+            $assigned_to = $this->input->post('assigned_to');
+            $department = $this->input->post('department');
+
+
 
 
 
             $data = $this->Project_Tasks_model->insert_project_tasks($arr);
-           
+
 
             $data2 = array();
             $loop_data = [];
             if ($department['0'] == 13) {
                 $loop_data = $assign_dates;
                 for ($i = 0; $i < count($loop_data); $i++) {
+
                     $file_name = "";
                     $file_tmp = "";
-            
+
                     if (isset($_FILES['ref_file_designer'])) {
                         $fileArrays = $_FILES['ref_file_designer'];
             
-                        // Check if file is uploaded for the current iteration
-                        if (isset($fileArrays['name'][$i])) {
-                            $file_name = $fileArrays['name'][$i];
-                            $file_tmp = $fileArrays['tmp_name'][$i];
+                        $file_paths = array(); 
             
-                            // Your processing logic here, such as moving the file to a directory
+                        for ($j = 0; $j < count($fileArrays['name']); $j++) {
+                            $file_name = $fileArrays['name'][$j];
+                            $file_tmp = $fileArrays['tmp_name'][$j];
+            
                             $file_path = "assets/designer_imgs/" . $file_name;
                             move_uploaded_file($file_tmp, $file_path);
+            
+                            // Store the file path in the array
+                            $file_paths[] = $file_path;
                         }
                     }
             
+                    $serialized_file_paths = serialize($file_paths);
+            
+
                     $data2[] = array(
-                        'project_task_id' => $data,
+                        'staff_id' => $assigned_to[$i],
+                         'department' => $department[$i],
+                        'project_task_id' => $data, 
                         'assign_date' => $assign_dates[$i],
                         'client_name' => $client_names[$i],
                         'work_type_designer' => $work_type_designer[$i],
                         'desc_designer' => $desc_designer[$i],
                         'ref_link_designer' => $ref_link_designer[$i],
                         'content_designer' => $content_designer[$i],
-                        'ref_file_designer' => $file_path,
+                        'ref_file_designer' => $serialized_file_paths, 
                     );
+                    $file_paths = array();
                 }
-            
             } else if ($department['0'] == 12) {
                 $loop_data = $assign_date_socialmedia;
                 for ($i = 0; $i < count($loop_data); $i++) {
@@ -199,7 +221,7 @@ class Project_Tasks extends CI_Controller
                 }
             } else if ($department['0'] == 10) {
                 $loop_data = $assign_date_web;
-                for ($i= 0; $i < count($loop_data); $i++){
+                for ($i = 0; $i < count($loop_data); $i++) {
                     $data2[] = array(
                         'project_task_id' => $data,
                         'assign_date' => $assign_date_web[$i],
@@ -211,7 +233,7 @@ class Project_Tasks extends CI_Controller
                 }
             } else if ($department['0'] == 11) {
                 $loop_data = $assign_date_seo;
-                for ($i = 0; $i < count($loop_data); $i++){
+                for ($i = 0; $i < count($loop_data); $i++) {
                     $data2[] = array(
                         'project_task_id' => $data,
                         'assign_date' => $assign_date_seo[$i],

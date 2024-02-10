@@ -219,6 +219,7 @@
                     <thead>
                       <tr>
                         <th class="form-control">Date</th>
+                        <th>Client</th>
                         <th>Work</th>
                         <th>Description</th>
                         <th>Google Ads</th>
