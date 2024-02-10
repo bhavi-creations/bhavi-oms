@@ -3,12 +3,12 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Project Tasks
+      Worksheets
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
       <li><a href="#">Project Tasks</a></li>
-      <li class="active">Manage Project Tasks</li>
+      <li class="active">Manage Worksheets</li>
     </ol>
   </section>
 
@@ -37,7 +37,7 @@
       <div class="col-xs-12">
         <div class="box box-info">
           <div class="box-header">
-            <h3 class="box-title">Manage Project Tasks</h3>
+            <h3 class="box-title">Manage Worksheets</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">

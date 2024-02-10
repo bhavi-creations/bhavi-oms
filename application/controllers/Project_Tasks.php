@@ -37,10 +37,20 @@ class Project_Tasks extends CI_Controller
 
     public function manage_worksheets()
     {
+        // Load the required models at the beginning
+        $this->load->model('Staff_model');
+        $this->load->model('Worksheet_model');
+    
+        // Retrieve staff data and worksheets
+        $data['staff'] = $this->Staff_model->select_staff(); 
+        $data['content'] = $this->Worksheet_model->select_worksheets_all();
+    
+        // Load the views
         $this->load->view('admin/header');
-        $this->load->view('admin/manage-worksheets');
+        $this->load->view('admin/manage-worksheets', $data);
         $this->load->view('admin/footer');
     }
+    
 
     public function view()
     {
