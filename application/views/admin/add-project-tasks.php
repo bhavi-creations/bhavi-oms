@@ -104,16 +104,16 @@
                   <select class="form-control selectpicker" id="department" data-live-search="true" name="department[]">
                     <option value="">Select</option>
                     <?php
-                   if (isset($departments)) {
-                    foreach ($departments as $cnt) {
-                      print "<option value='" . $cnt['id'] . "'>" . $cnt['department_name'] . "</option>";
+                    if (isset($departments)) {
+                      foreach ($departments as $cnt) {
+                        print "<option value='" . $cnt['id'] . "'>" . $cnt['department_name'] . "</option>";
+                      }
                     }
-                  }
                     ?>
                   </select>
                 </div>
               </div>
-        
+
 
               <div class="col-md-6">
                 <div class="form-group">
@@ -174,9 +174,9 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><input type="date" name="assign_date[]" class="form-control"></td> 
+                        <td><input type="date" name="assign_date[]" class="form-control"></td>
                         <td>
-                          <select  name="client_name[]" class="form-control">
+                          <select name="client_name[]" class="form-control">
                             <option value> select </option>
                             <?php
                             if (isset($clients)) {
@@ -239,15 +239,16 @@
                           ?>
                         </select></td>
                       <td><select name="work_type_socialmedia[]" id="" class="form-control">
-                          <option value="">Facebook</option>
-                          <option value="">Instagram</option>
-                          <option value="">Pintrest</option>
-                          <option value="">Linkedin</option>
-                          <option value="">Youtube</option>
+                          <option value="not_selected">Select</option>
+                          <option value="Facebook">Facebook</option>
+                          <option value="Instagram">Instagram</option>
+                          <option value="Pintrest">Pintrest</option>
+                          <option value="Linkedin">Linkedin</option>
+                          <option value="Youtube">Youtube</option>
                         </select></td>
                       <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
-                      <td><input name="g_ads_socialmedia[]" type="text" class="form-control"></td>                 
-                      <td> <input name="fb_ads_socialmedia[]" type="text" class="form-control"></td>                
+                      <td><input name="g_ads_socialmedia[]" type="text" class="form-control"></td>
+                      <td> <input name="fb_ads_socialmedia[]" type="text" class="form-control"></td>
                       <td> <button type="button" class="removeRow mb-2" class="form-control">Remove row -</button>
                     </tbody>
                   </table>
@@ -270,7 +271,7 @@
                     </thead>
                     <tbody>
                       <td><input type="date" name="assign_date_web[]" class="form-control"></td>
-                      <td><select  name="client_name_web[]" class="form-control">
+                      <td><select name="client_name_web[]" class="form-control">
                           <option value> select </option>
                           <?php
                           if (isset($clients)) {
@@ -288,7 +289,7 @@
                           <option value="other">other</option>
                         </select></td>
                       <td><textarea name="desc_website[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
-                      <td><input name="delivery_date[]" type="date" class="form-control"></td>            
+                      <td><input name="delivery_date[]" type="date" class="form-control"></td>
                       <td> <button type="button" class="removeRow mb-2">Remove row -</button>
 
                     </tbody>
@@ -350,7 +351,6 @@
 
   <!-- /. js for display the tables -->
   <script>
-
     // $(document).ready(function() {
     //   $('#myTextarea').wysihtml5();
     // });
@@ -437,11 +437,12 @@
                             ?>\
                         </select></td>
                       <td><select name="work_type_socialmedia[]" id="" class="form-control">
-                          <option value="">Facebook</option>
-                          <option value="">Instagram</option>
-                          <option value="">Pintrest</option>
-                          <option value="">Linkedin</option>
-                          <option value="">Youtube</option>
+                         <option value="not_selected">Select</option>
+                          <option value="Facebook">Facebook</option>
+                          <option value="Instagram">Instagram</option>
+                          <option value="Pintrest">Pintrest</option>
+                          <option value="Linkedin">Linkedin</option>
+                          <option value="Youtube">Youtube</option>
                         </select></td>
                       <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><input name="g_ads_socialmedia[]" type="text" class="form-control"></td>

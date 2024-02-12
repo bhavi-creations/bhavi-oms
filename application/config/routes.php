@@ -174,3 +174,4 @@ $route['edit-products/(:num)'] = 'products/edit/$1';
 
 $route['worksheet'] = 'Worksheet';
 $route['manage-worksheets'] = 'Project_Tasks/manage_worksheets';
+$route['delete-worksheets/(:num)'] = 'Project_Tasks/delete_worksheets/$1';

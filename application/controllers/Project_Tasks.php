@@ -44,7 +44,10 @@ class Project_Tasks extends CI_Controller
         // Retrieve staff data and worksheets
         $data['staff'] = $this->Staff_model->select_staff(); 
         $data['content'] = $this->Worksheet_model->select_worksheets_all();
-    
+        $data['designer'] = $this->Worksheet_model->select_designer_worksheets();
+        $data['social'] = $this->Worksheet_model->select_socialmedia_worksheets(); 
+        $data['website'] = $this->Worksheet_model->select_website_worksheets();   
+        $data['seo'] = $this->Worksheet_model->select_seo_worksheets();   
         // Load the views
         $this->load->view('admin/header');
         $this->load->view('admin/manage-worksheets', $data);
@@ -147,7 +150,6 @@ class Project_Tasks extends CI_Controller
             $desc_designer = $this->input->post('desc_designer');
             $ref_link_designer = $this->input->post('ref_link_designer');
             $content_designer = $this->input->post('content_designer');
-            // $ref_file_designer = $this->input->post('ref_file_designer');
             $work_type_socialmedia = $this->input->post('work_type_socialmedia');
             $desc_socialmedia = $this->input->post('desc_socialmedia');
             $fb_ads_socialmedia = $this->input->post('fb_ads_socialmedia');
@@ -186,7 +188,8 @@ class Project_Tasks extends CI_Controller
                         $fileArrays = $_FILES['ref_file_designer'];
             
                         $file_paths = array(); 
-            
+                        $assigned_to_value = $assigned_to[0];
+                        $department_value = $department[0];
                         for ($j = 0; $j < count($fileArrays['name']); $j++) {
                             $file_name = $fileArrays['name'][$j];
                             $file_tmp = $fileArrays['tmp_name'][$j];
@@ -203,8 +206,8 @@ class Project_Tasks extends CI_Controller
             
 
                     $data2[] = array(
-                        'staff_id' => $assigned_to[$i],
-                         'department' => $department[$i],
+                        'staff_id' => $assigned_to_value,
+                        'department' => $department_value,
                         'project_task_id' => $data, 
                         'assign_date' => $assign_dates[$i],
                         'client_name' => $client_names[$i],
@@ -218,8 +221,13 @@ class Project_Tasks extends CI_Controller
                 }
             } else if ($department['0'] == 12) {
                 $loop_data = $assign_date_socialmedia;
+                $data2 = array();
+                $assigned_to_value = $assigned_to[0];
+                $department_value = $department[0];
                 for ($i = 0; $i < count($loop_data); $i++) {
                     $data2[] = array(
+                        'staff_id' => $assigned_to_value,
+                        'department' => $department_value,
                         'project_task_id' => $data,
                         'assign_date' => $assign_date_socialmedia[$i],
                         'client_name' => $client_name_socialmedia[$i],
@@ -231,8 +239,12 @@ class Project_Tasks extends CI_Controller
                 }
             } else if ($department['0'] == 10) {
                 $loop_data = $assign_date_web;
+                $assigned_to_value = $assigned_to[0];
+                $department_value = $department[0];
                 for ($i = 0; $i < count($loop_data); $i++) {
                     $data2[] = array(
+                        'staff_id' => $assigned_to_value,
+                        'department' => $department_value,
                         'project_task_id' => $data,
                         'assign_date' => $assign_date_web[$i],
                         'client_name' => $client_name_web[$i],
@@ -243,8 +255,12 @@ class Project_Tasks extends CI_Controller
                 }
             } else if ($department['0'] == 11) {
                 $loop_data = $assign_date_seo;
+                $assigned_to_value = $assigned_to[0];
+                $department_value = $department[0];
                 for ($i = 0; $i < count($loop_data); $i++) {
                     $data2[] = array(
+                        'staff_id' => $assigned_to_value,
+                        'department' => $department_value,
                         'project_task_id' => $data,
                         'assign_date' => $assign_date_seo[$i],
                         'client_name' => $client_name_seo[$i],
@@ -337,6 +353,17 @@ class Project_Tasks extends CI_Controller
     {
         $data = $this->Project_Tasks_model->delete_project_tasks($id);
         if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', "Project Deleted Succesfully");
+        } else {
+            $this->session->set_flashdata('error', "Sorry, Project Delete Failed.");
+        }
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+    function delete_worksheets($id)
+    {
+        $this->load->model('Worksheet_model');
+        $data =$this->Worksheet_model->delete_worksheet($id);
+        if($this->db->affected_rows() > 0){
             $this->session->set_flashdata('success', "Project Deleted Succesfully");
         } else {
             $this->session->set_flashdata('error', "Sorry, Project Delete Failed.");
