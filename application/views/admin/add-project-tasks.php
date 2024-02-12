@@ -173,7 +173,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr id="designer-row-0">
                         <td><input type="date" name="assign_date[]" class="form-control"></td>
                         <td>
                           <select name="client_name[]" class="form-control">
@@ -202,7 +202,7 @@
                         <td><textarea name="desc_designer[]" id="" cols="30" rows="2"></textarea></td>
                         <td><input type="link" name="ref_link_designer[]"></td>
                         <td><textarea name="content_designer[]" id="" cols="30" rows="2"></textarea></td>
-                        <td><input name="ref_file_designer[]" type="file" multiple></td>
+                        <td><input name="ref_file_designer_0[]" type="file" multiple></td>
                         <td> <button type="button" class="removeRow mb-2">Remove row -</button>
                         </td>
                       </tr>
@@ -378,8 +378,14 @@
 
     document.addEventListener("DOMContentLoaded", function() {
       function addDesignerRow() {
+        var table = document.getElementById("designerTable");
+        var count = 0;
+        var elements = table.querySelectorAll('[id^="designer-row"]');
+        count = elements.length;
+
         var tableBody = document.getElementById("designerTable").querySelector('tbody');
         var newRow = document.createElement("tr");
+        newRow.id = "designer-row-"+count;
 
         newRow.innerHTML = `
         <td><input type="date" name="assign_date[]" class="form-control"></td>
@@ -409,7 +415,7 @@
         <td><textarea name="desc_designer[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
         <td><input type="text" name="ref_link_designer[]" class="form-control"></td>
         <td><textarea name="content_designer[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
-        <td><input name="ref_file_designer[]" type="file" class="form-control" multiple></td>
+        <td><input name="ref_file_designer_`+count+`[]" type="file" class="form-control" multiple></td>
         <td> <button type="button" class="removeRow">Remove row -</button></td>
       `;
 

@@ -177,34 +177,36 @@ class Project_Tasks extends CI_Controller
 
             $data2 = array();
             $loop_data = [];
+            // designer fields
             if ($department['0'] == 13) {
                 $loop_data = $assign_dates;
                 for ($i = 0; $i < count($loop_data); $i++) {
 
                     $file_name = "";
                     $file_tmp = "";
+                    
+                    foreach ($_FILES as $fkey => $fvalue) {
+                        $file_paths = [];
+                        if (isset($_FILES[$fkey])) {
+                            $fileArrays = $_FILES[$fkey];
+                
+                            // $file_paths = array(); 
+                            $assigned_to_value = $assigned_to[0];
+                            $department_value = $department[0];
 
-                    if (isset($_FILES['ref_file_designer'])) {
-                        $fileArrays = $_FILES['ref_file_designer'];
-            
-                        $file_paths = array(); 
-                        $assigned_to_value = $assigned_to[0];
-                        $department_value = $department[0];
-                        for ($j = 0; $j < count($fileArrays['name']); $j++) {
-                            $file_name = $fileArrays['name'][$j];
-                            $file_tmp = $fileArrays['tmp_name'][$j];
-            
-                            $file_path = "assets/designer_imgs/" . $file_name;
-                            move_uploaded_file($file_tmp, $file_path);
-            
-                            // Store the file path in the array
-                            $file_paths[] = $file_path;
+                            for ($j = 0; $j < count($fileArrays['name']); $j++) {
+                                $file_name = $fileArrays['name'][$j];
+                                $file_tmp = $fileArrays['tmp_name'][$j];
+                
+                                $file_path = "assets/designer_imgs/" . $file_name;
+                                move_uploaded_file($file_tmp, $file_path);
+                
+                                // Store the file path in the array
+                                $file_paths[] = $file_path;
+                            }
                         }
+                        $serialized_file_paths[] = serialize($file_paths);
                     }
-            
-                    $serialized_file_paths = serialize($file_paths);
-            
-
                     $data2[] = array(
                         'staff_id' => $assigned_to_value,
                         'department' => $department_value,
@@ -215,10 +217,11 @@ class Project_Tasks extends CI_Controller
                         'desc_designer' => $desc_designer[$i],
                         'ref_link_designer' => $ref_link_designer[$i],
                         'content_designer' => $content_designer[$i],
-                        'ref_file_designer' => $serialized_file_paths, 
+                        'ref_file_designer' => $serialized_file_paths[$i], 
                     );
                     $file_paths = array();
                 }
+
             } else if ($department['0'] == 12) {
                 $loop_data = $assign_date_socialmedia;
                 $data2 = array();
