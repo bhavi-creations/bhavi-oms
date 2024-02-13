@@ -194,8 +194,27 @@
                             <td><?php echo $descnt['desc_designer']; ?></td>
                             <td><?php echo $descnt['ref_link_designer']; ?></td>
                             <td><?php echo $descnt['content_designer']; ?></td>
-                            <td><?php echo $descnt['ref_file_designer'] ?></td>
+                            <?php
+                            $imagePaths = unserialize($descnt['ref_file_designer']);
+
+                            if (is_array($imagePaths)) {
+                            ?>
+                              <td>
+                                <?php
+                                foreach ($imagePaths as $imagePath) {
+                                ?>
+                                  <a href="<?php echo $imagePath; ?>" download>Download Image</a><br>
+                                <?php
+                                }
+                                ?>
+                              </td>
+                            <?php
+                            } else {
+                              echo "Invalid data type. Expected a serialized array.";
+                            }
+                            ?>
                             <td>
+                              <a href="<?php echo base_url(); ?>edit-worksheet/<?php echo $descnt['id']; ?>" class="btn btn-info">Edit</a>
                               <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $descnt['id']; ?>" class="btn btn-danger">Delete</a>
                             </td>
                           </tr>
@@ -242,7 +261,9 @@
                             <td><?php echo $socnt['desc_socialmedia']; ?></td>
                             <td><?php echo $socnt['fb_ads_socialmedia']; ?></td>
                             <td><?php echo $socnt['g_ads_socialmedia']; ?></td>
-                            <td><a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $socnt['id']; ?>" class="btn btn-danger">Delete</a>
+                            <td>
+                            <a href="<?php echo base_url(); ?>edit-worksheet/<?php echo $socnt['id']; ?>" class="btn btn-info">Edit</a> 
+                            <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $socnt['id']; ?>" class="btn btn-danger">Delete</a>
                             </td>
                           </tr>
                       <?php
@@ -287,7 +308,10 @@
                             <td><?php echo $web['website_type']; ?></td>
                             <td><?php echo $web['desc_website']; ?></td>
                             <td><?php echo $web['delivery_date']; ?></td>
-                            <td> <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $web['id']; ?>" class="btn btn-danger">Delete</a></td>
+                            <td> 
+                              <a href="<?php echo base_url(); ?>edit-worksheet/<?php echo $web['id']; ?>" class="btn btn-info">Edit</a> 
+                              <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $web['id']; ?>" class="btn btn-danger">Delete</a>
+                            </td>
                           </tr>
                       <?php
                           $i++;
@@ -331,10 +355,12 @@
                             <td><?php echo $seocnt['p_kw_SEO']; ?></td>
                             <td><?php echo $seocnt['target_kw_SEO']; ?></td>
                             <td><?php echo $seocnt['gmb_SEO']; ?></td>
-                            <td> <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $seocnt['id']; ?>" class="btn btn-danger">Delete</a></td>
+                            <td>
+                            <a href="<?php echo base_url(); ?>edit-worksheet/<?php echo $seocnt['id']; ?>" class="btn btn-info">Edit</a>   
+                            <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $seocnt['id']; ?>" class="btn btn-danger">Delete</a></td>
                           </tr>
                       <?php
-                        $i++;
+                          $i++;
                         endforeach;
                       endif;
                       ?>

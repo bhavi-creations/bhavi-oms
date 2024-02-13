@@ -121,7 +121,6 @@ $route['delete-file/(:num)/(:any)'] = 'projects/deleteFile/$1/$2';
 $route['add-project-tasks'] = 'Project_Tasks';
 $route['manage-project-tasks'] = 'Project_Tasks/manage';
 $route['view-project-tasks'] = 'Project_Tasks/view';
-$route['view-worksheets'] = 'Project_Tasks/view_worksheets';  //added route
 $route['insert-project-tasks'] = 'Project_Tasks/insert';
 $route['delete-project-tasks/(:num)'] = 'Project_Tasks/delete/$1';
 $route['edit-project-tasks/(:num)'] = 'Project_Tasks/edit/$1';
@@ -170,8 +169,12 @@ $route['manage-products'] = 'products/manage';
 $route['delete-products/(:num)'] = 'products/delete/$1';
 $route['edit-products/(:num)'] = 'products/edit/$1';
 
-//testing
-
-$route['worksheet'] = 'Worksheet';
+//worksheet routes
+$route['view-worksheets'] = 'Project_Tasks/view_worksheets';  //added route
 $route['manage-worksheets'] = 'Project_Tasks/manage_worksheets';
 $route['delete-worksheets/(:num)'] = 'Project_Tasks/delete_worksheets/$1';
+$route['edit-worksheet/(:num)'] = 'Project_Tasks/edit_worksheet/$1';
+
+
+
+// $route['edit-project-tasks/(:num)'] = 'Project_Tasks/edit/$1';

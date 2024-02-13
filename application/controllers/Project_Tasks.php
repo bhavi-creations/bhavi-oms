@@ -40,20 +40,20 @@ class Project_Tasks extends CI_Controller
         // Load the required models at the beginning
         $this->load->model('Staff_model');
         $this->load->model('Worksheet_model');
-    
+
         // Retrieve staff data and worksheets
-        $data['staff'] = $this->Staff_model->select_staff(); 
+        $data['staff'] = $this->Staff_model->select_staff();
         $data['content'] = $this->Worksheet_model->select_worksheets_all();
         $data['designer'] = $this->Worksheet_model->select_designer_worksheets();
-        $data['social'] = $this->Worksheet_model->select_socialmedia_worksheets(); 
-        $data['website'] = $this->Worksheet_model->select_website_worksheets();   
-        $data['seo'] = $this->Worksheet_model->select_seo_worksheets();   
+        $data['social'] = $this->Worksheet_model->select_socialmedia_worksheets();
+        $data['website'] = $this->Worksheet_model->select_website_worksheets();
+        $data['seo'] = $this->Worksheet_model->select_seo_worksheets();
         // Load the views
         $this->load->view('admin/header');
         $this->load->view('admin/manage-worksheets', $data);
         $this->load->view('admin/footer');
     }
-    
+
 
     public function view()
     {
@@ -158,7 +158,7 @@ class Project_Tasks extends CI_Controller
             $desc_website = $this->input->post('desc_website');
             $delivery_date = $this->input->post('delivery_date');
             $p_kw_SEO = $this->input->post('p_kw_SEO');
-            $target_kw_SEO = $this->input->post('target_kw_SEO');   
+            $target_kw_SEO = $this->input->post('target_kw_SEO');
             $gmb_SEO = $this->input->post('gmb_SEO');
             $assign_date_socialmedia = $this->input->post('assign_date_socialmedia');
             $assign_date_web = $this->input->post('assign_date_web');
@@ -184,12 +184,12 @@ class Project_Tasks extends CI_Controller
 
                     $file_name = "";
                     $file_tmp = "";
-                    
+
                     foreach ($_FILES as $fkey => $fvalue) {
                         $file_paths = [];
                         if (isset($_FILES[$fkey])) {
                             $fileArrays = $_FILES[$fkey];
-                
+
                             // $file_paths = array(); 
                             $assigned_to_value = $assigned_to[0];
                             $department_value = $department[0];
@@ -197,10 +197,10 @@ class Project_Tasks extends CI_Controller
                             for ($j = 0; $j < count($fileArrays['name']); $j++) {
                                 $file_name = $fileArrays['name'][$j];
                                 $file_tmp = $fileArrays['tmp_name'][$j];
-                
+
                                 $file_path = "assets/designer_imgs/" . $file_name;
                                 move_uploaded_file($file_tmp, $file_path);
-                
+
                                 // Store the file path in the array
                                 $file_paths[] = $file_path;
                             }
@@ -210,18 +210,17 @@ class Project_Tasks extends CI_Controller
                     $data2[] = array(
                         'staff_id' => $assigned_to_value,
                         'department' => $department_value,
-                        'project_task_id' => $data, 
+                        'project_task_id' => $data,
                         'assign_date' => $assign_dates[$i],
                         'client_name' => $client_names[$i],
                         'work_type_designer' => $work_type_designer[$i],
                         'desc_designer' => $desc_designer[$i],
                         'ref_link_designer' => $ref_link_designer[$i],
                         'content_designer' => $content_designer[$i],
-                        'ref_file_designer' => $serialized_file_paths[$i], 
+                        'ref_file_designer' => $serialized_file_paths[$i],
                     );
                     $file_paths = array();
                 }
-
             } else if ($department['0'] == 12) {
                 $loop_data = $assign_date_socialmedia;
                 $data2 = array();
@@ -341,6 +340,165 @@ class Project_Tasks extends CI_Controller
     }
 
 
+    public function update_worksheets()
+    {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('assign_date[]', 'Assign Date', '');
+        $this->form_validation->set_rules('client_name[]', 'Client Name', '');
+
+        //Designer table form validations
+        $this->form_validation->set_rules('work_type_designer[]', 'Type of Work', '');
+        $this->form_validation->set_rules('desc_designer[]', 'Desc Designer', '');
+        $this->form_validation->set_rules('ref_link_designer[]', 'Ref link designer', '');
+        $this->form_validation->set_rules('content_designer[]', 'Content Designer', '');
+        $this->form_validation->set_rules('ref_file_designer[]', 'File Designer', '');
+
+        // // Social Media form validation
+        $this->form_validation->set_rules('work_type_socialmedia[]', 'Type of social media work', '');
+        $this->form_validation->set_rules('desc_socialmedia[]', 'Desc of social media', '');
+        $this->form_validation->set_rules('fb_ads_socialmedia[]', 'about Fb ads', '');
+        $this->form_validation->set_rules('g_ads_socailmedia[]', 'about G ads social media', '');
+
+        // Website table form validation
+        $this->form_validation->set_rules('website_type[]', 'Type of website', '');
+        $this->form_validation->set_rules('desc_website[]', 'Desc about website', '');
+        $this->form_validation->set_rules('delivery_date[]', 'website delivery date', '');
+
+        // SEO table form validation
+        $this->form_validation->set_rules('p_kw_SEO[]', 'Present Keyword SEO', '');
+        $this->form_validation->set_rules('target_kw_SEO[]', 'Target keyword SEO', '');
+        $this->form_validation->set_rules('gmb_SEO[]', 'Google My Business SEO', '');
+
+        if ($this->form_validation->run() !== false) {
+            // Retrieve data from the form
+            $worksheet_id = $this->input->post('worksheet_id');
+            $assigned_to = implode(',', $this->input->post('assigned_to'));
+            $department = $this->input->post('department');
+            $assign_date = $this->input->post('assign_date');
+            $client_name = $this->input->post('client_name');
+            $work_type_designer = $this->input->post('work_type_designer');
+            $desc_designer = $this->input->post('desc_designer');
+            // Add more fields as needed for other departments
+
+            // Update the main project task record
+            $arr = array(
+                'assigned_to' => $assigned_to,
+                // Add more fields as needed
+            );
+            $this->Project_Tasks_model->update_worksheets($arr, $worksheet_id);
+
+            // Update or insert data for the specific department
+            if ($department == 13) { // Designer
+                $loop_data = $assign_date; // Assuming assign_date is used for Designer
+
+                for ($i = 0; $i < count($loop_data); $i++) {
+                    $file_name = "";
+                    $file_tmp = "";
+
+                    foreach ($_FILES as $fkey => $fvalue) {
+                        $file_paths = [];
+                        if (isset($_FILES[$fkey])) {
+                            $fileArrays = $_FILES[$fkey];
+
+                            // $file_paths = array(); 
+                            $assigned_to_value = $assigned_to[0];
+                            $department_value = $department[0];
+
+                            for ($j = 0; $j < count($fileArrays['name']); $j++) {
+                                $file_name = $fileArrays['name'][$j];
+                                $file_tmp = $fileArrays['tmp_name'][$j];
+
+                                $file_path = "assets/designer_imgs/" . $file_name;
+                                move_uploaded_file($file_tmp, $file_path);
+
+                                // Store the file path in the array
+                                $file_paths[] = $file_path;
+                            }
+                        }
+                        $serialized_file_paths[] = serialize($file_paths);
+                    }
+                    $data2[] = array(
+                        'staff_id' => $assigned_to_value,
+                        'department' => $department_value,
+                        'project_task_id' => $data,
+                        'assign_date' => $assign_dates[$i],
+                        'client_name' => $client_names[$i],
+                        'work_type_designer' => $work_type_designer[$i],
+                        'desc_designer' => $desc_designer[$i],
+                        'ref_link_designer' => $ref_link_designer[$i],
+                        'content_designer' => $content_designer[$i],
+                        'ref_file_designer' => $serialized_file_paths[$i],
+                    );
+                    $file_paths = array();
+                }
+            } elseif ($department == 12) { // Social Media
+                $loop_data = $assign_date_socialmedia;
+                $data2 = array();
+                $assigned_to_value = $assigned_to[0];
+                $department_value = $department[0];
+                for ($i = 0; $i < count($loop_data); $i++) {
+                    $data2[] = array(
+                        'staff_id' => $assigned_to_value,
+                        'department' => $department_value,
+                        'project_task_id' => $data,
+                        'assign_date' => $assign_date_socialmedia[$i],
+                        'client_name' => $client_name_socialmedia[$i],
+                        'work_type_socialmedia' => $work_type_socialmedia[$i],
+                        'desc_socialmedia' => $desc_socialmedia[$i],
+                        'g_ads_socialmedia' => $g_ads_socialmedia[$i],
+                        'fb_ads_socialmedia' => $fb_ads_socialmedia[$i],
+                    );
+                }
+            } elseif ($department == 10) { // Website
+                $loop_data = $assign_date_web;
+                $assigned_to_value = $assigned_to[0];
+                $department_value = $department[0];
+                for ($i = 0; $i < count($loop_data); $i++) {
+                    $data2[] = array(
+                        'staff_id' => $assigned_to_value,
+                        'department' => $department_value,
+                        'project_task_id' => $data,
+                        'assign_date' => $assign_date_web[$i],
+                        'client_name' => $client_name_web[$i],
+                        'website_type' => $website_type[$i],
+                        'desc_website' => $desc_website[$i],
+                        'delivery_date' => $delivery_date[$i],
+                    );
+                }
+            } elseif ($department == 11) { // SEO
+                $loop_data = $assign_date_seo;
+                $assigned_to_value = $assigned_to[0];
+                $department_value = $department[0];
+                for ($i = 0; $i < count($loop_data); $i++) {
+                    $data2[] = array(
+                        'staff_id' => $assigned_to_value,
+                        'department' => $department_value,
+                        'project_task_id' => $data,
+                        'assign_date' => $assign_date_seo[$i],
+                        'client_name' => $client_name_seo[$i],
+                        'p_kw_SEO' => $p_kw_SEO[$i],
+                        'target_kw_SEO' => $target_kw_SEO[$i],
+                        'gmb_SEO' => $gmb_SEO[$i],
+                    );
+                }
+            }
+
+            // Handle success or failure
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', "Worksheets Updated Successfully");
+            } else {
+                $this->session->set_flashdata('error', "Sorry, Worksheets Update Failed.");
+            }
+            redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            // Form validation failed, handle accordingly
+            $this->index(); // Redirect to your index or another appropriate page
+            return false;
+        }
+    }
+
+
     function edit($id)
     {
         $data['projects'] = $this->Projects_model->select_projects();
@@ -351,6 +509,17 @@ class Project_Tasks extends CI_Controller
         $this->load->view('admin/footer');
     }
 
+
+    function edit_worksheet($id)
+    {
+        $this->load->model('Worksheet_model');
+        $data['clients'] = $this->Clients_model->select_clients();
+        $data['staff'] = $this->Staff_model->select_staff();
+        $data['content'] = $this->Worksheet_model->select_worksheet_byID($id);
+        $this->load->view('admin/header');
+        $this->load->view('admin/edit-worksheet', $data);
+        $this->load->view('admin/footer');
+    }
 
     function delete($id)
     {
@@ -365,8 +534,8 @@ class Project_Tasks extends CI_Controller
     function delete_worksheets($id)
     {
         $this->load->model('Worksheet_model');
-        $data =$this->Worksheet_model->delete_worksheet($id);
-        if($this->db->affected_rows() > 0){
+        $data = $this->Worksheet_model->delete_worksheet($id);
+        if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', "Project Deleted Succesfully");
         } else {
             $this->session->set_flashdata('error', "Sorry, Project Delete Failed.");
