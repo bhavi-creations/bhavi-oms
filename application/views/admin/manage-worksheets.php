@@ -214,7 +214,7 @@
                             }
                             ?>
                             <td>
-                              <a href="<?php echo base_url(); ?>edit-worksheet/<?php echo $descnt['id']; ?>" class="btn btn-info">Edit</a>
+                              <a href="<?php echo base_url(); ?>edit-project-tasks/<?php echo $descnt['project_task_id']; ?>" class="btn btn-info">Edit</a>
                               <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $descnt['id']; ?>" class="btn btn-danger">Delete</a>
                             </td>
                           </tr>
@@ -262,7 +262,7 @@
                             <td><?php echo $socnt['fb_ads_socialmedia']; ?></td>
                             <td><?php echo $socnt['g_ads_socialmedia']; ?></td>
                             <td>
-                            <a href="<?php echo base_url(); ?>edit-worksheet/<?php echo $socnt['id']; ?>" class="btn btn-info">Edit</a> 
+                            <a href="<?php echo base_url(); ?>edit-project-tasks/<?php echo $socnt['project_task_id']; ?>" class="btn btn-info">Edit</a> 
                             <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $socnt['id']; ?>" class="btn btn-danger">Delete</a>
                             </td>
                           </tr>
@@ -309,7 +309,7 @@
                             <td><?php echo $web['desc_website']; ?></td>
                             <td><?php echo $web['delivery_date']; ?></td>
                             <td> 
-                              <a href="<?php echo base_url(); ?>edit-worksheet/<?php echo $web['id']; ?>" class="btn btn-info">Edit</a> 
+                              <a href="<?php echo base_url(); ?>edit-project-tasks/<?php echo $web['project_task_id']; ?>" class="btn btn-info">Edit</a> 
                               <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $web['id']; ?>" class="btn btn-danger">Delete</a>
                             </td>
                           </tr>
@@ -356,7 +356,7 @@
                             <td><?php echo $seocnt['target_kw_SEO']; ?></td>
                             <td><?php echo $seocnt['gmb_SEO']; ?></td>
                             <td>
-                            <a href="<?php echo base_url(); ?>edit-worksheet/<?php echo $seocnt['id']; ?>" class="btn btn-info">Edit</a>   
+                            <a href="<?php echo base_url(); ?>edit-project-tasks/<?php echo $seocnt['project_task_id']; ?>" class="btn btn-info">Edit</a>   
                             <a href="<?php echo base_url(); ?>delete-worksheets/<?php echo $seocnt['id']; ?>" class="btn btn-danger">Delete</a></td>
                           </tr>
                       <?php

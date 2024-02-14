@@ -146,7 +146,7 @@ class Worksheet_model extends CI_Model {
     
     function select_worksheet_byID($id)
     {
-        $this->db->where('worksheet_tbl.id',$id);
+        $this->db->where('worksheet_tbl.project_task_id',$id);
         $this->db->select('worksheet_tbl.*, staff_tbl.staff_name');
         $this->db->from("worksheet_tbl");
         $this->db->join('staff_tbl', 'worksheet_tbl.staff_id = staff_tbl.id', 'left');
@@ -164,12 +164,14 @@ class Worksheet_model extends CI_Model {
     
         return array();
     }
-    public function update_worksheets($data, $worksheet_id)
-    {
-        // Assuming 'project_tasks_tbl' is your main table
-        $this->db->where('id', $worksheet_id);
-        $this->db->update('worksheet_tbl', $data);
-    }
+
+
+    // public function update_worksheets($data, $worksheet_id)
+    // {
+    //     // Assuming 'project_tasks_tbl' is your main table
+    //     $this->db->where('id', $worksheet_id);
+    //     $this->db->update('worksheet_tbl', $data);
+    // }
 }
 
 
