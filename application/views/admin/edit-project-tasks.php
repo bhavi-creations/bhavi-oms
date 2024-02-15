@@ -91,7 +91,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Staff</label>
-                      <select class="form-control selectpicker" data-live-search="true" name="assigned_to[]" multiple>
+                      <select class="form-control selectpicker" data-live-search="true" name="assigned_to[]" >
                         <option value="">Select</option>
                         <?php
                         if (isset($staff)) {
@@ -214,7 +214,7 @@
                                       ?>
                                     </select>
                                   </td>
-                                  <input type="text" name="designer_id[]" value="<?php echo $designer_row['id'];?>" hidden>
+                                  <input type="text" name="designer_id[]" value="<?php echo $designer_row['id']; ?>" hidden>
                                   <td><textarea name="desc_designer[]" id="" cols="30" rows="2"><?php echo $designer_row['desc_designer']; ?></textarea></td>
                                   <td><input type="link" name="ref_link_designer[]" value="<?php echo $designer_row['ref_link_designer']; ?>"></td>
                                   <td><textarea name="content_designer[]" id="" cols="30" rows="2"><?php echo $designer_row['content_designer']; ?></textarea></td>
@@ -270,7 +270,7 @@
                                       <option value="Youtube" <?php echo ($socialmedia_row['work_type_socialmedia'] == 'Youtube') ? 'selected' : ''; ?>>Youtube</option>
                                     </select>
                                   </td>
-                                  <input type="text" name="socialmedia_id[]" value="<?php echo $socialmedia_row['id'];?>" hidden>
+                                  <input type="text" name="socialmedia_id[]" value="<?php echo $socialmedia_row['id']; ?>" hidden>
                                   <td><textarea name="desc_socialmedia[]" class="form-control" cols="30" rows="2"><?php echo $socialmedia_row['desc_socialmedia']; ?></textarea></td>
                                   <td><input name="g_ads_socialmedia[]" type="text" class="form-control" value="<?php echo $socialmedia_row['g_ads_socialmedia']; ?>"></td>
                                   <td><input name="fb_ads_socialmedia[]" type="text" class="form-control" value="<?php echo $socialmedia_row['fb_ads_socialmedia']; ?>"></td>
@@ -324,7 +324,7 @@
                                       <option value="other" <?php echo ($website_row['website_type'] == 'other') ? 'selected' : ''; ?>>Other</option>
                                     </select>
                                   </td>
-                                  <input type="text" name="website_id[]" value="<?php echo $website_row['id'];?>" hidden>
+                                  <input type="text" name="website_id[]" value="<?php echo $website_row['id']; ?>" hidden>
                                   <td><textarea name="desc_website[]" class="form-control" cols="30" rows="2"><?php echo $website_row['desc_website']; ?></textarea></td>
                                   <td><input name="delivery_date[]" type="date" class="form-control" value="<?php echo $website_row['delivery_date']; ?>"></td>
                                   <!-- <td><button type="button" class="removeRow mb-2">Remove row -</button></td> -->
@@ -368,7 +368,7 @@
                                       ?>
                                     </select>
                                   </td>
-                                  <input type="text" name="SEO_id[]" value="<?php echo $seo_row['id'];?>" hidden>
+                                  <input type="text" name="SEO_id[]" value="<?php echo $seo_row['id']; ?>" hidden>
                                   <td><textarea name="p_kw_SEO[]" class="form-control" cols="30" rows="2"><?php echo $seo_row['p_kw_SEO']; ?></textarea></td>
                                   <td><textarea name="target_kw_SEO[]" class="form-control" cols="30" rows="2"><?php echo $seo_row['target_kw_SEO']; ?></textarea></td>
                                   <td><textarea name="gmb_SEO[]" class="form-control" cols="30" rows="2"><?php echo $seo_row['gmb_SEO']; ?></textarea></td>

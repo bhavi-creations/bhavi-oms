@@ -64,13 +64,15 @@ class Project_Tasks extends CI_Controller
         $this->load->view('staff/footer');
     }
 
-    public function view_worksheets()   //added function 
+    public function view_worksheets($id)   //added function 
     {
-        $staff = $this->session->userdata('userid');
-        $data['content'] = $this->Project_Tasks_model->select_project_tasks_by_staffID($staff);
+        $this->load->model('Worksheet_model');
+        // $staff = $this->session->userdata('userid');
+        $data['content'] = $this->Worksheet_model->select_worksheet_byID($id);
         $this->load->view('staff/header');
         $this->load->view('staff/view-worksheets', $data);   //added view file
         $this->load->view('staff/footer');
+        
     }
 
     public function insert()
@@ -406,6 +408,8 @@ class Project_Tasks extends CI_Controller
             $data = $this->Project_Tasks_model->update_project_tasks($arr, $id);
 
             $designer_ids = $this->input->post('designer_id');
+            $assigned_to_values = $this->input->post('assigned_to')[0];
+
             foreach ($designer_ids as $index => $designer_id) {
                 // Retrieve other input values for the corresponding row
                 $assign_date = $this->input->post('assign_date')[$index];
@@ -414,13 +418,16 @@ class Project_Tasks extends CI_Controller
                 $desc_designer = $this->input->post('desc_designer')[$index];
                 $ref_link_designer = $this->input->post('ref_link_designer')[$index];
                 $content_designer = $this->input->post('content_designer')[$index];
+                $assigned_to_designer = $assigned_to_values;
                 // ... add other fields as needed
-        
+                echo $assigned_to_designer;
                 // Update the database using your model
-                $this->Project_Tasks_model->updateDesignerRow($designer_id, $assign_date, $client_name, $work_type_designer, $desc_designer, $ref_link_designer, $content_designer);
+                $this->Project_Tasks_model->updateDesignerRow($assigned_to_designer,$designer_id, $assign_date, $client_name, $work_type_designer, $desc_designer, $ref_link_designer, $content_designer);
             }
 
             $socialmedia_ids = $this->input->post('socialmedia_id');
+            $assigned_to_values = $this->input->post('assigned_to')[0];
+
             foreach ($socialmedia_ids as $index => $socialmedia_id) {
                 // Retrieve other input values for the corresponding row
                 $assign_date_socialmedia = $this->input->post('assign_date_socialmedia')[$index];
@@ -429,13 +436,16 @@ class Project_Tasks extends CI_Controller
                 $desc_socialmedia = $this->input->post('desc_socialmedia')[$index];
                 $g_ads_socialmedia = $this->input->post('g_ads_socialmedia')[$index];
                 $fb_ads_socialmedia = $this->input->post('fb_ads_socialmedia')[$index];
+                $assigned_to_socialmedia = $assigned_to_values;
+
                 // ... add other fields as needed
         
                 // Update the database using your model
-                $this->Project_Tasks_model->updateSocialMediaRow($socialmedia_id, $assign_date_socialmedia, $client_name_socialmedia, $work_type_socialmedia, $desc_socialmedia, $g_ads_socialmedia, $fb_ads_socialmedia);
+                $this->Project_Tasks_model->updateSocialMediaRow($assigned_to_socialmedia,$socialmedia_id, $assign_date_socialmedia, $client_name_socialmedia, $work_type_socialmedia, $desc_socialmedia, $g_ads_socialmedia, $fb_ads_socialmedia);
             }
            
             $website_ids = $this->input->post('website_id');
+            $assigned_to_values = $this->input->post('assigned_to')[0];
             foreach ($website_ids as $index => $website_id) {
                 // Retrieve other input values for the corresponding row
                 $assign_date_web = $this->input->post('assign_date_web')[$index];
@@ -443,13 +453,16 @@ class Project_Tasks extends CI_Controller
                 $website_type = $this->input->post('website_type')[$index];
                 $desc_website = $this->input->post('desc_website')[$index];
                 $delivery_date = $this->input->post('delivery_date')[$index];
+                $assigned_to_web = $assigned_to_values;
+
                 // ... add other fields as needed
         
                 // Update the database using your model
-                $this->Project_Tasks_model->updateWebsiteRow($website_id, $assign_date_web, $client_name_web, $website_type, $desc_website, $delivery_date);
+                $this->Project_Tasks_model->updateWebsiteRow($assigned_to_web,$website_id, $assign_date_web, $client_name_web, $website_type, $desc_website, $delivery_date);
             }
 
             $seo_ids = $this->input->post('SEO_id');
+            $assigned_to_values = $this->input->post('assigned_to')[0];
             foreach ($seo_ids as $index => $seo_id) {
                 // Retrieve other input values for the corresponding row
                 $assign_date_seo = $this->input->post('assign_date_seo')[$index];
@@ -457,10 +470,12 @@ class Project_Tasks extends CI_Controller
                 $p_kw_SEO = $this->input->post('p_kw_SEO')[$index];
                 $target_kw_SEO = $this->input->post('target_kw_SEO')[$index];
                 $gmb_SEO = $this->input->post('gmb_SEO')[$index];
+                $assigned_to_seo = $assigned_to_values;
+
                 // ... add other fields as needed
         
                 // Update the database using your model
-                $this->Project_Tasks_model->updateSEOrow($seo_id, $assign_date_seo, $client_name_seo, $p_kw_SEO, $target_kw_SEO, $gmb_SEO);
+                $this->Project_Tasks_model->updateSEOrow($assigned_to_seo,$seo_id, $assign_date_seo, $client_name_seo, $p_kw_SEO, $target_kw_SEO, $gmb_SEO);
             }
         
 

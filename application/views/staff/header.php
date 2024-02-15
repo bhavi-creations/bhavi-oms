@@ -134,7 +134,7 @@
         <li><a href="<?php echo base_url(); ?>view-attendance"><i class="fa fa-clock-o"></i> <span>Attendance</span></a></li>
         <li><a href="<?php echo base_url(); ?>view-projects"><i class="fa fa-star"></i> <span>Projects</span></a></li>
         <li><a href="<?php echo base_url(); ?>view-project-tasks"><i class="fa fa-star"></i> <span>Project Tasks</span></a></li>
-        <li><a href="<?php echo base_url(); ?>view-worksheets"><i class="fa fa-check-circle"></i> <span>Work Sheets</span></a></li>
+        <!-- <li><a href="<?php echo base_url(); ?>view-worksheets"><i class="fa fa-check-circle"></i> <span>Work Sheets</span></a></li> -->
 
         <!--<?php if($permission != 'no_access'){ ?>-->
         <!--  <li class="treeview">-->

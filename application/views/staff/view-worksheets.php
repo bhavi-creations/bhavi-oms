@@ -39,344 +39,203 @@
           <div class="box-header">
             <h3 class="box-title">View Worksheets</h3>
           </div>
-      
-          <!-- /.box-header -->
-          <div class="box-body" id="website_table">
-            <div class="table-responsive" style="display: none;">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Sl.no</th>
-                    <th>Date</th>
-                    <th>Client</th>
-                    <th>Type of Website</th>
-                    <th>Description</th>
-                    <th>Delivery Date</th>
-                    <!-- <th>Due Date</th> -->
-                    <!-- <th>Completed date</th> -->
-                    <!-- <th>Daily Task</th> -->
-                    <!-- <th>Priority</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  if (isset($content)) :
-                    $i = 1;
-                    foreach ($content as $cnt) :
-                  ?>
-                      <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $cnt['project_name']; ?></td>
-                        <td>
-                          <?php
-                          $staff_data = $cnt['staff_data'];
-                          foreach ($staff_data as $key => $staff) {
-                            if ($key == 0) {
-                              echo $staff['staff_name'];
-                            } else {
-                              echo " , " . $staff['staff_name'];
-                            }
-                          }
-                          ?>
-                        </td>
-                        <td><?php echo $cnt['task_name']; ?></td>
-                        <td><?php echo $cnt['task_details']; ?></td>
-                        <td><?php echo $cnt['task_status']; ?></td>
-                        <td><?php echo date('d-m-Y', strtotime($cnt['due_date'])); ?></td>
-                        <td>
-                          <?php
-                          if ($cnt['completed_date'] == "0000-00-00") {
-                            echo "-";
-                          } else {
-                            echo date('d-m-Y', strtotime($cnt['completed_date']));
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($cnt['task_daily']) {
-                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>yes</span> ";
-                          } else {
-                            echo " <span class='text-capitalize label label-danger' style='font-size:12px;'>no</span> ";
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($cnt['task_priority'] == 'low') {
-                            echo " <span class='text-capitalize label label-info' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          } else if ($cnt['task_priority'] == 'medium') {
-                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          } else if ($cnt['task_priority'] == 'high') {
-                            echo " <span class='text-capitalize label label-warning' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          }
-                          ?>
-                        </td>
-                      </tr>
-                  <?php
-                      $i++;
-                    endforeach;
-                  endif;
-                  ?>
 
-                </tbody>
-              </table>
+          <!-- /.box-header -->
+          <?php if (isset($content)) : ?>
+            <?php foreach ($content as $cnt) : ?>
+              <!-- form start -->
+
+              <div class="col-lg" style="display: none;">
+                <div class="form-group">
+                  <label>Department</label>
+                  <select class="form-control selectpicker" id="department" name="department">
+                    <option value="<?php echo $cnt['department']; ?>">All</option>
+                  </select>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
+          <div class="box-body">
+            <div id="designerTable" style="display: block;">
+              <div class="box-body">
+                <div class="table-responsive">
+                  <table id="example1_designer" class="table table-bordered table-striped">
+                    <thead id="design-tbody">
+                      <tr>
+                        <th>Date</th>
+                        <th>Client Name</th>
+                        <th>Type of work</th>
+                        <th>Description</th>
+                        <th>Ref Link</th>
+                        <th>Content</th>
+                        <th>Ref Image</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($content as $cnt) : ?>
+                        <tr>
+                          <td><?php echo $cnt['assign_date']; ?></td>
+                          <td><?php echo $cnt['client_name']; ?></td>
+                          <td><?php echo $cnt['work_type_designer']; ?></td>
+                          <td><?php echo $cnt['desc_designer']; ?></td>
+                          <td><?php echo $cnt['ref_link_designer']; ?></td>
+                          <td><?php echo $cnt['content_designer']; ?></td>
+                          <?php
+                          $imagePaths = unserialize($cnt['ref_file_designer']);
+
+                          if (is_array($imagePaths)) {
+                          ?>
+                            <td>
+                              <?php
+                              foreach ($imagePaths as $imagePath) {
+                                $imageUrl = base_url( $imagePath);
+                              ?>
+                                <a href="<?php echo $imageUrl; ?>" download>Download Image</a><br>
+                              <?php
+                              }
+                              ?>
+                            </td>
+                          <?php
+                          } else {
+                            echo "Invalid data type. Expected a serialized array.";
+                          }
+                          ?>
+
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
+            <div id="socialmedia" style="display: none;">
+              <div class="box-body">
+                <!-- <button type="button" class="addSocialmediaRow mb-2">Add row +</button> -->
+                <div class="table-responsive">
+                  <table id="example1_socialmedia" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th class="form-control">Date</th>
+                        <th>Client Name</th>
+                        <th>Work</th>
+                        <th>Description</th>
+                        <th>Google Ads</th>
+                        <th>Facebook Ads</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($content as $cnt) : ?>
+                        <td><?php echo $cnt['assign_date'] ?></td>
+                        <td>
+                          <?php
+                          echo $cnt['client_name'];
+                          ?>
+                        </td>
+                        <td><?php echo $cnt['work_type_socialmedia']; ?></td>
+                        <td><?php echo $cnt['desc_socialmedia']; ?></td>
+                        <td><?php echo $cnt['g_ads_socialmedia']; ?></td>
+                        <td><?php echo $cnt['fb_ads_socialmedia']; ?></td>
+                        <!-- <td> <input name="" type="text" class="form-control"></td> -->
+                        <!-- <td> <button type="button" class="removeRow mb-2" class="form-control">Remove row -</button> -->
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div id="websitetable" style="display: none;">
+              <div class="box-body">
+                <!-- <button type="button" class="addWebsiteRow mb-2">Add row +</button> -->
+                <div class="table-responsive">
+                  <table id="example1_website" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+
+                        <th>Client Name</th>
+                        <th>Type of Website</th>
+                        <th>Description</th>
+                        <th>Delivey Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($content as $cnt) : ?>
+                        <td><?php echo $cnt['assign_date']; ?></td>
+
+                        <td><?php echo $cnt['client_name']; ?></td>
+                        <td><?php echo $cnt['website_type']; ?></td>
+                        <td><?php echo $cnt['desc_website'] ?></td>
+                        <td><?php echo $cnt['delivery_date'] ?></td>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div id="SEOtable" style="display: none;">
+              <div class="box-body">
+                <!-- <button type="button" class="addSEORow mb-2">Add row +</button> -->
+                <div class="table-responsive">
+                  <table id="example1_SEO" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Client Name</th>
+                        <th>Presentkeyword</th>
+                        <th>Target Keyword Date</th>
+                        <th>Google My business</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($content as $cnt) : ?>
+                        <td><?php echo $cnt['assign_date']; ?></td>
+                        <td><?php echo $cnt['client_name']; ?></td>
+                        <td><?php echo $cnt['p_kw_SEO']; ?></textarea></td>
+                        <td><?php echo $cnt['target_kw_SEO']; ?></td>
+                        <td><?php echo $cnt['gmb_SEO'] ?></td>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
           </div>
           <!-- /.box-body -->
-          <div class="box-body" id="seo_table">
-            <div class="table-responsive" style="display: none;">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Sl.no</th>
-                    <th>Date</th>
-                    <th>Client</th>
-                    <th>Present keyword</th>
-                    <th>Target Keyword</th>
-                    <th>Google My Business</th>
-                    <!-- <th>Due Date</th> -->
-                    <!-- <th>Completed date</th> -->
-                    <!-- <th>Daily Task</th> -->
-                    <!-- <th>Priority</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  if (isset($content)) :
-                    $i = 1;
-                    foreach ($content as $cnt) :
-                  ?>
-                      <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $cnt['project_name']; ?></td>
-                        <td>
-                          <?php
-                          $staff_data = $cnt['staff_data'];
-                          foreach ($staff_data as $key => $staff) {
-                            if ($key == 0) {
-                              echo $staff['staff_name'];
-                            } else {
-                              echo " , " . $staff['staff_name'];
-                            }
-                          }
-                          ?>
-                        </td>
-                        <td><?php echo $cnt['task_name']; ?></td>
-                        <td><?php echo $cnt['task_details']; ?></td>
-                        <td><?php echo $cnt['task_status']; ?></td>
-                        <td><?php echo date('d-m-Y', strtotime($cnt['due_date'])); ?></td>
-                        <td>
-                          <?php
-                          if ($cnt['completed_date'] == "0000-00-00") {
-                            echo "-";
-                          } else {
-                            echo date('d-m-Y', strtotime($cnt['completed_date']));
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($cnt['task_daily']) {
-                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>yes</span> ";
-                          } else {
-                            echo " <span class='text-capitalize label label-danger' style='font-size:12px;'>no</span> ";
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($cnt['task_priority'] == 'low') {
-                            echo " <span class='text-capitalize label label-info' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          } else if ($cnt['task_priority'] == 'medium') {
-                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          } else if ($cnt['task_priority'] == 'high') {
-                            echo " <span class='text-capitalize label label-warning' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          }
-                          ?>
-                        </td>
-                      </tr>
-                  <?php
-                      $i++;
-                    endforeach;
-                  endif;
-                  ?>
 
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="box-body" id="socialmedia_table">
-            <div class="table-responsive" style="display: none;">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Sl.no</th>
-                    <th>Date</th>
-                    <th>Client</th>
-                    <th>Description</th>
-                    <th>Google Ads</th>
-                    <th>FB Adds</th>
-                    <!-- <th>Due Date</th> -->
-                    <!-- <th>Completed date</th> -->
-                    <!-- <th>Daily Task</th> -->
-                    <!-- <th>Priority</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  if (isset($content)) :
-                    $i = 1;
-                    foreach ($content as $cnt) :
-                  ?>
-                      <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $cnt['project_name']; ?></td>
-                        <td>
-                          <?php
-                          $staff_data = $cnt['staff_data'];
-                          foreach ($staff_data as $key => $staff) {
-                            if ($key == 0) {
-                              echo $staff['staff_name'];
-                            } else {
-                              echo " , " . $staff['staff_name'];
-                            }
-                          }
-                          ?>
-                        </td>
-                        <td><?php echo $cnt['task_name']; ?></td>
-                        <td><?php echo $cnt['task_details']; ?></td>
-                        <td><?php echo $cnt['task_status']; ?></td>
-                        <td><?php echo date('d-m-Y', strtotime($cnt['due_date'])); ?></td>
-                        <td>
-                          <?php
-                          if ($cnt['completed_date'] == "0000-00-00") {
-                            echo "-";
-                          } else {
-                            echo date('d-m-Y', strtotime($cnt['completed_date']));
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($cnt['task_daily']) {
-                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>yes</span> ";
-                          } else {
-                            echo " <span class='text-capitalize label label-danger' style='font-size:12px;'>no</span> ";
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($cnt['task_priority'] == 'low') {
-                            echo " <span class='text-capitalize label label-info' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          } else if ($cnt['task_priority'] == 'medium') {
-                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          } else if ($cnt['task_priority'] == 'high') {
-                            echo " <span class='text-capitalize label label-warning' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          }
-                          ?>
-                        </td>
-                      </tr>
-                  <?php
-                      $i++;
-                    endforeach;
-                  endif;
-                  ?>
-
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="box-body" id="designer_table">
-            <div class="table-responsive" style="display: none;">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Sl.no</th>
-                    <th>Date</th>
-                    <th>Client</th>
-                    <th>Work</th>
-                    <th>Ref link</th>
-                    <th>Content</th>
-                    <th>Ref Image</th>
-                    <!-- <th>Completed date</th> -->
-                    <!-- <th>Daily Task</th> -->
-                    <!-- <th>Priority</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  if (isset($content)) :
-                    $i = 1;
-                    foreach ($content as $cnt) :
-                  ?>
-                      <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $cnt['project_name']; ?></td>
-                        <td>
-                          <?php
-                          $staff_data = $cnt['staff_data'];
-                          foreach ($staff_data as $key => $staff) {
-                            if ($key == 0) {
-                              echo $staff['staff_name'];
-                            } else {
-                              echo " , " . $staff['staff_name'];
-                            }
-                          }
-                          ?>
-                        </td>
-                        <td><?php echo $cnt['task_name']; ?></td>
-                        <td><?php echo $cnt['task_details']; ?></td>
-                        <td><?php echo $cnt['task_status']; ?></td>
-                        <td><?php echo date('d-m-Y', strtotime($cnt['due_date'])); ?></td>
-                        <td>
-                          <?php
-                          if ($cnt['completed_date'] == "0000-00-00") {
-                            echo "-";
-                          } else {
-                            echo date('d-m-Y', strtotime($cnt['completed_date']));
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($cnt['task_daily']) {
-                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>yes</span> ";
-                          } else {
-                            echo " <span class='text-capitalize label label-danger' style='font-size:12px;'>no</span> ";
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($cnt['task_priority'] == 'low') {
-                            echo " <span class='text-capitalize label label-info' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          } else if ($cnt['task_priority'] == 'medium') {
-                            echo " <span class='text-capitalize label label-success' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          } else if ($cnt['task_priority'] == 'high') {
-                            echo " <span class='text-capitalize label label-warning' style='font-size:12px;'>" . $cnt['task_priority'] . "</span> ";
-                          }
-                          ?>
-                        </td>
-                      </tr>
-                  <?php
-                      $i++;
-                    endforeach;
-                  endif;
-                  ?>
-
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
         <!-- /.box -->
       </div>
-      <!-- /.col -->
+      <!--/.col (left) -->
     </div>
     <!-- /.row -->
   </section>
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<script>
+  $(document).ready(function() {
+    $('#department').on('change', function() {
+
+      document.getElementById('designerTable').style.display = 'none';
+      document.getElementById('socialmedia').style.display = 'none';
+      document.getElementById('websitetable').style.display = 'none';
+      document.getElementById('SEOtable').style.display = 'none';
+
+      var selectedDeptId = this.value;
+      console.log("Selected Department ID:", selectedDeptId);
+
+      if (selectedDeptId == 13) {
+        document.getElementById('designerTable').style.display = 'block';
+      } else if (selectedDeptId == 12) {
+        document.getElementById('socialmedia').style.display = 'block';
+      } else if (selectedDeptId == 10) {
+        document.getElementById('websitetable').style.display = 'block';
+      } else if (selectedDeptId == 11) {
+        document.getElementById('SEOtable').style.display = 'block';
+      }
+    });
+    $('#department').trigger('change');
+  });
+</script>

@@ -125,7 +125,7 @@ class Project_Tasks_model extends CI_Model
         $this->db->affected_rows();
     }
 
-    public function updateDesignerRow($designer_id, $assign_date, $client_name, $work_type_designer, $desc_designer, $ref_link_designer, $content_designer)
+    public function updateDesignerRow($assigned_to_designer,$designer_id, $assign_date, $client_name, $work_type_designer, $desc_designer, $ref_link_designer, $content_designer)
     {
         $data = array(
             'assign_date' => $assign_date,
@@ -134,6 +134,7 @@ class Project_Tasks_model extends CI_Model
             'desc_designer' => $desc_designer,
             'ref_link_designer' => $ref_link_designer,
             'content_designer' => $content_designer,
+            'staff_id' => $assigned_to_designer,
             // ... add other fields as needed
         );
 
@@ -142,7 +143,7 @@ class Project_Tasks_model extends CI_Model
     }
 
 
-    public function updateSocialMediaRow($socialmedia_id, $assign_date_socialmedia, $client_name_socialmedia, $work_type_socialmedia, $desc_socialmedia, $g_ads_socialmedia, $fb_ads_socialmedia)
+    public function updateSocialMediaRow($assigned_to_socialmedia,$socialmedia_id, $assign_date_socialmedia, $client_name_socialmedia, $work_type_socialmedia, $desc_socialmedia, $g_ads_socialmedia, $fb_ads_socialmedia)
     {
         $data = array(
             'assign_date' => $assign_date_socialmedia,
@@ -151,6 +152,8 @@ class Project_Tasks_model extends CI_Model
             'desc_socialmedia' => $desc_socialmedia,
             'g_ads_socialmedia' => $g_ads_socialmedia,
             'fb_ads_socialmedia' => $fb_ads_socialmedia,
+            'staff_id' => $assigned_to_socialmedia,
+
             // ... add other fields as needed
         );
 
@@ -159,7 +162,7 @@ class Project_Tasks_model extends CI_Model
     }
 
 
-    public function updateWebsiteRow($website_id, $assign_date_web, $client_name_web, $website_type, $desc_website, $delivery_date)
+    public function updateWebsiteRow($assigned_to_web,$website_id, $assign_date_web, $client_name_web, $website_type, $desc_website, $delivery_date)
     {
         $data = array(
             'assign_date' => $assign_date_web,
@@ -167,6 +170,7 @@ class Project_Tasks_model extends CI_Model
             'website_type' => $website_type,
             'desc_website' => $desc_website,
             'delivery_date' => $delivery_date,
+            'staff_id' => $assigned_to_web,
             // ... add other fields as needed
         );
 
@@ -174,7 +178,7 @@ class Project_Tasks_model extends CI_Model
         $this->db->update('worksheet_tbl', $data);
     }
     
-    public function updateSEOrow($seo_id, $assign_date_seo, $client_name_seo, $p_kw_SEO, $target_kw_SEO, $gmb_SEO)
+    public function updateSEOrow($assigned_to_seo,$seo_id, $assign_date_seo, $client_name_seo, $p_kw_SEO, $target_kw_SEO, $gmb_SEO)
     {
         $data = array(
             'assign_date' => $assign_date_seo,
@@ -182,6 +186,7 @@ class Project_Tasks_model extends CI_Model
             'p_kw_SEO' => $p_kw_SEO,
             'target_kw_SEO' => $target_kw_SEO,
             'gmb_SEO' => $gmb_SEO,
+            'staff_id' => $assigned_to_seo,
             // ... add other fields as needed
         );
 
