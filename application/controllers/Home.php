@@ -53,16 +53,16 @@
             $check_login = $this->Home_model->logindata($un, $pw);
             if ($check_login <> '') {
                 if ($check_login[0]['status'] == 1) {
-                    if ($check_login[0]['usertype'] == 1) {
-                        $data = array(
-                            'logged_in'  =>  TRUE,
-                            'username' => $check_login[0]['username'],
-                            'usertype' => $check_login[0]['usertype'],
-                            'userid' => $check_login[0]['id'],
-                            'loginid' => $check_login[0]['login_id'],
-                            'staff_data' => $check_login[0]['staff_data'],
-                        );
-                        $this->session->set_userdata($data);
+                            if ($check_login[0]['usertype'] == 1) {
+                                $data = array(
+                                    'logged_in'  =>  TRUE,
+                                    'username' => $check_login[0]['username'],
+                                    'usertype' => $check_login[0]['usertype'],
+                                    'userid' => $check_login[0]['id'],
+                                    'loginid' => $check_login[0]['login_id'],
+                                    'staff_data' => $check_login[0]['staff_data'],
+                                );
+                                $this->session->set_userdata($data);
                         redirect('/');
                     } elseif ($check_login[0]['usertype'] == 2) {
                         $data = array(
