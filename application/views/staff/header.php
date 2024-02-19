@@ -1,15 +1,24 @@
 <?php
-  $staff_data = $this->session->userdata('staff_data');
-  if( $this->session->userdata('usertype') == 2){
-    $permissions = $staff_data['permissions'];
-    if(isset($permissions['0'])){
-        $permission = $permissions['0']['permission'];
-    }else{
-        $permission = 'no_access';
-    }
-  }else{
-    $permission = 'edit_access';
-  }
+ $staff_data = $this->session->userdata('staff_data');
+
+ if ($this->session->userdata('usertype') == 2) {
+     if (isset($staff_data['permissions']) && is_array($staff_data['permissions'])) {
+         $permissions = $staff_data['permissions'];
+ 
+         if (isset($permissions[0]) && isset($permissions[0]['permission'])) {
+             $permission = $permissions[0]['permission'];
+         } else {
+             $permission = 'no_access';
+         }
+     } else {
+         $permission = 'no_access'; 
+     }
+ } else {
+     $permission = 'edit_access';
+ }
+ 
+
+ $permissions = isset($staff_data['permissions']) ? $staff_data['permissions'] : null;
 ?>
 
 <!DOCTYPE html>

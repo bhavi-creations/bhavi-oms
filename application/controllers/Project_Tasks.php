@@ -52,6 +52,7 @@ class Project_Tasks extends CI_Controller
         $this->load->view('admin/header');
         $this->load->view('admin/manage-worksheets', $data);
         $this->load->view('admin/footer');
+        return $result; 
     }
 
 
@@ -173,16 +174,13 @@ class Project_Tasks extends CI_Controller
             $department = $this->input->post('department');
 
 
-
-
-
             $data = $this->Project_Tasks_model->insert_project_tasks($arr);
 
 
             $data2 = array();
             $loop_data = [];
             // designer fields
-            if ($department['0'] == 13) {
+            if ($department['0'] == 11) {
                 $loop_data = $assign_dates;
                 for ($i = 0; $i < count($loop_data); $i++) {
 
@@ -225,7 +223,7 @@ class Project_Tasks extends CI_Controller
                     );
                     $file_paths = array();
                 }
-            } else if ($department['0'] == 12) {
+            } else if ($department['0'] == 6) {
                 $loop_data = $assign_date_socialmedia;
                 $data2 = array();
                 $assigned_to_value = $assigned_to[0];
@@ -243,7 +241,7 @@ class Project_Tasks extends CI_Controller
                         'fb_ads_socialmedia' => $fb_ads_socialmedia[$i],
                     );
                 }
-            } else if ($department['0'] == 10) {
+            } else if ($department['0'] == 16) {
                 $loop_data = $assign_date_web;
                 $assigned_to_value = $assigned_to[0];
                 $department_value = $department[0];
@@ -259,7 +257,7 @@ class Project_Tasks extends CI_Controller
                         'delivery_date' => $delivery_date[$i],
                     );
                 }
-            } else if ($department['0'] == 11) {
+            } else if ($department['0'] == 15 || $department['0'] == 17) {
                 $loop_data = $assign_date_seo;
                 $assigned_to_value = $assigned_to[0];
                 $department_value = $department[0];
