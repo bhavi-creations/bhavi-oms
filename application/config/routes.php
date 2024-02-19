@@ -72,6 +72,9 @@ $route['edit-client/(:num)'] = 'client/edit/$1';
 $route['update-client'] = 'client/update';
 $route['delete-client/(:num)'] = 'client/delete/$1';
 
+$route['edit-quote/(:num)'] = 'client/edit_quote/$1';
+$route['view-quote/(:num)'] = 'client/view_quote/$1';
+
 //staff routes
 $route['add-staff'] = 'staff';
 $route['manage-staff'] = 'staff/manage';

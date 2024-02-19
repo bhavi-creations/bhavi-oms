@@ -10,6 +10,12 @@ class Clients_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    function insert_quote($data2)
+    {
+        $this->db->insert("quote",$data2);
+        return $this->db->insert_id();
+    }
+
     function select_clients()
     {
         $this->db->where('client_id !=',0);
@@ -40,10 +46,27 @@ class Clients_model extends CI_Model {
         $this->db->affected_rows();
     }
 
+    function delete_quote($id)
+    {
+        $this->db->where('client_id', $id);
+        $this->db->delete("quote");
+        $this->db->affected_rows();
+    }
+
     function update_clients($data,$id)
     {
         $this->db->where('client_id', $id);
         $this->db->update('clients_tbl',$data);
         $this->db->affected_rows();
+    }
+
+    function select_quote_byID($id)
+    {
+        $this->db->where('client_id', $id);
+        $qry=$this->db->get('quote');
+        if($qry->num_rows()>0){
+            $result=$qry->result_array();
+            return $result;
+        }
     }
 }

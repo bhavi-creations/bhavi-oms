@@ -42,10 +42,21 @@ class Client extends CI_Controller {
         $refered=$this->input->post('refered');
         $status=1;
 
+        $project_duration = $this->input->post('project_duration');
+        $digital_services = $this->input->post('digital_services');
+        $images = $this->input->post('images');
+        $description = $this->input->post('description');
+        $SEO = $this->input->post('SEO');
+        $links = $this->input->post(addslashes('links'));
+        $payment_installments = $this->input->post('payment_installments');
+
         if($this->form_validation->run() !== false)
         {
             $data=$this->Clients_model->insert_clients(array('client_name'=>$name,'client_email'=>$email, 'client_mobile'=>$mobile, 'client_address'=>$address, 'client_details'=>$details,'refered_by'=>$refered,'status'=>$status));
-            if($data==true)
+            
+            $data2=$this->Clients_model->insert_quote(array('client_id'=>$data,'project_duration'=>$project_duration,'digital_services'=>$digital_services,'images'=>$images,'description'=>$description,'SEO'=>$SEO,'links'=>$links,'payment_installments'=>$payment_installments));
+                      
+            if($data==true && $data2==true)
             {
                 $this->session->set_flashdata('success', "New Client Added Succesfully"); 
             }else{
@@ -100,10 +111,19 @@ class Client extends CI_Controller {
         $this->load->view('admin/footer');
     }
 
+    function view_quote($id)
+    {
+        $data['content']=$this->Clients_model->select_quote_byID($id);
+        $this->load->view('admin/header');
+        $this->load->view('admin/view-quote',$data);
+        $this->load->view('admin/footer');
+        
+    }
 
     function delete($id)
     {
         $data=$this->Clients_model->delete_clients($id);
+        $data2=$this->Clients_model->delete_quote($id);
         if($this->db->affected_rows() > 0)
         {
             $this->session->set_flashdata('success', "Client Deleted Succesfully"); 

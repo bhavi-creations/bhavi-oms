@@ -51,6 +51,7 @@
                   <th>Address</th>
                   <th>Details</th>
                   <th>Refered</th>
+                  <th>Quote</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -68,6 +69,9 @@
                       <td><?php echo $cnt['client_address']; ?></td>
                       <td><?php echo $cnt['client_details']; ?></td>
                       <td><?php echo $cnt['refered_by']; ?></td>
+                      <td>
+                        <a href="<?php echo base_url(); ?>view-quote/<?php echo $cnt['client_id']; ?>" class="btn btn-info">view</a>
+                      </td>
                       <td>
                         <a href="<?php echo base_url(); ?>edit-client/<?php echo $cnt['client_id']; ?>" class="btn btn-info">Edit</a>
                         <a href="<?php echo base_url(); ?>delete-client/<?php echo $cnt['client_id']; ?>" class="btn btn-danger">Delete</a>
