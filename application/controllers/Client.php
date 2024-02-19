@@ -106,6 +106,7 @@ class Client extends CI_Controller {
     function edit($id)
     {
         $data['content']=$this->Clients_model->select_clients_byID($id);
+        $data['quote']=$this->Clients_model->select_quote_byID($id);
         $this->load->view('admin/header');
         $this->load->view('admin/edit-client',$data);
         $this->load->view('admin/footer');
