@@ -374,7 +374,7 @@
       } else if (selectedDeptId == 15 || selectedDeptId == 17) {
         document.getElementById('SEOtable').style.display = 'block';
       }
-    });
+    }); 
 
     document.addEventListener("DOMContentLoaded", function() {
       function addDesignerRow() {

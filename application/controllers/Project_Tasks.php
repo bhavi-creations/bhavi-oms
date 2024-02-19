@@ -52,7 +52,7 @@ class Project_Tasks extends CI_Controller
         $this->load->view('admin/header');
         $this->load->view('admin/manage-worksheets', $data);
         $this->load->view('admin/footer');
-        return $result; 
+        // return $result; 
     }
 
 

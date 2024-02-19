@@ -29,7 +29,7 @@ class Worksheet_model extends CI_Model {
     {
         $this->db->select('wt.*,  staff_tbl.staff_name');
         $this->db->from('worksheet_tbl as wt');
-        $this->db->where('wt.department', 13);
+        $this->db->where('wt.department', 11);
         $this->db->join('staff_tbl', 'wt.staff_id = staff_tbl.id', 'left');
         $this->db->order_by('wt.assign_date', 'ASC');
         $query = $this->db->get();
@@ -51,7 +51,7 @@ class Worksheet_model extends CI_Model {
     {
         $this->db->select('wt.*,  staff_tbl.staff_name');
         $this->db->from('worksheet_tbl as wt');
-        $this->db->where('wt.department', 12);
+        $this->db->where('wt.department', 6);
         $this->db->join('staff_tbl','wt.staff_id = staff_tbl.id','left');
         $this->db->order_by('wt.assign_date' , 'ASC');
         $query = $this->db->get();
@@ -70,7 +70,7 @@ class Worksheet_model extends CI_Model {
     {
         $this->db->select('wt.*,  staff_tbl.staff_name');
         $this->db->from('worksheet_tbl as wt');
-        $this->db->where('wt.department', 10);
+        $this->db->where('wt.department', 16);
         $this->db->join('staff_tbl','wt.staff_id = staff_tbl.id','left');
         $this->db->order_by('wt.assign_date' , 'ASC');
         $query = $this->db->get();
@@ -90,7 +90,7 @@ class Worksheet_model extends CI_Model {
     {
         $this->db->select('wt.*,  staff_tbl.staff_name');
         $this->db->from('worksheet_tbl as wt');
-        $this->db->where('wt.department', 11);
+        $this->db->where('wt.department', 15);
         $this->db->join('staff_tbl','wt.staff_id = staff_tbl.id','left');
         $this->db->order_by('wt.assign_date' , 'ASC');
         $query = $this->db->get();

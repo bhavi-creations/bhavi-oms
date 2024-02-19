@@ -91,7 +91,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Staff</label>
-                      <select class="form-control selectpicker" data-live-search="true" name="assigned_to[]" >
+                      <select class="form-control selectpicker" data-live-search="true" name="assigned_to[]">
                         <option value="">Select</option>
                         <?php
                         if (isset($staff)) {
@@ -419,13 +419,13 @@
         var selectedDeptId = this.value;
         console.log("Selected Department ID:", selectedDeptId);
 
-        if (selectedDeptId == 13) {
+        if (selectedDeptId == 11) {
           document.getElementById('designerTable').style.display = 'block';
-        } else if (selectedDeptId == 12) {
+        } else if (selectedDeptId == 6) {
           document.getElementById('socialmedia').style.display = 'block';
-        } else if (selectedDeptId == 10) {
+        } else if (selectedDeptId == 16) {
           document.getElementById('websitetable').style.display = 'block';
-        } else if (selectedDeptId == 11) {
+        } else if (selectedDeptId == 15 || selectedDeptId == 17) {
           document.getElementById('SEOtable').style.display = 'block';
         }
       });
