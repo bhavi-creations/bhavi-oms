@@ -125,6 +125,7 @@
                     </thead>
                     <tbody>
                       <?php foreach ($content as $cnt) : ?>
+                        <tr>
                         <td><?php echo $cnt['assign_date'] ?></td>
                         <td>
                           <?php
@@ -137,6 +138,7 @@
                         <td><?php echo $cnt['fb_ads_socialmedia']; ?></td>
                         <!-- <td> <input name="" type="text" class="form-control"></td> -->
                         <!-- <td> <button type="button" class="removeRow mb-2" class="form-control">Remove row -</button> -->
+                        </tr>
                       <?php endforeach; ?>
                     </tbody>
                   </table>
@@ -160,12 +162,14 @@
                     </thead>
                     <tbody>
                       <?php foreach ($content as $cnt) : ?>
+                        <tr>
                         <td><?php echo $cnt['assign_date']; ?></td>
 
                         <td><?php echo $cnt['client_name']; ?></td>
                         <td><?php echo $cnt['website_type']; ?></td>
                         <td><?php echo $cnt['desc_website'] ?></td>
                         <td><?php echo $cnt['delivery_date'] ?></td>
+                        </tr>
                       <?php endforeach; ?>
                     </tbody>
                   </table>
@@ -188,11 +192,13 @@
                     </thead>
                     <tbody>
                       <?php foreach ($content as $cnt) : ?>
+                        <tr>
                         <td><?php echo $cnt['assign_date']; ?></td>
                         <td><?php echo $cnt['client_name']; ?></td>
                         <td><?php echo $cnt['p_kw_SEO']; ?></textarea></td>
                         <td><?php echo $cnt['target_kw_SEO']; ?></td>
                         <td><?php echo $cnt['gmb_SEO'] ?></td>
+                        </tr>
                       <?php endforeach; ?>
                     </tbody>
                   </table>
