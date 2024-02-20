@@ -60,6 +60,13 @@ class Clients_model extends CI_Model {
         $this->db->affected_rows();
     }
 
+    function update_quote($data2,$id)
+    {
+        $this->db->where('client_id',$id);
+        $this->db->update('quote',$data2);
+        return $this->db->affected_rows();
+    }
+
     function select_quote_byID($id)
     {
         $this->db->where('client_id', $id);

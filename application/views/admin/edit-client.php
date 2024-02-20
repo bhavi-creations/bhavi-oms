@@ -97,99 +97,94 @@
                         <textarea class="form-control" name="details" id="details" cols="30" rows="5"><?php echo $cnt['client_details']; ?></textarea>
                       </div>
                     </div>
-                    <div id="quotation_table" style="display: block;">
-
-                      <div class="box-body">
-                        <div class="row">
-                          <div class="mt-4">
-                            <h4>Quotation</h4>
-                          </div>
-
-                          <!-- <button type="button" class="btn btn-danger pull-right" onclick="closeQuotationTable()">Close</button> -->
-                        </div>
-                        <?php
-                        if (isset($quote)) :
-                          foreach ($quote as $qt) :
-                        ?>
-                            <div class="row" style="padding-top: 20px;">
-                              <div class="col-md-6">
-                                <label for="Project ">Project Duraion</label>
-                                <input type="text" class="form-control" name="project_duration">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="Project ">Digital Services</label>
-                                <textarea name="digital_services" id="" cols="30" rows="2" class="form-control"></textarea>
-                              </div>
-                            </div>
-                            <div class="row " style="padding-top: 20px;">
-                              <div class="col-md-6 ">
-                                <label for="images ">Images</label>
-                                <select name="images" id="" class="form-control">
-                                  <option value="not-selected">Select</option>
-                                  <option value="monthly">monthly</option>
-                                  <option value="yearly">yearly</option>
-                                  <option value="day">Day</option>
-                                </select>
-                              </div>
-                              <div class="col-md-6">
-                                <label for="Project ">Description</label>
-                                <textarea name="description" id="" cols="30" rows="2" class="form-control"></textarea>
-                              </div>
-                            </div>
-                            <div class="row" style="padding-top: 20px;">
-                              <div class="col-md-6 ">
-                                <label>
-                                  <input type="checkbox" id="toggleCheckbox"> SEO
-                                </label>
-
-                              </div>
-                              <div class="form-group col-md-6" id="textareaContainer" style="display: none;">
-                                <label for="textarea">Key word and Description</label>
-                                <textarea name="SEO" class="form-control" id="textarea" rows="3"></textarea>
-                              </div>
-                            </div>
-
-                            <div class="row" style="padding-top: 20px;">
-                              <div class="col-md-6 ">
-                                <label>Links</label>
-                                <textarea name="links" id="" cols="30" rows="3" class="form-control"></textarea>
-                              </div>
-                              <div class="col-md-6 ">
-                                <label>
-                                  <input type="checkbox" id="payCheckbox"> Payments(installments)
-                                </label>
-                                <div class="form-group" id="textareapayments" style="display: none;">
-                                  <select name="payment_installments" id="" class="form-control">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                  </select>
-                                </div>
-                              </div>
-                          <?php
-                          endforeach;
-                        endif;
-                          ?>
-                            </div>
+                    <div id="quotation_table" class="mt-4">
+                      <div class="mt-4">
+                        <h4>Quotation</h4>
                       </div>
                     </div>
+                    <?php
+                    if (isset($quote)) :
+                      foreach ($quote as $qt) :
+                    ?>
+                        <div class="row" style="padding-top: 20px;">
+                          <div class="col-md-6">
+                            <label for="Project ">Project Duraion</label>
+                            <input type="text" class="form-control" name="project_duration" value="<?php echo $qt['project_duration'] ?>">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="Project ">Digital Services</label>
+                            <textarea name="digital_services" id="" cols="30" rows="2" class="form-control"><?php echo $qt['digital_services']; ?></textarea>
+                          </div>
+                        </div>
+                        <div class="row " style="padding-top: 20px;">
+                          <div class="col-md-6 ">
+                            <label for="images ">Images</label>
+                            <select name="images" id="" class="form-control">
+                              <option value="not-selected">Select</option>
+                              <option value="monthly" <?php echo ($qt['images'] == 'monthly') ? 'selected' : ''; ?>>monthly</option>
+                              <option value="yearly" <?php echo ($qt['images'] == 'yearly') ? 'selected' : ''; ?>>yearly</option>
+                              <option value="day" <?php echo ($qt['images'] == 'day') ? 'selected' : ''; ?>>Day</option>
+                            </select>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="Project ">Description</label>
+                            <textarea name="description" id="" cols="30" rows="2" class="form-control"><?php echo $qt['description']; ?></textarea>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-top: 20px;">
+                          <div class="col-md-6 ">
+                            <label>
+                              SEO
+                            </label>
 
+                          </div>
+                          <div class="form-group col-md-6" id="textareaContainer">
+                            <label for="textarea">Key word and Description</label>
+                            <textarea name="SEO" class="form-control" id="textarea" rows="3"><?php echo $qt['SEO'] ?></textarea>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-top: 20px;">
+                          <div class="col-md-6 ">
+                            <label>Links</label>
+                            <textarea name="links" id="" cols="30" rows="3" class="form-control"><?php echo $qt['links']; ?></textarea>
+                          </div>
+                          <div class="col-md-6 ">
+                            <label>
+                              Payments(installments)
+                            </label>
+                            <div class="form-group" id="textareapayments">
+                              <select name="payment_installments" id="" class="form-control">
+                                <option value="0" <?php echo ($qt['payment_installments'] == 0) ? 'selected' : ''; ?>>0</option>
+                                <option value="1" <?php echo ($qt['payment_installments'] == 1) ? 'selected' : ''; ?>>1</option>
+                                <option value="2" <?php echo ($qt['payment_installments'] == 2) ? 'selected' : ''; ?>>2</option>
+                                <option value="3" <?php echo ($qt['payment_installments'] == 3) ? 'selected' : ''; ?>>3</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                    <?php
+                      endforeach;
+                    endif;
+                    ?>
                   </div>
-                  <!-- /.box-body -->
-                  <div class="box-footer">
-                    <button type="submit" class="btn btn-info pull-right">Update</button>
-                  </div>
-                </form>
-              <?php endforeach; ?>
-            <?php endif; ?>
           </div>
-          <!-- /.box -->
         </div>
-        <!--/.col (left) -->
+
       </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="submit" class="btn btn-info pull-right">Update</button>
+      </div>
+      </form>
+    <?php endforeach; ?>
+  <?php endif; ?>
+  </div>
+  <!-- /.box -->
+  </div>
+  <!--/.col (left) -->
+  </div>
+  <!-- /.row -->
+  </section>
+  <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

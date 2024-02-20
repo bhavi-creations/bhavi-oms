@@ -315,7 +315,7 @@
                                       ?>
                                     </select>
                                   </td>
-                                  <td>
+                                  <td>  
                                     <select name="website_type[]" class="form-control">
                                       <option value="not-selected">Select</option>
                                       <option value="Static" <?php echo ($website_row['website_type'] == 'Static') ? 'selected' : ''; ?>>Static</option>
