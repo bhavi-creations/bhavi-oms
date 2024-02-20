@@ -12,7 +12,7 @@ class Staff_model extends CI_Model {
 
     function select_staff()
     {
-        $this->db->order_by('staff_tbl.id','DESC');
+        $this->db->order_by('staff_tbl.id','ASC');
         $this->db->select("staff_tbl.*,department_tbl.department_name");
         $this->db->from("staff_tbl");
         $this->db->join("department_tbl",'department_tbl.id=staff_tbl.department_id');
