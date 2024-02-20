@@ -48,13 +48,14 @@ class Client extends CI_Controller {
         $description = $this->input->post('description');
         $SEO = $this->input->post('SEO');
         $links = $this->input->post(addslashes('links'));
+        $filteredLink = filter_var($links, FILTER_SANITIZE_URL);
         $payment_installments = $this->input->post('payment_installments');
 
         if($this->form_validation->run() !== false)
         {
             $data=$this->Clients_model->insert_clients(array('client_name'=>$name,'client_email'=>$email, 'client_mobile'=>$mobile, 'client_address'=>$address, 'client_details'=>$details,'refered_by'=>$refered,'status'=>$status));
             
-            $data2=$this->Clients_model->insert_quote(array('client_id'=>$data,'project_duration'=>$project_duration,'digital_services'=>$digital_services,'images'=>$images,'description'=>$description,'SEO'=>$SEO,'links'=>$links,'payment_installments'=>$payment_installments));
+            $data2=$this->Clients_model->insert_quote(array('client_id'=>$data,'project_duration'=>$project_duration,'digital_services'=>$digital_services,'images'=>$images,'description'=>$description,'SEO'=>$SEO,'links'=>$filteredLink,'payment_installments'=>$payment_installments));
                       
             if($data==true && $data2==true)
             {
@@ -93,13 +94,14 @@ class Client extends CI_Controller {
         $description = $this->input->post('description');
         $SEO = $this->input->post('SEO');
         $links = $this->input->post(addslashes('links'));
+        $filteredLink = filter_var($links, FILTER_SANITIZE_URL);
         $payment_installments = $this->input->post('payment_installments');
 
 
         if($this->form_validation->run() !== false)
         {
             $data=$this->Clients_model->update_clients(array('client_name'=>$name,'client_email'=>$email, 'client_mobile'=>$mobile, 'client_address'=>$address, 'client_details'=>$details,'refered_by'=>$refered,'status'=>$status,'updated_on'=>$updated),$id);
-            $data2=$this->Clients_model->update_quote(array('project_duration'=>$project_duration,'digital_services'=>$digital_services,'images'=>$images,'description'=>$description,'SEO'=>$SEO,'links'=>$links,'payment_installments'=>$payment_installments),$id);
+            $data2=$this->Clients_model->update_quote(array('project_duration'=>$project_duration,'digital_services'=>$digital_services,'images'=>$images,'description'=>$description,'SEO'=>$SEO,'links'=>$filteredLink,'payment_installments'=>$payment_installments),$id);
             if($this->db->affected_rows() > 0)
             {
                 $this->session->set_flashdata('success', "Client Updated Succesfully"); 

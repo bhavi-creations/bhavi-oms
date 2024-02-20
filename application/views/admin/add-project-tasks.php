@@ -200,7 +200,7 @@
                             </select>
                           </td>
                           <td><textarea name="desc_designer[]" id="" cols="30" rows="2"></textarea></td>
-                          <td><input type="link" name="ref_link_designer[]"></td>
+                          <td><textarea name="ref_link_designer[]" id="" cols="30" rows="2"></textarea></td>
                           <td><textarea name="content_designer[]" id="" cols="30" rows="2"></textarea></td>
                           <td><input name="ref_file_designer_0[]" type="file" multiple></td>
                           <td> <button type="button" class="removeRow mb-2">Remove row -</button>
