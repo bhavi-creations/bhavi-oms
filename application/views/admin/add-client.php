@@ -118,14 +118,43 @@
                         <textarea name="digital_services" id="" cols="30" rows="2" class="form-control"></textarea>
                       </div>
                     </div>
+                    <div class="mt-4">
+                        <h4><b>Services</b></h4>
+                      </div>
                     <div class="row " style="padding-top: 20px;">
                       <div class="col-md-6 ">
-                        <label for="images ">Images</label>
+                        <label for="images ">Creatives</label>
                         <select name="images" id="" class="form-control">
                           <option value="not-selected">Select</option>
                           <option value="monthly">monthly</option>
                           <option value="yearly">yearly</option>
                           <option value="day">Day</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="Project ">Description</label>
+                        <textarea name="description" id="" cols="30" rows="2" class="form-control"></textarea>
+                      </div>
+                    </div>
+                    <div class="row " style="padding-top: 20px;">
+                      <div class="col-md-6">
+                        <label for="images ">Designing</label>
+                      <textarea name="designing" id="" cols="30" rows="2" class="form-control"></textarea>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="Project ">Description</label>
+                        <textarea name="description" id="" cols="30" rows="2" class="form-control"></textarea>
+                      </div>
+                    </div>
+                    <div class="row " style="padding-top: 20px;">
+                      <div class="col-md-6">
+                        <label for="images ">Website</label>
+                        <select name="images" id="" class="form-control">
+                          <option value="not-selected">Select</option>
+                          <option value="Static">Static</option>
+                          <option value="Dynamic">Dynamic</option>
+                          <option value="Single_Page">Single Page</option>
+                          <option value="Other">Other</option>
                         </select>
                       </div>
                       <div class="col-md-6">
