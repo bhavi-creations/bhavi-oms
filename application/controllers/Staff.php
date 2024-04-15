@@ -498,6 +498,7 @@ class Staff extends CI_Controller {
         $data['department']=$this->Department_model->select_departments();
         $data['country']=$this->Home_model->select_countries();
         $data['content']=$this->Staff_model->select_staff_byID($id);
+        $data['status']=$this->Staff_model->select_login_data($id);
         $this->load->view('admin/header');
         $this->load->view('admin/edit-staff',$data);
         $this->load->view('admin/footer');

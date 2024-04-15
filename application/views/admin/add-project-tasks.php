@@ -205,7 +205,7 @@
                         <td><textarea name="ref_link_designer[]" id="" cols="30" rows="2"></textarea></td>
                         <td><textarea name="content_designer[]" id="" cols="30" rows="2"></textarea></td>
                         <td><input name="ref_file_designer_0[]" type="file" multiple></td>
-                        <td> <button type="button" class="removeRow mb-2">Remove row -</button>
+                        <!-- <td> <button type="button" class="removeRow mb-2">Remove row -</button> -->
                         </td>
                       </tr>
                     </tbody>
@@ -217,7 +217,7 @@
             <!-- social media table -->
             <div id="socialmedia" style="display: none;">
               <div class="box-body">
-                <button type="button" class="addSocialmediaRow mb-2">Add row +</button>
+                <button type="button" class="addSocialmediaRow btn btn-primary mb-2">Add row +</button>
                 <div class="table-responsive">
                   <table id="example1_socialmedia" class="table table-bordered table-striped">
                     <thead>
@@ -253,7 +253,7 @@
                       <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><input name="g_ads_socialmedia[]" type="text" class="form-control"></td>
                       <td> <input name="fb_ads_socialmedia[]" type="text" class="form-control"></td>
-                      <td> <button type="button" class="removeRow mb-2" class="form-control">Remove row -</button>
+                      <!-- <td> <button type="button" class="removeRow mb-2" class="form-control">Remove row -</button> -->
                     </tbody>
                   </table>
                 </div>
@@ -263,7 +263,7 @@
             <!-- website table -->
             <div id="websitetable" style="display: none;">
               <div class="box-body">
-                <button type="button" class="addWebsiteRow mb-2">Add row +</button>
+                <button type="button" class="addWebsiteRow btn btn-primary mb-2">Add row +</button>
                 <div class="table-responsive">
                   <table id="example1_website" class="table table-bordered table-striped">
                     <thead>
@@ -296,7 +296,7 @@
                         </select></td>
                       <td><textarea name="desc_website[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><input name="delivery_date[]" type="date" class="form-control"></td>
-                      <td> <button type="button" class="removeRow mb-2">Remove row -</button>
+                      <!-- <td> <button type="button" class="removeRow mb-2">Remove row -</button> -->
 
                     </tbody>
                   </table>
@@ -307,7 +307,7 @@
             <!-- socail media table -->
             <div id="SEOtable" style="display: none;">
               <div class="box-body">
-                <button type="button" class="addSEORow mb-2">Add row +</button>
+                <button type="button" class="addSEORow btn btn-primary mb-2">Add row +</button>
                 <div class="table-responsive">
                   <table id="example1_SEO" class="table table-bordered table-striped">
                     <thead>
@@ -334,7 +334,7 @@
                       <td><textarea name="p_kw_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><textarea name="target_kw_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><textarea name="gmb_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
-                      <td> <button type="button" class="removeRow mb-2">Remove row -</button>
+                      <!-- <td> <button type="button" class="removeRow mb-2">Remove row -</button> -->
                     </tbody>
                   </table>
                 </div>
@@ -476,7 +476,7 @@
         <td><input type="text" name="ref_link_designer[]" class="form-control"></td>
         <td><textarea name="content_designer[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
         <td><input name="ref_file_designer_` + count + `[]" type="file" class="form-control" multiple></td>
-        <td> <button type="button" class="removeRow">Remove row -</button></td>
+        <td> <button type="button" class="removeRow btn btn-danger"><b>X</b></button></td>
       `;
 
         tableBody.appendChild(newRow);
@@ -513,7 +513,7 @@
                       <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><input name="g_ads_socialmedia[]" type="text" class="form-control"></td>
                       <td> <input name="fb_ads_socialmedia[]" type="text" class="form-control"></td>
-                      <td> <button type="button" class="removeRow">Remove row -</button></td>
+                      <td> <button type="button" class="removeRow btn btn-danger"><b>X</b></button></td>
       `;
 
         tableBody.appendChild(newRow);
@@ -549,7 +549,7 @@
                       <td><textarea name="desc_socialmedia[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><input name="g_ads_socialmedia[]" type="text" class="form-control"></td>
                       <td> <input name="fb_ads_socialmedia[]" type="text" class="form-control"></td>
-                      <td> <button type="button" class="removeRow">Remove row -</button></td>
+                      <td> <button type="button" class="removeRow btn btn-danger"><b>X</b></button></td>
       `;
 
         tableBody.appendChild(newRow);
@@ -583,7 +583,7 @@
                         </select></td>
                         <td><textarea name="desc_website[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><input type="date" name="delivery_date[]" class="form-control"></td>
-                      <td> <button type="button" class="removeRow">Remove row -</button></td>
+                      <td> <button type="button" class="removeRow btn btn-danger"><b>X</b></button></td>
       `;
 
         tableBody.appendChild(newRow);
@@ -611,7 +611,7 @@
                       <td><textarea name="p_kw_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><textarea name="target_kw_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><textarea name="gmb_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
-                      <td> <button type="button" class="removeRow">Remove row -</button></td>
+                      <td> <button type="button" class="removeRow btn btn-danger"><b>X</b></button></td>
       `;
 
         tableBody.appendChild(newRow);
