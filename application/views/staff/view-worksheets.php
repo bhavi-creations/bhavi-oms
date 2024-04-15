@@ -88,7 +88,7 @@
                             <td>
                               <?php
                               foreach ($imagePaths as $imagePath) {
-                                $imageUrl = base_url( $imagePath);
+                                $imageUrl = base_url($imagePath);
                               ?>
                                 <a href="<?php echo $imageUrl; ?>" download>Download Image</a><br>
                               <?php
@@ -126,18 +126,18 @@
                     <tbody>
                       <?php foreach ($content as $cnt) : ?>
                         <tr>
-                        <td><?php echo $cnt['assign_date'] ?></td>
-                        <td>
-                          <?php
-                          echo $cnt['client_name'];
-                          ?>
-                        </td>
-                        <td><?php echo $cnt['work_type_socialmedia']; ?></td>
-                        <td><?php echo $cnt['desc_socialmedia']; ?></td>
-                        <td><?php echo $cnt['g_ads_socialmedia']; ?></td>
-                        <td><?php echo $cnt['fb_ads_socialmedia']; ?></td>
-                        <!-- <td> <input name="" type="text" class="form-control"></td> -->
-                        <!-- <td> <button type="button" class="removeRow mb-2" class="form-control">Remove row -</button> -->
+                          <td><?php echo $cnt['assign_date'] ?></td>
+                          <td>
+                            <?php
+                            echo $cnt['client_name'];
+                            ?>
+                          </td>
+                          <td><?php echo $cnt['work_type_socialmedia']; ?></td>
+                          <td><?php echo $cnt['desc_socialmedia']; ?></td>
+                          <td><?php echo $cnt['g_ads_socialmedia']; ?></td>
+                          <td><?php echo $cnt['fb_ads_socialmedia']; ?></td>
+                          <!-- <td> <input name="" type="text" class="form-control"></td> -->
+                          <!-- <td> <button type="button" class="removeRow mb-2" class="form-control">Remove row -</button> -->
                         </tr>
                       <?php endforeach; ?>
                     </tbody>
@@ -163,12 +163,12 @@
                     <tbody>
                       <?php foreach ($content as $cnt) : ?>
                         <tr>
-                        <td><?php echo $cnt['assign_date']; ?></td>
+                          <td><?php echo $cnt['assign_date']; ?></td>
 
-                        <td><?php echo $cnt['client_name']; ?></td>
-                        <td><?php echo $cnt['website_type']; ?></td>
-                        <td><?php echo $cnt['desc_website'] ?></td>
-                        <td><?php echo $cnt['delivery_date'] ?></td>
+                          <td><?php echo $cnt['client_name']; ?></td>
+                          <td><?php echo $cnt['website_type']; ?></td>
+                          <td><?php echo $cnt['desc_website'] ?></td>
+                          <td><?php echo $cnt['delivery_date'] ?></td>
                         </tr>
                       <?php endforeach; ?>
                     </tbody>
@@ -176,6 +176,7 @@
                 </div>
               </div>
             </div>
+            <!-- seo table -->
             <div id="SEOtable" style="display: none;">
               <div class="box-body">
                 <!-- <button type="button" class="addSEORow mb-2">Add row +</button> -->
@@ -193,11 +194,11 @@
                     <tbody>
                       <?php foreach ($content as $cnt) : ?>
                         <tr>
-                        <td><?php echo $cnt['assign_date']; ?></td>
-                        <td><?php echo $cnt['client_name']; ?></td>
-                        <td><?php echo $cnt['p_kw_SEO']; ?></textarea></td>
-                        <td><?php echo $cnt['target_kw_SEO']; ?></td>
-                        <td><?php echo $cnt['gmb_SEO'] ?></td>
+                          <td><?php echo $cnt['assign_date']; ?></td>
+                          <td><?php echo $cnt['client_name']; ?></td>
+                          <td><?php echo $cnt['p_kw_SEO']; ?></textarea></td>
+                          <td><?php echo $cnt['target_kw_SEO']; ?></td>
+                          <td><?php echo $cnt['gmb_SEO'] ?></td>
                         </tr>
                       <?php endforeach; ?>
                     </tbody>
@@ -205,7 +206,35 @@
                 </div>
               </div>
             </div>
-
+            <!-- Contenttable -->
+            <div id="ContentTable" style="display: none;">
+              <div class="box-body">
+                <!-- <button type="button" class="addSEORow mb-2">Add row +</button> -->
+                <div class="table-responsive">
+                  <table id="example1_SEO" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Client Name</th>
+                        <th>WorkType</th>
+                        <th>Description</th>
+                        <!-- <th>Google My business</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($content as $cnt) : ?>
+                        <tr>
+                          <td><?php echo $cnt['assign_date']; ?></td>
+                          <td><?php echo $cnt['client_name']; ?></td>
+                          <td><?php echo $cnt['work_type_content']; ?></td>
+                          <td><?php echo $cnt['desc_content']; ?></textarea></td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- /.box-body -->
 
@@ -228,6 +257,7 @@
       document.getElementById('socialmedia').style.display = 'none';
       document.getElementById('websitetable').style.display = 'none';
       document.getElementById('SEOtable').style.display = 'none';
+      document.getElementById('ContentTable').style.display = 'none';
 
       var selectedDeptId = this.value;
       console.log("Selected Department ID:", selectedDeptId);
@@ -236,10 +266,13 @@
         document.getElementById('designerTable').style.display = 'block';
       } else if (selectedDeptId == 6) {
         document.getElementById('socialmedia').style.display = 'block';
-      } else if (selectedDeptId == 16) {
+      } else if (selectedDeptId == 18) {
         document.getElementById('websitetable').style.display = 'block';
       } else if (selectedDeptId == 15 || selectedDeptId == 17) {
         document.getElementById('SEOtable').style.display = 'block';
+      }
+      else if (selectedDeptId == 19) {
+        document.getElementById('ContentTable').style.display = 'block';
       }
     });
     $('#department').trigger('change');

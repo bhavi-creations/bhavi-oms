@@ -113,6 +113,10 @@ class Project_Tasks extends CI_Controller
         $this->form_validation->set_rules('target_kw_SEO[]', 'Target keyword SEO', '');
         $this->form_validation->set_rules('gmb_SEO[]', 'Google My Business SEO', '');
 
+        // Content table validations
+        $this->form_validation->set_rules('work_type_content[]' , 'Work type of Content Writer', '');
+        $this->form_validation->set_rules('desc_content{}', 'Description about work', '');
+
 
 
         if ($this->form_validation->run() !== false) {
@@ -173,6 +177,13 @@ class Project_Tasks extends CI_Controller
             $assigned_to = $this->input->post('assigned_to');
             $department = $this->input->post('department');
 
+            // getting data from content table
+            $assign_date_content = $this->input->post('assign_date_content');
+            $client_name_content = $this->input->post('client_name_content');
+            $work_type_content = $this->input->post('work_type_content');
+            $desc_content = $this->input->post('desc_content');
+
+
 
             $data = $this->Project_Tasks_model->insert_project_tasks($arr);
 
@@ -223,7 +234,7 @@ class Project_Tasks extends CI_Controller
                     );
                     $file_paths = array();
                 }
-            } else if ($department['0'] == 6) {
+            } else if ($department['0'] == 6 ) {
                 $loop_data = $assign_date_socialmedia;
                 $data2 = array();
                 $assigned_to_value = $assigned_to[0];
@@ -241,7 +252,7 @@ class Project_Tasks extends CI_Controller
                         'fb_ads_socialmedia' => $fb_ads_socialmedia[$i],
                     );
                 }
-            } else if ($department['0'] == 16) {
+            } else if ($department['0'] == 18) {
                 $loop_data = $assign_date_web;
                 $assigned_to_value = $assigned_to[0];
                 $department_value = $department[0];
@@ -271,6 +282,21 @@ class Project_Tasks extends CI_Controller
                         'p_kw_SEO' => $p_kw_SEO[$i],
                         'target_kw_SEO' => $target_kw_SEO[$i],
                         'gmb_SEO' => $gmb_SEO[$i],
+                    );
+                }
+            }else if ($department['0'] == 19 ) {
+                $loop_data = $assign_date_content;
+                $assigned_to_value = $assigned_to[0];
+                $department_value = $department[0];
+                for ($i = 0; $i < count($loop_data); $i++) {
+                    $data2[] = array(
+                        'staff_id' => $assigned_to_value,
+                        'department' => $department_value,
+                        'project_task_id' => $data,
+                        'assign_date' => $assign_date_content[$i],
+                        'client_name' => $client_name_content[$i],
+                        'work_type_content' => $work_type_content[$i],
+                        'desc_content' => $desc_content[$i],
                     );
                 }
             }

@@ -342,7 +342,7 @@
             </div>
 
             <!-- content writer table -->
-            <div id="Contentwriter" style="display: block;">
+            <div id="Contentwriter" style="display: none;">
               <div class="box-body">
                 <button type="button" class="addContentRow btn btn-primary mb-2"><b>Add row +</b></button>
                 <div class="table-responsive">
@@ -418,19 +418,20 @@
       document.getElementById('socialmedia').style.display = 'none';
       document.getElementById('websitetable').style.display = 'none';
       document.getElementById('SEOtable').style.display = 'none';
+      document.getElementById('Contentwriter').style.display = 'none';
 
       var selectedDeptId = this.value;
       console.log("Selected Department ID:", selectedDeptId);
 
-      if (selectedDeptId == 11 || selectedDeptId == 13) {
+      if (selectedDeptId == 11) {
         document.getElementById('designerTable').style.display = 'block';
-      } else if (selectedDeptId == 6 || selectedDeptId == 12) {
+      } else if (selectedDeptId == 6 ) {
         document.getElementById('socialmedia').style.display = 'block';
-      } else if (selectedDeptId == 16 || selectedDeptId == 10) {
+      } else if (selectedDeptId == 18 ) {
         document.getElementById('websitetable').style.display = 'block';
-      } else if (selectedDeptId == 15 || selectedDeptId == 17) {
+      } else if (selectedDeptId == 15 || selectedDeptId == 17 ) {
         document.getElementById('SEOtable').style.display = 'block';
-      } else if (selectedDeptId == 14 || selectedDeptId == 17) {
+      } else if (selectedDeptId == 19 ) {
         document.getElementById('Contentwriter').style.display = 'block';
       }
     });
