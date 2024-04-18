@@ -54,16 +54,39 @@
 
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Edit Status</h3>
+              <h3 class="box-title">Change Status</h3>
             </div>
             <?php if (isset($status)) : ?>
               <?php foreach ($status as $st) : ?>
-                <?php echo form_open_multipart(''); ?>
+                <?php echo form_open_multipart('Staff/updatestatus'); ?>
                 <div class="box-body">
-                  <div class="col-md-6">
-                    <label>Status</label>
-                    <p> <?php echo $st['status'] ?></p>
+                  <div class="row">
+                    <!-- <div class="col-md-6">
+                      <label>Status</label>
+
+                    </div> -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Active / Inactive</label>
+                        <select class="form-control selectpicker" data-live-search="true" name="staff-status">
+                          <option value="">Select</option>
+                          <?php
+                          if ($st['status'] == '0') {
+                            print '<option value="0" selected>Inactive</option>
+                                    <option value="1">Active</option>';
+                          } elseif ($st['status'] == '1') { // Change from else to elseif
+                            print '<option value="0">Inactive</option>
+                                    <option value="1" selected>Active</option>';
+                          }
+                          ?>
+                        </select>
+                        <input type="hidden" name="status_id" value="<?php echo $st['id'] ?>">
+                      </div>
+                    </div>
                   </div>
+                </div>
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-info pull-right">Update</button>
                 </div>
                 </form>
               <?php endforeach; ?>

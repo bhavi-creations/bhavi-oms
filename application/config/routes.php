@@ -85,6 +85,7 @@ $route['delete-staff/(:num)'] = 'staff/delete/$1';
 $route['edit-staff/(:num)'] = 'staff/edit/$1';
 $route['update-staff'] = 'staff/update';
 $route['delete-staff-file/(:num)/(:any)'] = 'staff/deleteFile/$1/$2';
+$route['update-status'] = 'staff/updatestatus';
 
 //holidays routes
 $route['add-holidays'] = 'holidays';

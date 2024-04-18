@@ -78,7 +78,7 @@
                           <td><?php echo $cnt['client_name']; ?></td>
                           <td><?php echo $cnt['work_type_designer']; ?></td>
                           <td><?php echo $cnt['desc_designer']; ?></td>
-                          <td><?php echo $cnt['ref_link_designer']; ?></td>
+                          <td><a href="<?php echo $cnt['ref_link_designer']; ?>"><?php echo $cnt['ref_link_designer']; ?></a></td>
                           <td><?php echo $cnt['content_designer']; ?></td>
                           <?php
                           $imagePaths = unserialize($cnt['ref_file_designer']);

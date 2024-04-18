@@ -22,23 +22,23 @@
                   <h4><i class="icon fa fa-check"></i> Failed!</h4>', '</div>
           </div>'); ?>
 
-        <?php if($this->session->flashdata('success')): ?>
+        <?php if ($this->session->flashdata('success')) : ?>
           <div class="col-md-12">
             <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h4><i class="icon fa fa-check"></i> Success!</h4>
-                  <?php echo $this->session->flashdata('success'); ?>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4><i class="icon fa fa-check"></i> Success!</h4>
+              <?php echo $this->session->flashdata('success'); ?>
             </div>
           </div>
-        <?php elseif($this->session->flashdata('error')):?>
-        <div class="col-md-12">
+        <?php elseif ($this->session->flashdata('error')) : ?>
+          <div class="col-md-12">
             <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h4><i class="icon fa fa-check"></i> Failed!</h4>
-                  <?php echo $this->session->flashdata('error'); ?>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4><i class="icon fa fa-check"></i> Failed!</h4>
+              <?php echo $this->session->flashdata('error'); ?>
             </div>
           </div>
-        <?php endif;?>
+        <?php endif; ?>
 
         <!-- column -->
         <div class="col-md-12">
@@ -49,55 +49,85 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <?php echo form_open_multipart('Projects/insert');?>
-              <div class="box-body">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Project Name</label>
-                        <input type="text" name="project_name" class="form-control" placeholder="Project Name">
-                    </div>
+            <?php echo form_open_multipart('Projects/insert'); ?>
+            <div class="box-body">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Project Name</label>
+                  <input type="text" name="project_name" class="form-control" placeholder="Project Name">
                 </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Project Link</label>
-                        <input type="text" name="project_link" class="form-control" placeholder="Project Link">
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Project Details</label>
-                        <textarea type="text" name="project_details" class="form-control" rows="5" placeholder="Project Details"></textarea>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Project Files</label>
-                        <input type="file" name="project_files[]" class="form-control" placeholder="Project Files" multiple>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label>Project Date</label>
-                        <input type="date" name="project_date" class="form-control" value="<?php echo date('Y-m-d')?>" placeholder="DATE">
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label>Project Status</label><br>
-                        <input type="checkbox" name="project_status" class="form-control" data-toggle="toggle" value="1" checked="checked" placeholder="Project Status">
-                    </div>
-                </div>
-                
               </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-right">Submit</button>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Project FB Link</label>
+                  <input type="text" name="project_fb_link" class="form-control" placeholder="Facebook">
+                </div>
               </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Project Insta Link</label>
+                  <input type="text" name="project_insta_link" class="form-control" placeholder="Instagram">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Project Pintrest Link</label>
+                  <input type="text" name="project_pint_link" class="form-control" placeholder="Pintrest">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Project Youtube Link</label>
+                  <input type="text" name="project_youtube_link" class="form-control" placeholder="Youtube">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Project Website Link</label>
+                  <input type="text" name="project_web_link" class="form-control" placeholder="Website">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Project Details</label>
+                  <textarea type="text" name="project_details" class="form-control" rows="5" placeholder="Project Details"></textarea>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Project Files</label>
+                  <input type="file" name="project_files[]" class="form-control" placeholder="Project Files" multiple>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Project Starting Date</label>
+                  <input type="date" name="project_date" class="form-control" value="<?php echo date('Y-m-d') ?>" placeholder="DATE">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Project Ending Date</label>
+                  <input type="date" name="project_end_date" class="form-control" placeholder="DATE">
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Project Status</label><br>
+                  <input type="checkbox" name="project_status" class="form-control" data-toggle="toggle" value="1" checked="checked" placeholder="Project Status">
+                </div>
+              </div>
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <button type="submit" class="btn btn-info pull-right">Submit</button>
+            </div>
             </form>
           </div>
           <!-- /.box -->

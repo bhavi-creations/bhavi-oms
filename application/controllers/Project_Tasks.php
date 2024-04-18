@@ -213,7 +213,6 @@ class Project_Tasks extends CI_Controller
 
                                 $file_path = "assets/designer_imgs/" . $file_name;
                                 move_uploaded_file($file_tmp, $file_path);
-
                                 // Store the file path in the array
                                 $file_paths[] = $file_path;
                             }

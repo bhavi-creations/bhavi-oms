@@ -147,6 +147,25 @@ class Staff extends CI_Controller {
 
         } 
     }
+    public function updatestatus()
+    {
+        $this->load->helper('form');
+        $status=$this->input->post('staff-status');
+        $id=$this->input->post('status_id');
+        // print_r($id);
+        $data = [
+            'status'=>$status,
+        ]; 
+        $this->Staff_model->update_status($id,$data);
+
+        if($this->db->affected_rows() > 0)
+            {
+                $this->session->set_flashdata('success', "Status Updated Succesfully"); 
+            }else{
+                $this->session->set_flashdata('error', "Sorry, Status Update Failed.");
+            }
+            redirect(base_url()."edit-staff/{$id}");
+    }
 
     public function update()
     {
@@ -503,6 +522,8 @@ class Staff extends CI_Controller {
         $this->load->view('admin/edit-staff',$data);
         $this->load->view('admin/footer');
     }
+
+
 
 
     function delete($id)

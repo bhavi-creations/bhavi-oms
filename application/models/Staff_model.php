@@ -95,6 +95,13 @@ class Staff_model extends CI_Model
         $this->db->update('staff_tbl', $data);
         $this->db->affected_rows();
     }
+    
+    function update_status($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('login_tbl' , $data);
+        $this->db->affected_rows();
+    }
 
     function check_current_password($current_password, $id)
     {
