@@ -72,6 +72,7 @@
                             'userid' => $check_login[0]['id'],
                             'loginid' => $check_login[0]['login_id'],
                             'staff_data' => $check_login[0]['staff_data'],
+                            'dept_id' => $check_login[0]['dept_id'],
                         );
                         $this->session->set_userdata($data);
                         redirect('/');

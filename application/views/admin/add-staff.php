@@ -53,14 +53,14 @@
               <div class="box-body">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Full Name</label>
+                    <label>Full Name <span style="color: red;">*</span> </label>
                     <input type="text" name="txtname" class="form-control" placeholder="Full Name">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Department</label>
+                    <label>Department <span style="color: red;">*</span></label>
                     <select class="form-control selectpicker" data-live-search="true" name="slcdepartment">
                       <option value="">Select</option>
                       <?php
@@ -78,7 +78,7 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Gender</label>
+                    <label>Gender <span style="color: red;">*</span></label>
                     <select class="form-control selectpicker" data-live-search="true" name="slcgender">
                       <option value="">Select</option>
                       <option value="Male">Male</option>
@@ -90,14 +90,14 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Email</label>
+                    <label>Email <span style="color: red;">*</span></label>
                     <input type="text" name="txtemail" class="form-control" placeholder="Email">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Mobile</label>
+                    <label>Mobile <span style="color: red;">*</span></label>
                     <input type="text" name="txtmobile" class="form-control" placeholder="Mobile">
                   </div>
                 </div>
@@ -111,21 +111,21 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Date of Birth</label>
+                    <label>Date of Birth <span style="color: red;">*</span></label>
                     <input type="date" name="txtdob" class="form-control" placeholder="DOB">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Date of Joining</label>
+                    <label>Date of Joining <span style="color: red;">*</span></label>
                     <input type="date" name="txtdoj" class="form-control" placeholder="DOJ">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Employee Id</label>
+                    <label>Employee Id <span style="color: red;">*</span></label>
                     <input type="text" name="employee_id" class="form-control" placeholder="Employee Id">
                   </div>
                 </div>
@@ -139,21 +139,21 @@
                 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>City</label>
+                    <label>City <span style="color: red;">*</span></label>
                     <input type="text" name="txtcity" class="form-control" placeholder="City">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>State</label>
+                    <label>State <span style="color: red;">*</span></label>
                     <input type="text" name="txtstate" class="form-control" placeholder="State">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Country</label>
+                    <label>Country <span style="color: red;">*</span></label>
                     <select class="form-control selectpicker" data-live-search="true" name="slccountry">
                       <option value="">Select</option>
                       <?php

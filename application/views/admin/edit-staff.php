@@ -74,7 +74,7 @@
                           if ($st['status'] == '0') {
                             print '<option value="0" selected>Inactive</option>
                                     <option value="1">Active</option>';
-                          } elseif ($st['status'] == '1') { // Change from else to elseif
+                          } elseif ($st['status'] == '1') { 
                             print '<option value="0">Inactive</option>
                                     <option value="1" selected>Active</option>';
                           }
@@ -107,7 +107,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Full Name</label>
+                      <label>Full Name <span style="color: red;">*</span></label>
                       <input type="hidden" name="txtid" value="<?php echo $cnt['id'] ?>" class="form-control" placeholder="Full Name">
                       <input type="text" name="txtname" value="<?php echo $cnt['staff_name'] ?>" class="form-control" placeholder="Full Name">
                     </div>
@@ -115,7 +115,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Department</label>
+                      <label>Department <span style="color: red;">*</span></label>
                       <select class="form-control selectpicker" data-live-search="true" name="slcdepartment">
                         <option value="">Select</option>
                         <?php
@@ -135,7 +135,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Gender</label>
+                      <label>Gender <span style="color: red;">*</span></label>
                       <select class="form-control selectpicker" data-live-search="true" name="slcgender">
                         <option value="">Select</option>
                         <?php
@@ -163,14 +163,14 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Email</label>
+                      <label>Email <span style="color: red;">*</span></label>
                       <input type="text" name="txtemail" value="<?php echo $cnt['email'] ?>" class="form-control" placeholder="Email" readonly>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Mobile</label>
+                      <label>Mobile <span style="color: red;">*</span></label>
                       <input type="text" name="txtmobile" value="<?php echo $cnt['mobile'] ?>" class="form-control" placeholder="Mobile" readonly>
                     </div>
                   </div>
@@ -184,21 +184,21 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Date of Birth</label>
+                      <label>Date of Birth <span style="color: red;">*</span></label>
                       <input type="date" name="txtdob" value="<?php echo $cnt['dob'] ?>" class="form-control" placeholder="DOB">
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Date of Joining</label>
+                      <label>Date of Joining <span style="color: red;">*</span></label>
                       <input type="date" name="txtdoj" value="<?php echo $cnt['doj'] ?>" class="form-control" placeholder="DOJ">
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Employee Id</label>
+                      <label>Employee Id <span style="color: red;">*</span></label>
                       <input type="text" name="employee_id" value="<?php echo $cnt['employee_id'] ?>" class="form-control" placeholder="Employee Id">
                     </div>
                   </div>
@@ -212,21 +212,21 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>City</label>
+                      <label>City <span style="color: red;">*</span></label>
                       <input type="text" name="txtcity" value="<?php echo $cnt['city'] ?>" class="form-control" placeholder="City">
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>State</label>
+                      <label>State <span style="color: red;">*</span></label>
                       <input type="text" name="txtstate" value="<?php echo $cnt['state'] ?>" class="form-control" placeholder="State">
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Country</label>
+                      <label>Country <span style="color: red;">*</span></label>
                       <select class="form-control selectpicker" data-live-search="true" name="slccountry">
                         <option value="">Select</option>
                         <?php

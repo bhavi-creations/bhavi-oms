@@ -423,15 +423,15 @@
       var selectedDeptId = this.value;
       console.log("Selected Department ID:", selectedDeptId);
 
-      if (selectedDeptId == 11) {
+      if (selectedDeptId == 4) {
         document.getElementById('designerTable').style.display = 'block';
-      } else if (selectedDeptId == 6 ) {
+      } else if (selectedDeptId == 3 ) {
         document.getElementById('socialmedia').style.display = 'block';
-      } else if (selectedDeptId == 18 ) {
+      } else if (selectedDeptId == 6 ) {
         document.getElementById('websitetable').style.display = 'block';
-      } else if (selectedDeptId == 15 || selectedDeptId == 17 ) {
+      } else if (selectedDeptId == 7 || selectedDeptId == 8 ) {
         document.getElementById('SEOtable').style.display = 'block';
-      } else if (selectedDeptId == 19 ) {
+      } else if (selectedDeptId == 5 ) {
         document.getElementById('Contentwriter').style.display = 'block';
       }
     });

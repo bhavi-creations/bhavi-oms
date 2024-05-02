@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -180,5 +180,12 @@ $route['delete-worksheets/(:num)'] = 'Project_Tasks/delete_worksheets/$1';
 $route['view-worksheet/(:num)'] = 'Project_Tasks/view_worksheets/$1';
 
 
+//Content Routes
 
-// $route['edit-project-tasks/(:num)'] = 'Project_Tasks/edit/$1';
+$route['content'] = 'Content';
+$route['content/insert'] = 'Content/insert';
+$route['content_details'] = 'Content/view';
+$route['edit-content/(:num)'] = 'Content/edit/$1';
+$route['content/update'] = 'Content/update';
+$route['delete-content/(:num)'] = 'Content/delete/$1';
+$route['view_staff_content'] = 'Content/view_staff_content';

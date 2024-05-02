@@ -47,7 +47,11 @@
                   <tr>
                     <th>Slno.</th>
                     <th>Project Name</th>
-                    <th>Project Link</th>
+                    <th>Project FB link</th>
+                    <th>Project Instagram link</th>
+                    <th>Project Pintrest link</th>
+                    <th>Project Youtube link</th>
+                    <th>Project Website link</th>
                     <th>Project Details</th>
                     <th>Status</th>
                     <th>Added On</th>
@@ -62,7 +66,11 @@
                       <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $cnt['project_name']; ?></td>
-                        <td><?php echo '<a target="_blank" href="'.$cnt['project_link'].'">'.$cnt['project_link'].'</a>'; ?></td>
+                        <td><?php echo '<a target="_blank" href="'.$cnt['project_fb_link'].'">'.$cnt['project_fb_link'].'</a>'; ?></td>
+                        <td><?php echo '<a target="_blank" href="'.$cnt['project_insta_link'].'">'.$cnt['project_insta_link'].'</a>'; ?></td>
+                        <td><?php echo '<a target="_blank" href="'.$cnt['project_pint_link'].'">'.$cnt['project_pint_link'].'</a>'; ?></td>
+                        <td><?php echo '<a target="_blank" href="'.$cnt['project_youtube_link'].'">'.$cnt['project_youtube_link'].'</a>'; ?></td>
+                        <td><?php echo '<a target="_blank" href="'.$cnt['project_web_link'].'">'.$cnt['project_web_link'].'</a>'; ?></td>
                         <td><?php echo $cnt['project_details']; ?></td>
                         <td><?php 
                           if($cnt['status'] == 1){
