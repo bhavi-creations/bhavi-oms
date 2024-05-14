@@ -73,7 +73,6 @@ class Project_Tasks extends CI_Controller
         $this->load->view('staff/header');
         $this->load->view('staff/view-worksheets', $data);   //added view file
         $this->load->view('staff/footer');
-        
     }
 
     public function insert()
@@ -114,8 +113,9 @@ class Project_Tasks extends CI_Controller
         $this->form_validation->set_rules('gmb_SEO[]', 'Google My Business SEO', '');
 
         // Content table validations
-        $this->form_validation->set_rules('work_type_content[]' , 'Work type of Content Writer', '');
+        $this->form_validation->set_rules('work_type_content[]', 'Work type of Content Writer', '');
         $this->form_validation->set_rules('desc_content{}', 'Description about work', '');
+
 
 
 
@@ -145,6 +145,9 @@ class Project_Tasks extends CI_Controller
                 'completed_date' => $completed_date,
                 'department' => $department_value
             );
+
+
+
             // $this->db->insert("project_tasks_tbl", $data);
             // $task_id = $this->db->insert_id();
             // $this->db->insert('project_task_tbl', $arr);
@@ -182,16 +185,27 @@ class Project_Tasks extends CI_Controller
             $client_name_content = $this->input->post('client_name_content');
             $work_type_content = $this->input->post('work_type_content');
             $desc_content = $this->input->post('desc_content');
+            $poster_opts = $this->input->post('poster');
+            $poster_subs = $this->input->post('poster_subs');
+            // $serialized_reel_poster = serialize($poster_subs);
+            $reel_opts = $this->input->post('reel');
+            $reel_subs = $this->input->post('reel_subs');
+            // $serialized_reel_subs = serialize($reel_subs);
+            $video_opts = $this->input->post('video');
+            $video_subs = $this->input->post('video_opts');
+            // $serialized_video_subs = serialize($video_subs);
 
 
 
+
+            // print_r($arr);
             $data = $this->Project_Tasks_model->insert_project_tasks($arr);
 
 
             $data2 = array();
             $loop_data = [];
             // designer fields
-            if ($department['0'] == 11) {
+            if ($department['0'] == 4) {
                 $loop_data = $assign_dates;
                 for ($i = 0; $i < count($loop_data); $i++) {
 
@@ -232,8 +246,9 @@ class Project_Tasks extends CI_Controller
                         'ref_file_designer' => $serialized_file_paths[$i],
                     );
                     $file_paths = array();
+                    print_r($assigned_to_value);
                 }
-            } else if ($department['0'] == 6 ) {
+            } else if ($department['0'] == 3) {
                 $loop_data = $assign_date_socialmedia;
                 $data2 = array();
                 $assigned_to_value = $assigned_to[0];
@@ -251,7 +266,7 @@ class Project_Tasks extends CI_Controller
                         'fb_ads_socialmedia' => $fb_ads_socialmedia[$i],
                     );
                 }
-            } else if ($department['0'] == 18) {
+            } else if ($department['0'] == 6) {
                 $loop_data = $assign_date_web;
                 $assigned_to_value = $assigned_to[0];
                 $department_value = $department[0];
@@ -267,7 +282,7 @@ class Project_Tasks extends CI_Controller
                         'delivery_date' => $delivery_date[$i],
                     );
                 }
-            } else if ($department['0'] == 15 || $department['0'] == 17) {
+            } else if ($department['0'] == 7 || $department['0'] == 8) {
                 $loop_data = $assign_date_seo;
                 $assigned_to_value = $assigned_to[0];
                 $department_value = $department[0];
@@ -283,11 +298,14 @@ class Project_Tasks extends CI_Controller
                         'gmb_SEO' => $gmb_SEO[$i],
                     );
                 }
-            }else if ($department['0'] == 19 ) {
+            } else if ($department['0'] == 5) {
                 $loop_data = $assign_date_content;
                 $assigned_to_value = $assigned_to[0];
                 $department_value = $department[0];
                 for ($i = 0; $i < count($loop_data); $i++) {
+                    $serialized_poster_subs = serialize($poster_subs[$i]);
+                    $serialized_reel_subs = serialize($reel_subs[$i]);
+                    $serialized_video_subs = serialize($video_subs[$i]);
                     $data2[] = array(
                         'staff_id' => $assigned_to_value,
                         'department' => $department_value,
@@ -296,19 +314,32 @@ class Project_Tasks extends CI_Controller
                         'client_name' => $client_name_content[$i],
                         'work_type_content' => $work_type_content[$i],
                         'desc_content' => $desc_content[$i],
+                        'poster_opts' => $poster_opts[$i],
+                        'poster_subs' => $serialized_poster_subs,
+                        'reel_opts' => $reel_opts[$i],
+                        'reel_subs' => $serialized_reel_subs,
+                        'video_opts' => $video_opts[$i],
+                        'video_subs' => $serialized_video_subs
                     );
                 }
             }
-            // $task_id = $this->Project_Tasks_model->insert_project_tasks($arr);
-            // $data = $this->Project_Tasks_model->insert_project_tasks($arr);
-            $data2 = $this->Project_Tasks_model->insert_worksheets($data2);
 
-            if ($data == true and $data2 == true) {
-                $this->session->set_flashdata('success', "New Project Task Added Succesfully");
-            } else {
-                $this->session->set_flashdata('error', "Sorry, New Project Task Adding Failed.");
-            }
-            redirect($_SERVER['HTTP_REFERER']);
+            echo "<pre>";
+            print_r($data2);
+            echo "</pre>";
+
+
+            // $data = $this->Project_Tasks_model->insert_project_tasks($arr);
+
+            // print_r($work_type_designer);
+            // $data2 = $this->Project_Tasks_model->insert_worksheets($data2);
+
+            // if ($data == true and $data2 == true) {
+            //     $this->session->set_flashdata('success', "New Project Task Added Succesfully");
+            // } else {
+            //     $this->session->set_flashdata('error', "Sorry, New Project Task Adding Failed.");
+            // }
+            // redirect($_SERVER['HTTP_REFERER']);
         } else {
             $this->index();
             return false;
@@ -445,7 +476,7 @@ class Project_Tasks extends CI_Controller
                 // ... add other fields as needed
                 echo $assigned_to_designer;
                 // Update the database using your model
-                $this->Project_Tasks_model->updateDesignerRow($assigned_to_designer,$designer_id, $assign_date, $client_name, $work_type_designer, $desc_designer, $ref_link_designer, $content_designer);
+                $this->Project_Tasks_model->updateDesignerRow($assigned_to_designer, $designer_id, $assign_date, $client_name, $work_type_designer, $desc_designer, $ref_link_designer, $content_designer);
             }
 
             $socialmedia_ids = $this->input->post('socialmedia_id');
@@ -462,11 +493,11 @@ class Project_Tasks extends CI_Controller
                 $assigned_to_socialmedia = $assigned_to_values;
 
                 // ... add other fields as needed
-        
+
                 // Update the database using your model
-                $this->Project_Tasks_model->updateSocialMediaRow($assigned_to_socialmedia,$socialmedia_id, $assign_date_socialmedia, $client_name_socialmedia, $work_type_socialmedia, $desc_socialmedia, $g_ads_socialmedia, $fb_ads_socialmedia);
+                $this->Project_Tasks_model->updateSocialMediaRow($assigned_to_socialmedia, $socialmedia_id, $assign_date_socialmedia, $client_name_socialmedia, $work_type_socialmedia, $desc_socialmedia, $g_ads_socialmedia, $fb_ads_socialmedia);
             }
-           
+
             $website_ids = $this->input->post('website_id');
             $assigned_to_values = $this->input->post('assigned_to')[0];
             foreach ($website_ids as $index => $website_id) {
@@ -479,9 +510,9 @@ class Project_Tasks extends CI_Controller
                 $assigned_to_web = $assigned_to_values;
 
                 // ... add other fields as needed
-        
+
                 // Update the database using your model
-                $this->Project_Tasks_model->updateWebsiteRow($assigned_to_web,$website_id, $assign_date_web, $client_name_web, $website_type, $desc_website, $delivery_date);
+                $this->Project_Tasks_model->updateWebsiteRow($assigned_to_web, $website_id, $assign_date_web, $client_name_web, $website_type, $desc_website, $delivery_date);
             }
 
             $seo_ids = $this->input->post('SEO_id');
@@ -496,11 +527,11 @@ class Project_Tasks extends CI_Controller
                 $assigned_to_seo = $assigned_to_values;
 
                 // ... add other fields as needed
-        
+
                 // Update the database using your model
-                $this->Project_Tasks_model->updateSEOrow($assigned_to_seo,$seo_id, $assign_date_seo, $client_name_seo, $p_kw_SEO, $target_kw_SEO, $gmb_SEO);
+                $this->Project_Tasks_model->updateSEOrow($assigned_to_seo, $seo_id, $assign_date_seo, $client_name_seo, $p_kw_SEO, $target_kw_SEO, $gmb_SEO);
             }
-        
+
 
             if ($this->db->affected_rows() > 0) {
                 $this->session->set_flashdata('success', "Project Task Updated Succesfully");

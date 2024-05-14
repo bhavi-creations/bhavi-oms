@@ -353,35 +353,86 @@
                         <th>Client</th>
                         <th>Work</th>
                         <th>Description</th>
-                        <!-- <th>Google Ads</th> -->
-                        <!-- <th>Fb Ads</th> -->
                       </tr>
                     </thead>
                     <tbody>
-                      <td><input type="date" name="assign_date_content[]" class="form-control"></td>
-                      <td><select name="client_name_content[]" class="form-control">
-                          <option value> select </option>
-                          <?php
-                          if (isset($clients)) {
-                            foreach ($clients as $clt) {
-                              print "<option value='" . $clt['client_name'] . "'>" . $clt['client_name'] . "</option>";
+                      <tr>
+                        <td><input type="date" name="assign_date_content[]" class="form-control"></td>
+                        <td><select name="client_name_content[]" class="form-control">
+                            <option value> select </option>
+                            <?php
+                            if (isset($clients)) {
+                              foreach ($clients as $clt) {
+                                print "<option value='" . $clt['client_name'] . "'>" . $clt['client_name'] . "</option>";
+                              }
                             }
-                          }
-                          ?>
-                        </select></td>
-                      <td><select name="work_type_content[]" id="" class="form-control">
-                          <option value="not_selected">Select</option>
-                          <option value="Poster">Poster</option>
-                          <option value="Facebook">Facebook</option>
-                          <option value="Instagram">Instagram</option>
-                          <option value="Pintrest">Pintrest</option>
-                          <option value="Website">Website</option>
-                          <option value="Youtube">Youtube</option>
-                        </select></td>
-                      <td><textarea name="desc_content[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
-                      <!-- <td><input name="g_ads_socialmedia[]" type="text" class="form-control"></td> -->
-                      <!-- <td> <input name="fb_ads_socialmedia[]" type="text" class="form-control"></td> -->
-                      <!-- <td> <button type="button" class="removeRow btn btn-danger mb-2" ><b>X</b></button> -->
+                            ?>
+                          </select></td>
+                        <td>
+                          <select name="work_type_content[]" id="work_type" class="form-control">
+                            <option value="not_selected">Select</option>
+                            <option value="1">Poster</option>
+                            <option value="2">Video</option>
+                            <option value="3">GIF</option>
+                            <option value="4">Reel</option>
+                            <option value="5">Hoardings</option>
+                            <option value="6">Website</option>
+                            <option value="7">Coverpage</option>
+                          </select>
+                        </td>
+                        <td><textarea name="desc_content[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                      </tr>
+                      <tr>
+                        <!-- poster options  -->
+                        <td id="poster_dropdown" style="display: none;">
+                          <label for="" class="form-control">Work</label>
+                          <select name="poster[]" id="" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="youtube">Youtube</option>
+                            <option value="pintrest">Pintrest</option>
+                            <option value="twitter">Twitter</option>
+                            <option value="linkedin">LinkedIn</option>
+                          </select>
+                        </td>
+                        <td id="checkbox_row" style="display: none;">
+                          <label for="" class="form-control">Sub Work</label>
+                          <input type="checkbox" class="" name="poster_subs[]" value="Tags">Tags <br>
+                          <input type="checkbox" class="" name="poster_subs[]" value="Hashtags">Hashtags <br>
+                          <input type="checkbox" class="" name="poster_subs[]" value="Title">Title <br>
+                        </td>
+                        <!-- reel-options  -->
+                        <td id="reel-dropdown" style="display: none;">
+                          <label for="" class="form-control">Work</label>
+                          <select name="reel[]" id="" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Facebook">Facebook</option>
+                          </select>
+                        </td>
+                        <td id="reel-checkbox" style="display: none;">
+                          <label for="" class="form-control">Sub Work</label>
+                          <input type="checkbox" name="reel_subs[]" value="Tags">Tags <br>
+                          <input type="checkbox" name="reel_subs[]" value="Description">Description <br>
+                          <input type="checkbox" name="reel_subs[]" value="Hashtags">Hashtags <br>
+                        </td>
+                        <!-- video options -->
+                        <td id="video-dropdown" style="display: none;">
+                          <label for="" class="form-control">Work</label>
+                          <select name="video[]" id="" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Youtube">Youtube</option>
+                            <option value="Other">Others</option>
+                          </select>
+                        </td>
+                        <td id="video-checkbox" style="display: none;">
+                          <label for="" class="form-control">Sub Work</label>
+                          <input type="checkbox" name="video_opts[]" value="Tags">Tags <br>
+                          <input type="checkbox" name="video_opts[]" value="Description">Description <br>
+                          <input type="checkbox" name="video_opts[]" value="Title">Title <br>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -408,6 +459,44 @@
 
   <!-- /. js for display the tables -->
   <script>
+    var workTypeDropdown = document.getElementById("work_type");
+
+    // Add event listener to detect changes in the primary dropdown
+    workTypeDropdown.addEventListener("change", function() {
+
+      var selectedOption = this.value;
+
+      // Drop down variables
+      var posterDropdown = document.getElementById("poster_dropdown");
+      var videoDropdown = document.getElementById("video-dropdown");
+      var reelDropdown = document.getElementById("reel-dropdown");
+
+      // Check boxes
+      var checkboxRow = document.getElementById("checkbox_row");
+      var checkboxvideo = document.getElementById("video-checkbox");
+      var checkboxreel = document.getElementById("reel-checkbox");
+
+      posterDropdown.style.display = "none";
+      videoDropdown.style.display = "none";
+      reelDropdown.style.display = "none";
+      checkboxRow.style.display = "none";
+      checkboxvideo.style.display = "none";
+      checkboxreel.style.display = "none";
+
+      // If the selected option is "Poster", show the secondary dropdown and the checkbox row
+      if (selectedOption === "1") {
+        posterDropdown.style.display = "table-cell";
+        checkboxRow.style.display = "table-cell";
+      } else if (selectedOption === "2") {
+        videoDropdown.style.display = "table-cell";
+        checkboxvideo.style.display = "table-cell";
+      } else if (selectedOption == "4") {
+        // Otherwise, hide the secondary dropdown and the checkbox row
+        reelDropdown.style.display = "table-cell";
+        checkboxreel.style.display = "table-cell";
+      }
+    });
+
     // $(document).ready(function() {
     //   $('#myTextarea').wysihtml5();
     // });
@@ -425,13 +514,13 @@
 
       if (selectedDeptId == 4) {
         document.getElementById('designerTable').style.display = 'block';
-      } else if (selectedDeptId == 3 ) {
+      } else if (selectedDeptId == 3) {
         document.getElementById('socialmedia').style.display = 'block';
-      } else if (selectedDeptId == 6 ) {
+      } else if (selectedDeptId == 6) {
         document.getElementById('websitetable').style.display = 'block';
-      } else if (selectedDeptId == 7 || selectedDeptId == 8 ) {
+      } else if (selectedDeptId == 7 || selectedDeptId == 8) {
         document.getElementById('SEOtable').style.display = 'block';
-      } else if (selectedDeptId == 5 ) {
+      } else if (selectedDeptId == 5) {
         document.getElementById('Contentwriter').style.display = 'block';
       }
     });
@@ -612,7 +701,7 @@
                       <td><textarea name="target_kw_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td><textarea name="gmb_SEO[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
                       <td> <button type="button" class="removeRow btn btn-danger"><b>X</b></button></td>
-      `;
+        `;
 
         tableBody.appendChild(newRow);
         newRow.querySelector(".removeRow").addEventListener("click", function() {
@@ -622,38 +711,132 @@
 
       function addContentRow() {
         var tableBody = document.getElementById("Contentwriter").querySelector('tbody');
-        var newRow = document.createElement("tr");
 
+        // Create and append the first <tr> element
+        var newRow = document.createElement("tr");
         newRow.innerHTML = `
         <td><input name="assign_date_content[]" type="date" class="form-control"></td>
-                      <td><select name="client_name_content[]" class="form-control">
-                      <option value> select </option>
-                            \<?php
-                              if (isset($clients)) {
-                                foreach ($clients as $clt) {
-                                  print "<option value='" . $clt['client_name'] . "'>" . $clt['client_name'] . "</option>";
-                                }
-                              }
-                              ?>\
-                        </select></td>
-                        <td><select name="work_type_scontent[]" id="" class="form-control">
-                            <option value="not_selected">Select</option>
-                            <option value="Poster">Poster</option>
+        <td>
+            <select name="client_name_content[]" class="form-control">
+                <option value="">Select</option>
+                <?php
+                if (isset($clients)) {
+                  foreach ($clients as $clt) {
+                    echo "<option value='" . $clt['client_name'] . "'>" . $clt['client_name'] . "</option>";
+                  }
+                }
+                ?>
+            </select>
+        </td>
+        <td>
+            <select name="work_type_content[]" class="form-control">
+                <option value="not_selected">Select</option>
+                <option value="1">Poster</option>
+                <option value="2">Video</option>
+                <option value="3">GIF</option>
+                <option value="4">Reel</option>
+                <option value="5">Hoardings</option>
+                <option value="6">Website</option>
+                <option value="7">Coverpage</option>
+            </select>
+        </td>
+        <td><textarea name="desc_content[]" cols="30" rows="2" class="form-control"></textarea></td>
+        <td><button type="button" class="removeRow btn btn-danger"><b>X</b></button></td>
+        `;
+        tableBody.appendChild(newRow);
+
+        // Create and append the second <tr> element
+        var optionsRow = document.createElement("tr");
+        optionsRow.innerHTML = `
+        <!-- poster options  -->
+                        <td id="poster_dropdown" style="display: none;">
+                          <label for="" class="form-control">Work</label>
+                          <select name="poster[]" id="" class="form-control">
+                            <option value="">Select</option>
                             <option value="Facebook">Facebook</option>
                             <option value="Instagram">Instagram</option>
-                            <option value="Pintrest">Pintrest</option>
-                            <option value="Website">Website</option>
+                            <option value="youtube">Youtube</option>
+                            <option value="pintrest">Pintrest</option>
+                            <option value="twitter">Twitter</option>
+                            <option value="linkedin">LinkedIn</option>
+                          </select>
+                        </td>
+                        <td id="checkbox_row" style="display: none;">
+                          <label for="" class="form-control">Sub Work</label>
+                          <input type="checkbox" class="" name="poster_subs[]" value="Tags">Tags <br>
+                          <input type="checkbox" class="" name="poster_subs[]" value="Hashtags">Hashtags <br>
+                          <input type="checkbox" class="" name="poster_subs[]" value="Title">Title <br>
+                        </td>
+                        <!-- reel-options  -->
+                        <td id="reel-dropdown" style="display: none;">
+                          <label for="" class="form-control">Work</label>
+                          <select name="video[]" id="" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Facebook">Facebook</option>
+                          </select>
+                        </td>
+                        <td id="reel-checkbox" style="display: none;">
+                          <label for="" class="form-control">Sub Work</label>
+                          <input type="checkbox" name="reel_subs[]" value="Tags">Tags <br>
+                          <input type="checkbox" name="reel_subs[]" value="Description">Description <br>
+                          <input type="checkbox" name="reel_subs[]" value="Hashtags">Hashtags <br>
+                        </td>
+                        <!-- video options -->
+                        <td id="video-dropdown" style="display: none;">
+                          <label for="" class="form-control">Work</label>
+                          <select name="video[]" id="" class="form-control">
+                            <option value="">Select</option>
                             <option value="Youtube">Youtube</option>
-                          </select></td>
-                          <td><textarea name="desc_content[]" id="" cols="30" rows="2" class="form-control"></textarea></td>
-                      <td> <button type="button" class="removeRow btn btn-danger"><b>X</b></button></td>
-      `;
-
-        tableBody.appendChild(newRow);
+                            <option value="Other">Others</option>
+                          </select>
+                        </td>
+                        <td id="video-checkbox" style="display: none;">
+                          <label for="" class="form-control">Sub Work</label>
+                          <input type="checkbox" name="video_opts[]" value="Tags">Tags <br>
+                          <input type="checkbox" name="video_opts[]" value="Description">Description <br>
+                          <input type="checkbox" name="video_opts[]" value="Title">Title <br>
+                        </td>
+               `;
+        tableBody.appendChild(optionsRow);
+                
+        // Attach event listener to the "Remove Row" button in the new row
         newRow.querySelector(".removeRow").addEventListener("click", function() {
           tableBody.removeChild(newRow);
+          tableBody.removeChild(optionsRow);
+        });
+
+        // Attach event listener to the "work_type_content[]" dropdown in the new row
+        newRow.querySelector("[name='work_type_content[]']").addEventListener("change", function() {
+          var selectedOption = this.value;
+          var posterDropdown = optionsRow.querySelector("#poster_dropdown");
+          var checkboxRow = optionsRow.querySelector("#checkbox_row");
+          var reelDropdown = optionsRow.querySelector("#reel-dropdown");
+          var checkboxreel = optionsRow.querySelector("#reel-checkbox");
+          var videoDropdown = optionsRow.querySelector("#video-dropdown");
+          var checkboxvideo = optionsRow.querySelector("#video-checkbox");
+
+          posterDropdown.style.display = "none";
+          checkboxRow.style.display = "none";
+          reelDropdown.style.display = "none";
+          checkboxreel.style.display = "none";
+          videoDropdown.style.display = "none";
+          checkboxvideo.style.display = "none";
+
+          if (selectedOption === "1") {
+            posterDropdown.style.display = "table-cell";
+            checkboxRow.style.display = "table-cell";
+          } else if (selectedOption === "2") {
+            videoDropdown.style.display = "table-cell";
+            checkboxvideo.style.display = "table-cell";
+          } else if (selectedOption === "4") {
+            reelDropdown.style.display = "table-cell";
+            checkboxreel.style.display = "table-cell";
+          }
         });
       }
+
+
 
       // Event listeners for the "Add" buttons
       document.querySelector("#designerTable .addDesignerRow").addEventListener("click", addDesignerRow);
