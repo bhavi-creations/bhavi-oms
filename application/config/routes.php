@@ -189,3 +189,8 @@ $route['edit-content/(:num)'] = 'Content/edit/$1';
 $route['content/update'] = 'Content/update';
 $route['delete-content/(:num)'] = 'Content/delete/$1';
 $route['view_staff_content'] = 'Content/view_staff_content';
+
+
+//assign-clients
+$route['assign-clients'] = 'Assign_clients';
+$route['insert-asssign-client'] = 'Assign_clients/insert';
