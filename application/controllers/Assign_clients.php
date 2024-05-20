@@ -27,21 +27,28 @@ class Assign_clients extends CI_Controller
 
         // Retrieve selected staff ID and client IDs from the form
         $staff_id = $this->input->post('staff_name');
-        $clients = $this->input->post('client_name');
+        $clients = serialize($this->input->post('client_name'));
 
         // Create an array to store the data for batch insertion
-        $data = array();
+        // $data = array();
 
         // Iterate over each selected client and create a data array
-        foreach ($clients as $client_id) {
-            $data[] = array(
-                'staff_id' => $staff_id,
-                'clients_id' => $client_id
-            );
-        }
+        // foreach ($clients as $client_id) {
+        //     $data[] = array(
+        //         'staff_id' => $staff_id,
+        //         'clients_id' => $client_id
+        //     );
+        // }
+
+        $data = [
+            'staff_id' => $staff_id,
+            'clients_id' => $clients
+        ];
+
+        // print_r($data);
 
         // Insert all data into the database
-        $inserted = $this->Assign_model->insert_batch($data);
+        $inserted = $this->Assign_model->insert($data);
 
         // Check if insertion was successful
         if ($inserted) {
