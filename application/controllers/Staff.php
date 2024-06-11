@@ -82,8 +82,14 @@ class Staff extends CI_Controller
         $added = $this->session->userdata('userid');
         $files = isset($_FILES["files"]) ? $_FILES["files"] : null;
 
+        $branch = $this->input->post('branch');
+        $description = $this->input->post('description');
+        $bond = isset($_FILES["bond"]) ? $_FILES["bond"] : null;
+        $certificate = isset($_FILES["certificate"]) ? $_FILES["certificate"] : null;
+        $hike = isset($_FILES["hike"]) ? $_FILES["hike"] : null;
 
-        
+
+
         if ($this->form_validation->run() !== false) {
             $this->load->library('upload');
             $config['upload_path'] = 'uploads/staff-files/';
@@ -105,7 +111,7 @@ class Staff extends CI_Controller
                 $this->upload->initialize($config);
 
                 if ($this->upload->do_upload('files[]')) {
-                    $file_data =   $this->upload->data();
+                    $file_data = $this->upload->data();
                     $file_names[] = $file_data['file_name'];
                 }
             }
@@ -121,21 +127,35 @@ class Staff extends CI_Controller
             if (!$this->upload->do_upload('filephoto')) {
                 $image = 'default-pic.jpg';
             } else {
-                $image_data =   $this->upload->data();
+                $image_data = $this->upload->data();
                 $image = $image_data['file_name'];
             }
-            $login = $this->Home_model->insert_login(array('username' => $email, 'password' => md5($mobile), 'usertype' => 2, 'dept_id' => $department));
+            $additional_files = [];
+            $additional_uploads = ['bond' => $bond, 'certificate' => $certificate, 'hike' => $hike];
+            foreach ($additional_uploads as $key => $file) {
+                if ($file) {
+                    $config['file_name'] = time() . "_" . $file['name'];
+                    $this->upload->initialize($config2);
+                    if ($this->upload->do_upload($key)) {
+                        $file_data = $this->upload->data();
+                        $additional_files[$key] = $file_data['file_name'];
+                    } else {
+                        $additional_files[$key] = null;
+                    }
+                }
+            }
+            $login = $this->Home_model->insert_login(array('username' => $email, 'password' => md5($mobile), 'usertype' => 2));
             if ($login > 0) {
-                $data = $this->Staff_model->insert_staff(array('id' => $login, 'staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department, 'pic' => $image, 'files' => $file_names, 'added_by' => $added));
+                $data = $this->Staff_model->insert_staff(array('id' => $login, 'staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department, 'pic' => $image, 'files' => $file_names, 'added_by' => $added, 'branch' => $branch, 'certificate' => $additional_files['certificate'], 'hike' => $additional_files['hike'], 'bond' => $additional_files['bond'], 'description' => $description));
             }
+            echo $data;
+            // if ($data == true) {
 
-            if ($data == true) {
-
-                $this->session->set_flashdata('success', "New Staff Added Succesfully");
-            } else {
-                $this->session->set_flashdata('error', "Sorry, New Staff Adding Failed.");
-            }
-            redirect($_SERVER['HTTP_REFERER']);
+            //     $this->session->set_flashdata('success', "New Staff Added Succesfully");
+            // } else {
+            //     $this->session->set_flashdata('error', "Sorry, New Staff Adding Failed.");
+            // }
+            // redirect($_SERVER['HTTP_REFERER']);
         } else {
             $this->index();
             return false;
@@ -215,7 +235,7 @@ class Staff extends CI_Controller
                 $this->upload->initialize($config);
 
                 if ($this->upload->do_upload('files[]')) {
-                    $file_data =   $this->upload->data();
+                    $file_data = $this->upload->data();
                     $file_names[] = $file_data['file_name'];
                 }
             }
@@ -236,7 +256,7 @@ class Staff extends CI_Controller
             if (!$this->upload->do_upload('filephoto')) {
                 $data = $this->Staff_model->update_staff(array('staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department, 'files' => $file_names), $id);
             } else {
-                $image_data =   $this->upload->data();
+                $image_data = $this->upload->data();
                 $image = $image_data['file_name'];
 
                 $data = $this->Staff_model->update_staff(array('staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department, 'pic' => $image_data['file_name'], 'files' => $file_names, 'added_by' => $added), $id);
@@ -293,15 +313,15 @@ class Staff extends CI_Controller
             if (!$this->upload->do_upload('filephoto')) {
                 $data = $this->Staff_model->update_staff(array('staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country), $id);
             } else {
-                $image_data =   $this->upload->data();
+                $image_data = $this->upload->data();
 
-                $configer =  array(
-                    'image_library'   => 'gd2',
-                    'source_image'    =>  $image_data['full_path'],
-                    'maintain_ratio'  =>  TRUE,
-                    'width'           =>  150,
-                    'height'          =>  150,
-                    'quality'         =>  50
+                $configer = array(
+                    'image_library' => 'gd2',
+                    'source_image' => $image_data['full_path'],
+                    'maintain_ratio' => TRUE,
+                    'width' => 150,
+                    'height' => 150,
+                    'quality' => 50
                 );
                 $this->image_lib->clear();
                 $this->image_lib->initialize($configer);
@@ -407,7 +427,7 @@ class Staff extends CI_Controller
                 $this->upload->initialize($config);
 
                 if ($this->upload->do_upload('files[]')) {
-                    $file_data =   $this->upload->data();
+                    $file_data = $this->upload->data();
                     $file_names[] = $file_data['file_name'];
                 }
             }
@@ -420,15 +440,15 @@ class Staff extends CI_Controller
             if (!$this->upload->do_upload('filephoto')) {
                 $data = $this->Staff_model->update_staff(array('staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department), $id);
             } else {
-                $image_data =   $this->upload->data();
+                $image_data = $this->upload->data();
 
-                $configer =  array(
-                    'image_library'   => 'gd2',
-                    'source_image'    =>  $image_data['full_path'],
-                    'maintain_ratio'  =>  TRUE,
-                    'width'           =>  150,
-                    'height'          =>  150,
-                    'quality'         =>  50
+                $configer = array(
+                    'image_library' => 'gd2',
+                    'source_image' => $image_data['full_path'],
+                    'maintain_ratio' => TRUE,
+                    'width' => 150,
+                    'height' => 150,
+                    'quality' => 50
                 );
                 $this->image_lib->clear();
                 $this->image_lib->initialize($configer);

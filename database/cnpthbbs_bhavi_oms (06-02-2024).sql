@@ -992,6 +992,11 @@ CREATE TABLE `staff_tbl` (
   `state` varchar(100) NOT NULL,
   `country` varchar(50) NOT NULL,
   `department_id` int(11) NOT NULL,
+  `branch` text DEFAULT NULL,
+  `certificate` varchar(255) DEFAULT NULL,
+  `bond` varchar(255) DEFAULT NULL,
+  `hike` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
   `pic` varchar(150) NOT NULL DEFAULT 'default-pic.jpg',
   `files` longtext NOT NULL,
   `added_by` int(11) NOT NULL,
@@ -1003,18 +1008,18 @@ CREATE TABLE `staff_tbl` (
 -- Dumping data for table `staff_tbl`
 --
 
-INSERT INTO `staff_tbl` (`id`, `staff_name`, `gender`, `email`, `mobile`, `dob`, `doj`, `employee_id`, `blood_group`, `address`, `city`, `state`, `country`, `department_id`, `pic`, `files`, `added_by`, `updated_on`, `added_on`) VALUES
-(1, 'Bhavi Creations', 'Male', 'bhavicreations2022@gmail.com', 9642343434, '2022-04-15', '2022-04-15', 'BCKKD000', '', 'kakinada', 'kakinada', 'Andhra Pradesh', 'India', 0, 'bhavi.JPG', '', 0, '0000-00-00', '2022-05-06 16:32:59'),
-(9, 'Ch Naga Phaneendra', 'Male', 'phanIchalikonda@gmail.com', 8686394079, '1992-11-20', '2022-02-24', 'BCKKD001', 'A+', '41-1/14-205, Near nirmala sishu bhavan,Krishnalanka, Vijayawada', 'vijayawada', 'AP', 'India', 6, 'WhatsApp_Image_2022-05-06_at_4_56_03_PM.jpeg', '', 1, '0000-00-00', '2022-05-06 11:32:31'),
-(10, 'Adina Venkata Raju', 'Male', 'chinnu6202@gmail.com', 7842800565, '1994-08-25', '2022-03-18', 'BCKKD002', 'A+', '9-33-111, 16th ward, NZP-RPL Road,Sukaplli, Repalle Mandal,Guntur-522265', 'Guntur', 'Andhra pradesh', 'India', 7, 'Image_Venkat.jpeg', '', 1, '0000-00-00', '2022-05-06 11:46:20'),
-(11, 'Gottipati krishna priya', 'Female', 'krishnapriyavemulapalli696@gmail.com', 7093639208, '1988-10-14', '2022-04-01', 'BCKKD003', 'O+', '2-141, Old Harijanawada Tenneru, krishna Andhra pradesh-521260', 'Vijyawada', 'Andhra Pradesh', 'India', 9, 'priya.jpeg', '', 1, '0000-00-00', '2022-05-06 11:55:40'),
-(12, 'Shaik Mahaboob Shariff', 'Male', 'shariffsimpson@gmail.com', 8712387490, '1998-12-18', '2022-03-01', 'BCKKD004', 'B+', 'Urvasi, kancharapalem,visakhapatnam', 'visakhapatnam', 'Andhra Pradesh', 'India', 7, 'shariff.png', '', 1, '0000-00-00', '2022-05-06 12:06:03'),
-(13, 'Bommidi Pratyusha', 'Female', 'prathyushabommidi@gmail.com', 8106563840, '1991-03-07', '2022-03-08', 'BCKKD005', 'O+', '8-91, ff-1, Shirdi sai nagar road, tadigadapa donka road, yenmalakuduru, vijayawada-7', 'Vijayawada', 'Andhra Pradesh', 'India', 7, 'pratyusha.jpeg', '', 1, '0000-00-00', '2022-05-06 12:11:06'),
-(14, 'Veduruvada Uday Kumar', 'Male', 'veduruvadauday@gmail.com', 8712965092, '1995-09-15', '2022-03-03', 'BCKKD006', 'B+', '4-36/1, Bolashankar Nagar, near  old Shivalayam temple, Kutubullapur, Rangareddi, Telangana, 500055', 'Kutubullapur', 'Telangana', 'India', 10, 'uday.jpg', '', 1, '0000-00-00', '2024-01-29 07:47:48'),
-(15, 'Kada sairam', 'Male', 'sairamkada0290@gmail.com', 9440491273, '1997-12-02', '2022-04-25', 'BCKKD007', 'A+', 'Bodhilanka, K Gangavaram mandal, Bhatlapalika,Dangeru, Andhra Pradesh,533263', 'Draksharama', 'Andhra Pradesh', 'India', 7, 'sai.jpg', '', 1, '0000-00-00', '2022-05-06 12:27:17'),
-(16, 'Juttuga Devi prasanna', 'Female', 'deviprasanna243@gmail.com', 9676212573, '2000-05-29', '2022-04-27', 'BCKKD008', 'B+', '3-81 Dongalagudem K.Gangavaram mandal,Bhatlapalika, dangeru, Andhra pradesh- 533263', 'Draksharama', 'Andhra Pradesh', 'India', 8, 'prasanna.jpg', '', 1, '0000-00-00', '2022-05-06 12:30:14'),
-(17, 'Kunche Kamal Kumar', 'Male', 'anthonykunche.kamal@gmail.com', 9052555608, '1980-12-22', '2022-05-02', 'BCKKD009', 'B+', '3-16-15/3A Rajalaksmi nagar Gudarigunta, Kakinada', 'Kakinada', 'Andhra Pradesh', 'India', 9, 'Image_Kamal.jpg', '', 1, '0000-00-00', '2022-05-06 12:33:21'),
-(20, 'Rajkumar Giduthuri', 'Male', 'rajkumar16371@gmail.com', 7981885538, '2024-02-06', '2024-02-05', 'jjytu', 'ay', '5-155 ysr colony madhavapatnam eg dist kakinada ap india 533005', 'Kakinada', 'S01', 'India', 10, 'default-pic.jpg', '', 1, '0000-00-00', '2024-02-06 05:20:09');
+INSERT INTO `staff_tbl` (`id`, `staff_name`, `gender`, `email`, `mobile`, `dob`, `doj`, `employee_id`, `blood_group`, `address`, `city`, `state`, `country`, `department_id`, `branch`, `certificate`, `bond`, `hike`, `description`, `pic`, `files`, `added_by`, `updated_on`, `added_on`) VALUES
+(1, 'Bhavi Creations', 'Male', 'bhavicreations2022@gmail.com', 9642343434, '2022-04-15', '2022-04-15', 'BCKKD000', '', 'kakinada', 'kakinada', 'Andhra Pradesh', 'India', 0, NULL, NULL, NULL, NULL, NULL, 'bhavi.JPG', '', 0, '0000-00-00', '2022-05-06 16:32:59'),
+(9, 'Ch Naga Phaneendra', 'Male', 'phanIchalikonda@gmail.com', 8686394079, '1992-11-20', '2022-02-24', 'BCKKD001', 'A+', '41-1/14-205, Near nirmala sishu bhavan,Krishnalanka, Vijayawada', 'vijayawada', 'AP', 'India', 6, NULL, NULL, NULL, NULL, NULL, 'WhatsApp_Image_2022-05-06_at_4_56_03_PM.jpeg', '', 1, '0000-00-00', '2022-05-06 11:32:31'),
+(10, 'Adina Venkata Raju', 'Male', 'chinnu6202@gmail.com', 7842800565, '1994-08-25', '2022-03-18', 'BCKKD002', 'A+', '9-33-111, 16th ward, NZP-RPL Road,Sukaplli, Repalle Mandal,Guntur-522265', 'Guntur', 'Andhra pradesh', 'India', 7, NULL, NULL, NULL, NULL, NULL, 'Image_Venkat.jpeg', '', 1, '0000-00-00', '2022-05-06 11:46:20'),
+(11, 'Gottipati krishna priya', 'Female', 'krishnapriyavemulapalli696@gmail.com', 7093639208, '1988-10-14', '2022-04-01', 'BCKKD003', 'O+', '2-141, Old Harijanawada Tenneru, krishna Andhra pradesh-521260', 'Vijyawada', 'Andhra Pradesh', 'India', 9, NULL, NULL, NULL, NULL, NULL, 'priya.jpeg', '', 1, '0000-00-00', '2022-05-06 11:55:40'),
+(12, 'Shaik Mahaboob Shariff', 'Male', 'shariffsimpson@gmail.com', 8712387490, '1998-12-18', '2022-03-01', 'BCKKD004', 'B+', 'Urvasi, kancharapalem,visakhapatnam', 'visakhapatnam', 'Andhra Pradesh', 'India', 7, NULL, NULL, NULL, NULL, NULL, 'shariff.png', '', 1, '0000-00-00', '2022-05-06 12:06:03'),
+(13, 'Bommidi Pratyusha', 'Female', 'prathyushabommidi@gmail.com', 8106563840, '1991-03-07', '2022-03-08', 'BCKKD005', 'O+', '8-91, ff-1, Shirdi sai nagar road, tadigadapa donka road, yenmalakuduru, vijayawada-7', 'Vijayawada', 'Andhra Pradesh', 'India', 7, NULL, NULL, NULL, NULL, NULL, 'pratyusha.jpeg', '', 1, '0000-00-00', '2022-05-06 12:11:06'),
+(14, 'Veduruvada Uday Kumar', 'Male', 'veduruvadauday@gmail.com', 8712965092, '1995-09-15', '2022-03-03', 'BCKKD006', 'B+', '4-36/1, Bolashankar Nagar, near  old Shivalayam temple, Kutubullapur, Rangareddi, Telangana, 500055', 'Kutubullapur', 'Telangana', 'India', 10, NULL, NULL, NULL, NULL, NULL, 'uday.jpg', '', 1, '0000-00-00', '2024-01-29 07:47:48'),
+(15, 'Kada sairam', 'Male', 'sairamkada0290@gmail.com', 9440491273, '1997-12-02', '2022-04-25', 'BCKKD007', 'A+', 'Bodhilanka, K Gangavaram mandal, Bhatlapalika,Dangeru, Andhra Pradesh,533263', 'Draksharama', 'Andhra Pradesh', 'India', 7, NULL, NULL, NULL, NULL, NULL, 'sai.jpg', '', 1, '0000-00-00', '2022-05-06 12:27:17'),
+(16, 'Juttuga Devi prasanna', 'Female', 'deviprasanna243@gmail.com', 9676212573, '2000-05-29', '2022-04-27', 'BCKKD008', 'B+', '3-81 Dongalagudem K.Gangavaram mandal,Bhatlapalika, dangeru, Andhra pradesh- 533263', 'Draksharama', 'Andhra Pradesh', 'India', 8, NULL, NULL, NULL, NULL, NULL, 'prasanna.jpg', '', 1, '0000-00-00', '2022-05-06 12:30:14'),
+(17, 'Kunche Kamal Kumar', 'Male', 'anthonykunche.kamal@gmail.com', 9052555608, '1980-12-22', '2022-05-02', 'BCKKD009', 'B+', '3-16-15/3A Rajalaksmi nagar Gudarigunta, Kakinada', 'Kakinada', 'Andhra Pradesh', 'India', 9, NULL, NULL, NULL, NULL, NULL, 'Image_Kamal.jpg', '', 1, '0000-00-00', '2022-05-06 12:33:21'),
+(20, 'Rajkumar Giduthuri', 'Male', 'rajkumar16371@gmail.com', 7981885538, '2024-02-06', '2024-02-05', 'jjytu', 'ay', '5-155 ysr colony madhavapatnam eg dist kakinada ap india 533005', 'Kakinada', 'S01', 'India', 10, NULL, NULL, NULL, NULL, NULL, 'default-pic.jpg', '', 1, '0000-00-00', '2024-02-06 05:20:09');
 
 -- --------------------------------------------------------
 
