@@ -43,7 +43,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <?php echo form_open('Salary/insert'); ?>
+            <?php echo form_open_multipart('Salary/insert'); ?>
               <div class="box-body">
                
                 <div class="col-md-6">

@@ -149,13 +149,13 @@ class Staff extends CI_Controller
                 $data = $this->Staff_model->insert_staff(array('id' => $login, 'staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department, 'pic' => $image, 'files' => $file_names, 'added_by' => $added, 'branch' => $branch, 'certificate' => $additional_files['certificate'], 'hike' => $additional_files['hike'], 'bond' => $additional_files['bond'], 'description' => $description));
             }
             echo $data;
-            // if ($data == true) {
+            if ($data == true) {
 
-            //     $this->session->set_flashdata('success', "New Staff Added Succesfully");
-            // } else {
-            //     $this->session->set_flashdata('error', "Sorry, New Staff Adding Failed.");
-            // }
-            // redirect($_SERVER['HTTP_REFERER']);
+                $this->session->set_flashdata('success', "New Staff Added Succesfully");
+            } else {
+                $this->session->set_flashdata('error', "Sorry, New Staff Adding Failed.");
+            }
+            redirect($_SERVER['HTTP_REFERER']);
         } else {
             $this->index();
             return false;
