@@ -16,7 +16,7 @@
   <section class="content">
     <div class="row">
 
-      <?php if ($this->session->flashdata('success')) : ?>
+      <?php if ($this->session->flashdata('success')): ?>
         <div class="col-md-12">
           <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -24,7 +24,7 @@
             <?php echo $this->session->flashdata('success'); ?>
           </div>
         </div>
-      <?php elseif ($this->session->flashdata('error')) : ?>
+      <?php elseif ($this->session->flashdata('error')): ?>
         <div class="col-md-12">
           <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -44,7 +44,8 @@
             <div class="row" style="margin-bottom:10px">
               <div class="col-md-3">
                 <label for="project_tasks_staff">Staff/Employee</label>
-                <select name="project_tasks_staff" id="project_tasks_staff" class="form-control selectpicker" data-live-search="true">
+                <select name="project_tasks_staff" id="project_tasks_staff" class="form-control selectpicker"
+                  data-live-search="true">
                   <option value="">All</option>
                   <?php
                   if (isset($staff)) {
@@ -64,11 +65,13 @@
               </div>
               <div class="col-md-3">
                 <label for="project_tasks_min">From Date</label>
-                <input type="date" id="project_tasks_min" name="project_tasks_min" class="form-control" value="<?= date('Y-m-01') ?>">
+                <input type="date" id="project_tasks_min" name="project_tasks_min" class="form-control"
+                  value="<?= date('Y-m-01') ?>">
               </div>
               <div class="col-md-3">
                 <label for="project_tasks_max">To Date</label>
-                <input type="date" id="project_tasks_max" name="project_tasks_max" class="form-control" value="<?= date('Y-m-d') ?>">
+                <input type="date" id="project_tasks_max" name="project_tasks_max" class="form-control"
+                  value="<?= date('Y-m-d') ?>">
               </div>
             </div>
             <div class="table-responsive">
@@ -91,10 +94,10 @@
                 </thead>
                 <tbody>
                   <?php
-                  if (isset($content)) :
+                  if (isset($content)):
                     $i = 1;
-                    foreach ($content as $cnt) :  
-                  ?>
+                    foreach ($content as $cnt):
+                      ?>
                       <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $cnt['project_name']; ?></td>
@@ -110,8 +113,37 @@
                           }
                           ?>
                         </td>
-                        <td><?php echo $cnt['task_name']; ?></td>
-                        <td><?php echo $cnt['task_details']; ?></td>
+                        <?php
+                        $taskNameData = $cnt['task_details'];
+                        $tasksSeparatedData = explode(", ", $taskNameData);
+                        $task_names = [];
+                        $task_details = [];
+
+                        foreach ($tasksSeparatedData as $taskSeparatedValue) {
+                          if (strpos($taskSeparatedValue, ": ") !== false):
+                            list($name, $details) = explode(": ", $taskSeparatedValue);
+                            $task_names[] = trim($name);
+                            $task_details[] = trim($details);
+                          else:
+                            $task_names[] = $cnt['task_name'];
+                            $task_details[] = $cnt['task_details'];
+                          endif;
+                        }
+                        ?>
+                        <td>
+                          <?php
+                          foreach ($task_names as $index => $task_name):
+                            echo $task_name . '<br>';
+                          endforeach;
+                          ?>
+                        </td>
+                        <td>
+                          <?php
+                          foreach ($task_details as $index => $task_detail):
+                            echo $task_detail . '<br>';
+                          endforeach;
+                          ?>
+                        </td>
                         <td><?php echo $cnt['task_status']; ?></td>
                         <td><?php echo date('d-m-Y', strtotime($cnt['due_date'])); ?></td>
                         <td>
@@ -144,11 +176,13 @@
                           ?>
                         </td>
                         <td>
-                          <a href="<?php echo base_url(); ?>edit-project-tasks/<?php echo $cnt['p_id']; ?>" class="btn btn-info">Edit</a>
-                          <a href="<?php echo base_url(); ?>delete-project-tasks/<?php echo $cnt['p_id']; ?>" class="btn btn-danger">Delete</a>
+                          <a href="<?php echo base_url(); ?>edit-project-tasks/<?php echo $cnt['p_id']; ?>"
+                            class="btn btn-info">Edit</a>
+                          <a href="<?php echo base_url(); ?>delete-project-tasks/<?php echo $cnt['p_id']; ?>"
+                            class="btn btn-danger">Delete</a>
                         </td>
                       </tr>
-                  <?php
+                      <?php
                       $i++;
                     endforeach;
                   endif;

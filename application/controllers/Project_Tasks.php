@@ -81,8 +81,8 @@ class Project_Tasks extends CI_Controller
         $this->load->library('form_validation');
         $this->form_validation->set_rules('project_id', 'Project ID', 'required');
         $this->form_validation->set_rules('assigned_to', 'Assigned To', '');
-        $this->form_validation->set_rules('task_name', 'Task Name', 'required');
-        $this->form_validation->set_rules('task_details', 'Task Details', 'required');
+        $this->form_validation->set_rules('task_name[]', 'Task Name', 'required'); // Changed to array
+        $this->form_validation->set_rules('task_details[]', 'Task Details', 'required'); // Changed to array
         $this->form_validation->set_rules('task_status', 'Task Status', 'required');
         $this->form_validation->set_rules('due_date', 'Task Due Date', 'required');
         $this->form_validation->set_rules('completed_date', 'Task Completed Date', 'required');
@@ -124,7 +124,7 @@ class Project_Tasks extends CI_Controller
             $assigned_to = $this->input->post('assigned_to');
             $assigned_to = implode(',', $this->input->post('assigned_to'));
             $department = $this->input->post('department');
-            $task_name = $this->input->post('task_name');
+            $task_names = $this->input->post('task_name');
             $task_details = $this->input->post('task_details');
             $task_status = $this->input->post('task_status');
             $task_priority = $this->input->post('task_priority');
@@ -132,12 +132,17 @@ class Project_Tasks extends CI_Controller
             $due_date = $this->input->post('due_date');
             $completed_date = $this->input->post('completed_date');
             $department_value = $department[0];
+            $tasks_combined = [];
+            for ($i = 0; $i < count($task_names); $i++) {
+                $tasks_combined[] = addslashes($task_names[$i]) . ": " . addslashes($task_details[$i]);
+            }
+            $tasks_combined_str = implode(", ", $tasks_combined);
 
             $arr = array(
                 'project_id' => $project_id,
                 'assigned_to' => $assigned_to,
-                'task_name' => addslashes($task_name),
-                'task_details' => addslashes($task_details),
+                'task_name' => $tasks_combined_str,
+                'task_details' => $tasks_combined_str,
                 'task_status' => $task_status,
                 'task_priority' => $task_priority,
                 'task_daily' => $task_daily,
@@ -401,8 +406,8 @@ class Project_Tasks extends CI_Controller
         $this->load->helper('form');
         $this->form_validation->set_rules('project_id', 'Project ID', 'required');
         $this->form_validation->set_rules('assigned_to', 'Assigned To', '');
-        $this->form_validation->set_rules('task_name', 'Task Name', 'required');
-        $this->form_validation->set_rules('task_details', 'Task Details', 'required');
+        $this->form_validation->set_rules('task_name[]', 'Task Name', 'required'); // Changed to array
+        $this->form_validation->set_rules('task_details[]', 'Task Details', 'required'); // Changed to array
         $this->form_validation->set_rules('task_status', 'Task Status', 'required');
         $this->form_validation->set_rules('due_date', 'Task Due Date', 'required');
         $this->form_validation->set_rules('completed_date', 'Task Completed Date', 'required');
@@ -439,19 +444,24 @@ class Project_Tasks extends CI_Controller
             $project_id = $this->input->post('project_id');
             // $assigned_to=$this->input->post('assigned_to');
             $assigned_to = implode(',', $this->input->post('assigned_to'));
-            $task_name = $this->input->post('task_name');
+            $task_names = $this->input->post('task_name');
             $task_details = $this->input->post('task_details');
             $task_status = $this->input->post('task_status');
             $task_priority = $this->input->post('task_priority');
             $task_daily = $this->input->post('task_daily');
             $due_date = $this->input->post('due_date');
             $completed_date = $this->input->post('completed_date');
+            $tasks_combined = [];
+            for ($i = 0; $i < count($task_names); $i++) {
+                $tasks_combined[] = addslashes($task_names[$i]) . ": " . addslashes($task_details[$i]);
+            }
+            $tasks_combined_str = implode(", ", $tasks_combined);
 
             $arr = array(
                 'project_id' => $project_id,
                 'assigned_to' => $assigned_to,
-                'task_name' => addslashes($task_name),
-                'task_details' => addslashes($task_details),
+                'task_name' => $tasks_combined_str,
+                'task_details' => $tasks_combined_str,
                 'task_status' => $task_status,
                 'task_priority' => $task_priority,
                 'task_daily' => $task_daily,
