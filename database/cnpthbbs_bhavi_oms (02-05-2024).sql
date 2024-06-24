@@ -1765,6 +1765,18 @@ INSERT INTO `worksheet_tbl` (`id`, `project_task_id`, `department`, `staff_id`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `clients_updates`
+--
+
+CREATE TABLE `clients_updates` (
+  `id` int(11) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `descriptions` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `work_reports_tbl`
 --
 
@@ -1791,6 +1803,12 @@ INSERT INTO `work_reports_tbl` (`id`, `project_id`, `task_id`, `staff_id`, `work
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `clients_updates`
+--
+ALTER TABLE `clients_updates`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `appointments_tbl`
@@ -1915,6 +1933,13 @@ ALTER TABLE `work_reports_tbl`
 --
 ALTER TABLE `appointments_tbl`
   MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  
+--
+-- AUTO_INCREMENT for table `clients_updates`
+--
+ALTER TABLE `clients_updates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
 
 --
 -- AUTO_INCREMENT for table `clients_tbl`

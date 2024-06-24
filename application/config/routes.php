@@ -66,7 +66,9 @@ $route['delete-department/(:num)'] = 'department/delete/$1';
 
 // client routes
 $route['add-client'] = 'client';
+$route['client-updates'] = 'client/client_updates';
 $route['insert-client'] = 'client/insert';
+$route['client-updates-insert'] = 'client/client_updates_insert';
 $route['manage-client'] = 'client/manage_client';
 $route['edit-client/(:num)'] = 'client/edit/$1';
 $route['update-client'] = 'client/update';
