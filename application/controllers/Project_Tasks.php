@@ -334,17 +334,17 @@ class Project_Tasks extends CI_Controller
             echo "</pre>";
 
 
-            // $data = $this->Project_Tasks_model->insert_project_tasks($arr);
+            $data = $this->Project_Tasks_model->insert_project_tasks($arr);
 
-            // print_r($work_type_designer);
-            // $data2 = $this->Project_Tasks_model->insert_worksheets($data2);
+            print_r($work_type_designer);
+            $data2 = $this->Project_Tasks_model->insert_worksheets($data2);
 
-            // if ($data == true and $data2 == true) {
-            //     $this->session->set_flashdata('success', "New Project Task Added Succesfully");
-            // } else {
-            //     $this->session->set_flashdata('error', "Sorry, New Project Task Adding Failed.");
-            // }
-            // redirect($_SERVER['HTTP_REFERER']);
+            if ($data == true and $data2 == true) {
+                $this->session->set_flashdata('success', "New Project Task Added Succesfully");
+            } else {
+                $this->session->set_flashdata('error', "Sorry, New Project Task Adding Failed.");
+            }
+            redirect($_SERVER['HTTP_REFERER']);
         } else {
             $this->index();
             return false;
