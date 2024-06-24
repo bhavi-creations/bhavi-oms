@@ -114,7 +114,7 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
 
-                    <li><a href="<?php echo base_url(); ?>work-client"><i class="fa fa-table"></i>
+                    <li><a href="<?php echo base_url(); ?>updates-client"><i class="fa fa-table"></i>
                             <span>Work</span></a></li>
                     <li><a href="<?php echo base_url(); ?>invoices-client"><i class="fa fa-table"></i>
                             <span>Invoices</span></a></li>
