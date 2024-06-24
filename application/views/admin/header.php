@@ -14,9 +14,11 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/Ionicons/css/ionicons.min.css">
   <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet"
+    href="<?php echo base_url(); ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet"
+    href="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">
@@ -29,7 +31,8 @@
   <script src="<?php echo base_url(); ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <!-- Bootstrap Toggle Css -->
   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
@@ -104,7 +107,8 @@
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MAIN NAVIGATION</li>
 
-          <li class="active"><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li class="active"><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i>
+              <span>Dashboard</span></a></li>
 
 
           <li class="treeview">
@@ -115,8 +119,10 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="<?php echo base_url(); ?>add-department"><i class="fa fa-circle-o"></i> Add Department</a></li>
-              <li><a href="<?php echo base_url(); ?>manage-department"><i class="fa fa-circle-o"></i> Manage Department</a></li>
+              <li><a href="<?php echo base_url(); ?>add-department"><i class="fa fa-circle-o"></i> Add Department</a>
+              </li>
+              <li><a href="<?php echo base_url(); ?>manage-department"><i class="fa fa-circle-o"></i> Manage
+                  Department</a></li>
             </ul>
           </li>
 
@@ -155,6 +161,10 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="<?php echo base_url(); ?>add-client"><i class="fa fa-circle-o"></i> Add Client</a></li>
+              <li><a href="<?php echo base_url(); ?>client-updates"><i class="fa fa-circle-o"></i> Client Updates</a>
+              </li>
+              <li><a href="<?php echo base_url(); ?>client-invoices"><i class="fa fa-circle-o"></i> Client Invoices</a>
+              </li>
               <li><a href="<?php echo base_url(); ?>manage-client"><i class="fa fa-circle-o"></i> Manage Client</a></li>
             </ul>
           </li>
@@ -194,7 +204,8 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="<?php echo base_url(); ?>add-projects"><i class="fa fa-circle-o"></i> Add Projects</a></li>
-              <li><a href="<?php echo base_url(); ?>manage-projects"><i class="fa fa-circle-o"></i> Manage Projects</a></li>
+              <li><a href="<?php echo base_url(); ?>manage-projects"><i class="fa fa-circle-o"></i> Manage Projects</a>
+              </li>
             </ul>
           </li>
 
@@ -206,9 +217,12 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="<?php echo base_url(); ?>add-project-tasks"><i class="fa fa-circle-o"></i> Add Project Tasks</a></li>
-              <li><a href="<?php echo base_url(); ?>manage-project-tasks"><i class="fa fa-circle-o"></i> Manage Project Tasks</a></li>
-              <li><a href="<?php echo base_url(); ?>manage-worksheets"><i class="fa fa-circle-o"></i>Manage Worksheets</a></li> <!--aaded by raklumar-->
+              <li><a href="<?php echo base_url(); ?>add-project-tasks"><i class="fa fa-circle-o"></i> Add Project
+                  Tasks</a></li>
+              <li><a href="<?php echo base_url(); ?>manage-project-tasks"><i class="fa fa-circle-o"></i> Manage Project
+                  Tasks</a></li>
+              <li><a href="<?php echo base_url(); ?>manage-worksheets"><i class="fa fa-circle-o"></i>Manage
+                  Worksheets</a></li> <!--aaded by raklumar-->
             </ul>
           </li>
           <!-- <li class="treeview"><span>Manage Worksheets</span></li> -->
@@ -223,8 +237,10 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="<?php echo base_url(); ?>add-work-reports"><i class="fa fa-circle-o"></i> Add Work Reports</a></li>
-              <li><a href="<?php echo base_url(); ?>manage-work-reports"><i class="fa fa-circle-o"></i> Manage Work Reports</a></li>
+              <li><a href="<?php echo base_url(); ?>add-work-reports"><i class="fa fa-circle-o"></i> Add Work
+                  Reports</a></li>
+              <li><a href="<?php echo base_url(); ?>manage-work-reports"><i class="fa fa-circle-o"></i> Manage Work
+                  Reports</a></li>
             </ul>
           </li>
 
@@ -250,7 +266,8 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="<?php echo base_url(); ?>add-holidays"><i class="fa fa-circle-o"></i> Add holidays</a></li>
-              <li><a href="<?php echo base_url(); ?>manage-holidays"><i class="fa fa-circle-o"></i> Manage Holidays</a></li>
+              <li><a href="<?php echo base_url(); ?>manage-holidays"><i class="fa fa-circle-o"></i> Manage Holidays</a>
+              </li>
             </ul>
           </li>
 
@@ -262,8 +279,10 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="<?php echo base_url(); ?>assign-clients"><i class="fa fa-circle-o"></i>Assign Clients Socialmedia</a></li>
-              <li><a href="<?php echo base_url(); ?>manage-holidays"><i class="fa fa-circle-o"></i> Manage Worksheets</a></li>
+              <li><a href="<?php echo base_url(); ?>assign-clients"><i class="fa fa-circle-o"></i>Assign Clients
+                  Socialmedia</a></li>
+              <li><a href="<?php echo base_url(); ?>manage-holidays"><i class="fa fa-circle-o"></i> Manage
+                  Worksheets</a></li>
             </ul>
           </li>
 
@@ -280,7 +299,8 @@
           <!--  </ul>-->
           <!--</li>-->
 
-          <li><a href="<?php echo base_url(); ?>manage-attendance"><i class="fa fa-clock-o"></i> <span>Attendance</span></a></li>
+          <li><a href="<?php echo base_url(); ?>manage-attendance"><i class="fa fa-clock-o"></i>
+              <span>Attendance</span></a></li>
 
 
         </ul>

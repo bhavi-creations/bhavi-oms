@@ -8,7 +8,7 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Clients</a></li>
-            <li class="active">Add Client</li>
+            <li class="active">Clients Invoices</li>
         </ol>
     </section>
 
@@ -49,8 +49,8 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form id="clientForm" role="form" action="<?php echo base_url(); ?>client-updates-insert"
-                        method="POST">
+                    <form id="clientForm" role="form" action="<?php echo base_url(); ?>client-invoices-insert"
+                        method="POST" enctype="multipart/form-data">
                         <div class="box-body">
 
                             <div class="col-md-6">
@@ -77,19 +77,12 @@
                                 </div>
                             </div>
 
-                            <div id="descriptions">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Description</label>
-                                        <textarea name="description[]" class="form-control"
-                                            placeholder="Client Description"></textarea>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="invoice">Invoice</label>
+                                    <input name="invoice" type="file" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <button type="button" id="addTextArea" class="btn btn-default">Add</button>
-                            </div>
-
                         </div>
                         <!-- /.box-body -->
 
@@ -105,17 +98,3 @@
     </section>
     <!-- /.content -->
 </div>
-
-<script>
-    $(document).ready(function () {
-        // Counter for dynamic textareas
-        var textareaCount = 1;
-
-        // Add new textarea on button click
-        $("#addTextArea").click(function () {
-            var newTextArea = '<div class="col-md-12"><div class="form-group"><textarea name="description[]" class="form-control" placeholder="Client Description"></textarea></div></div>';
-            $("#descriptions").append(newTextArea);
-            textareaCount++;
-        });
-    });
-</script>

@@ -1770,8 +1770,22 @@ INSERT INTO `worksheet_tbl` (`id`, `project_task_id`, `department`, `staff_id`, 
 
 CREATE TABLE `clients_updates` (
   `id` int(11) NOT NULL,
+  `client_id` varchar(255) NOT NULL,
   `date` varchar(100) NOT NULL,
   `descriptions` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clients_invoices`
+--
+
+CREATE TABLE `clients_invoices` (
+  `id` int(11) NOT NULL,
+  `client_id` varchar(255) NOT NULL,
+  `invoice` text NOT NULL,
+  `date` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -1821,6 +1835,19 @@ ALTER TABLE `appointments_tbl`
 --
 ALTER TABLE `clients_tbl`
   ADD PRIMARY KEY (`client_id`);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `clients_invoices`
+--
+
+
+ALTER TABLE `clients_invoices`
+  ADD PRIMARY KEY (`id`);
+
 
 --
 -- Indexes for table `content`
@@ -1938,7 +1965,14 @@ ALTER TABLE `appointments_tbl`
 -- AUTO_INCREMENT for table `clients_updates`
 --
 ALTER TABLE `clients_updates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+COMMIT;
+
+--
+-- AUTO_INCREMENT for table `clients_invoices`
+--
+ALTER TABLE `clients_invoices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
 --
