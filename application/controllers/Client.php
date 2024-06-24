@@ -4,13 +4,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Client extends CI_Controller
 {
 
-    function __construct()
-    {
-        parent::__construct();
-        if (!$this->session->userdata('logged_in')) {
-            redirect(base_url() . 'login');
-        }
-    }
+    // function __construct()
+    // {
+    //     parent::__construct();
+    //     if (!$this->session->userdata('logged_in')) {
+    //         redirect(base_url() . 'login');
+    //     }
+    // }
 
     public function index()
     {
@@ -46,17 +46,17 @@ class Client extends CI_Controller
     public function updates_client()
     {
         $data['client_updates'] = $this->Clients_Updates_model->get_client_updates(5);
-        $this->load->view('admin/header');
+        $this->load->view('client/header');
         $this->load->view('client/client-updates', $data);
-        $this->load->view('admin/footer');
+        $this->load->view('client/footer');
     }
 
     public function invoices_client()
     {
         $data['client_invoices'] = $this->Clients_Invoices_model->get_client_invoices(5);
-        $this->load->view('admin/header');
+        $this->load->view('client/header');
         $this->load->view('client/client-invoices', $data);
-        $this->load->view('admin/footer');
+        $this->load->view('client/footer');
     }
 
     public function client_invoices_insert()
