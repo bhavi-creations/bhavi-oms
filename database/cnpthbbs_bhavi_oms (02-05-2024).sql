@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2024 at 12:58 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Feb 06, 2024 at 04:56 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -1624,7 +1624,6 @@ CREATE TABLE `salary_tbl` (
   `no_of_leaves` int(11) NOT NULL,
   `salary_per_day` double NOT NULL,
   `total` bigint(20) NOT NULL,
-  `payslip` text default NULL,
   `added_by` int(11) NOT NULL,
   `updated_on` date NOT NULL,
   `added_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -1671,6 +1670,11 @@ CREATE TABLE `staff_tbl` (
   `state` varchar(100) NOT NULL,
   `country` varchar(50) NOT NULL,
   `department_id` int(11) NOT NULL,
+  `branch` text DEFAULT NULL,
+  `certificate` varchar(255) DEFAULT NULL,
+  `bond` varchar(255) DEFAULT NULL,
+  `hike` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
   `pic` varchar(150) NOT NULL DEFAULT 'default-pic.jpg',
   `files` longtext NOT NULL,
   `added_by` int(11) NOT NULL,
@@ -1682,17 +1686,17 @@ CREATE TABLE `staff_tbl` (
 -- Dumping data for table `staff_tbl`
 --
 
-INSERT INTO `staff_tbl` (`id`, `staff_name`, `gender`, `email`, `mobile`, `dob`, `doj`, `employee_id`, `blood_group`, `address`, `city`, `state`, `country`, `department_id`, `pic`, `files`, `added_by`, `updated_on`, `added_on`) VALUES
-(60, 'Rajkumar Giduthuri', 'Male', 'rajkumar16371@gmail.com', 7981885538, '2024-04-18', '2024-04-30', '3434', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 6, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:15:23'),
-(61, 'satya', 'Male', 'satya@gmail.com', 9392220278, '2024-04-30', '2024-04-30', '1111', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 5, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:47:32'),
-(62, 'abhi', 'Male', 'abhi@gmail.com', 9505582768, '2024-04-30', '2024-04-30', '2222', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 3, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:48:24'),
-(63, 'dileep', 'Male', 'dileep@gmail.com', 1234567891, '2024-04-30', '2024-04-30', '122211', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 7, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:49:41'),
-(64, 'teja', 'Male', 'teja@gmail.com', 7418529631, '2024-04-16', '2024-04-30', '3434', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 4, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:51:53'),
-(65, 'raj', 'Male', 'raj@gmail.com', 7730052238, '2001-11-05', '2024-05-10', '7869', '', '', 'kakinada', 'ap', 'India', 5, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:46:33'),
-(66, 'ram', 'Male', 'ram@gmail.com', 2385131789, '2000-04-05', '2024-11-05', '4561', '', '', 'kkd', 'ap', 'India', 6, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:50:27'),
-(67, 'ram@gmaildn', 'Female', 'drams@fgmail.com', 7979484670, '2015-11-05', '2024-10-05', '7546', '', '', 'kkd', 'ap', 'India', 6, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:52:02'),
-(68, 'dadsa', 'Male', 'ram@gmail.com', 9876548768, '2050-11-05', '2222-04-08', '56214', '', '', 'kkd', 'ap', 'British Indian Ocean Territory', 4, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:54:47'),
-(69, 'fsdfsd', 'Male', 'taj@gmail.com', 7894257869, '2024-04-30', '2024-04-30', '7589', '', '', 'kkd', 'ap', 'India', 8, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:57:08');
+INSERT INTO `staff_tbl` (`id`, `staff_name`, `gender`, `email`, `mobile`, `dob`, `doj`, `employee_id`, `blood_group`, `address`, `city`, `state`, `country`, `department_id`, `pic`, `files`, `added_by`, `updated_on`, `added_on` `branch`, `certificate`, `bond`, `hike`, `description`) VALUES
+(60, 'Rajkumar Giduthuri', 'Male', 'rajkumar16371@gmail.com', 7981885538, '2024-04-18', '2024-04-30', '3434', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 6, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:15:23', NULL, NULL, NULL, NULL),
+(61, 'satya', 'Male', 'satya@gmail.com', 9392220278, '2024-04-30', '2024-04-30', '1111', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 5, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:47:32', NULL, NULL, NULL, NULL),
+(62, 'abhi', 'Male', 'abhi@gmail.com', 9505582768, '2024-04-30', '2024-04-30', '2222', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 3, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:48:24', NULL, NULL, NULL, NULL),
+(63, 'dileep', 'Male', 'dileep@gmail.com', 1234567891, '2024-04-30', '2024-04-30', '122211', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 7, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:49:41', NULL, NULL, NULL, NULL),
+(64, 'teja', 'Male', 'teja@gmail.com', 7418529631, '2024-04-16', '2024-04-30', '3434', '', '', 'Kakinada, Andhra Pradesh', 'Andhra Pradesh', 'India', 4, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 07:51:53', NULL, NULL, NULL, NULL),
+(65, 'raj', 'Male', 'raj@gmail.com', 7730052238, '2001-11-05', '2024-05-10', '7869', '', '', 'kakinada', 'ap', 'India', 5, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:46:33', NULL, NULL, NULL, NULL),
+(66, 'ram', 'Male', 'ram@gmail.com', 2385131789, '2000-04-05', '2024-11-05', '4561', '', '', 'kkd', 'ap', 'India', 6, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:50:27', NULL, NULL, NULL, NULL),
+(67, 'ram@gmaildn', 'Female', 'drams@fgmail.com', 7979484670, '2015-11-05', '2024-10-05', '7546', '', '', 'kkd', 'ap', 'India', 6, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:52:02', NULL, NULL, NULL, NULL),
+(68, 'dadsa', 'Male', 'ram@gmail.com', 9876548768, '2050-11-05', '2222-04-08', '56214', '', '', 'kkd', 'ap', 'British Indian Ocean Territory', 4, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:54:47', NULL, NULL, NULL, NULL),
+(69, 'fsdfsd', 'Male', 'taj@gmail.com', 7894257869, '2024-04-30', '2024-04-30', '7589', '', '', 'kkd', 'ap', 'India', 8, 'default-pic.jpg', '', 1, '0000-00-00', '2024-04-30 09:57:08', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
