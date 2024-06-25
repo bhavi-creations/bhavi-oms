@@ -155,7 +155,6 @@ class Client extends CI_Controller
         $this->form_validation->set_rules('name', 'Clients Name', 'required');
         $this->form_validation->set_rules('email', 'Clients Email', 'required|valid_email');
         $this->form_validation->set_rules('mobile', 'Clients Mobile', 'required');
-        $this->form_validation->set_rules('username', 'Clients Username', 'required');
         $this->form_validation->set_rules('password', 'Clients password', 'required');
 
         $name = $this->input->post('name');
@@ -196,11 +195,6 @@ class Client extends CI_Controller
             $this->index();
             return false;
         }
-    }
-
-    public function client_updates_data()
-    {
-
     }
 
     public function update()
