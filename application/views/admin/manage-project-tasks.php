@@ -58,6 +58,7 @@
               <div class="col-md-3">
                 <label for="filter_by">Filter By</label>
                 <select name="filter_by" id="filter_by" class="form-control selectpicker" data-live-search="true">
+                  <option value="">Select</option>
                   <option value="due_date">Due Date</option>
                   <option value="completed_date">Completed Date</option>
                 </select>
@@ -101,11 +102,15 @@
                         <td>
                           <?php
                           $staff_data = $cnt['staff_data'];
-                          foreach ($staff_data as $key => $staff) {
-                            if ($key == 0) {
-                              echo $staff['staff_name'];
-                            } else {
-                              echo " , " . $staff['staff_name'];
+                          if(is_array($staff_data)) {
+                            foreach ($staff_data as $key => $staff) {
+                              if(isset($staff['staff_name'])){
+                                if ($key == 0) {
+                                  echo $staff['staff_name'];
+                                } else {
+                                  echo " , " . $staff['staff_name'];
+                                }
+                              }
                             }
                           }
                           ?>

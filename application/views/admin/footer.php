@@ -253,11 +253,15 @@
         var min = new Date($('#project_tasks_min').val()+' 00:00:00');
         var max = new Date($('#project_tasks_max').val()+' 23:59:59');
 
-        var staffName = data[2];
+        var staffName = data[2];  
         if(filter_by == 'due_date'){
           var staffDateIndexes = data[6].split('-');
-        }else{
+        }else if(filter_by == 'completed_date'){
           var staffDateIndexes = data[7].split('-');
+        }else{
+          var staffDateIndexes = data[6].split('-');
+          min = null;
+          max = null;
         }
         var date = new Date( staffDateIndexes[2]+' '+staffDateIndexes[1]+' '+staffDateIndexes[0]);
         console.log(min);

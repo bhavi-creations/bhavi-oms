@@ -84,9 +84,9 @@ class Project_Tasks extends CI_Controller
         $this->form_validation->set_rules('assigned_to', 'Assigned To', '');
         $this->form_validation->set_rules('task_name', 'Task Name', 'required');
         $this->form_validation->set_rules('task_details', 'Task Details', 'required');
-        $this->form_validation->set_rules('task_status', 'Task Status', 'required');
-        $this->form_validation->set_rules('due_date', 'Task Due Date', 'required');
-        $this->form_validation->set_rules('completed_date', 'Task Completed Date', 'required');
+        // $this->form_validation->set_rules('task_status', 'Task Status', 'required');
+        // $this->form_validation->set_rules('due_date', 'Task Due Date', 'required');
+        // $this->form_validation->set_rules('completed_date', 'Task Completed Date', 'required');
         $this->form_validation->set_rules('assign_date[]', 'Assign Date', '');
         $this->form_validation->set_rules('client_name[]', 'Client Name', '');
 
@@ -347,9 +347,9 @@ class Project_Tasks extends CI_Controller
         $this->form_validation->set_rules('assigned_to', 'Assigned To', '');
         $this->form_validation->set_rules('task_name', 'Task Name', 'required');
         $this->form_validation->set_rules('task_details', 'Task Details', 'required');
-        $this->form_validation->set_rules('task_status', 'Task Status', 'required');
-        $this->form_validation->set_rules('due_date', 'Task Due Date', 'required');
-        $this->form_validation->set_rules('completed_date', 'Task Completed Date', 'required');
+        // $this->form_validation->set_rules('task_status', 'Task Status', 'required');
+        // $this->form_validation->set_rules('due_date', 'Task Due Date', 'required');
+        // $this->form_validation->set_rules('completed_date', 'Task Completed Date', 'required');
         $this->form_validation->set_rules('assign_date[]', 'Assign Date', '');
         $this->form_validation->set_rules('client_name[]', 'Client Name', '');
 
