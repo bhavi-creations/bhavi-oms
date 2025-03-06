@@ -224,7 +224,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="<?php echo base_url(); ?>add-work-reports"><i class="fa fa-circle-o"></i> Add Work Reports</a></li>
-              <li><a href="<?php echo base_url(); ?>manage-work-reports"><i class="fa fa-circle-o"></i> Manage Work Reports</a></li>
+              <li><a href="<?php echo base_url(); ?>manage-work-reports"><i class="fa fa-circle-o"></i> View Work Reports</a></li>
             </ul>
           </li>
 
