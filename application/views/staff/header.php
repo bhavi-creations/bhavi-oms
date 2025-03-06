@@ -114,7 +114,7 @@
           <img src="<?php echo base_url(); ?>assets/dist/img/bhavi.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Staff</p>
+          <p><?php echo $this->session->userdata('staff_data')['staff_name']; ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
