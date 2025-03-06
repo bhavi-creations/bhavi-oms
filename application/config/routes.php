@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -66,13 +66,7 @@ $route['delete-department/(:num)'] = 'department/delete/$1';
 
 // client routes
 $route['add-client'] = 'client';
-$route['client-updates'] = 'client/client_updates';
-$route['client-invoices'] = 'client/client_invoices';
 $route['insert-client'] = 'client/insert';
-$route['client-updates-insert'] = 'client/client_updates_insert';
-$route['client-invoices-insert'] = 'client/client_invoices_insert';
-$route['updates-client'] = 'client/updates_client';
-$route['invoices-client'] = 'client/invoices_client';
 $route['manage-client'] = 'client/manage_client';
 $route['edit-client/(:num)'] = 'client/edit/$1';
 $route['update-client'] = 'client/update';
@@ -91,7 +85,6 @@ $route['delete-staff/(:num)'] = 'staff/delete/$1';
 $route['edit-staff/(:num)'] = 'staff/edit/$1';
 $route['update-staff'] = 'staff/update';
 $route['delete-staff-file/(:num)/(:any)'] = 'staff/deleteFile/$1/$2';
-$route['update-status'] = 'staff/updatestatus';
 
 //holidays routes
 $route['add-holidays'] = 'holidays';
@@ -186,17 +179,5 @@ $route['delete-worksheets/(:num)'] = 'Project_Tasks/delete_worksheets/$1';
 $route['view-worksheet/(:num)'] = 'Project_Tasks/view_worksheets/$1';
 
 
-//Content Routes
 
-$route['content'] = 'Content';
-$route['content/insert'] = 'Content/insert';
-$route['content_details'] = 'Content/view';
-$route['edit-content/(:num)'] = 'Content/edit/$1';
-$route['content/update'] = 'Content/update';
-$route['delete-content/(:num)'] = 'Content/delete/$1';
-$route['view_staff_content'] = 'Content/view_staff_content';
-
-
-//assign-clients
-$route['assign-clients'] = 'Assign_clients';
-$route['insert-asssign-client'] = 'Assign_clients/insert';
+// $route['edit-project-tasks/(:num)'] = 'Project_Tasks/edit/$1';

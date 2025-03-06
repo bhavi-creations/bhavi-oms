@@ -1,8 +1,8 @@
   <style>
-    .floatybox {
-      display: inline-block;
-      width: 123px;
-    }
+  .floatybox {
+     display: inline-block;
+     width: 123px;
+}
   </style>
 
   <!-- Content Wrapper. Contains page content -->
@@ -29,274 +29,246 @@
                   <h4><i class="icon fa fa-check"></i> Failed!</h4>', '</div>
           </div>'); ?>
 
-        <?php if ($this->session->flashdata('success')) : ?>
+        <?php if($this->session->flashdata('success')): ?>
           <div class="col-md-12">
             <div class="alert alert-success alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <h4><i class="icon fa fa-check"></i> Success!</h4>
-              <?php echo $this->session->flashdata('success'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4><i class="icon fa fa-check"></i> Success!</h4>
+                  <?php echo $this->session->flashdata('success'); ?>
             </div>
           </div>
-        <?php elseif ($this->session->flashdata('error')) : ?>
-          <div class="col-md-12">
+        <?php elseif($this->session->flashdata('error')):?>
+        <div class="col-md-12">
             <div class="alert alert-danger alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <h4><i class="icon fa fa-check"></i> Failed!</h4>
-              <?php echo $this->session->flashdata('error'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4><i class="icon fa fa-check"></i> Failed!</h4>
+                  <?php echo $this->session->flashdata('error'); ?>
             </div>
           </div>
-        <?php endif; ?>
+        <?php endif;?>
 
         <!-- column -->
         <div class="col-md-12">
-
-          <!-- edit atatus of status -->
-
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Change Status</h3>
-            </div>
-            <?php if (isset($status)) : ?>
-              <?php foreach ($status as $st) : ?>
-                <?php echo form_open_multipart('Staff/updatestatus'); ?>
-                <div class="box-body">
-                  <div class="row">
-                    <!-- <div class="col-md-6">
-                      <label>Status</label>
-
-                    </div> -->
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Active / Inactive</label>
-                        <select class="form-control selectpicker" data-live-search="true" name="staff-status">
-                          <option value="">Select</option>
-                          <?php
-                          if ($st['status'] == '0') {
-                            print '<option value="0" selected>Inactive</option>
-                                    <option value="1">Active</option>';
-                          } elseif ($st['status'] == '1') { 
-                            print '<option value="0">Inactive</option>
-                                    <option value="1" selected>Active</option>';
-                          }
-                          ?>
-                        </select>
-                        <input type="hidden" name="status_id" value="<?php echo $st['id'] ?>">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-info pull-right">Update</button>
-                </div>
-                </form>
-              <?php endforeach; ?>
-            <?php endif; ?>
-          </div>
-
           <!-- general form elements -->
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Edit Staff</h3>
             </div>
             <!-- /.box-header -->
-            <?php if (isset($content)) : ?>
-              <?php foreach ($content as $cnt) : ?>
-                <!-- form start -->
-                <?php echo form_open_multipart('Staff/update'); ?>
-                <div class="box-body">
 
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Full Name <span style="color: red;">*</span></label>
-                      <input type="hidden" name="txtid" value="<?php echo $cnt['id'] ?>" class="form-control" placeholder="Full Name">
-                      <input type="text" name="txtname" value="<?php echo $cnt['staff_name'] ?>" class="form-control" placeholder="Full Name">
-                    </div>
-                  </div>
+            <?php if(isset($content)): ?>
+              <?php foreach($content as $cnt): ?>
+                  <!-- form start -->
+                  <?php echo form_open_multipart('Staff/update');?>
+                    <div class="box-body">
 
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Department <span style="color: red;">*</span></label>
-                      <select class="form-control selectpicker" data-live-search="true" name="slcdepartment">
-                        <option value="">Select</option>
-                        <?php
-                        if (isset($department)) {
-                          foreach ($department as $cnt1) {
-                            if ($cnt1['id'] == $cnt['department_id']) {
-                              print "<option value='" . $cnt1['id'] . "' selected>" . $cnt1['department_name'] . " " . $cnt1['city'] . "</option>";
-                            } else {
-                              print "<option value='" . $cnt1['id'] . "'>" . $cnt1['department_name'] . " " . $cnt1['city'] . "</option>";
-                            }
-                          }
-                        }
-                        ?>
-                      </select>
-                    </div>
-                  </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Full Name</label>
+                          <input type="hidden" name="txtid" value="<?php echo $cnt['id'] ?>" class="form-control" placeholder="Full Name">
+                          <input type="text" name="txtname" value="<?php echo $cnt['staff_name'] ?>" class="form-control" placeholder="Full Name">
+                        </div>
+                      </div>
 
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Gender <span style="color: red;">*</span></label>
-                      <select class="form-control selectpicker" data-live-search="true" name="slcgender">
-                        <option value="">Select</option>
-                        <?php
-                        if ($cnt['gender'] == 'Male') {
-                          print '<option value="Male" selected>Male</option>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Department</label>
+                          <select class="form-control selectpicker" data-live-search="true" name="slcdepartment">
+                            <option value="">Select</option>
+                            <?php
+                            if(isset($department))
+                            {
+                              foreach($department as $cnt1)
+                              {
+                                if($cnt1['id']==$cnt['department_id'])
+                                {
+                                  print "<option value='".$cnt1['id']."' selected>".$cnt1['department_name']." ".$cnt1['city']."</option>";
+                                }
+                                else{
+                                  print "<option value='".$cnt1['id']."'>".$cnt1['department_name']." ".$cnt1['city']."</option>";
+                                }
+                              }
+                            } 
+                            ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Gender</label>
+                          <select class="form-control selectpicker" data-live-search="true" name="slcgender">
+                            <option value="">Select</option>
+                            <?php
+                            if($cnt['gender']=='Male')
+                            {
+                              print '<option value="Male" selected>Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Others">Others</option>';
-                        } elseif ($cnt['gender'] == 'Femle') {
-                          print '<option value="Male">Male</option>
+                            }
+                            elseif($cnt['gender']=='Femle')
+                            {
+                              print '<option value="Male">Male</option>
                                     <option value="Female" selected>Female</option>
                                     <option value="Others">Others</option>';
-                        } elseif ($cnt['gender'] == 'Others') {
-                          print '<option value="Male">Male</option>
+                            }
+                            elseif($cnt['gender']=='Others')
+                            {
+                              print '<option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Others" selected>Others</option>';
-                        } else {
-                          print '<option value="Male">Male</option>
+                            }
+                            else{
+                              print '<option value="Male">Male</option>
                               <option value="Female">Female</option>
                               <option value="Others">Others</option>';
-                        }
-                        ?>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Email <span style="color: red;">*</span></label>
-                      <input type="text" name="txtemail" value="<?php echo $cnt['email'] ?>" class="form-control" placeholder="Email" readonly>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Mobile <span style="color: red;">*</span></label>
-                      <input type="text" name="txtmobile" value="<?php echo $cnt['mobile'] ?>" class="form-control" placeholder="Mobile" readonly>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Photo</label>
-                      <input type="file" name="filephoto" value="<?php echo base_url(); ?>uploads/profile-pic/<?php echo $cnt['pic'] ?>" class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Date of Birth <span style="color: red;">*</span></label>
-                      <input type="date" name="txtdob" value="<?php echo $cnt['dob'] ?>" class="form-control" placeholder="DOB">
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Date of Joining <span style="color: red;">*</span></label>
-                      <input type="date" name="txtdoj" value="<?php echo $cnt['doj'] ?>" class="form-control" placeholder="DOJ">
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Employee Id <span style="color: red;">*</span></label>
-                      <input type="text" name="employee_id" value="<?php echo $cnt['employee_id'] ?>" class="form-control" placeholder="Employee Id">
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Blood Group</label>
-                      <input type="text" name="blood_group" value="<?php echo $cnt['blood_group'] ?>" class="form-control" placeholder="Blood Group">
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>City <span style="color: red;">*</span></label>
-                      <input type="text" name="txtcity" value="<?php echo $cnt['city'] ?>" class="form-control" placeholder="City">
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>State <span style="color: red;">*</span></label>
-                      <input type="text" name="txtstate" value="<?php echo $cnt['state'] ?>" class="form-control" placeholder="State">
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Country <span style="color: red;">*</span></label>
-                      <select class="form-control selectpicker" data-live-search="true" name="slccountry">
-                        <option value="">Select</option>
-                        <?php
-                        if (isset($country)) {
-                          foreach ($country as $cnt1) {
-                            if ($cnt1['country_name'] == $cnt['country']) {
-                              print "<option value='" . $cnt1['country_name'] . "' selected>" . $cnt1['country_name'] . "</option>";
-                            } else {
-                              print "<option value='" . $cnt1['country_name'] . "'>" . $cnt1['country_name'] . "</option>";
                             }
-                          }
-                        }
-                        ?>
-                      </select>
-                    </div>
-                  </div>
+                            ?>
+                          </select>
+                        </div>
+                      </div>
 
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Address</label>
-                      <textarea class="form-control" name="txtaddress"><?php echo $cnt['address'] ?></textarea>
-                    </div>
-                  </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input type="text" name="txtemail" value="<?php echo $cnt['email'] ?>" class="form-control" placeholder="Email" readonly>
+                        </div>
+                      </div>
 
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Files</label>
-                      <input type="hidden" name="prev_files" class="form-control" placeholder="Files" value="<?php echo $cnt['files'] ?>">
-                      <input type="file" name="files[]" class="form-control" placeholder="Files" multiple>
-                    </div>
-                  </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Mobile</label>
+                          <input type="text" name="txtmobile" value="<?php echo $cnt['mobile'] ?>" class="form-control" placeholder="Mobile" readonly>
+                        </div>
+                      </div>
 
-                  <div class="col-md-6">
-                    <div class="form-group" style="background-color: #ecf0f5; padding:10px; border-radius:5px">
-                      <?php
-                      $links = explode(',', $cnt['files']);
-                      if ($cnt['files'] != '') {
-                        foreach ($links as $key => $value) {
-                          $filename = explode('_', $value, 2);
-                          if (!isset($filename['1'])) {
-                            $filename['1'] = $value;
-                          }
-                          if ($value != '') {
-                            echo '
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Photo</label>
+                          <input type="file" name="filephoto" value="<?php echo base_url(); ?>uploads/profile-pic/<?php echo $cnt['pic'] ?>" class="form-control">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Date of Birth</label>
+                          <input type="date" name="txtdob" value="<?php echo $cnt['dob'] ?>" class="form-control" placeholder="DOB">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Date of Joining</label>
+                          <input type="date" name="txtdoj" value="<?php echo $cnt['doj'] ?>" class="form-control" placeholder="DOJ">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Employee Id</label>
+                          <input type="text" name="employee_id" value="<?php echo $cnt['employee_id'] ?>" class="form-control" placeholder="Employee Id">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Blood Group</label>
+                          <input type="text" name="blood_group" value="<?php echo $cnt['blood_group'] ?>" class="form-control" placeholder="Blood Group">
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>City</label>
+                          <input type="text" name="txtcity" value="<?php echo $cnt['city'] ?>" class="form-control" placeholder="City">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>State</label>
+                          <input type="text" name="txtstate" value="<?php echo $cnt['state'] ?>" class="form-control" placeholder="State">
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Country</label>
+                          <select class="form-control selectpicker" data-live-search="true" name="slccountry">
+                            <option value="">Select</option>
+                            <?php
+                              if(isset($country))
+                              {
+                                foreach ($country as $cnt1)
+                                {
+                                  if($cnt1['country_name']==$cnt['country'])
+                                  {
+                                    print "<option value='".$cnt1['country_name']."' selected>".$cnt1['country_name']."</option>";
+                                  }
+                                  else{
+                                    print "<option value='".$cnt1['country_name']."'>".$cnt1['country_name']."</option>";
+                                  }
+                                  
+                                }
+                              }
+                            ?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Address</label>
+                          <textarea class="form-control" name="txtaddress"><?php echo $cnt['address'] ?></textarea>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Files</label>
+                            <input type="hidden" name="prev_files" class="form-control" placeholder="Files" value="<?php echo $cnt['files'] ?>">
+                            <input type="file" name="files[]" class="form-control" placeholder="Files" multiple>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group" style="background-color: #ecf0f5; padding:10px; border-radius:5px">
+                            <?php
+                                $links = explode(',',$cnt['files']);
+                                if($cnt['files']!=''){
+                                  foreach ($links as $key => $value) {
+                                    $filename = explode('_',$value,2);
+                                    if(!isset($filename['1'])){
+                                      $filename['1'] = $value;
+                                    }
+                                    if($value != ''){
+                                    echo '
                                       <div class"d-flex" style="margin:10px">
-                                      <a href="' . base_url() . 'uploads/staff-files/' . $value . '" download>
-                                      ' . $filename['1'] . '
+                                      <a href="'.base_url().'uploads/staff-files/'.$value.'" download>
+                                      '.$filename['1'].'
                                       </a>
-                                      <a class="label label-danger" style="margin-left:20px" href="' . base_url() . 'delete-staff-file/' . $cnt['id'] . '/' . $value . '">
+                                      <a class="label label-danger" style="margin-left:20px" href="'.base_url().'delete-staff-file/'.$cnt['id'].'/'.$value.'">
                                       Delete
                                       </a>
                                       <br>
                                       </div>
                                     ';
-                          }
-                        }
-                      } else {
-                        echo 'No Files';
-                      }
-                      ?>
+                                    }
+                                  }
+                                }else{
+                                  echo'No Files';
+                                }
+                              ?>
+                        </div>
+                      </div>
+                      
                     </div>
-                  </div>
-
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-info pull-right">Submit</button>
-                </div>
-                </form>
-              <?php endforeach; ?>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                      <button type="submit" class="btn btn-info pull-right">Submit</button>
+                    </div>
+                  </form>
+                <?php endforeach; ?>
             <?php endif; ?>
           </div>
           <!-- /.box -->
@@ -308,53 +280,47 @@
             </div>
             <!-- /.box-header -->
 
-            <?php if (isset($content)) : ?>
-              <?php foreach ($content as $cnt) : ?>
+            <?php if(isset($content)): ?>
+              <?php foreach($content as $cnt): ?>
                 <?php
-                if (isset($cnt['permissions']['0'])) {
-                  $permission = $cnt['permissions']['0']['permission'];
-                } else {
-                  $permission = 'no_access';
-                }
+                  if(isset($cnt['permissions']['0'])){
+                    $permission = $cnt['permissions']['0']['permission'];
+                  }else{
+                    $permission = 'no_access';
+                  } 
                 ?>
-                <!-- form start -->
-                <?php echo form_open_multipart('Staff/update_staff_permissions'); ?>
-                <div class="box-body">
+                  <!-- form start -->
+                  <?php echo form_open_multipart('Staff/update_staff_permissions');?>
+                    <div class="box-body">
 
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Module</label>
-                      <input type="hidden" name="staff_id" value="<?php echo $cnt['id'] ?>" class="form-control" placeholder="Staff Id">
-                      <select class="form-control selectpicker" data-live-search="true" name="module">
-                        <option value="marketing">Marketing</option>
-                      </select>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Module</label>
+                          <input type="hidden" name="staff_id" value="<?php echo $cnt['id'] ?>" class="form-control" placeholder="Staff Id">
+                          <select class="form-control selectpicker" data-live-search="true" name="module">
+                            <option value="marketing">Marketing</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Permission</label>
+                          <select class="form-control selectpicker" data-live-search="true" name="permission">
+                            <option value="no_access" <?php if($permission == 'no_access'){echo"selected";} ?> >No Access</option>
+                            <option value="view_access" <?php if($permission == 'view_access'){echo"selected";} ?> >View Access</option>
+                            <option value="edit_access" <?php if($permission == 'edit_access'){echo"selected";} ?> >Edit Access</option>
+                          </select>
+                        </div>
+                      </div>
+                      
                     </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Permission</label>
-                      <select class="form-control selectpicker" data-live-search="true" name="permission">
-                        <option value="no_access" <?php if ($permission == 'no_access') {
-                                                    echo "selected";
-                                                  } ?>>No Access</option>
-                        <option value="view_access" <?php if ($permission == 'view_access') {
-                                                      echo "selected";
-                                                    } ?>>View Access</option>
-                        <option value="edit_access" <?php if ($permission == 'edit_access') {
-                                                      echo "selected";
-                                                    } ?>>Edit Access</option>
-                      </select>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                      <button type="submit" class="btn btn-info pull-right">Submit</button>
                     </div>
-                  </div>
-
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-info pull-right">Submit</button>
-                </div>
-                </form>
-              <?php endforeach; ?>
+                  </form>
+                <?php endforeach; ?>
             <?php endif; ?>
           </div>
           <!-- /.box -->

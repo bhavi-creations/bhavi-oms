@@ -16,7 +16,7 @@
   <section class="content">
     <div class="row">
 
-      <?php if ($this->session->flashdata('success')): ?>
+      <?php if ($this->session->flashdata('success')) : ?>
         <div class="col-md-12">
           <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -24,7 +24,7 @@
             <?php echo $this->session->flashdata('success'); ?>
           </div>
         </div>
-      <?php elseif ($this->session->flashdata('error')): ?>
+      <?php elseif ($this->session->flashdata('error')) : ?>
         <div class="col-md-12">
           <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -39,7 +39,6 @@
           <div class="box-header">
             <h3 class="box-title">View Project Tasks</h3>
           </div>
-          <input type="date" id="datepicker123" class="form-control" style="width: 200px;">
           <!-- /.box-header -->
           <div class="box-body">
             <div class="table-responsive">
@@ -61,10 +60,10 @@
                 </thead>
                 <tbody>
                   <?php
-                  if (isset($content)):
+                  if (isset($content)) :
                     $i = 1;
-                    foreach ($content as $cnt):
-                      ?>
+                    foreach ($content as $cnt) :
+                  ?>
                       <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $cnt['project_name']; ?></td>
@@ -113,11 +112,10 @@
                           }
                           ?>
                         </td>
-                        <td> <a href="<?php echo base_url(); ?>view-worksheet/<?php echo $cnt['p_id']; ?>"
-                            class="btn btn-success">View</a>
+                        <td> <a href="<?php echo base_url(); ?>view-worksheet/<?php echo $cnt['p_id']; ?>" class="btn btn-success">View</a>
                         </td>
                       </tr>
-                      <?php
+                  <?php
                       $i++;
                     endforeach;
                   endif;
@@ -138,17 +136,3 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-<script>
-  $(document).ready(function () {
-    $('#datepicker123').on('change', function () {
-      var selectedDate = $(this).val();
-      $(this).val(selectedDate);
-      if (selectedDate) {
-        var formattedDate = selectedDate.split('-').reverse().join('-'); // Convert from dd-mm-yyyy to yyyy-mm-dd
-        var table = $('#example1').DataTable();
-        table.column(6).search(formattedDate).draw(); // Assuming Due Date is the 7th column (index 6)
-      }
-    });
-  });
-</script>
