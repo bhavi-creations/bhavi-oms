@@ -80,7 +80,7 @@
                       {
                         foreach($tasks as $cnt)
                         {
-                          print "<option value='".$cnt['id']."'>".$cnt['task_name']."</option>";
+                          print "<option value='".$cnt['p_id']."'>".$cnt['task_name']."</option>";
                         }
                       } 
                       ?>
@@ -105,14 +105,19 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Work Status</label>
-                    <input type="text" name="work_status" class="form-control" placeholder="work status">
+                    <select class="form-control selectpicker" data-live-search="true" name="work_status">
+                      <option value="Pending">Pending</option>
+                      <option value="In Progress">In Progress</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+                    <!-- <input type="text" name="work_status" class="form-control" placeholder="work status"> -->
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Date</label>
-                    <input type="date" name="on_date" class="form-control" placeholder="DATE">
+                    <input type="date" name="on_date" class="form-control" value="<?php echo date("Y-m-d") ?>" placeholder="DATE">
                   </div>
                 </div>
                 

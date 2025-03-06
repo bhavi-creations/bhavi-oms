@@ -89,12 +89,12 @@
                                 {
                                     foreach($tasks as $cnt1)
                                     {
-                                        if($cnt1['id'] == $cnt['task_id'])
+                                        if($cnt1['p_id'] == $cnt['task_id'])
                                         {
-                                            print "<option value='".$cnt1['id']."' selected>".$cnt1['task_name']."</option>";
+                                            print "<option value='".$cnt1['p_id']."' selected>".$cnt1['task_name']."</option>";
                                         }
                                         else{
-                                            print "<option value='".$cnt1['id']."'>".$cnt1['task_name']."</option>";
+                                            print "<option value='".$cnt1['p_id']."'>".$cnt1['task_name']."</option>";
                                         }
                                     }
                                 } 
@@ -120,7 +120,12 @@
                             <div class="col-md-6">
                             <div class="form-group">
                                 <label>Work Status</label>
-                                <input type="text" name="work_status" class="form-control" value="<?php echo $cnt['work_status'] ?>" placeholder="work status">
+                                <select class="form-control selectpicker" data-live-search="true" name="work_status">
+                                  <option value="Pending" <?php if($cnt['work_status'] == 'pending'){echo "selected";}?> >Pending</option>
+                                  <option value="In Progress" <?php if($cnt['work_status'] == 'In Progress'){echo "selected";}?> >In Progress</option>
+                                  <option value="Completed" <?php if($cnt['work_status'] == 'Completed'){echo "selected";}?> >Completed</option>
+                                </select>
+                                <!-- <input type="text" name="work_status" class="form-control" value="<?php echo $cnt['work_status'] ?>" placeholder="work status"> -->
                             </div>
                             </div>
 
