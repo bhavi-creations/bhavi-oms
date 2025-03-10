@@ -19,6 +19,15 @@
  
 
  $permissions = isset($staff_data['permissions']) ? $staff_data['permissions'] : null;
+
+ $today = date('Y-m-d');
+ $staff_id = $this->session->userdata('staff_data')['id'];
+ $attendance_today = $this->Attendance_model->select_attendance_by_date($staff_id, $today);
+ $last_login = $this->Attendance_model->get_last_login($staff_id);
+
+ function format_datetime($datetime) {
+     return date('d M Y, h:i A', strtotime($datetime));
+ }
 ?>
 
 <!DOCTYPE html>
@@ -118,6 +127,14 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
+      <div class="user-panel">
+        <p style="color: #fff;">Last Login: <?php echo $last_login ? format_datetime($last_login['login_date_time']) : 'N/A'; ?></p>
+        <?php if ($attendance_today): ?>
+          <button class="btn btn-danger" style="width: 100%;" id="logout-time">Logout Time</button>
+        <?php else: ?>
+          <button class="btn btn-success" style="width: 100%;" id="login-time">Login Time</button>
+        <?php endif; ?>
+      </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
@@ -188,3 +205,21 @@
       redirect('login');
     }
   ?>
+
+<script>
+  $(document).ready(function() {
+    $('#login-time').click(function() {
+      $.post('<?php echo base_url(); ?>home/insert_login_record', {}, function(response) {
+        location.reload();
+      });
+    });
+
+    $('#logout-time').click(function() {
+      if (confirm('Are you sure you want to logout?')) {
+        $.post('<?php echo base_url(); ?>home/logout_record', {}, function(response) {
+          location.reload();
+        });
+      }
+    });
+  });
+</script>

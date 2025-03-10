@@ -1,4 +1,4 @@
-    <?php
+<?php
     defined('BASEPATH') or exit('No direct script access allowed');
 
     class Home extends CI_Controller
@@ -89,17 +89,41 @@
             }
         }
 
+        public function insert_login_record()
+        {
+            $staff_id = $this->session->userdata('staff_data')['id'];
+            $login_record = array(
+                'staff_id' => $staff_id,
+                'login_date_time' => date('Y-m-d H:i:s'),
+                'logout_date_time' => NULL,
+                'ip_address' => $this->Home_model->getIPAddress(),
+                'status' => 1,
+            );
+            $this->Home_model->insert_login_records($login_record);
+            echo json_encode(['status' => 'success']);
+        }
+
+        public function logout_record()
+        {
+            $staff_id = $this->session->userdata('staff_data')['id'];
+            $attendance_today = $this->Attendance_model->select_attendance_by_date($staff_id, date('Y-m-d'));
+            if ($attendance_today) {
+                $this->Home_model->logoutdata($attendance_today['id']);
+            }
+            echo json_encode(['status' => 'success']);
+        }
+
         public function logout()
         {
             $data = $this->session->get_userdata();
-            $logoutdata = $this->Home_model->logoutdata($data['loginid']);
-            if ($logoutdata > 0) {
+            // $logoutdata = $this->Home_model->logoutdata($data['loginid']);
+            // if ($logoutdata > 0) {
                 $this->session->sess_destroy();
                 redirect(base_url() . 'login');
-            } else {
-                $this->session->set_flashdata('login_error', 'Please check your username or password and try again.', 300);
-                redirect(base_url() . 'login');
-            }
+            // } else {
+            //     $this->session->set_flashdata('login_error', 'Please check your username or password and try again.', 300);
+            //     redirect(base_url() . 'login');
+            // }
         }
 
        
