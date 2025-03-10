@@ -9,6 +9,7 @@ class Attendance_model extends CI_Model {
         $this->db->select("login_records_tbl.*,staff_tbl.*");
         $this->db->from("login_records_tbl");
         $this->db->join("staff_tbl",'staff_tbl.id=login_records_tbl.staff_id');
+        $this->db->where("login_records_tbl.staff_id !=",'1');
         $qry=$this->db->get();
         if($qry->num_rows()>0)
         {
