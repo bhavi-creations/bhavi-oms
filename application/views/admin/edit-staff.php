@@ -111,6 +111,12 @@
                       <input type="hidden" name="txtid" value="<?php echo $cnt['id'] ?>" class="form-control" placeholder="Full Name">
                       <input type="text" name="txtname" value="<?php echo $cnt['staff_name'] ?>" class="form-control" placeholder="Full Name">
                     </div>
+                </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Salary <span style="color: red;">*</span></label>
+                      <input type="text" name="txtsalary" value="<?php echo $cnt['salary'] ?>" class="form-control" placeholder="Salary">
+                    </div>
                   </div>
 
                   <div class="col-md-6">

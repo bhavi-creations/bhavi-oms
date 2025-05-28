@@ -95,6 +95,7 @@ class Staff_model extends CI_Model
         $this->db->update('staff_tbl', $data);
         $this->db->affected_rows();
     }
+
     
     function update_status($id, $data)
     {
@@ -152,4 +153,23 @@ class Staff_model extends CI_Model
             return $this->db->insert_id();
         }
     }
+
+
+
+     public function get_salary($staff_id)
+    {
+        $this->db->select('salary');
+        $this->db->from('staff_tbl');
+        $this->db->where('id', $staff_id);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row()->salary;
+        } else {
+            return false;
+        }
+    }
+
+ 
+
 }

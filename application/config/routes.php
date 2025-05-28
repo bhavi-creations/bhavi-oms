@@ -96,6 +96,7 @@ $route['update-status'] = 'staff/updatestatus';
 //holidays routes
 $route['add-holidays'] = 'holidays';
 $route['manage-holidays'] = 'holidays/manage';
+$route['manage-monthly-holidays'] = 'holidays/monthly_holidays';
 $route['view-holidays'] = 'holidays/view';
 $route['insert-holidays'] = 'holidays/insert';
 $route['delete-holidays/(:num)'] = 'holidays/delete/$1';

@@ -267,6 +267,7 @@
             <ul class="treeview-menu">
               <li><a href="<?php echo base_url(); ?>add-holidays"><i class="fa fa-circle-o"></i> Add holidays</a></li>
               <li><a href="<?php echo base_url(); ?>manage-holidays"><i class="fa fa-circle-o"></i> Manage Holidays</a>
+              <li><a href="<?php echo base_url(); ?>manage-monthly-holidays"><i class="fa fa-circle-o"></i> Manage Monthly Holidays</a>
               </li>
             </ul>
           </li>

@@ -61,10 +61,13 @@ class Staff extends CI_Controller
         $this->form_validation->set_rules('txtdob', 'Date of Birth', 'required');
         $this->form_validation->set_rules('txtdoj', 'Date of Joining', 'required');
         $this->form_validation->set_rules('employee_id', 'Employee Id', 'required');
+        $this->form_validation->set_rules('txtsalary', 'Basic Salary', 'required');
+
         // $this->form_validation->set_rules('blood_group', 'Blood Group', 'required');
         $this->form_validation->set_rules('txtcity', 'City', 'required');
         $this->form_validation->set_rules('txtstate', 'State', 'required');
         $this->form_validation->set_rules('slccountry', 'Country', 'required');
+
 
         $name = $this->input->post('txtname');
         $gender = $this->input->post('slcgender');
@@ -79,6 +82,7 @@ class Staff extends CI_Controller
         $state = $this->input->post('txtstate');
         $country = $this->input->post('slccountry');
         $address = $this->input->post('txtaddress');
+        $salary = $this->input->post('txtsalary');
         $added = $this->session->userdata('userid');
         $files = isset($_FILES["files"]) ? $_FILES["files"] : null;
 
@@ -146,7 +150,7 @@ class Staff extends CI_Controller
             }
             $login = $this->Home_model->insert_login(array('username' => $email, 'password' => md5($mobile), 'usertype' => 2));
             if ($login > 0) {
-                $data = $this->Staff_model->insert_staff(array('id' => $login, 'staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department, 'pic' => $image, 'files' => $file_names, 'added_by' => $added, 'branch' => $branch, 'certificate' => $additional_files['certificate'], 'hike' => $additional_files['hike'], 'bond' => $additional_files['bond'], 'description' => $description));
+                $data = $this->Staff_model->insert_staff(array('id' => $login, 'staff_name' => $name, 'gender' => $gender, 'salary' => $salary,  'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department, 'pic' => $image, 'files' => $file_names, 'added_by' => $added, 'branch' => $branch, 'certificate' => $additional_files['certificate'], 'hike' => $additional_files['hike'], 'bond' => $additional_files['bond'], 'description' => $description));
             }
             echo $data;
             if ($data == true) {
@@ -182,97 +186,145 @@ class Staff extends CI_Controller
     }
 
     public function update()
-    {
-        $this->load->helper('form');
-        $this->form_validation->set_rules('txtname', 'Full Name', 'required');
-        $this->form_validation->set_rules('slcgender', 'Gender', 'required');
-        $this->form_validation->set_rules('slcdepartment', 'Department', 'required');
-        $this->form_validation->set_rules('txtemail', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('txtmobile', 'Mobile Number ', 'required|regex_match[/^[0-9]{10}$/]');
-        $this->form_validation->set_rules('txtdob', 'Date of Birth', 'required');
-        $this->form_validation->set_rules('txtdoj', 'Date of Joining', 'required');
-        $this->form_validation->set_rules('employee_id', 'Employee Id', 'required');
-        // $this->form_validation->set_rules('blood_group', 'Blood Group', 'required');
-        $this->form_validation->set_rules('txtcity', 'City', 'required');
-        $this->form_validation->set_rules('txtstate', 'State', 'required');
-        $this->form_validation->set_rules('slccountry', 'Country', 'required');
+{
+    $this->load->helper('form');
+    $this->form_validation->set_rules('txtname', 'Full Name', 'required');
+    $this->form_validation->set_rules('txtsalary', 'Salary', 'required');
+    $this->form_validation->set_rules('slcgender', 'Gender', 'required');
+    $this->form_validation->set_rules('slcdepartment', 'Department', 'required');
+    $this->form_validation->set_rules('txtemail', 'Email', 'trim|required|valid_email');
+    $this->form_validation->set_rules('txtmobile', 'Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
+    $this->form_validation->set_rules('txtdob', 'Date of Birth', 'required');
+    $this->form_validation->set_rules('txtdoj', 'Date of Joining', 'required');
+    $this->form_validation->set_rules('employee_id', 'Employee Id', 'required');
+    $this->form_validation->set_rules('txtcity', 'City', 'required');
+    $this->form_validation->set_rules('txtstate', 'State', 'required');
+    $this->form_validation->set_rules('slccountry', 'Country', 'required');
 
-        $id = $this->input->post('txtid');
-        $name = $this->input->post('txtname');
-        $gender = $this->input->post('slcgender');
-        $department = $this->input->post('slcdepartment');
-        $email = $this->input->post('txtemail');
-        $mobile = $this->input->post('txtmobile');
-        $dob = $this->input->post('txtdob');
-        $doj = $this->input->post('txtdoj');
-        $employee_id = $this->input->post('employee_id');
-        $blood_group = $this->input->post('blood_group');
-        $city = $this->input->post('txtcity');
-        $state = $this->input->post('txtstate');
-        $country = $this->input->post('slccountry');
-        $address = $this->input->post('txtaddress');
-        $prev_files = $this->input->post('prev_files');
-        $files = $_FILES["files"];
+    $id = $this->input->post('txtid');
+    $name = $this->input->post('txtname');
+    $salary = $this->input->post('txtsalary');
+    $gender = $this->input->post('slcgender');
+    $department = $this->input->post('slcdepartment');
+    $email = $this->input->post('txtemail');
+    $mobile = $this->input->post('txtmobile');
+    $dob = $this->input->post('txtdob');
+    $doj = $this->input->post('txtdoj');
+    $employee_id = $this->input->post('employee_id');
+    $blood_group = $this->input->post('blood_group');
+    $city = $this->input->post('txtcity');
+    $state = $this->input->post('txtstate');
+    $country = $this->input->post('slccountry');
+    $address = $this->input->post('txtaddress');
+    $prev_files = $this->input->post('prev_files');
+    $files = $_FILES["files"];
 
-        if ($this->form_validation->run() !== false) {
-            $this->load->library('upload');
-            $config['upload_path'] = 'uploads/staff-files/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|doc|docx|csv|html|mp3|mp4|svg|pdf|txt|xls|xlsx|xml';
-            $file_names = [];
-            foreach ($files['name'] as $key => $image) {
-                $_FILES['files[]']['name'] = $files['name'][$key];
-                $_FILES['files[]']['type'] = $files['type'][$key];
-                $_FILES['files[]']['tmp_name'] = $files['tmp_name'][$key];
-                $_FILES['files[]']['error'] = $files['error'][$key];
-                $_FILES['files[]']['size'] = $files['size'][$key];
+    if ($this->form_validation->run() !== false) {
+        $this->load->library('upload');
+        $config['upload_path'] = 'uploads/staff-files/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|doc|docx|csv|html|mp3|mp4|svg|pdf|txt|xls|xlsx|xml';
+        $file_names = [];
 
-                $fileName = time() . "_" . $image;
+        foreach ($files['name'] as $key => $image) {
+            $_FILES['files[]']['name'] = $files['name'][$key];
+            $_FILES['files[]']['type'] = $files['type'][$key];
+            $_FILES['files[]']['tmp_name'] = $files['tmp_name'][$key];
+            $_FILES['files[]']['error'] = $files['error'][$key];
+            $_FILES['files[]']['size'] = $files['size'][$key];
 
-                $files[] = $fileName;
+            $fileName = time() . "_" . $image;
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
 
-                $config['file_name'] = $fileName;
-
-                $this->upload->initialize($config);
-
-                if ($this->upload->do_upload('files[]')) {
-                    $file_data = $this->upload->data();
-                    $file_names[] = $file_data['file_name'];
-                }
+            if ($this->upload->do_upload('files[]')) {
+                $file_data = $this->upload->data();
+                $file_names[] = $file_data['file_name'];
             }
-            if (count($file_names)) {
-                $file_names = implode(',', $file_names);
-                $file_names = $file_names . ',' . $prev_files;
-            } else {
-                $file_names = $prev_files;
-            }
-
-            $config = [];
-
-            // $this->load->library('image_lib');
-            $config2['upload_path'] = 'uploads/profile-pic/';
-            $config2['allowed_types'] = 'gif|jpg|png|jpeg';
-            $this->load->library('upload', $config2);
-            $this->upload->initialize($config2);
-            if (!$this->upload->do_upload('filephoto')) {
-                $data = $this->Staff_model->update_staff(array('staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department, 'files' => $file_names), $id);
-            } else {
-                $image_data = $this->upload->data();
-                $image = $image_data['file_name'];
-
-                $data = $this->Staff_model->update_staff(array('staff_name' => $name, 'gender' => $gender, 'email' => $email, 'mobile' => $mobile, 'dob' => $dob, 'doj' => $doj, 'employee_id' => $employee_id, 'blood_group' => $blood_group, 'address' => $address, 'city' => $city, 'state' => $state, 'country' => $country, 'department_id' => $department, 'pic' => $image_data['file_name'], 'files' => $file_names, 'added_by' => $added), $id);
-            }
-
-            if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', "Staff Updated Succesfully");
-            } else {
-                $this->session->set_flashdata('error', "Sorry, Staff Update Failed.");
-            }
-            redirect(base_url() . "manage-staff");
-        } else {
-            $this->edit($id);
-            return false;
         }
+
+        if (count($file_names)) {
+            $file_names = implode(',', $file_names);
+            $file_names = $file_names . ',' . $prev_files;
+        } else {
+            $file_names = $prev_files;
+        }
+
+        // Upload profile photo
+        $config2['upload_path'] = 'uploads/profile-pic/';
+        $config2['allowed_types'] = 'gif|jpg|png|jpeg';
+        $this->upload->initialize($config2);
+
+        if (!$this->upload->do_upload('filephoto')) {
+            $update_data = array(
+                'staff_name'    => $name,
+                'salary'        => $salary,
+                'gender'        => $gender,
+                'email'         => $email,
+                'mobile'        => $mobile,
+                'dob'           => $dob,
+                'doj'           => $doj,
+                'employee_id'   => $employee_id,
+                'blood_group'   => $blood_group,
+                'address'       => $address,
+                'city'          => $city,
+                'state'         => $state,
+                'country'       => $country,
+                'department_id' => $department,
+                'files'         => $file_names
+            );
+        } else {
+            $image_data = $this->upload->data();
+            $update_data = array(
+                'staff_name'    => $name,
+                'salary'        => $salary,
+                'gender'        => $gender,
+                'email'         => $email,
+                'mobile'        => $mobile,
+                'dob'           => $dob,
+                'doj'           => $doj,
+                'employee_id'   => $employee_id,
+                'blood_group'   => $blood_group,
+                'address'       => $address,
+                'city'          => $city,
+                'state'         => $state,
+                'country'       => $country,
+                'department_id' => $department,
+                'files'         => $file_names,
+                'pic'           => $image_data['file_name']
+            );
+        }
+
+        $this->Staff_model->update_staff($update_data, $id);
+
+        // ✅ Auto-sync salary into salary_tbl
+        $this->db->where('staff_id', $id);
+        $query = $this->db->get('salary_tbl');
+
+        $salary_data = array(
+            'staff_id' => $id,
+            'basic_salary' => $salary
+        );
+
+        if ($query->num_rows() > 0) {
+            $this->db->where('staff_id', $id);
+            $this->db->update('salary_tbl', $salary_data);
+        } else {
+            $this->db->insert('salary_tbl', $salary_data);
+        }
+
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', "Staff Updated Successfully");
+        } else {
+            $this->session->set_flashdata('error', "Sorry, Staff Update Failed.");
+        }
+
+        redirect(base_url() . "manage-staff");
+    } else {
+        $this->edit($id);
+        return false;
     }
+}
+
 
     public function updateAdminProfile()
     {
@@ -576,4 +628,7 @@ class Staff extends CI_Controller
             return false;
         }
     }
+
+ 
+
 }

@@ -76,6 +76,14 @@
 
             <div class="col-md-6">
               <div class="form-group">
+                <label>Salary <span style="color: red;">*</span></label>
+                <input type="text" name="txtsalary" class="form-control" placeholder="Salary">
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
                 <label>Gender <span style="color: red;">*</span></label>
                 <select class="form-control selectpicker" data-live-search="true" name="slcgender">
                   <option value="">Select</option>
