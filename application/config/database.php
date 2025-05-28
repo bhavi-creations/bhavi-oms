@@ -97,3 +97,6 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+ 
+error_reporting(0);
+ 
