@@ -79,6 +79,7 @@ class Staff extends CI_Controller {
         $state=$this->input->post('txtstate');
         $country=$this->input->post('slccountry');
         $address=$this->input->post('txtaddress');
+        $salary = $this->input->post('txtsalary');
         $added=$this->session->userdata('userid');
         $files=$_FILES["files"];
 
@@ -129,7 +130,7 @@ class Staff extends CI_Controller {
             $login=$this->Home_model->insert_login(array('username'=>$email,'password'=>md5($mobile),'usertype'=>2));
             if($login>0)
             {
-                $data=$this->Staff_model->insert_staff(array('id'=>$login,'staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'pic'=>$image,'files'=>$file_names,'added_by'=>$added));
+                $data=$this->Staff_model->insert_staff(array('id'=>$login,'staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'pic'=>$image,'files'=>$file_names,'added_by'=>$added, 'salary' => $salary ));
             }
             
             if($data==true)
@@ -163,6 +164,8 @@ class Staff extends CI_Controller {
         $this->form_validation->set_rules('txtcity', 'City', 'required');
         $this->form_validation->set_rules('txtstate', 'State', 'required');
         $this->form_validation->set_rules('slccountry', 'Country', 'required');
+        $this->form_validation->set_rules('txtsalary', 'Salary', 'required|numeric');
+
         
         $id=$this->input->post('txtid');
         $name=$this->input->post('txtname');
@@ -178,6 +181,8 @@ class Staff extends CI_Controller {
         $state=$this->input->post('txtstate');
         $country=$this->input->post('slccountry');
         $address=$this->input->post('txtaddress');
+        $salary = $this->input->post('txtsalary');
+
         $prev_files=$this->input->post('prev_files');
         $files=$_FILES["files"];
 
@@ -223,14 +228,14 @@ class Staff extends CI_Controller {
             $this->upload->initialize($config2);
             if ( ! $this->upload->do_upload('filephoto'))
             {
-                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'files'=>$file_names),$id);
+                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'salary' => $salary,'files'=>$file_names),$id);
             }
             else
             {
                 $image_data =   $this->upload->data();
                 $image=$image_data['file_name'];
 
-                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'pic'=>$image_data['file_name'],'files'=>$file_names,'added_by'=>$added),$id);
+                $data=$this->Staff_model->update_staff(array('staff_name'=>$name,'gender'=>$gender,'email'=>$email,'mobile'=>$mobile,'dob'=>$dob,'doj'=>$doj,'employee_id'=>$employee_id,'blood_group'=>$blood_group,'address'=>$address,'city'=>$city,'state'=>$state,'country'=>$country,'department_id'=>$department,'salary' => $salary,'pic'=>$image_data['file_name'],'files'=>$file_names,'added_by'=>$added),$id);
             }
             
             if($this->db->affected_rows() > 0)

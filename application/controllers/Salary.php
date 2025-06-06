@@ -169,8 +169,8 @@ class Salary extends CI_Controller {
             {
                 print '<tr>
                 <td>'.$d["staff_name"].'</td>
-                <td><input type="hidden" name="txtid[]" value="'.$d["id"].'">
-                    <input type="text" id="basic_salary" name="txtbasic[]" class="form-control expenses">
+                <td><input type="text" id="basic_salary" name="txtbasic[]" class="form-control expenses" value="'.($d["basic_salary"] ?? 0).'" readonly>
+
                 </td>
                 <td><input type="text" name="txtallowance[]" class="form-control expenses allowance"></td>
                 <td><input type="text" name="working_days[]" class="form-control working_days"></td>

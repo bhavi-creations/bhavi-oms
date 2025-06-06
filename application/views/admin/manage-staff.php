@@ -60,6 +60,7 @@
                     <th>City</th>
                     <th>State</th>
                     <th>Country</th>
+                        <th>Salary</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
@@ -102,6 +103,8 @@
                         <td><?php echo $cnt['city']; ?></td>
                         <td><?php echo $cnt['state']; ?></td>
                         <td><?php echo $cnt['country']; ?></td>
+                        <td><?php echo number_format($cnt['salary'], 2); ?></td>
+
                         <td>
                           <a href="<?php echo base_url(); ?>edit-staff/<?php echo $cnt['id']; ?>" class="btn btn-info">Edit</a>
                           <a href="<?php echo base_url(); ?>delete-staff/<?php echo $cnt['id']; ?>" class="btn btn-danger">Delete</a>
