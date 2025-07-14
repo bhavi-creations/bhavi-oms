@@ -185,76 +185,98 @@ class Staff extends CI_Controller
         redirect(base_url() . "edit-staff/{$id}");
     }
 
-    public function update()
-{
-    $this->load->helper('form');
-    $this->form_validation->set_rules('txtname', 'Full Name', 'required');
-    $this->form_validation->set_rules('txtsalary', 'Salary', 'required');
-    $this->form_validation->set_rules('slcgender', 'Gender', 'required');
-    $this->form_validation->set_rules('slcdepartment', 'Department', 'required');
-    $this->form_validation->set_rules('txtemail', 'Email', 'trim|required|valid_email');
-    $this->form_validation->set_rules('txtmobile', 'Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
-    $this->form_validation->set_rules('txtdob', 'Date of Birth', 'required');
-    $this->form_validation->set_rules('txtdoj', 'Date of Joining', 'required');
-    $this->form_validation->set_rules('employee_id', 'Employee Id', 'required');
-    $this->form_validation->set_rules('txtcity', 'City', 'required');
-    $this->form_validation->set_rules('txtstate', 'State', 'required');
-    $this->form_validation->set_rules('slccountry', 'Country', 'required');
+ public function update()
+    {
+        $this->load->helper('form');
+        $this->form_validation->set_rules('txtname', 'Full Name', 'required');
+        $this->form_validation->set_rules('txtsalary', 'Salary', 'required');
+        $this->form_validation->set_rules('slcgender', 'Gender', 'required');
+        $this->form_validation->set_rules('slcdepartment', 'Department', 'required');
+        $this->form_validation->set_rules('txtemail', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('txtmobile', 'Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
+        $this->form_validation->set_rules('txtdob', 'Date of Birth', 'required');
+        $this->form_validation->set_rules('txtdoj', 'Date of Joining', 'required');
+        $this->form_validation->set_rules('employee_id', 'Employee Id', 'required');
+        $this->form_validation->set_rules('txtcity', 'City', 'required');
+        $this->form_validation->set_rules('txtstate', 'State', 'required');
+        $this->form_validation->set_rules('slccountry', 'Country', 'required');
 
-    $id = $this->input->post('txtid');
-    $name = $this->input->post('txtname');
-    $salary = $this->input->post('txtsalary');
-    $gender = $this->input->post('slcgender');
-    $department = $this->input->post('slcdepartment');
-    $email = $this->input->post('txtemail');
-    $mobile = $this->input->post('txtmobile');
-    $dob = $this->input->post('txtdob');
-    $doj = $this->input->post('txtdoj');
-    $employee_id = $this->input->post('employee_id');
-    $blood_group = $this->input->post('blood_group');
-    $city = $this->input->post('txtcity');
-    $state = $this->input->post('txtstate');
-    $country = $this->input->post('slccountry');
-    $address = $this->input->post('txtaddress');
-    $prev_files = $this->input->post('prev_files');
-    $files = $_FILES["files"];
+        $id = $this->input->post('txtid');
+        $name = $this->input->post('txtname');
+        $salary = $this->input->post('txtsalary');
+        $gender = $this->input->post('slcgender');
+        $department = $this->input->post('slcdepartment');
+        $email = $this->input->post('txtemail');
+        $mobile = $this->input->post('txtmobile');
+        $dob = $this->input->post('txtdob');
+        $doj = $this->input->post('txtdoj');
+        $employee_id = $this->input->post('employee_id');
+        $blood_group = $this->input->post('blood_group');
+        $city = $this->input->post('txtcity');
+        $state = $this->input->post('txtstate');
+        $country = $this->input->post('slccountry');
+        $address = $this->input->post('txtaddress');
+        $prev_files = $this->input->post('prev_files');
+        $files = $_FILES["files"];
 
-    if ($this->form_validation->run() !== false) {
-        $this->load->library('upload');
-        $config['upload_path'] = 'uploads/staff-files/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg|doc|docx|csv|html|mp3|mp4|svg|pdf|txt|xls|xlsx|xml';
-        $file_names = [];
+        if ($this->form_validation->run() !== false) {
+            $this->load->library('upload');
+            $file_names = []; // Initialize for new staff-files upload
 
-        foreach ($files['name'] as $key => $image) {
-            $_FILES['files[]']['name'] = $files['name'][$key];
-            $_FILES['files[]']['type'] = $files['type'][$key];
-            $_FILES['files[]']['tmp_name'] = $files['tmp_name'][$key];
-            $_FILES['files[]']['error'] = $files['error'][$key];
-            $_FILES['files[]']['size'] = $files['size'][$key];
+            // Handle multiple files upload (new files only)
+            if (!empty($files['name'][0])) { // Check if new files were selected
+                $config['upload_path'] = 'uploads/staff-files/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg|doc|docx|csv|html|mp3|mp4|svg|pdf|txt|xls|xlsx|xml';
+                $config['overwrite'] = FALSE; // Ensure existing files are not overwritten if names collide
 
-            $fileName = time() . "_" . $image;
-            $config['file_name'] = $fileName;
-            $this->upload->initialize($config);
+                foreach ($files['name'] as $key => $image_name) {
+                    // Temporarily set $_FILES for single file upload
+                    $_FILES['files_single']['name'] = $files['name'][$key];
+                    $_FILES['files_single']['type'] = $files['type'][$key];
+                    $_FILES['files_single']['tmp_name'] = $files['tmp_name'][$key];
+                    $_FILES['files_single']['error'] = $files['error'][$key];
+                    $_FILES['files_single']['size'] = $files['size'][$key];
 
-            if ($this->upload->do_upload('files[]')) {
-                $file_data = $this->upload->data();
-                $file_names[] = $file_data['file_name'];
+                    $fileName = time() . "_" . $image_name; // Ensure unique name
+                    $config['file_name'] = $fileName;
+                    $this->upload->initialize($config); // Re-initialize for each file
+
+                    if ($this->upload->do_upload('files_single')) {
+                        $file_data = $this->upload->data();
+                        $file_names[] = $file_data['file_name'];
+                    } else {
+                        // Log file upload errors but continue. You might want stricter handling.
+                        log_message('error', 'Staff file upload error: ' . $this->upload->display_errors());
+                    }
+                }
             }
-        }
 
-        if (count($file_names)) {
-            $file_names = implode(',', $file_names);
-            $file_names = $file_names . ',' . $prev_files;
-        } else {
-            $file_names = $prev_files;
-        }
+            // Combine newly uploaded files with previously existing ones
+            $existing_files_array = array_filter(explode(',', $prev_files)); // Filter out empty strings
+            $all_files_array = array_merge($existing_files_array, $file_names);
+            $final_files_string = implode(',', array_filter($all_files_array)); // Filter again after merge
 
-        // Upload profile photo
-        $config2['upload_path'] = 'uploads/profile-pic/';
-        $config2['allowed_types'] = 'gif|jpg|png|jpeg';
-        $this->upload->initialize($config2);
+            $pic_filename = null; // Initialize profile picture filename
+            // Handle profile photo upload
+            if (!empty($_FILES['filephoto']['name'])) { // Check if a new profile photo was selected
+                $config2['upload_path'] = 'uploads/profile-pic/';
+                $config2['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config2['file_name'] = time() . "_" . $_FILES['filephoto']['name']; // Ensure unique name
+                $config2['overwrite'] = TRUE; // Overwrite if same name, or you can manage old files
 
-        if (!$this->upload->do_upload('filephoto')) {
+                $this->upload->initialize($config2); // Initialize for profile photo
+
+                if ($this->upload->do_upload('filephoto')) {
+                    $image_data = $this->upload->data();
+                    $pic_filename = $image_data['file_name'];
+                } else {
+                    // Profile photo upload failed, critical error, redirect back
+                    $this->session->set_flashdata('error', 'Profile photo upload failed: ' . $this->upload->display_errors());
+                    redirect(base_url() . "edit-staff/" . $id);
+                    return; // Stop execution to prevent partial update
+                }
+            }
+
             $update_data = array(
                 'staff_name'    => $name,
                 'salary'        => $salary,
@@ -270,60 +292,68 @@ class Staff extends CI_Controller
                 'state'         => $state,
                 'country'       => $country,
                 'department_id' => $department,
-                'files'         => $file_names
+                'files'         => $final_files_string
             );
-        } else {
-            $image_data = $this->upload->data();
-            $update_data = array(
-                'staff_name'    => $name,
-                'salary'        => $salary,
-                'gender'        => $gender,
-                'email'         => $email,
-                'mobile'        => $mobile,
-                'dob'           => $dob,
-                'doj'           => $doj,
-                'employee_id'   => $employee_id,
-                'blood_group'   => $blood_group,
-                'address'       => $address,
-                'city'          => $city,
-                'state'         => $state,
-                'country'       => $country,
-                'department_id' => $department,
-                'files'         => $file_names,
-                'pic'           => $image_data['file_name']
-            );
-        }
 
-        $this->Staff_model->update_staff($update_data, $id);
+            if ($pic_filename) {
+                $update_data['pic'] = $pic_filename; // Add 'pic' to data only if a new one was uploaded
+            }
 
-        // ✅ Auto-sync salary into salary_tbl
-        $this->db->where('staff_id', $id);
-        $query = $this->db->get('salary_tbl');
+            // Perform the main staff data update and get affected rows
+            $staff_affected_rows = $this->Staff_model->update_staff($update_data, $id);
+            $staff_update_success = ($staff_affected_rows > 0);
 
-        $salary_data = array(
-            'staff_id' => $id,
-            'basic_salary' => $salary
-        );
-
-        if ($query->num_rows() > 0) {
+            // Auto-sync salary into salary_tbl
             $this->db->where('staff_id', $id);
-            $this->db->update('salary_tbl', $salary_data);
-        } else {
-            $this->db->insert('salary_tbl', $salary_data);
-        }
+            $query = $this->db->get('salary_tbl');
+            $salary_tbl_updated = false; // Flag to track salary update success
 
-        if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', "Staff Updated Successfully");
-        } else {
-            $this->session->set_flashdata('error', "Sorry, Staff Update Failed.");
-        }
+            $salary_data = array(
+                'staff_id' => $id,
+                'basic_salary' => $salary
+            );
 
-        redirect(base_url() . "manage-staff");
-    } else {
-        $this->edit($id);
-        return false;
+            if ($query->num_rows() > 0) {
+                // Record exists, update it
+                $this->db->where('staff_id', $id);
+                $this->db->update('salary_tbl', $salary_data);
+                $affected_by_salary_update = $this->db->affected_rows();
+
+                if ($affected_by_salary_update > 0) {
+                    $salary_tbl_updated = true; // Data was changed
+                } else {
+                    // No rows affected by update, check if data was already identical
+                    $existing_salary_record = $query->row_array();
+                    if ($existing_salary_record['basic_salary'] == $salary) {
+                        $salary_tbl_updated = true; // Consider it a success if data is already as desired
+                    }
+                }
+            } else {
+                // Record does not exist, insert it
+                $this->db->insert('salary_tbl', $salary_data);
+                if ($this->db->affected_rows() > 0) {
+                    $salary_tbl_updated = true;
+                }
+            }
+
+            // Determine overall success for flashdata message
+            // Success if main staff data was updated OR salary data was updated/already correct
+            if ($staff_update_success || $salary_tbl_updated || ($pic_filename !== null && $staff_affected_rows === 0)) {
+                $this->session->set_flashdata('success', "Staff information updated successfully.");
+            } else {
+                // This 'error' covers cases where no data changed, or a silent DB error occurred in update_staff
+                $this->session->set_flashdata('error', "No changes were detected or the update failed. Please check the data you submitted.");
+            }
+
+            redirect(base_url() . "manage-staff");
+
+        } else {
+            // Form validation failed.
+            // Capture all validation errors and pass them via flashdata.
+            $this->session->set_flashdata('error', validation_errors());
+            $this->edit($id); // This reloads the edit page with the errors
+        }
     }
-}
 
 
     public function updateAdminProfile()

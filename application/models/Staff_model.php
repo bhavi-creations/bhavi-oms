@@ -88,19 +88,18 @@ class Staff_model extends CI_Model
         $this->db->affected_rows();
     }
 
-
     function update_staff($data, $id)
     {
         $this->db->where('id', $id);
         $this->db->update('staff_tbl', $data);
-        $this->db->affected_rows();
+        return $this->db->affected_rows(); // <--- ADD 'return' here
     }
 
-    
+
     function update_status($id, $data)
     {
         $this->db->where('id', $id);
-        $this->db->update('login_tbl' , $data);
+        $this->db->update('login_tbl', $data);
         $this->db->affected_rows();
     }
 
@@ -156,7 +155,7 @@ class Staff_model extends CI_Model
 
 
 
-     public function get_salary($staff_id)
+    public function get_salary($staff_id)
     {
         $this->db->select('salary');
         $this->db->from('staff_tbl');
@@ -169,7 +168,4 @@ class Staff_model extends CI_Model
             return false;
         }
     }
-
- 
-
 }
