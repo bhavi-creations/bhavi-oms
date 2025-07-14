@@ -1,30 +1,27 @@
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Salary
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Salary</a></li>
-        <li class="active">Add Salary</li>
-      </ol>
-    </section>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Salary
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#">Salary</a></li>
+      <li class="active">Add Salary</li>
+    </ol>
+  </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
+  <section class="content">
+    <div class="row">
 
-        <?php if($this->session->flashdata('success')): ?>
-          <div class="col-md-12">
-            <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h4><i class="icon fa fa-check"></i> Success!</h4>
-                  <?php echo $this->session->flashdata('success'); ?>
-            </div>
+      <?php if($this->session->flashdata('success')): ?>
+        <div class="col-md-12">
+          <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Success!</h4>
+                <?php echo $this->session->flashdata('success'); ?>
           </div>
-        <?php elseif($this->session->flashdata('error')):?>
+        </div>
+      <?php elseif($this->session->flashdata('error')):?>
         <div class="col-md-12">
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -32,113 +29,120 @@
                   <?php echo $this->session->flashdata('error'); ?>
             </div>
           </div>
-        <?php endif;?>
+      <?php endif;?>
 
-        <!-- column -->
-        <div class="col-md-12">
-          <!-- general form elements -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Add Salary</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <?php echo form_open_multipart('Salary/insert'); ?>
-              <div class="box-body">
-               
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Department Name</label>
-                    <select class="form-control selectpicker" data-live-search="true" name="slcdepartment" onchange="getstaff(this.value)">
-                      <option value="">Select</option>
-                        <?php
-                          if(isset($departments))
+      <div class="col-md-12">
+        <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Add Salary</h3>
+          </div>
+         <?php echo form_open('Salary/insert'); ?>
+            <div class="box-body">
+              
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Department Name</label>
+                  <select class="form-control selectpicker" data-live-search="true" name="slcdepartment" onchange="getstaff(this.value)">
+                    <option value="">Select</option>
+                      <?php
+                        if(isset($departments))
+                        {
+                          foreach($departments as $cnt)
                           {
-                            foreach($departments as $cnt)
-                            {
-                              print "<option value='".$cnt['id']."'>".$cnt['department_name']." ".$cnt['city']."</option>";
-                            }
-                          } 
-                        ?>
-                    </select>
-                  </div>
+                            print "<option value='".$cnt['id']."'>".$cnt['department_name']." ".$cnt['city']."</option>";
+                          }
+                        } 
+                      ?>
+                  </select>
                 </div>
               </div>
-              <!-- /.box-body -->
-
-              <div id="salarydiv">
-              </div>
-              
-            </form>
-          </div>
-          <!-- /.box -->
+            </div>
+            <div id="salarydiv">
+            </div>
+            
+          </form>
         </div>
-        <!--/.col (left) -->
+        </div>
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+<script>
+    // Function to perform calculations for a single staff row
+    function calculateSalary(row) {
+        // Get values from the current row
+        const basicSalary = parseFloat(row.find('.basic-salary').val().replace(/,/g, '')) || 0;
+          const totalWorkingDaysMonth = 25;
+        const employeeLoginDays = parseInt(row.find('.employee-login-days').val()) || 0;
+        const addWorkingDays = parseInt(row.find('.add-working-days').val()) || 0;
+        const addAllowance = parseFloat(row.find('.add-allowance').val()) || 0;
 
-  <script>
+        // Calculate No. of Leaves
+        let noOfLeaves = totalWorkingDaysMonth - employeeLoginDays;
+        if (noOfLeaves < 0) noOfLeaves = 0; // Ensure it's not negative
+
+        // Update No. of Leaves field (read-only, but good to set its value)
+        row.find('.no-of-leaves').val(noOfLeaves);
+
+        // Calculate Salary per Day
+        let salaryPerDay = 0;
+        if (basicSalary > 0 && totalWorkingDaysMonth > 0) {
+            salaryPerDay = basicSalary / totalWorkingDaysMonth;
+        }
+
+        // Calculate Salary to be Paid
+        let salaryToBePaid = 0;
+        if (salaryPerDay > 0) {
+            const effectiveWorkedDays = employeeLoginDays + addWorkingDays;
+            salaryToBePaid = (salaryPerDay * effectiveWorkedDays) + addAllowance;
+        } else {
+            salaryToBePaid = addAllowance; // If no basic salary, only allowance applies
+        }
+
+        // Update Salary to be Paid field
+        row.find('.salary-to-be-paid').val(salaryToBePaid.toFixed(2)); // Format to 2 decimal places
+    }
+
+    // Event listener for changes in department selection
+    // When department changes, the #salarydiv content is reloaded, so we need to
+    // re-attach event listeners to the new inputs.
+    // This uses a MutationObserver to detect when #salarydiv content changes.
+    const observer = new MutationObserver(function(mutationsList, observer) {
+        for(let mutation of mutationsList) {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                // Content of #salarydiv has likely changed.
+                // Attach event listeners to the newly loaded inputs.
+                $('#salarydiv').find('.add-working-days, .add-allowance').off('keyup change').on('keyup change', function() {
+                    const currentRow = $(this).parents('tr');
+                    calculateSalary(currentRow);
+                });
+
+                // Also trigger initial calculation for all rows after load
+                $('#salarydiv').find('tbody tr').each(function() {
+                    calculateSalary($(this));
+                });
+            }
+        }
+    });
+
+    // Start observing the #salarydiv for changes in its children
+    const salaryDiv = document.getElementById('salarydiv');
+    if (salaryDiv) {
+        observer.observe(salaryDiv, { childList: true });
+    }
+
+    // Initial setup for the department dropdown change (already exists)
     function getstaff(dept) {
-            $.ajax({
-                type: "POST",
-                url:  "<?php echo site_url('Salary/get_salary_list'); ?>",
-                data: 'dept='+dept,
-                success: function(data){
-                    $('#salarydiv').html(data);
-                }
-            });
-        }
-  </script>
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('Salary/get_salary_list'); ?>",
+            data: 'dept=' + dept,
+            success: function(data){
+                $('#salarydiv').html(data);
+                // The MutationObserver will now handle attaching new event listeners
+            }
+        });
+    }
 
-  <script>
-    $(document).on('keyup','input.expenses',function(){
-      $expenses = $(this).parents('tr').find('.expenses');
-      $expenseTotal = $(this).parents('tr').find('#total');
-      $expenseTotal.val('0');
-      $.each($expenses,function(index,object){    
-        if($(object).val()!='')
-        {
-          $expenseTotal.val(parseFloat($expenseTotal.val())+parseFloat($(object).val()));
-        }
-      })
-    });
-
-    $(document).on('keyup','input.working_days',function(){
-      $working_days = $(this).parents('tr').find('.working_days');
-      $basic_salary = $(this).parents('tr').find('#basic_salary');
-      $salary_per_day = $(this).parents('tr').find('#salary_per_day');
-      $worked_days = $(this).parents('tr').find('#worked_days');
-      $no_of_leaves = $(this).parents('tr').find('#no_of_leaves');
-      $salary_per_day.val('0');
-      $no_of_leaves.val('0');
-      $.each($working_days,function(index,object){    
-        if($(object).val()!='')
-        {
-          $salary_per_day.val((parseFloat($basic_salary.val())/parseInt($(object).val())).toFixed(2));
-          $worked_days.val($working_days.val());
-        }
-      })
-    });
-
-    $(document).on('keyup','input.no_of_leaves',function(){
-      $no_of_leaves = $(this).parents('tr').find('.no_of_leaves');
-      $worked_days = $(this).parents('tr').find('.worked_days');
-      $working_days = $(this).parents('tr').find('.working_days');
-      $allowance = $(this).parents('tr').find('.allowance');
-      $salary_per_day = $(this).parents('tr').find('#salary_per_day');
-      $expenseTotal = $(this).parents('tr').find('#total');
-      $.each($no_of_leaves,function(index,object){    
-        if($(object).val()!='')
-        {
-          $total_worked_days = parseInt($working_days.val())-parseInt($(object).val()).toFixed(2);
-          $worked_days.val($total_worked_days);
-          $without_allowance = Math.round(parseFloat($salary_per_day.val())*parseInt($total_worked_days));
-          $expenseTotal.val(parseInt($allowance.val())+parseInt($without_allowance));
-        }
-      })
-    });
-  </script>
+    // The old keyup functions for 'expenses', 'working_days', 'no_of_leaves' are removed
+    // as they are replaced by the new calculation logic above.
+</script>

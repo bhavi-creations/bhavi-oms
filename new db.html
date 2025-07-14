@@ -1,0 +1,38 @@
+CREATE TABLE `company_assets_tbl` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_logo_path` VARCHAR(255) DEFAULT NULL,
+  `company_stamp_path` VARCHAR(255) DEFAULT NULL,
+  `digital_signature_path` VARCHAR(255) DEFAULT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+
+
+ALTER TABLE `salary_tbl`
+ADD COLUMN `gross_salary` DECIMAL(10,2) DEFAULT '0.00' AFTER `allowance`,
+ADD COLUMN `pf_deduction` DECIMAL(10,2) DEFAULT '0.00' AFTER `total`,
+ADD COLUMN `esi_deduction` DECIMAL(10,2) DEFAULT '0.00' AFTER `pf_deduction`,
+ADD COLUMN `professional_tax_deduction` DECIMAL(10,2) DEFAULT '0.00' AFTER `esi_deduction`,
+ADD COLUMN `tds_deduction` DECIMAL(10,2) DEFAULT '0.00' AFTER `professional_tax_deduction`,
+ADD COLUMN `other_deductions` DECIMAL(10,2) DEFAULT '0.00' AFTER `tds_deduction`,
+ADD COLUMN `net_payable_salary` DECIMAL(10,2) DEFAULT '0.00' AFTER `other_deductions`,
+ADD COLUMN `payslip_pdf_path` VARCHAR(255) DEFAULT NULL AFTER `net_payable_salary`;
+
+
+
+
+ALTER TABLE `salary_tbl`
+ADD COLUMN `payslip` VARCHAR(255) NULL AFTER `worked_days`;
+-- You can change 'AFTER `worked_days`' to place it after any other existing column.
+
+
+
+
+ALTER TABLE salary_tbl
+ADD COLUMN month INT(2) NOT NULL AFTER basic_salary;
+
+ALTER TABLE salary_tbl
+ADD COLUMN year INT(4) NOT NULL AFTER month;

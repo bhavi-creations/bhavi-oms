@@ -157,6 +157,7 @@ $route['print-invoice/(:num)'] = 'salary/invoice_print/$1';
 $route['delete-salary/(:num)'] = 'salary/delete/$1';
 $route['staff-salary-invoice/(:num)'] = 'salary/staff_invoice/$1';
 $route['staff-print-invoice/(:num)'] = 'salary/staff_invoice_print/$1';
+$route['salary/generate_payslip_pdf/(:num)/(:num)/(:num)'] = 'salary/generate_payslip_pdf/$1/$2/$3';  
 
 $route['apply-leave'] = 'leave';
 $route['approve-leave'] = 'leave/approve';

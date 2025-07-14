@@ -185,7 +185,7 @@ class Staff extends CI_Controller
         redirect(base_url() . "edit-staff/{$id}");
     }
 
- public function update()
+    public function update()
     {
         $this->load->helper('form');
         $this->form_validation->set_rules('txtname', 'Full Name', 'required');
@@ -279,7 +279,7 @@ class Staff extends CI_Controller
 
             $update_data = array(
                 'staff_name'    => $name,
-                'salary'        => $salary,
+                'salary'        => $salary, // This updates staff_tbl.salary
                 'gender'        => $gender,
                 'email'         => $email,
                 'mobile'        => $mobile,
@@ -303,42 +303,12 @@ class Staff extends CI_Controller
             $staff_affected_rows = $this->Staff_model->update_staff($update_data, $id);
             $staff_update_success = ($staff_affected_rows > 0);
 
-            // Auto-sync salary into salary_tbl
-            $this->db->where('staff_id', $id);
-            $query = $this->db->get('salary_tbl');
-            $salary_tbl_updated = false; // Flag to track salary update success
-
-            $salary_data = array(
-                'staff_id' => $id,
-                'basic_salary' => $salary
-            );
-
-            if ($query->num_rows() > 0) {
-                // Record exists, update it
-                $this->db->where('staff_id', $id);
-                $this->db->update('salary_tbl', $salary_data);
-                $affected_by_salary_update = $this->db->affected_rows();
-
-                if ($affected_by_salary_update > 0) {
-                    $salary_tbl_updated = true; // Data was changed
-                } else {
-                    // No rows affected by update, check if data was already identical
-                    $existing_salary_record = $query->row_array();
-                    if ($existing_salary_record['basic_salary'] == $salary) {
-                        $salary_tbl_updated = true; // Consider it a success if data is already as desired
-                    }
-                }
-            } else {
-                // Record does not exist, insert it
-                $this->db->insert('salary_tbl', $salary_data);
-                if ($this->db->affected_rows() > 0) {
-                    $salary_tbl_updated = true;
-                }
-            }
+            // >>>>>>>>>>>>>> REMOVED THE SALARY_TBL INTERACTION HERE <<<<<<<<<<<<<<<<
+            // The salary_tbl should only be affected when a monthly salary is processed
+            // on the "Add Salary" page, not when editing staff profile.
 
             // Determine overall success for flashdata message
-            // Success if main staff data was updated OR salary data was updated/already correct
-            if ($staff_update_success || $salary_tbl_updated || ($pic_filename !== null && $staff_affected_rows === 0)) {
+            if ($staff_update_success || ($pic_filename !== null && $staff_affected_rows === 0)) {
                 $this->session->set_flashdata('success', "Staff information updated successfully.");
             } else {
                 // This 'error' covers cases where no data changed, or a silent DB error occurred in update_staff
@@ -346,7 +316,6 @@ class Staff extends CI_Controller
             }
 
             redirect(base_url() . "manage-staff");
-
         } else {
             // Form validation failed.
             // Capture all validation errors and pass them via flashdata.
@@ -658,7 +627,4 @@ class Staff extends CI_Controller
             return false;
         }
     }
-
- 
-
 }
